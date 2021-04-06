@@ -1,0 +1,21 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid" style="overflow: hidden; background-color: white; display: grid;">
+    <div style="display: flex; justify-content: center; margin: 0;">
+        <img src="https://i.ibb.co/tD5YVxW/24-4.png" alt="24-4" border="0" style="transform: scale(0.5);">
+    </div>
+    <div class="container">
+        <div class="spinner-border" role="status" style="width: 100%; margin: auto;">
+            <span><i class="fas fa-circle-notch big-icon"></i></span>
+        </div>
+    </div>
+</div>
+<script>
+    var containerFluid = document.getElementById("container-fluid");
+    
+    window.setTimeout(function() {
+        window.location.href = "/home";
+    }, 2000);
+</script>
+
+<%- include("../partials/footer.ejs") %>

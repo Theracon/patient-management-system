@@ -1,0 +1,14 @@
+<%- include("./partials/header.ejs") %>
+<% if(currentUser && currentUser.typeOfUser === "referrer") { %> 
+    <%- include("../partials/navbar.ejs") %>
+<% } %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <br><br>
+        <p class="text-center">Oops, an error just occurred!</p>
+        <p class="text-center"><a href="/">Go to homepage</a></p>
+    </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

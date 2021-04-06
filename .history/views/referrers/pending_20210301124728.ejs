@@ -1,0 +1,29 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!--CLOCK-->
+                <div class="analog">
+                    <div class="hand hour"></div>
+                    <div class="hand minute"></div>
+                    <div class="hand second"></div>
+                </div>
+            </div>
+            <h1 class="header-h1-text">Account Activation Pending</h1>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="container small" style="margin: 0 auto; width: 50%; text-align: center; padding: 2rem; border: 1px solid lightgray; border-radius: 10px; background-color: white;">
+            <small>Your profile has been successfully set up and is pending approval.</small><br>
+            <small>Your account should be approved within 72 hours.</small>
+            <small>If your account is not activated after 72 hours and you don't receive confirmation email from us, please send an email to <a href="#">hello@patientrefplatform.com</a> to inform us.</small>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,25 @@
+<%- include("../partials/header.ejs") %> 
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo">
+        </div>
+        <h1 class="header-h1-text">Activation Pending</h1>
+    </header>
+
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="container small-content">
+            <small><i class="fas fa-hourglass-half big-icon"></i></small><br><br>
+            <small>Your profile has been successfully set up and is pending approval.</small>
+            <small>Your account should be approved within 72 hours.</small>
+            <small>If your account is not activated after 72 hours and you don't receive confirmation email from us, kindly <a href="#">hello@patientrefplatform.com</a> to inform us.</small>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

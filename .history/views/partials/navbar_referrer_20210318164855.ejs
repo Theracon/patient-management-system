@@ -1,0 +1,29 @@
+<div style="width: 100%; display: flex; justify-content: center;">
+    <nav class="navbar_nouser">
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="toggleHide" id="hiddenNavLinks">
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/referrers/<%=currentUser.username%>/dashboard">Dashboard</a></li>
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/referrers/<%=currentUser.username%>/patients/new">New Patient</a></li>
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/referrers/<%=currentUser.username%>/patients">Patients</a></li>
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/referrers/<%=currentUser.username%>/profile">Profile</a></li>
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/faq">FAQs</a></li>
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/contact">Contact</a></li>
+                    <li style="display: block; width:" class="nav-item"><a class="nav-link navbar_nouser_link" href="/logout">Log out</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<script>
+    var linkArr = Array.from(document.querySelectorAll(".navbar_nouser_link"));
+    linkArr.forEach(function(link, index, arr) {
+        link.addEventListener("click", function() {
+            arr.forEach(function(el) {
+                el.style.fontWeight = "400";
+            });
+            link.style.fontWeight = "700";
+        });
+    });
+</script>

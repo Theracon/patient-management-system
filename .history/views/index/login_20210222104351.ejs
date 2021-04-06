@@ -1,0 +1,130 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container" style="height: 100vh;">
+        <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top" id="header">
+            <h1 class="header-h1-text">Login</h1>
+            <small class="text-center">Enter your username and password to login.</small>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        
+        <div style="height: 70vh; display: grid;">
+            <div id="button-holder" style="width: 30%; margin: 0 auto; display: flex;">
+                <button id="doctor-button" class="text-break text-wrap button btn btn-primary" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
+                <button id="hospital-button" class="text-break text-wrap button btn btn-outline-primary" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
+            </div>
+            <br>
+            <div id="form-holder">
+                <form action="/referrers/login" method="POST">
+                    <div class="row g-3 align-items-center justify-content-center" style="width: 30%; margin: 0 auto;">
+                        <p class="text-center text-wrap text-break" id="login-info" style="height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #374046; color: white;">Login as a doctor</p>
+                        <!--Username-->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <label for="username">Username</label>
+                        </div>
+                        <!--Password-->
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <label for="password">Password</label>
+                        </div>
+                        <!--Button-->
+                        <div class="button-group" style="width: 100%;">
+                            <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div style="display: grid; align-items: center;">
+                <p class="text-center lh-1" style="margin-bottom: 0.5rem;">Don't have an account? <a href="/" style="font-family: 'Poppins', sans-serif;">Create an account</a></p> 
+                <small class="text-center lh-1">Join hundreds of physicians who are helping patients get quality care quicker.</small>
+            </div>
+            <br>
+        </div>
+    </div>
+
+    <%- include("../partials/footerBanner.ejs") %>
+    <div class="container-fluid" id="footer-container" style="">
+        <div class="footer-container-content">
+
+        </div>
+        <hr class="hr-bottom">
+        <p class="text-center">©2021. All Rights Reserved. PATIENTREF®</p>
+        <div class="socials">
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-twitter-square"></i>
+        </div>
+    </div>
+</div>
+
+<script>
+    var formHolder = document.getElementById("form-holder");
+    var buttonHolder = document.getElementById("button-holder");
+    var doctorButton = document.getElementById("doctor-button");
+    var hospitalButton = document.getElementById("hospital-button");
+
+    buttonHolder.addEventListener("click", function(e) {
+        if(e.target.value === "doctor") {
+            console.log("doctor.");
+            formHolder.innerHTML = `
+            <form action="/referrers/login" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" style="width: 30%; margin: 0 auto;">
+                    <p class="text-center text-wrap text-break" id="login-info" style="height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #374046; color: white;">Login as a doctor</p>
+                    <!--Username-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <label for="username">Username</label>
+                    </div>
+                    <!--Password-->
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <!--Button-->
+                    <div class="button-group" style="width: 100%;">
+                        <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%;">
+                    </div>
+                </div>
+            </form>
+            `;
+            doctorButton.classList.add("btn-primary");
+            doctorButton.classList.remove("btn-outline-primary");
+            hospitalButton.classList.add("btn-outline-primary");
+            hospitalButton.classList.remove("btn-primary");
+
+            return
+        }
+        if(e.target.value === "hospital") {
+            console.log("Hospital.");
+            formHolder.innerHTML = `
+            <form action="/hospitals/login" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" style="width: 30%; margin: 0 auto;">
+                    <p class="text-center text-wrap text-break" id="login-info" style="height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #374046; color: white;">Login as a hospital</p>
+                    <!--Username-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <label for="username">Username</label>
+                    </div>
+                    <!--Password-->
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <!--Button-->
+                    <div class="button-group" style="width: 100%;">
+                        <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%;">
+                    </div>
+                </div>
+            </form>
+            `;
+            doctorButton.classList.remove("btn-primary");
+            doctorButton.classList.add("btn-outline-primary");
+            hospitalButton.classList.remove("btn-outline-primary");
+            hospitalButton.classList.add("btn-primary");
+        }
+    });
+
+</script>
+
+<%- include("../partials/footer.ejs") %>

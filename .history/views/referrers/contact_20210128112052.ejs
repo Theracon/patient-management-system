@@ -1,0 +1,48 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top" id="header">
+            <h1 class="header-h1-text">Contact Us</h1>
+        </header>
+        <br>
+
+        <!--Email-->
+        <div id="email" style="height: 20vh; background-color: white; padding: 1rem; width: 50%; margin: 0 auto 1.5rem auto;">
+            <h1 class="header-h1-text text-center">Send An Email</h1>
+        </div>
+
+        <!--New message-->
+        <div id="message">
+            <h1 class="header-h1-text text-center">Live Chat</h1>
+            <form action="/referrers/<%=currentUser._id%>/messages" method="POST">
+                <div style="width: 50%; margin: 0px auto; background-color: white; padding: 2rem;">
+                    <!--Name-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" value="<%=currentUser.referrerDetails.title + " " + currentUser.referrerDetails.name%>" readonly>
+                        <label for="name">Name</label>
+                    </div>
+                    <!--Subject-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="subject" name="subject" required>
+                        <label for="subject">Subject</label>
+                    </div>
+                    <!--Content-->
+                    <div class="form-floating">
+                        <textarea class="form-control" name="content" id="content" required style="height: 10rem;"></textarea>
+                        <label for="content">Your message here...</label>
+                    </div>
+                    <br><br>
+                    <div class="button-group" style="width: 100%;">
+                        <input type="submit" class="button btn btn-primary" value="Start Live Chat" style="font-family: 'Poppins', sans-serif; width: 45%; margin: 0.25rem;">
+                        <button class="button btn btn-secondary" onclick="window.location.href='/referrers/<%=currentUser._id%>/dashboard';" style="font-family: 'Poppins', sans-serif; width: 45%; margin: 0.25rem;">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,34 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <div class="deregister-content overflow-auto">
+            <p class="text-center" style="font-family: 'Open Sans', sans-serif;">Can we resolve this?</p>
+            <p class="text-center" style="font-family: 'Open Sans', sans-serif;"></p>
+        </div>
+        <br>
+        <div style="width: 50%; margin: auto;">
+            <p style="font-family: 'Open Sans', sans serif;">Still want to deactivate? We'll miss you.</p>
+            <form action="/referrers/<%= referrer._id %>/deregister?_method=DELETE" method="POST">
+                <!--Name-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" name="name" value="Doctor + <%= referrer.name %>" disabled>
+                    <label for="name">Name</label>
+                </div>
+                <!--Reason for deactivating-->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="content" name="reason" style="height: 10rem;" required></textarea>
+                    <label for="content">Reason for deactivating</label>
+                </div>
+                <!--Buttons-->
+                <div class="button-group" style="width: 50%;">
+                    <input type="submit" class="button btn btn-danger" value="Confirm" onclick="return confirm('Are you sure you want to deactivate?')" style="width: 50%; margin: 0.25rem;">
+                    <button class="button btn btn-outline-primary" onclick="window.location.href='/referrers/<%=referrer._id%>/dashboard';" style="width: 50%; margin: 0.25rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

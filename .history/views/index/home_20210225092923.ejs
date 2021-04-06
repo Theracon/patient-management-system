@@ -1,0 +1,35 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer") { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+            <h1 class="header-h1-text">PATIENTREF</h1><li class="nav-item"><a class="nav-link navbar_nouser_link" href="/" style="font-weight: 700;">Home</a></li>
+            <li class="nav-item"><a class="nav-link navbar_nouser_link" href="/about">About</a></li>
+            <li class="nav-item"><a class="nav-link navbar_nouser_link" href="/blog">Blog</a></li>
+            <li class="nav-item"><a class="nav-link navbar_nouser_link" href="/licenses">Licenses</a></li>
+            <li class="nav-item"><a class="nav-link navbar_nouser_link" href="/contact">Contact</a></li>
+            <% if(!currentUser) { %> 
+                <li><a class="nav-link navbar_nouser_link" href="/login">Login</a></li>
+                <li><a class="nav-link navbar_nouser_link" href="/register">Sign up</a></li>
+            <% } %> 
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="container" style="background-color: white; padding: 1rem;">
+
+        </div>
+    </div>
+</div>
+<footer class="text-muted text-center position-relative bottom-0" id="footer" style="font-size: 0.7rem;">Designed and developed by <a href="https://web.facebook.com/Overstack-102533051819877" target="_blank">Overstack </a> &#169;2021</footer>
+
+<%- include("../partials/footer.ejs") %>

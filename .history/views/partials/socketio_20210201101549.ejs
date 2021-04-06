@@ -1,0 +1,68 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.6/qs.min.js" 
+integrity="sha512-3TmPrquYLaAsUmZKXRARTDC5siWhLAdBVqNo4dWpDABBtLU62AaoTaQJEvjxjExcZYurO6i1dnK85k8pPIBlRg==" 
+crossorigin="anonymous"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+    var date = new Date();
+    var liveChatForm = document.getElementById("livechat-form");
+    var chatMessages = document.querySelector(".messages");
+
+    // Get username from URL
+    var { username } = Qs.parse(location.search, {
+        
+    });
+
+    // GET TIME IN AM/PM FORMAT
+    var formatTime = function(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+    var socket = io();
+
+    // Message from server
+    socket.on("message", function(message) {
+        console.log(message);
+        outputMessage(message);
+
+        // Scroll down
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+
+    // Send message
+    liveChatForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get message text
+        var message = event.target.elements.message_input.value;
+
+        // Emit message to server
+        socket.emit("chatMessage", message);
+
+        // Clear input field
+        event.target.elements.message_input.value = "";
+        event.target.elements.message_input.focus();
+    });
+
+    // Output message to DOM
+    function outputMessage(message) {
+        var div = document.createElement("div");
+        div.classList.add("message");
+        div.innerHTML = `
+            <span class="message_content_username">${message.username}</span><p class="message_content"><span class="message_content_message">${message.text}</span> <span class="message_content_time">${message.time}</span></p>
+        `;
+        document.querySelector(".messages").appendChild(div);
+    }
+
+
+
+</script>

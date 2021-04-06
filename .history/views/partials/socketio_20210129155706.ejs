@@ -1,0 +1,50 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    var date = new Date();
+
+    // GET TIME IN AM/PM FORMAT
+    var formatTime = function(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+    var liveChatForm = document.getElementById("livechat-form");
+
+    var socket = io();
+
+    // Message from server
+    socket.on("message", function(message) {
+        console.log(message);
+        outputMessage(message);
+    });
+
+    // Send message
+    liveChatForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get message text
+        var message = event.target.elements.message.value;
+
+        // Emit message to server
+        socket.emit("chatMessage", message);
+    });
+
+    // Output message to DOM
+    function outputMessage(message) {
+        var div = document.createElement("div");
+        div.classList.add("message-text-div");
+        div.innerHTML = `
+            <p class="text-center message-text-time"> <span>User</span> at <span> ${formatTime(date)} </span> </p>
+            <p class="message-text-admin"> ${message} </p>
+        `;
+        document.querySelector(".messages").appendChild(div);
+    }
+
+</script>

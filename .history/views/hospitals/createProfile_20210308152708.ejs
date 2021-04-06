@@ -1,0 +1,96 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!--CLOCK-->
+                <div class="analog">
+                    <div class="hand hour"></div>
+                    <div class="hand minute"></div>
+                    <div class="hand second"></div>
+                </div>
+            </div>
+            <h1 class="header-h1-text">Sign Up</h1>
+            <small class="text-center">Stage 2 <em>of</em> 3: Basic information.</small><br>
+            <small style="font-weight: 100;" class="text-center">Please confirm that information entered is correct before submitting form.</small>
+        </header>
+
+        <%- include("../partials/alert.ejs") %> 
+        <br>
+
+        <div style="background-color: white; padding: 1rem; width: 80%; margin: 0 auto; border: 1px solid lightgrey;">
+            <form action="/hospitals/<%=currentUser.username%>/update" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" style="width: 50%; margin: 0 auto;">
+                    <!--Type of institution-->
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="institution_type" name="institution_type" required>
+                            <option value="-1" selected disabled> --- Select one --- </option>
+                            <option value="0">Teaching Hospital</option>
+                            <option value="1">Specialist Hospital</option>
+                            <option value="2">General Hospital</option>
+                            <option value="3">Primary Healthcare Centre</option>
+                            <option value="4">Diagnostic Centre</option>
+                            <option value="5">Other (not listed)</option>
+                        </select>
+                        <label for="institution_type">Type of Institution</label>
+                    </div>
+                    <!--Name-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="name">Hospital name</label>
+                    </div>
+                    <!--Address-->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="address" name="address" style="height: 10rem;" required></textarea>
+                        <label for="addresss">Hospital address</label>
+                    </div>
+                    <!--Email-->
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <label for="email">Hospital email</label>
+                    </div>
+                    <!--Phone-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                        <label for="name">Hospital phone number</label>
+                    </div>
+                    <!--Website-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="website" name="website">
+                        <label for="website">Hospital website address</label>
+                    </div>
+                    <!--CMD-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="cmd" name="cmd" required>
+                        <label for="cmd">Full name of Hospital CMD</label>
+                    </div>
+                    <!--CEO-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="ceo" name="ceo" required>
+                        <label for="ceo">Full name of Hospital CEO</label>
+                    </div>
+                    <!--Consultants-->
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="consultants" name="consultants" required>
+                        <label for="ceo">Number of consultants at your institution</label>
+                    </div>
+                    <!--Doctors-->
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="doctors" name="doctors" required>
+                        <label for="ceo">Number of medical doctors at your institution</label>
+                    </div>
+                    <!--Buttons-->
+                    <div class="button-group" style="width: 100%; margin-top: 3rem;">
+                        <input type="submit" class="button btn btn-primary" value="Confirm" style="width: 45%;">
+                        <button type="reset" class="button btn btn-warning" style="width: 45%;">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+
+<%- include("../partials/footer.ejs") %>

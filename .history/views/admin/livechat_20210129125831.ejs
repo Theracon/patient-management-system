@@ -1,0 +1,23 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container" style="display: flex; justify-content: center;">
+        <div class="livechat">
+            <div class="messages overflow-auto" style="width: 100%;">
+                
+            </div>
+            <form action="/referrers/<%=currentUser._id%>/messages" method="POST" style="margin: 0;">
+                <div class="input-group" style="height: fit-content; width: 100%; margin: 0; padding: 1rem; background-color: lightgrey; border: 1px solid grey">
+                    <input type="text" class="form-control form-control-lg" placeholder="Start typing..." name="content" style="border-radius: 0px; font-family: 'Poppins', sans-serif; font-size: 0.8rem;">
+                    <button type="submit" class="btn btn-primary" style="border-radius: 0px; font-family: 'Poppins', sans-serif;">
+                        <i class="fas fa-paper-plane"></i>
+                        Send
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/socketio.ejs") %>
+<%- include("../partials/footer.ejs") %>

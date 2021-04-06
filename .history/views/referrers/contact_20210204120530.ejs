@@ -1,0 +1,48 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top" id="header">
+            <h1 class="header-h1-text">Contact Us</h1>
+        </header>
+        <br>
+
+        <!--Email-->
+        <div id="email" style="height: auto; border: 1px solid lightgrey; background-color: white; padding: 1rem; width: 50%; margin: 0 auto 2rem auto;">
+            <h1 class="header-h1-text text-center">Email</h1>
+            <hr>
+            <br><br>
+            <p class="text-center"><i style="margin-right: 1rem; font-size: 1.5rem;" class="fas fa-envelope align-middle"></i> <a class="lead" href="#">patientref@gmail.com</a></p>
+        </div><br>
+
+        <!--Phone-->
+        <div id="phone" style="height: auto; border: 1px solid lightgrey; background-color: white; padding: 1rem; width: 50%; margin: 0 auto 2rem auto;">
+            <h1 class="header-h1-text text-center">Phone</h1>
+            <hr>
+            <p class="text-center">Our lines are available 24/7</p>
+            <br><br>
+            <p class="text-center"><i style="margin-right: 1rem; font-size: 1.5rem;" class="fas fa-phone-alt align-middle"></i> <a class="lead" href="#">+234 (0) 806 019 4496</a></p>
+        </div>
+
+                <!--Live chat: new message-->
+                <div id="message">
+                    <form action="/livechat/<%=currentUser.typeOfUser%>">
+                        <div style="width: 50%; margin: 0 auto 2rem auto; background-color: white; padding: 2rem; border: 1px solid lightgrey;">
+                            <h1 class="header-h1-text text-center">Live Chat</h1>
+                            <hr>
+                            <input type="text" name="typeOfUser" value="<%= currentUser.typeOfUser %>" style="display: none;">
+                            <input type="text" name="chatRoom" value="<%=  %>" style="display: none;">
+                            <br>
+                            <p class="text-center">Start a live chat and get your queries answered instantly.</p>
+                            <br>
+                            <button type="submit" class="button btn btn-secondary" disabled style="font-family: 'Poppins', sans-serif; width: 45%; margin: 0 auto; display: block;">
+                                Coming Soon
+                            </button>
+                        </div>
+                    </form>
+                </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

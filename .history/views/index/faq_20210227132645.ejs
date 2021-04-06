@@ -1,0 +1,81 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="clock"></div>
+            </div>
+            <h1 class="header-h1-text">PatientRef</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } else if(currentUser.typeOfUser == "admin") { %>
+                    <%- include("../partials/navbar_admin.ejs") %>
+                <% } else { %>
+                    <%- include("../partials/navbar_nouser.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        </header>
+        
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="container" style="padding: 2rem; width: 100%; height: fit-content; background-color: white; border: 1px solid lightgrey; margin-top: 1rem;">
+                <article>
+                    <h1>Question</h1>
+                    <br>
+                    <hr style="width: 50%; margin: 0 auto;"><br>
+                    <p>Answer</p>
+                </article>
+        </div>
+        <div class="container" style="padding: 2rem; width: 100%; height: fit-content; background-color: white; border: 1px solid lightgrey; margin-top: 1rem;">
+            <section>
+                <article>
+                    <h1>Question</h1>
+                    <br>
+                    <hr style="width: 50%; margin: 0 auto;"><br>
+                    <p>Answer</p>
+                </article>
+            </section>
+        </div>
+        <div class="container" style="padding: 2rem; width: 100%; height: fit-content; background-color: white; border: 1px solid lightgrey; margin-top: 1rem;">
+            <section>
+                <article>
+                    <h1>Question</h1>
+                    <br>
+                    <hr style="width: 50%; margin: 0 auto;"><br>
+                    <p>Answer</p>
+                </article>
+            </section>
+        </div>
+        <div class="container" style="padding: 2rem; width: 100%; height: fit-content; background-color: white; border: 1px solid lightgrey; margin-top: 1rem;">
+            <section>
+                <article>
+                    <h1>Question</h1>
+                    <br>
+                    <hr style="width: 50%; margin: 0 auto;"><br>
+                    <p>Answer</p>
+                </article>
+            </section>
+        </div>
+        <div class="container" style="padding: 2rem; width: 100%; height: fit-content; background-color: white; border: 1px solid lightgrey; margin-top: 1rem;">
+            <section>
+                <article>
+                    <h1>Question</h1>
+                    <br>
+                    <hr style="width: 50%; margin: 0 auto;"><br>
+                    <p>Answer</p>
+                </article>
+            </section>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

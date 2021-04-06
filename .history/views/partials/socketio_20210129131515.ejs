@@ -1,0 +1,31 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    var liveChatForm = document.getElementById("livechat-form");
+
+    var socket = io();
+
+    // Message from server
+    socket.on("message", function(message) {
+        console.log(message);
+        outputMessage(message);
+    });
+
+    // Send message
+    liveChatForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get message text
+        var message = event.target.elements.message.value;
+
+        // Emit message to server
+        socket.emit("chatMessage", message);
+    });
+
+    // Output message to DOM
+    function outputMessage(message) {
+        var div = document.createElement("div");
+        div.classList.add("")
+    }
+
+</script>

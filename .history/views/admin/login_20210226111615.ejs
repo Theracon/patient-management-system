@@ -1,0 +1,36 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text">Sign </h1>
+                <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            </div>
+            <%- include("../partials/navbar_admin.ejs") %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br><br>
+        <form action="/admin/login" method="POST">
+            <div class="row g-3 align-items-center justify-content-center" style="width: 30%; margin: 0 auto;">
+                <!--Username-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    <label for="username">Username</label>
+                </div>
+                <!--Password-->
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password">Password</label>
+                </div>
+                <!--Button-->
+                <div class="button-group" style="width: 100%;">
+                    <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%; font-family: 'Poppins', sans-serif;">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

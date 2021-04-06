@@ -1,0 +1,19 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <h1 class="header-h1-text"><%= notify.date %> </h1>
+        </header>
+        <br><br>
+
+        <div style="margin: 0 auto; padding: 1rem; background: white; height: fit-content; border: 1px solid lightgray; width: 50%;">
+            <p style="float: right; text-align: ; width: 20%; font-family: 'Work Sans', sans-serif;"><%= notify.time.toUpperCase() %> </p>
+            <hr style="width: 80%;">
+            <br>
+            <p><%= notify.content %> </p>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

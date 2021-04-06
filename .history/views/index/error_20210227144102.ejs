@@ -1,0 +1,38 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #f0ad4e!important;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="clock"></div>
+            </div>
+            <h1 class="header-h1-text">Error</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } else if(currentUser.typeOfUser == "admin") { %>
+                    <%- include("../partials/navbar_admin.ejs") %>
+                <% } else { %>
+                    <%- include("../partials/navbar_nouser.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <p class="text-center">Oops! Something isn't quite right.</p>
+        <div class="container" style="margin: 0 auto; width: 50%; text-align: center; padding: 2rem; border: 1px solid lightgray; border-radius: 10px; background-color: white;">
+            <small>Your profile has been successfully set up and is pending approval.</small><br>
+            <small>Your account should be approved within 72 hours.</small>
+            <small>If your account is not activated after 72 hours and you don't receive confirmation email from us, please send an email to <a href="#">hello@patientrefplatform.com</a> to inform us.</small>
+        </div>
+    </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

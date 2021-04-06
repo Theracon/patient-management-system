@@ -1,0 +1,87 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <%- include("../partials/navbar_referrer.ejs") %>
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text">Refer</h1>
+                <div style="display: flex; align-items: flex-start;">  
+                    <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %> 
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: #0275D8;"></i></a></p>
+                        <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                    <% } else { %>
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: white;"></i></a></p>
+                    <% } %> 
+                </div>
+            </div>
+        </header>
+        <%- include("../partials/alert.ejs") %> 
+
+        <br><br>
+        <form action="/referrers/<%=currentUser.username%>/patients" method="POST">
+            <div style="width: 50%; margin: 0 auto; background-color: white; padding: 2rem; border: 1px solid lightgrey;">
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" name="hospital" required>
+                        <option value="-1" selected disabled>--- Select one ---</option>
+
+                        <% hospitals.forEach(function(hospital, index) { %>
+                            <% if(hospital.role == 1) { %>
+
+                                <option value="<%=index%>"> <%=hospital.hospitalDetails.name%> </option>
+                                
+                            <% } %> 
+                        <% }); %>
+
+                    </select>
+                    <label for="floatingSelect">Hospital you want to refer patient to</label>
+                </div>
+
+                <div>
+                    <input type="text" name="hospitalIndex" value="" id="hospitalIndex" style="display: none;">
+                </div>
+
+                <div class="patient-form" style="display: none;">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Patient's name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="investigation" class="form-label">Investigations (e.g. chest x-ray)</label>
+                        <textarea class="form-control" name="investigation" id="investigation" style="height: 10rem;" required></textarea>
+                        <p style="font-size: 0.8rem;"><i class="fas fa-exclamation-circle"></i> <span>Check our <a href="/hospitals" target="_blank">hospital index page</a> to see the investigations available in each hospital.</span></p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Patient's phone number:</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+                    <br><br>
+                    <div class="button-group" style="width: 100%; margin: 5rem auto;">
+                        <input type="submit" class="text-wrap button btn btn-primary " value="Confirm" style="width: 45%;">
+                        <button class="text-wrap button btn btn-secondary" onclick="window.location.href='/referrers/<%=currentUser.username%>/dashboard';" style="width: 45%;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="space"></div>
+    </div>
+</div>
+
+<script>
+
+var patientForm = document.querySelector(".patient-form");
+var formSelect = document.querySelector(".form-select");
+
+formSelect.addEventListener("click", function(event) {
+    if (event.target.value != "-1") {
+        patientForm.style.display = "block";
+    }
+
+    var hospitalID = document.getElementById("hospitalIndex");
+    hospitalID.value = event.target.value;
+    console.log(hospitalID.value);
+});
+
+</script>
+
+<%- include("../partials/footer.ejs") %>

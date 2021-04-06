@@ -1,0 +1,137 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <h1 class="header-h1-text">Edit Hospital Structure</h1>
+        </header>
+        <br>
+        <div style="background-color: white; padding: 1rem; width: 80%; margin: 0 auto; border: 1px solid lightgrey;">
+            <form action="/hospitals/<%=currentUser.username%>/departments?_method=PUT" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" style="width: 50%; margin: 0 auto;">
+                    <h1 class="header-h1-text text-center">Departments</h1>
+                    <div id="departments">
+                        
+                        <% var count = 0 %> 
+                        
+                        <% currentUser.hospitalDetails.departments.forEach(function(department, index) { %>
+
+                            <div class="department">
+                                <!--Name-->
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="name" name="name" value="<%=department.name%>">
+                                    <label for="name">Department name (e.g. Internal Medicine)</label>
+                                </div>
+                                <!--Staff count-->
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="staff_count" name="staff_count" value="<%= department.staff_count %>">
+                                    <label for="staff_count">Number of clinical staff in department</label>
+                                </div>
+                                <!--Procedures-->
+                                <label for="procedures" class="text-muted">Procedures</label>
+                                <small class="text-muted">(Type in a procedure and click '+')</small>
+                                <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+                                    <input type="text" class="procedure_input border border-secondary">
+                                    <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+                                </div>
+                                <div class="procedures">
+
+                                    <% department.procedures.forEach(function(procedure) { %>
+
+                                        <div class="input-group mb-1" data-input="<%= index %>">
+                                            <input type="text" class="border procedure" name="[procedures]-[<%= index %>]" value="<%= procedure %>" data-input="<%= index %> " readonly>
+                                            <button class="btn btn-outline-secondary procedure_button border" type="button">-</button>
+                                        </div>
+
+                                    <% }); %> 
+
+                                </div>
+                            </div>
+
+                            <% count++; %> 
+
+                        <% }); %> 
+                        
+                    </div>
+                    <br>
+                    <!--Add department button-->
+                    <div style="width: 90%; padding: 0; margin: 1rem auto;">
+                        <button class="btn btn-outline-primary" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
+                    </div>
+                    <!--Buttons-->
+                    <div class="button-group" style="width: 100%; margin-top: 4rem;">
+                        <input type="submit" class="button btn btn-primary" value="Confirm" style="width: 45%;">
+                        <button onclick="window.location.href='';" class="button btn btn-outline-secondary" style="width: 45%;">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<script>
+    var departmentsArr = Array.from(document.querySelectorAll(".department"));
+    var procedure_count = departmentsArr.length - 1;
+    departmentsArr.forEach(function(el) {
+        console.log(el.lastElementChild.firstElementChild.data);
+    });
+
+    var departments = document.getElementById("departments");
+
+    departments.addEventListener("click", function(e) {
+        if(e.target.classList.contains("procedure_input_button")) {
+            var text = e.target.previousElementSibling.value;
+            var dataInput;
+
+            if(text.length > 0) {
+                var div = document.createElement("div");
+                div.classList.add("input-group");
+                div.classList.add("mb-1");
+                div.innerHTML = `
+                    <input type="text" class="procedure border" name="[procedures]-[${procedure_count}]" value="${text}" readonly>
+                    <button class="btn btn-outline-secondary procedure_button border" type="button">-</button>
+                `;
+                e.target.parentElement.nextElementSibling.appendChild(div);
+                e.target.previousElementSibling.value = "";
+                e.target.previousElementSibling.focus();
+        }
+        }
+    });
+
+    departments.addEventListener("click", function(e) {
+        if(e.target.classList.contains("procedure_button")) {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+        }
+    });
+
+    document.querySelector("#add_department").addEventListener("click", function() {
+        procedure_count++;
+
+        var div = document.createElement("div");
+        div.classList.add("department");
+        div.innerHTML = `
+            <!--Name-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="name" name="name">
+                <label for="name">Department name (e.g. Internal Medicine)</label>
+            </div>
+            <!--Staff count-->
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="staff_count" name="staff_count">
+                <label for="staff_count">Number of clinical staff in department</label>
+            </div>
+            <!--Procedures-->
+            <label for="procedures" class="text-muted">Procedures</label>
+            <small class="text-muted">[Type in a procedure and click '+']</small>
+            <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+                <input type="text" class="procedure_input border border-secondary">
+                <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+            </div>
+            <div class="procedures"></div>
+        `;
+        document.getElementById("departments").appendChild(div);
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

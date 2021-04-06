@@ -1,0 +1,4 @@
+{
+    "restructuredtext.languageServer.disabled": true,
+    "git.ignoreLimitWarning": true
+}

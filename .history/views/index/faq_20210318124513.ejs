@@ -1,0 +1,100 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo">
+            <% if(currentUser) {  %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <div style="display: flex; align-items: flex-start; width: 10%;">  
+                        <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %> 
+                            <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                            <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                        <% } else { %>
+                            <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                        <% } %> 
+                    </div>
+                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+                    
+                <% } %> 
+            <% } %>
+        </div>
+        <h1 class="header-h1-text">FAQs</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <% if(currentUser) { %>
+            <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                <%- include("../partials/navbar_referrer.ejs") %>
+            <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %> 
+                <%- include("../partials/navbar_hospital.ejs") %>
+            <% } else if(currentUser.typeOfUser == "admin") { %>
+                <%- include("../partials/navbar_admin.ejs") %>
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %> 
+        <% } else { %>
+            <%- include("../partials/navbar_nouser.ejs") %>
+        <% } %>
+    </header>
+    
+    <div class="container">
+        
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Accordion Item #1
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                    <strong>This is the first item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                </div>
+                </div>
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Accordion Item #2
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                </div>
+                </div>
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Accordion Item #3
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="space"></div>
+</div>
+
+<script>
+    var toggleHideButtons = Array.from(document.querySelectorAll("#toggle_content"));
+    var hiddenContent = Array.from(document.querySelectorAll("#hidden_content"));
+
+    toggleHideButtons.forEach(function(toggleHideButton, index) {
+        toggleHideButton.addEventListener("click", function() {
+            hiddenContent[index].classList.toggle("toggleHide");
+            hiddenContent[index].classList.toggle("toggleShow");
+            toggleHideButton.classList.toggle("rotate_180");
+        });
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

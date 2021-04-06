@@ -1,0 +1,82 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!--CLOCK-->
+                <div class="analog">
+                    <div class="hand hour"></div>
+                    <div class="hand minute"></div>
+                    <div class="hand second"></div>
+                </div>
+                <div style="display: flex; align-items: flex-start; width: 10%;">  
+                    <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %> 
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                        <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                        <% } else { %>
+                            <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                            <% } %> 
+                        </div>
+                    </div>
+            <h1 class="header-h1-text">Edit Patient Details</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <%- include("../partials/navbar_referrer.ejs") %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %> 
+        <br>
+
+        <div style="width: 50%; margin: 0 auto; background-color: white; padding: 2rem; border: 1px solid lightgrey;">
+        <form action="/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>?_method=PUT" method="POST">
+                <!--Hospital-->
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="hospital" name="hospital" required>
+                        <option value="-1" selected disabled>--- Select one ---</option>
+                        <option value="0">Mayfield Specialist Hospital</option>
+                        <option value="1">Nizamiye Hospital</option>
+                        <option value="2">e-Clinic & Diagnostics</option>
+                    </select>
+                    <label for="hospital">Hospital you want to refer patient to:</label>
+                </div>
+                <!--Name-->
+                <div class="form-floating mb-3">
+                    <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="name" name="name" value="<%= patient.name %>">
+                    <label for="name">Name</label>
+                </div>
+                <!--Investigations-->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="investigation" name="investigation" style="height: 10rem;"><%= patient.investigation %> </textarea>
+                    <label for="investigation">Investigations</label>
+                </div>
+                <!--Phone number-->
+                <div class="form-floating mb-3">
+                    <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="phone" name="phone" value="<%= patient.phone %>">
+                    <label for="phone">Phone number</label>
+                </div>
+                <br><br>
+                <!--Button group-->
+                <div class="button-group" style="width: 100%; margin: 5rem auto; font-family: 'Poppins', sans-serif;">
+                    <input type="submit" class="text-wrap button btn btn-primary " value="Confirm" style="width: 45%;">
+                    <button type="reset" class="text-wrap button btn btn-secondary" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';" style="width: 45%;">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <div class="space"></div>
+    </div>
+</div>
+
+<script>
+
+var patientForm     = document.querySelector(".patient-form");
+var formSelect      = document.querySelector(".form-select");
+
+formSelect.addEventListener("click", function(event) {
+    if (event.target.value != "-1") {
+        patientForm.style.display = "block";
+    }
+});
+
+</script>
+
+<%- include("../partials/footer.ejs") %>

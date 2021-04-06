@@ -1,0 +1,44 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!--CLOCK-->
+                <div class="analog">
+                    <div class="hand hour"></div>
+                    <div class="hand minute"></div>
+                    <div class="hand second"></div>
+                </div>
+            </div>
+            <h1 class="header-h1-text">Dashboard</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <%- include("../partials/navbar_admin.ejs") %>
+        </header>
+        
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="container">
+            <div class="dashboard-buttons-div">
+                <!--HOSPITALS-->
+                <button class="dashboard-button-normal" onclick="window.location.href='/admin/hospitals';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-clinic-medical extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Hospitals</span>
+                </button>
+                <!--REFERRERS-->
+                <button class="dashboard-button-normal" onclick="window.location.href='/admin/referrers';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-user-md extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Referrers</span>
+                </button>
+                <!--LIVE CHAT-->
+                <button class="dashboard-button-normal" onclick="window.location.href='/admin/broadcast';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-comments extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Broadcast</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

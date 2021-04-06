@@ -1,0 +1,11 @@
+<div class="container">
+    <div style="width: 30%; margin: 0 auto; font-size: 0.8rem;" id>
+        <% if(success && success.length > 0) { %> 
+            <div class="alert alert-success text-center text-wrap text-break" role="alert"><%= success %></div>
+        <% } %> 
+
+        <% if(error && error.length > 0) { %>
+            <div class="alert alert-danger text-center text-wrap text-break" role="alert"><%= error %></div>
+        <% } %>
+    </div>
+</div>

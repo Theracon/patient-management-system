@@ -1,0 +1,31 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div class="clock"></div>
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text">No Authorization</h1>
+                <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            </div>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } else { %>
+                    <%- include("../partials/navbar_nouser.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <p class="text-center">You are not authorized to visit that page.</p>
+        <p class="text-center">Go to <a href="/login">login</a> page</p>
+    </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

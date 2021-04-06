@@ -1,0 +1,73 @@
+<%- include("../partials/header.ejs") %>
+
+<div style="margin: 0 auto; display: flex; align-items: start; background: white; width: 100%; height: 100%; position: relative;">
+    <% var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
+    <% var date = new Date(); %>
+
+    <div class="pane-left" style="margin-top: 5rem;">
+        <button class="btn btn-primary" onclick="window.location.href='/referrers/<%=currentUser._id%>/messages/new';" style="border: none; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; padding: 2rem;">
+            <i class="fas fa-comments" style="font-size: 2rem; margin-right: 1rem;"></i> Live chat
+        </button>
+        <br>
+        <button class="btn btn-primary btn-lg" style="border-radius: 20px; font-family: 'Open sans', sans-serif; width: 100%; display: flex; justify-content: center; align-items: center;">
+            <i style="margin-right: 0.5rem;" class="bi bi-inbox-fill"></i>
+            <span>Inbox</span>
+        </button>
+        <button class="btn btn-outline-primary btn-lg" style="border-radius: 20px; font-family: 'Open sans', sans-serif; width: 100%; display: flex; justify-content: center; align-items: baseline;">
+            <i style="margin-right: 0.5rem;" class="bi bi-box-arrow-right"></i>
+            <span>Sent</span>
+        </button>
+        <button class="btn btn-outline-danger btn-lg" style="border-radius: 20px; font-family: 'Open sans', sans-serif; width: 100%; display: flex; justify-content: center; align-items: center;">
+            <i style="margin-right: 0.5rem;" class="fas fa-trash"></i>
+            Trash
+        </button>
+    </div>
+    <div class="pane-right">
+        <div style="justify-self: center; margin-bottom: 1rem; margin-top: 1rem; display: flex;">
+            <button class="btn btn-primary btn-lg" style="font-family: 'Poppins', sans-serif; border-radius: 0px; margin-right: 0.1rem;">All messages</button>
+            <button class="btn btn-outline-primary btn-lg" style="font-family: 'Poppins', sans-serif; border-radius: 0px; margin-right: 0.1rem;">Today</button>
+            <select class="form-select border border-primary" style="width: auto; border-radius: 0px; font-family: 'Poppins', sans-serif; cursor: pointer;">
+                <option selected disabled>By Month</option>
+                <option value="0">January <%= date.getFullYear() %> </option>
+                <option value="1">February <%= date.getFullYear() %> </option>
+                <option value="2">March <%= date.getFullYear() %> </option>
+                <option value="3">April <%= date.getFullYear() %> </option>
+                <option value="4">May <%= date.getFullYear() %> </option>
+                <option value="5">June <%= date.getFullYear() %> </option>
+                <option value="6">July <%= date.getFullYear() %> </option>
+                <option value="7">August <%= date.getFullYear() %> </option>
+                <option value="8">September <%= date.getFullYear() %> </option>
+                <option value="9">October <%= date.getFullYear() %> </option>
+                <option value="10">November <%= date.getFullYear() %> </option>
+                <option value="11">December <%= date.getFullYear() %> </option>
+            </select>
+        </div>
+        <div class="overflow-auto">
+            <% function limitText(text, limit = 17) { %>
+                <% var newText = []; %>
+                <% if(text.length > limit) { %>
+                    <% text.split(" ").reduce(function(acc, cur) { %>
+                        <% if(acc + cur.length <= limit) { %>
+                            <% newText.push(cur); %>
+                        <% } %>
+                        <% return acc + cur.length; %>
+                    <% }, 0); %>
+                    <% return newText.join(" ") + "..."; %>
+                <% } %>
+                <% return text; %>
+            <% } %>
+
+            <% currentUser.referrerDetails.messages.forEach(function(message) { %>
+                <a href="" style="color: black;">
+                    <div class="message-holder">
+                        <p class="" style="width: 10%;"><%= message.date %> </p>
+                        <p class="text-wrap text-break" style="margin-right: 1rem; width: auto;"><%= limitText(message.subject) %> </p>
+                        <p class="text-wrap text-break text-muted" style="width: auto; font-size: 0.9rem;"><%= limitText(message.content, 50) %> </p>
+                    </div>
+                </a>
+            <% }); %> 
+        </div>
+    </div>
+</div>   
+
+<%- include("../partials/footer.ejs") %>

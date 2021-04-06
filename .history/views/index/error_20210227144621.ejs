@@ -1,0 +1,35 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #f0ad4e!important;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="clock"></div>
+            </div>
+            <h1 class="header-h1-text">Error</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } else if(currentUser.typeOfUser == "admin") { %>
+                    <%- include("../partials/navbar_admin.ejs") %>
+                <% } else { %>
+                    <%- include("../partials/navbar_nouser.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="container" style="margin: 0 auto; width: 50%; text-align: center; padding: 2rem; border: 1px solid lightgray; border-radius: 10px; background-color: white;">
+            <small>Oops! Something isn't quite right.</small>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

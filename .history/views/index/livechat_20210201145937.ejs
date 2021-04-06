@@ -1,0 +1,26 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container" style="display: flex; justify-content: center;">
+        <div class="livechat">
+            <div class="messages overflow-auto" style="width: 100%;"></div>
+            <form action="/referrers/<%=currentUser._id%>/messages" method="POST" id="livechat-form" style="margin: 0;" autocomplete="off">
+                <div id="message_div">
+                    <input type="text" name="content" placeholder="Start typing..." id="message_input">
+                    <button type="submit" id="message_button"><i class="fas fa-paper-plane"></i>Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/socketio.ejs") %>
+<script>
+    
+    const { username } = Qs.parse(location.search, {
+        ignoreQueryPrefix: true
+    });
+    console.log(username);
+
+</script>
+<%- include("../partials/footer.ejs") %>

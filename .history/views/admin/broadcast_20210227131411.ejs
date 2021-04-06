@@ -1,0 +1,41 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="clock"></div>
+            </div>
+            <h1 class="header-h1-text">Broadcast</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <%- include("../partials/navbar_admin.ejs") %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div id="message">
+            <form action="/admin/broadcast" method="POST">
+                <div style="width: 50%; margin: 0 auto 2rem auto; background-color: white; padding: 2rem; border: 1px solid lightgrey;">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect" name="recipient" required>
+                            <option value="-1" selected disabled> --- Select one --- </option>
+                            <option value="referrer">Referrers</option>
+                            <option value="hospital">Hospitals</option>
+                        </select>
+                        <label for="floatingSelect">Send broadcast message to:</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="content" name="content" style="height: 10rem;" required></textarea>
+                        <label for="content">Broadcast message...</label>
+                    </div>
+                    <div class="button-group" style="width: 100%; margin-top: 3rem;">
+                        <input type="submit" class="button btn btn-primary" value="Send" style="font-family: 'Poppins', sans-serif; width: 45%;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

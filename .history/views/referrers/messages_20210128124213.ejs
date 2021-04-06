@@ -1,0 +1,22 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container">
+    <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top" id="header">
+        <h1 class="header-h1-text">Live Chat</h1>
+    </header>
+</div>
+
+<div class="container" style="display: flex; justify-content: center;">
+    <div class="livechat border border-secondary overflow-auto">
+        <div class="messages" style="width: 100%;">
+            
+        </div>
+        <div class="input">
+            <form action="/referrers/<%= curre %> ">
+                <input type="text" class="form-control form-control-lg" style="border-radius: 0px; height: auto; position: absolute; bottom: 0;" placeholder="Start typing...">
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

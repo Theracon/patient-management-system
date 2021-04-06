@@ -1,0 +1,80 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/home"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">The Fastclinic Blog</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <% if(currentUser) { %>
+            <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                <%- include("../partials/navbar_referrer.ejs") %>
+            <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %> 
+                <%- include("../partials/navbar_hospital.ejs") %>
+            <% } else if(currentUser.typeOfUser == "admin") { %>
+                <%- include("../partials/navbar_admin.ejs") %>
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %> 
+        <% } else { %>
+            <%- include("../partials/navbar_nouser.ejs") %>
+        <% } %>
+    </header>
+    
+    <div class="container">
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        
+        <div class="blog">
+            <div class="card blog_content">
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Article Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read article</a>
+                </div>
+            </div>
+
+            <div class="card blog_content">
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Article Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read article</a>
+                </div>
+            </div>
+
+            <div class="card blog_content">
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Article Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read article</a>
+                </div>
+            </div>
+
+            <div class="card blog_content">
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Article Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read article</a>
+                </div>
+            </div>
+
+            <div class="card blog_content">
+                <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Article Title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Read article</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

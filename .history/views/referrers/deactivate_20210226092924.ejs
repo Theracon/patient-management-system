@@ -1,0 +1,68 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: darkred!important;">
+            <%- include("../partials/navbar_referrer.ejs") %>
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text">Deactivate Account</h1>
+                <div style="display: flex; align-items: flex-start;">  
+                    <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %> 
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: #0275D8;"></i></a></p>
+                        <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                    <% } else { %>
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: white;"></i></a></p>
+                    <% } %> 
+                </div>
+            </div>
+        </header>
+
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text"><%= currentUser.referrerDetails.title %> <%= currentUser.referrerDetails.firstname %> </h1>
+                <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+                <div style="display: flex; align-items: flex-start; width: 10%;">  
+                    <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %> 
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                        <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                    <% } else { %>
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                    <% } %> 
+                </div>
+            </div>
+            <%- include("../partials/navbar_referrer.ejs") %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="deregister-content overflow-auto">
+            <p class="text-center" style="font-family: 'Open Sans', sans-serif;">What can we do to resolve this?</p>
+            <p class="text-center" style="font-family: 'Open Sans', sans-serif;"></p>
+        </div>
+        <br><br>
+        <div style="width: 50%; margin: auto; background-color: white; border: 1px solid lightgray; padding: 2rem;">
+            <p class="text-center" style="font-family: 'Open Sans', sans serif;">Still want to deactivate? We'll miss you.</p>
+            <form action="/referrers/<%=currentUser._id%>?_method=DELETE" method="POST">
+                <!--Name-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" name="name" value="Doctor <%= currentUser.referrerDetails.name %>" readonly>
+                    <label for="name">Name</label>
+                </div>
+                <!--Reason for deactivating-->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="content" name="reason" style="height: 10rem;"></textarea>
+                    <label for="content">Reason for deactivating</label>
+                </div>
+                <!--Buttons-->
+                <div class="button-group" style="width: 50%; margin: 0 auto;">
+                    <input type="submit" class="button btn btn-danger text-wrap" value="Deactivate" style="width: 50%; margin: 0.25rem;">
+                    <button class="button btn btn-primary" onclick="window.location.href='/referrers/<%=currentUser.username%>/dashboard';" style="width: 50%; margin: 0.25rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

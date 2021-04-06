@@ -1,0 +1,29 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top" id="header">
+            <h1 class="header-h1-text">Contact Us</h1>
+        </header>
+        <br>
+
+        <!--Live chat: new message-->
+        <div id="message">
+            <form action="/livechat/<%=currentUser.typeOfUser%>">
+                <div style="width: 50%; margin: 0 auto 2rem auto; background-color: white; padding: 2rem; border: 1px solid lightgrey;">
+                    <h1 class="header-h1-text text-center">Live Chat</h1>
+                    <hr>
+                    <input type="text" name="typeOfUser" value="<%= currentUser.typeOfUser %>" style="display: none;">
+                    <br>
+                    <p class="text-center">Start a live chat and get your queries answered instantly.</p>
+                    <br>
+                    <button type="submit" class="button btn btn-primary" style="font-family: 'Poppins', sans-serif; width: 45%; margin: 0 auto; display: block;">
+                        Start Live Chat
+                    </button>
+                </div>
+            </form>
+        </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

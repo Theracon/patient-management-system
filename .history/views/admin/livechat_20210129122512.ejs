@@ -1,0 +1,20 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container" style="display: flex; justify-content: center;">
+        <div class="livechat border border-secondary">
+            <div class="messages overflow-auto" style="width: 100%;">
+                
+            </div>
+            <form action="/referrers/<%=currentUser._id%>/messages" method="POST" style="margin: 0;">
+                <div class="input-group" style="height: fit-content; width: 100%; margin: 0; box-shadow: #0275D8 0px 0px 5px 1px;">
+                    <input type="text" class="form-control form-control-lg" placeholder="Start typing..." name="content" style="border-radius: 0px; font-family: 'Poppins', sans-serif; font-size: 0.8rem;">
+                    <input type="submit" value="Send" class="btn btn-primary btn-lg" style="border-radius: 0px; font-family: 'Poppins', sans-serif;">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/") %> 
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/955da05a97.js" crossorigin="anonymous"></script>
+        <style>
+            /************************************************************************************************************************ 
+                                                            DEFAULT STYLES
+            *************************************************************************************************************************/
+            html, body, body div {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                outline: 0;
+                vertical-align: baseline;
+                background: transparent;
+            }
+
+            html {
+                position: relative;
+                height: 100%;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            html::before {
+                content: "";
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                background: url("https://images.unsplash.com/photo-1460672985063-6764ac8b9c74?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1055&q=80") no-repeat center center fixed;
+                background-size: cover;
+                background-blend-mode: color-burn;
+                background-position: top center;
+                opacity: 0.25;
+            }            
+
+            body {
+                margin: 0;
+                height: 100vh;
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            header {
+                border-radius: 20px;
+            }
+
+            div {
+                border: none!important;
+            }
+
+            form {
+                margin-bottom: 50px;
+            }
+
+            button, input[type='submit'] {
+                font-family: 'Poppins', sans-serif!important;
+                font-weight: 700!important;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            header > small {
+                text-transform: initial!important;
+            }
+
+            #header {
+                background: #374046!important;
+                color: white!important;
+                font-family: 'Poppins', sans-serif!important;
+                box-shadow: lightgrey 0px 0px 5px 2px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+            #container-fluid {
+                position: relative;
+                height: 100%;
+                width: 100%;
+            }
+
+            #referrers {
+                width: 100%;
+                background-color: white;
+                color: black;
+                border-radius: 10px;
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+                margin-top: 2rem;
+            }
+
+            #referrer-img {
+                display: block;
+                margin: 1rem auto;
+            }
+
+            #align {
+                display: flex;
+                justify-self: center;
+                font-size: 0.7rem;
+                margin-bottom: 1rem;
+            }
+
+            #nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 999;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                width: 100%;
+                height: 10%;
+                background-color: #f7f7f7;
+            }
+
+            #profile {
+                width: 70%;
+                background-color: white;
+                padding: 2rem;
+                border-radius: 10px;
+            }
+
+            #footer-container {
+                width: 100%;
+                height: 60vh;
+                box-sizing: border-box;
+                background-color: white;
+            }
+            
+            #copyright {
+                height: 10vh;
+                background-color: white;
+            }
+
+            #message_div {
+                width: 100%;
+                display: flex;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            #message_input {
+                padding: 0.5rem;
+                width: 85%;
+                border: 1px solid #b0b0b0;
+            }
+
+            #message_input:focus {
+                outline: none;
+                border: none;
+                box-shadow: #0275d8 0px -1px 5px 0px;
+            }
+
+            #message_button {
+                width: 15%;
+                padding: 0.5rem;
+                text-align: center;
+                border: 1px solid #0275D8;
+                background: #0275D8;
+                color: white;
+            }
+
+            #message_button:focus {
+                outline: none;
+            }
+
+            #message_button > i {
+                margin-right: 0.5rem;
+            }
+
+            #show_links {
+                font-size: 1.5rem;
+            }
+
+            #toggle_content {
+                font-size: 1.5rem;
+            }
+
+            .form_div {
+                display: grid; 
+                background-color: white; 
+                padding: 2rem 1rem 2rem 1rem; 
+                width: 30%; 
+                margin: 0 auto; 
+            }
+
+            .new_patient_form_div {
+                width: 50%; 
+                margin: 0 auto; 
+                background-color: white; 
+                padding: 2rem; 
+            }
+
+            .clock {
+                width: 20%;
+                font-family: 'Orbitron', sans-serif;
+                font-size: 1rem;
+                color: white;
+            }
+
+            .content {
+                margin: 0 auto;
+                background-color: white; 
+                padding: 3rem; 
+                width: 70%;
+            }
+
+            .blog {
+                margin: 0 auto;
+                width: 80%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-column-gap: 1rem;
+                grid-row-gap: 2rem;
+            }
+
+            .card-body > a {
+                width: 100%;
+                padding: 1rem;
+            }
+
+
+
+
+
+
+
+            .profile-image {
+                display: block;
+                margin: 1rem auto;
+                box-shadow: #0275d8 0px -1px 5px 0px;
+                cursor: pointer;
+                width: 20%;
+            }
+
+            .profile-details {
+                display: grid;
+                align-items: baseline;
+                padding-left: 3rem;
+                padding-right: 3rem;
+                margin-top: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .profile-details-paragraph {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .space {
+                position: absolute;
+                height: 15%;
+                width: 20%;
+            }
+
+            .square-image {
+                width: 200px;
+                height: 150px;
+                overflow: hidden;
+            }
+
+            .button {
+                width: 50%;
+                margin: auto auto;
+                padding: 20px;
+            }
+            .relative {
+                position: relative;
+            }
+
+            .white-text {
+                color: #000;
+                font-weight: 500;
+            }
+
+            .bold-text {
+                font-weight: 500!important;
+            }
+
+            .button-group {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .space-out {
+                margin-left: 1%;
+                margin-right: 1%;
+            }
+
+            .margin-bottom {
+                margin-bottom: 10%;
+            }
+
+            .round-button {
+                position: relative;
+                display: block;
+                padding: 1.5rem;
+                width: 30%;
+                margin-left: 2.5%;
+                margin-right: 2.5%;
+                background-color: #0275D8;
+                color: #ffffff;
+                border-radius: 10px;
+                border: 1px solid black;
+                cursor: pointer;
+            }
+
+            .align-center {
+                margin: auto auto;
+            }
+
+            .grid {
+                display: grid;
+                grid-gap: 0px;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .thumbnail-group {
+                width: 100%;
+            }
+
+            .special-heading {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 2%;
+                width: 100%;
+                background-color: turquoise;
+                color: #000000;
+            }
+
+            .auto-height {
+                height: auto;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            .big-icon {
+                transform: scale(2);
+            }
+
+            .extra-big-icon {
+                transform: scale(4);
+            }
+
+            .banner {
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+                margin: 0 auto;
+                padding: 1rem;
+                background-color: #0275d8;
+                color: white;
+                font-weight: 500;
+                border-radius: 10px;
+            }
+
+            .wallet-detail {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                color: white;
+                font-weight: 500;
+            }
+
+            .holder {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .patient-card-name {
+                width: 100%;
+                height: 10%;
+                font-family: 'Open Sans', sans-serif;
+                font-weight: bolder;
+            }
+
+            .patient-card-investigation {
+                width: 100%;
+                height: 100%;
+                font-size: 0.8rem;
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            .patient-card-date {
+                width: 100%;
+                height: 20%;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 0.6rem;
+            }
+
+            .patients-header-auth {
+                font-family: 'Poppins', sans-serif;
+                width: 100%;
+                height: auto;
+                padding: 1rem;
+                font-weight: 200;
+                margin: 0;
+            }
+
+            .patients-div-auth {
+                width: 100%;
+                max-height: 100vh;
+                margin: 0 auto;
+                padding: 1rem;
+                font-family: 'Open Sans', sans-serif;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: center;
+            }
+
+            .patient-card-auth {
+                position: relative;
+                background-color: white;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                width: 18%;
+                height: 18vh;
+                justify-self: center;
+                align-self: center;
+                margin: 1%;
+                cursor: pointer;
+            }
+
+            .patients-header-unauth {
+                font-family: 'Poppins', sans-serif;
+                font-weight: 200;
+                width: 100%;
+                height: auto;
+                padding: 1rem;
+                margin: 0;
+            }
+
+            .patients-div-unauth {
+                width: 100%;
+                max-height: 100vh;
+                margin: 0 auto;
+                padding: 1rem;
+                font-family: 'Open Sans', sans-serif;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: center;
+            }
+
+            .patient-card-unauth {
+                position: relative;
+                background-color: white;
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                width: 18%;
+                height: 18vh;
+                padding: 0.3rem 0 0.3rem 0;
+                justify-self: center;
+                align-self: center;
+                margin: 1%;
+                cursor: pointer;
+            }
+
+            .patient-card-button {
+                width: 100%;
+                padding: 0.5rem;
+                margin: 0.5rem auto;
+                color: white;
+                font-family: 'Poppins', sans-serif;
+                border-radius: 20px;
+                border: none;
+                outline: none;
+            }
+
+            .dashboard-buttons-div {
+                width: 50%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+
+            .dashboard-button-normal {
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                margin: 0.5rem;
+                width: 30%;
+                height: 12rem;
+                border: none;
+                border-radius: 10px;
+                background-color: #0275d8;
+                color: white;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 700;
+            }
+
+            .dashboard-button-grey {
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                margin: 0.5rem;
+                width: 30%;
+                height: 12rem;
+                border: none;
+                border-radius: 10px;
+                background-color: #DC3545;
+                color: white;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 700;
+            }
+
+            .dashboard-button-normal:hover {
+                animation-name: delay;
+                animation-duration: 400ms;
+                animation-timing-function: cubic-bezier();
+            }
+
+            @keyframes delay {
+                25% {
+                transform: scale(1.015);
+                }
+                66% {
+                transform: scale(1.03);
+                }
+                100% {
+                transform: scale(1.05);
+                }
+            }
+
+            .dashboard-button-grey:hover {
+                animation-name: grey;
+                animation-duration: 400ms;
+                animation-timing-function: cubic-bezier();
+            }
+
+            @keyframes grey {
+                25% {
+                transform: scale(1.015);
+                }
+                66% {
+                transform: scale(1.03);
+                }
+                100% {
+                transform: scale(1.05);
+                }
+            }
+
+            .dashboard-button-danger {
+                color: white;
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                width: 30%;
+                height: 12rem;
+                margin: 0.5rem;
+                border: 1px solid #D9534F;
+                border-radius: 10px;
+                background-color: #D9534F;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .dashboard-button-danger:hover {
+                animation-name: danger;
+                animation-duration: 400ms;
+                animation-timing-function: cubic-bezier();
+            }
+
+            @keyframes danger {
+                25% {
+                transform: scale(1.05);
+                }
+                66% {
+                transform: scale(1.1);
+                }
+                100% {
+                transform: scale(1);
+                }
+            }
+
+            .deactivate-account {
+                font-family: 'Open sans', sans-serif;
+                width: 70%;
+                margin: 2rem auto;
+                padding: 1rem;
+                background-color: #374046;
+                color: white;
+                border-radius: 10px;
+            }
+
+            .deactivate-account-text {
+                width: 100%;
+                height: 20vh;
+                padding: 1rem;
+            }
+
+            .back {
+                position: fixed;
+                padding: 0;
+                margin: 0;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white;
+                animation-name: backdiv;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+            }
+
+            .heart {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: #0275D8;
+                height: 50px;
+                width: 50px;
+                transform: rotate(-45deg);
+                animation-name: beat;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+            }
+
+            .heart:after {
+                background-color: #0275D8;
+                content: "";
+                border-radius: 50%;
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: 0px;
+                left: 25px;
+            }
+
+            .heart:before {
+                background-color: #0275D8;
+                content: "";
+                border-radius: 50%;
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: -25px;
+                left: 0px;
+            }
+
+            @keyframes backdiv {
+                50% {
+                background: white;
+                }
+            }
+
+            @keyframes beat {
+                0% {
+                transform: scale(1) rotate(-45deg);
+                }
+                50% {
+                transform: scale(0.6) rotate(-45deg);
+                }
+            }
+
+            .footer-banner {
+                width: 100%;
+                margin: 10rem auto 0 auto;
+                padding: 2rem;
+            }
+
+            .header-h1-text {
+                font-family: 'Poppins', sans-serif;
+                font-weight: 400;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .header-h1-text-2 {
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 400;
+                width: 100%;
+                background-color: #108FFD;
+                color: white;
+                border-radius: 5px;
+                padding: 1rem;
+            }
+
+            .footer-banner-content {
+                width: 100%;
+                height: 80vh;
+                background-color: #108FFD;
+                color: white;
+                border-radius: 5px;
+                padding: 1rem;
+            }
+
+            .footer-banner-extra {
+                width: 100%;
+                height: 100vh;
+                padding: 1rem;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .footer-content-extra-block {
+                width: 30%;
+                height: 80%;
+                padding: 1rem;
+                text-align: center;
+                background-color: white;
+                border: 1px solid #10FDF4;
+            }
+
+            .footer-content-extra-block-h1 {
+                font-family: 'Opens Sans', sans-serif;
+                font-weight: 300;
+                width: 100%;
+                background-color: white;
+                color: black;
+                padding: 1rem;
+            }
+
+            .footer-container-content {
+                width: 100%;
+                height: 80%;
+                padding: 1rem;
+            }
+
+            .hr-bottom {
+                display: block;
+                margin: 0 auto;
+                width: 60%;
+                color: gray;
+            }
+
+            .fade {
+                margin: 50px;
+                padding: 50px;
+                background-color: lightgreen;
+                opacity: 1;
+            }
+
+            .socials {
+                width: 20%;
+                margin: 0 auto;
+                height: auto;
+                font-size: 3rem;
+                text-align: center;
+                color: #0275D8;
+            }
+
+            .deregister-content {
+                width: 70%;
+                height: 105vh;
+                margin: auto;
+                padding: 3rem;
+                font-family: 'Open Sans', sans-serif;
+                background-color: white;
+                border: 1px solid lightgray;
+            }
+
+            .deregister-action {
+                width: 70%; 
+                margin: auto; 
+                background-color: white; 
+                border: 1px solid lightgray; 
+                padding: 3rem;
+            }
+
+            .livechat {
+                position: relative;
+                width: 60%;
+                height: 75vh;
+                background: white;
+                margin: 3rem auto auto auto;
+                box-shadow: lightgrey 0px 0px 2px 1px;
+            }
+
+            .messages {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            .message_admin {
+                height: fit-content;
+                max-width: 65%;
+                margin: 0.5rem 0 1rem 0.5rem;
+            }
+
+            .message_user {
+                height: fit-content;
+                max-width: 65%;
+                margin: 0.5rem 0 1rem 0.5rem;
+            }
+
+            .message_content {
+                height: fit-content;
+                width: 100%;
+                margin: 0;
+                display: flex;
+                align-items: baseline;
+            }
+
+            .message_content_message {
+                font-size: 0.9rem;
+                max-width: 80%;
+                height: fit-content;
+                border-radius: 20px;
+                margin: 0;
+                padding: 0.5rem;
+                background-color: #0275D8;
+                color: white;
+            }
+
+            .message_content_message_admin {
+                font-size: 0.9rem;
+                max-width: 80%;
+                height: fit-content;
+                border-radius: 20px;
+                margin: 0;
+                padding: 0.5rem;
+                background-color: #374046;
+                color: white;
+            }
+
+            .message_content_time {
+                font-size: 0.75rem;
+                width: fit-content;
+                text-align: center;
+                height: fit-content;
+                color: #374046;
+                margin-left: 0.5rem;
+                
+            }
+
+            .message_content_username {
+                width: fit-content;
+                text-align: center;
+                font-size: 0.85rem;
+                height: fit-content;
+                color: black;
+                font-family: 'Ubuntu', sans-serif;
+                font-weight: 400;
+            }
+
+            .message-text-div {
+                position: absolute;
+                height: auto;
+                width: auto;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .message-text-admin {
+                position: absolute;
+                left: 0.5rem;
+                max-width: 65%;
+                text-align: left;
+                background-color: #d0d0d0;
+                color: black;
+                padding: 0.7rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-family: 'Open Sans', sans-serif;
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .message-text-user {
+                position: absolute;
+                right: 0.5rem;
+                max-width: 65%;
+                text-align: left;
+                background-color: #0275d8;
+                color: white;
+                padding: 0.7rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-family: 'Open Sans', sans-serif;
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .message-text-time {
+                font-family: 'Open sans', sans-serif;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            .notifications {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: fit-content;
+                margin: 0 auto;
+                padding: 1rem;
+                background: white;
+                border: 1px solid lightgray;
+                border-radius: 10px;
+            }
+
+            .notification {
+                position: relative;
+                display: flex;
+                align-items: center;
+                flex-wrap: nowrap;
+                width: 50vw;
+                height: 10vh;
+                margin: 0.5rem auto;
+                padding: 1rem;
+            }
+
+            .notification_time {
+                position: absolute;
+                left: 0;
+                display: inline-block;
+                max-width: 30%;
+                margin: 0 auto;
+                padding: 1rem;
+                margin-right: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .notification_content {
+                display: inline-block;
+                margin: 0 auto;
+                padding: 1rem;
+                width: 65%;
+                text-align: left;
+            }
+
+            .notification_button {
+                display: inline-block;
+                margin: 0 auto;
+            }
+
+            .department {
+                width: 100%;
+                height: fit-content;
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+                padding: 2rem;
+                border: 1px solid lightgray;
+            }
+
+            .procedures {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+                height: fit-content;
+                padding: 0;
+            }
+
+            .procedure {
+                width: 90%;
+                padding: 0.5rem;
+            }
+
+            .procedure_button {
+                border-radius: 50%;
+                padding: 0.5rem;
+                width: 10%;
+                height: fit-content;
+            }
+
+            .procedure_input {
+                width: 90%;
+                padding: 0.5rem;
+            }
+
+            .procedure_input_button {
+                padding: 0.5rem;
+                width: 10%;
+                height: fit-content;
+            }
+
+            .procedure_input:focus {
+                outline: none;
+            }
+
+            .profile {
+                width: 70%;
+                height: fit-content;
+                background-color: white;
+                margin: 0.5rem auto;
+                padding: 2rem;
+                border: 1px solid lightgray;
+                border-radius: 10px;
+            }
+
+            .departments {
+                display: grid;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                margin: 0.5rem auto;
+                padding: 2rem;
+                border: 1px solid lightgray;
+                border-radius: 10px;
+            }
+
+            .hospitals {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                background-color: white;
+                border: 1px solid lightgray;
+                padding: 1rem;
+            }
+
+            .hospital_button {
+                width: 18%;
+                height: 20vh;
+                margin: 1%;
+                display: grid;
+            }
+
+            .referrers {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                background-color: white;
+                border: 1px solid lightgray;
+                padding: 1rem;
+            }
+
+            .referrer_button {
+                width: 18%;
+                height: 20vh;
+                margin: 1%;
+                display: grid;
+            }
+
+            .profile_procedures {
+                width: 70%;
+                height: 105vh;
+                background-color: white;
+                margin: 0.5rem auto;
+                padding: 2rem;
+                border: 1px solid lightgray;
+                border-radius: 10px;
+            }
+
+            .navbar_nouser {
+                position: relative;
+                top: 0;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                width: 80%;
+                height: fit-content;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 400;
+            }
+
+            nav > div > ul {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            nav > div > ul > div > li {
+                display: block;
+                letter-spacing: 3px;
+                margin-left: 1rem;
+                margin-right: 1rem;
+                padding: 0.5rem;
+            }
+
+            nav > div > ul > div > li > a {
+                display: block;
+                margin: 0 auto;
+                color: white!important;
+                text-align: center;
+                animation-name: link;
+                animation-duration: 1s;
+            }
+
+            @keyframes link {
+                50% {
+                    opacity: 0.8;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            .toggleHide {
+                display: none;
+            }
+
+            .toggleShow {
+                display: block;
+            }
+
+            .rotate_180 {
+                transform: rotate(180deg);
+            }
+
+            .small-content {
+                margin: 0 auto; 
+                width: 50%; 
+                text-align: center; 
+                padding: 2rem; 
+                border: 1px solid lightgray; 
+                border-radius: 10px; 
+                background-color: white;
+            }
+
+            .holder_div {
+                background-color: white; 
+                padding: 1rem; 
+                width: 80%; 
+                margin: 0 auto; 
+                border: 1px solid lightgrey;
+            }
+
+            /*
+            CLOCK STYLES
+            */
+            .analog {
+                width: 100px;
+                height: 100px;
+                background-color: #73ff00;
+                border-radius: 50%;
+                border: 8px solid #000;
+                box-shadow: 2px 2px 8px 2px rgba(22, 45, 75, 0.92);
+                background-image: url('https://e7.pngegg.com/pngimages/813/410/png-clipart-social-media-marketing-time-management-clock-clock-without-hands-angle-content-marketing.png');
+                background-size: cover;
+                position: relative;
+            }
+
+            .clock::before {
+                content: '';
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-color: #000;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 999;
+            }
+
+            .hand {
+                position: absolute;
+                bottom: 50%;
+                left: 50%;
+                transform: translateX(-50%) rotate(90deg);
+                transform-origin: bottom;
+                border-top-left-radius: 7px;
+                border-top-right-radius: 7px;
+            }
+
+            .hour {
+                width: 8px;
+                height: 28%;
+                background-color: #000;
+            }
+
+            .minute {
+                width: 5px;
+                height: 38%;
+                background-color: #50a0a0;
+            }
+
+            .second {
+                width: 3px;
+                height: 40%;
+                background-color: #ff0000;
+            }
+
+            /************************************************************************************************************************ 
+                                                            FOR MOBILE DEVICES AND TABLETS
+            *************************************************************************************************************************/
+            @media screen and (max-width: 768px) {
+                #alert-div {
+                    width: 100%!important;
+                }
+
+                #button-group {
+                    width: 100%!important;
+                }
+
+                #button-group > * {
+                    width: 100%!important;
+                    margin-bottom: 1rem!important;
+                }
+
+                #form_row_div {
+                    width: 100%!important;
+                }
+
+                #profile {
+                    width: 100%;
+                }
+
+                .button-group {
+                    display: flex!important;
+                    flex-wrap: wrap!important;
+                }
+
+                .button-group-child {
+                    width: 100%!important;
+                    margin-bottom: 1.5rem!important;
+                }
+
+                .form_div {
+                    width: 100%;
+                }
+
+                .header-h1-text {
+                    font-size: 0.8rem;
+                }
+
+                .dashboard-buttons-div {
+                    width: 100%;
+                }
+
+                .dashboard-button-normal {
+                    width: 100%;
+                }
+
+                .dashboard-button-grey {
+                    width: 100%;
+                }
+
+                .new_patient_form_div {
+                    width: 100%;
+                }
+
+                .analog {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                .content {
+                    width: 100%;
+                    padding: 2rem;
+                }
+
+                .blog {
+                    width: 100%;
+                    grid-template-columns: 1fr;
+                }
+
+                .small-content {
+                    width: 100%;
+                }
+
+                .hospital_button {
+                    width: 100%;
+                }
+
+                .profile {
+                    width: 100%;
+                }
+
+                .profile-details-paragraph {
+                    display: block;
+                    text-align: center;
+                }
+
+                .profile_procedures {
+                    width: 100%;
+                    font-size: 0.8rem!important;
+                }
+
+                .departments {
+                    width: 100%;
+                }
+
+                .deregister-content {
+                    width: 100%;
+                    padding: 2rem;
+                }
+
+                .deregister-action {
+                    width: 100%;
+                    padding: 2rem;
+                }
+
+                .holder_div {
+                    width: 100%;
+                }
+
+                .deactivate-account {
+                    width: 100%;
+                }
+                
+                .deactivate-account * button {
+                    padding: 1rem!important;
+                }
+
+                .notification {
+                    width: 100%;
+                }
+
+                .notification_time {
+                    font-size: 0.5rem!important;
+                }
+
+                .notification_content {
+                    font-size: 0.8rem!important;
+                }
+            }
+        </style>
+    </head>
+    <body>

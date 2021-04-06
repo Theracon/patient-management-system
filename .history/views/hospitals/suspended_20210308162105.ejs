@@ -1,0 +1,21 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #f0ad4e!important;">
+        <h1 class="header-h1-text">Account Suspended</h1>
+    </header>
+    <div class="container">
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        
+        <div class="container small-content">
+            <small><i class="fas fa-exclamation-triangle big-icon"></i></small><br><br>
+            <small>Dear user, following violations of our <a href="/terms">terms and conditions</a> and/or <a href="/privacy">privacy policies</a> your account has been temporarily suspended.</small><br>
+            <small>Kindly <a href="/contact">contact us</a> to get this issue resolved immediately.</small>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,28 @@
+<%- include("../partials/header.ejs") %>
+
+<% var messages = [{ sender: "user", content: "HI" }, { sender: "admin", content: "HELLO, HOW CAN I HELP YOU TODAY?" }, {sender: "user", content: "I HAVE A QUESTION." }, { sender: "admin", content: "I'M WITH YOU." }, { sender: "user", content: "I HAVE BEEN DEBITED WRONGLY. WHY?" }, { sender: "user", content: "SORO SOKE, WEREY!" }] %>
+
+
+<div class="container" style="display: flex; justify-content: center;">
+    <div class="livechat border border-secondary overflow-auto">
+        <div class="messages" style="width: 100%;">
+            <% messages.forEach(function(message) { %>
+                <% if(message.sender === "admin") { %> 
+                    <p class="float-start" style="margin-right: 1rem;"> <%= message.content %> </p><br><br>
+                <% } else { %>
+                    <p class="float-end" style=""> <%= message.content %> </p><br><br>
+                <% } %>  
+            <% }) %> 
+        </div>
+        <div class="input">
+            <form action="/referrers/<%=currentUser._id%>/messages" method="POST" style="margin: 0;">
+                <div class="input-group" style="position: absolute; bottom: 0; height: auto; margin: 0; border-radius: 0px;">
+                    <input type="text" class="form-control form-control-lg" placeholder="Start typing..." name="content" style="border-radius: 0px; height: auto;">
+                    <input type="submit" value="Send" class="btn btn-primary" style="border-radius: 0px; font-family: 'Poppins', sans-serif; font-size: 0.8rem;">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

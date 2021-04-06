@@ -1,0 +1,255 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <% var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
+    <% var date = new Date(); %>
+
+    <% function authPatientsCount() { %>
+        <% var authPatientsArr = []; %>
+        <% patients.forEach(function(patient) { %>
+            <% if(patient.status == "authenticated") { authPatientsArr.push(patient); } %>
+        <% }); %>
+        <% return authPatientsArr.length; %>
+    <% } %>
+
+    <% function limitText(text, limit = 17) { %>
+        <% var newText = []; %>
+        <% if(text.length > limit) { %>
+            <% text.split(" ").reduce(function(acc, cur) { %>
+                <% if(acc + cur.length <= limit) { %>
+                    <% newText.push(cur); %>
+                <% } %>
+                <% return acc + cur.length; %>
+            <% }, 0); %>
+            <% return newText.join(" ") + "..."; %>
+        <% } %>
+        <% return text; %>
+    <% } %>
+
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <h1>Patients</h1>
+            <small>Find all your patients here</small>
+            <br><br>            
+        </header>
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <%- include("../partials/navbar_hospital.ejs") %>
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text"><%= notify.date %> </h1>
+                <div style="display: flex; align-items: flex-start;">  
+                    <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %> 
+                        <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: #0275D8;"></i></a></p>
+                        <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
+                    <% } else { %>
+                        <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: white;"></i></a></p>
+                    <% } %> 
+                </div>
+            </div>
+        </header>
+
+        <%- include("../partials/navbar_hospital.ejs") %>
+        <br>
+
+        <div class="container">
+            <div class="" style="display: flex; justify-content: center;">
+                <button type="button" class="btn btn-outline-primary btn-lg" id="button-month" style="margin-right: 0.15rem; padding: 1rem;"><%=months[date.getMonth()]%></span> <span><%=date.getFullYear()%></button>
+                <button type="button" class="btn btn-primary btn-lg" id="button-all" style="margin-left: 0.15rem; padding: 1rem;">All Patients</button>
+            </div>
+            <br><br>
+            <div class="banner" id="banner">
+                <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=patients.length%> </span></p>
+                <hr>
+                <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=authPatientsCount()%> </span></p>
+                <hr>
+                <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(patients.length, 10) - parseInt(authPatientsCount(), 10)%> </span></p>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div id="platform">
+            <div class="container">
+                <h4 class="text-center patients-header-auth">Authenticated</h4>
+                <hr>
+                <div class="patients-div-auth overflow-auto">
+                    <% var count = 0; %> 
+                    <% patients.forEach(function(patient, index, array) { %>
+                        <% if(patient.status === "authenticated") { %>
+                            <% count++ %> 
+                            <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
+                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                                <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                                <span class="patient-card-date lh-1 text-center">Authenticated: <%= patient.authentication_date %></span>
+                            </button>
+                        <% } %> 
+                    <% }) %>
+                    <% if(count < 1) { %> 
+                        <p>No patients to display.</p>
+                    <% } %>
+                </div>
+                <br><br>
+                <h4 class="text-center patients-header-unauth">Not Authenticated</h4>
+                <hr>
+                <div class="patients-div-unauth overflow-auto">
+                    <% var count = 0; %> 
+                    <% patients.forEach(function(patient, index, array) { %>
+                        <% if(patient.status === "unauthenticated") { %>
+                            <% count++ %> 
+                            <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
+                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                                <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                            </button>
+                        <% } %> 
+                    <% }) %>
+                    <% if(count < 1) { %> 
+                        <p>No patients to display.</p>
+                    <% } %> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<script>
+
+    // ALL AUTH PATIENTS
+    var allPatientsAuthMarkup = `
+    <% var count = 0; %> 
+    <% patients.forEach(function(patient, index, array) { %>
+        <% if(patient.status === "authenticated") { %>
+            <% count++ %> 
+            <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
+                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                <span class="patient-card-date lh-1 text-center">Authenticated: <%= patient.authentication_date %></span>
+            </button>
+        <% } %> 
+    <% }) %>
+    <% if(count < 1) { %> 
+        <p>No patients to display.</p>
+    <% } %>
+    `;
+    // ALL UNAUTH PATIENTS
+    var allPatientsUnauthMarkup = `
+    <% var count = 0; %> 
+    <% patients.forEach(function(patient, index, array) { %>
+        <% if(patient.status === "unauthenticated") { %>
+            <% count++ %> 
+            <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
+                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+            </button>
+        <% } %> 
+    <% }) %>
+
+    <% if(count < 1) { %> 
+        <p>No patients to display.</p>
+    <% } %> 
+    `;
+
+    var monthlyPatientsAuthMarkup = `
+        <% var count = 0; %> 
+        <% patients.forEach(function(patient, index, array) { %>
+            <% if(patient.status == "authenticated") { %>
+                <% if(patient.referral_month == months[date.getMonth()]) { %>
+                    <% count++ %> 
+                    <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
+                        <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                        <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                        <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                        <span class="patient-card-date lh-1 text-center">Authenticated: <%= patient.authentication_date %></span>
+                    </button>
+                <% } else %>
+            <% } %> 
+        <% }); %>
+        
+        <% if(count < 1) { %> 
+            <p>No patients to display.</p>
+        <% } %>
+    `;
+
+    var monthlyPatientsUnauthMarkup = `
+        <% var count = 0; %> 
+        <% patients.forEach(function(patient, index, array) { %>
+            <% if(patient.status == "unauthenticated") { %>
+                <% if(patient.referral_month == months[date.getMonth()]) { %>
+                    <% count++ %> 
+                    <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
+                        <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                        <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                        <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                    </button>
+                <% } %>
+            <% } %> 
+        <% }); %>
+        
+        <% if(count < 1) { %> 
+            <p>No patients to display.</p>
+        <% } %>
+    `;
+
+    var allBannerMarkup = `
+        <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=patients.length%> </span></p>
+            <hr>
+        <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=authPatientsCount()%> </span></p>
+            <hr>
+        <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(patients.length, 10) - parseInt(authPatientsCount(), 10)%> </span></p>
+    `;
+
+    var monthBannerMarkup = `
+        <% var patientCount = 0; %>
+        <% var authPatientCount = 0; %>
+
+        <% var obj = {}; %>
+
+        <% patients.forEach(function(patient) { %>
+            <% if(patient.referral_month == months[date.getMonth()]) { %>
+                <% patientCount++ %>
+                
+                <% if(patient.status == "authenticated") { %>
+                    <% authPatientCount++ %>
+                <% } %>
+            <% } %>
+        <% }); %>
+            
+        <% obj = { patientCount: patientCount, authPatientCount: authPatientCount }; %>
+
+        <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=obj.patientCount%> </span></p>
+            <hr>
+        <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=obj.authPatientCount%> </span></p>
+            <hr>
+        <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
+    `;
+
+    var banner = document.getElementById("banner");
+    var platform = document.getElementById("platform");
+    var buttonMonth = document.getElementById("button-month");
+    var buttonAll = document.getElementById("button-all");
+
+    buttonAll.addEventListener("click", function(e) {
+        buttonMonth.classList.remove("btn-primary");
+        buttonMonth.classList.add("btn-outline-primary");
+        buttonAll.classList.add("btn-primary");
+        buttonAll.classList.remove("btn-outline-primary");
+        banner.innerHTML = allBannerMarkup;
+        document.querySelector(".patients-div-auth").innerHTML = allPatientsAuthMarkup;
+        document.querySelector(".patients-div-unauth").innerHTML = allPatientsUnauthMarkup;
+    });
+
+    buttonMonth.addEventListener("click", function(e) {
+        buttonAll.classList.remove("btn-primary");
+        buttonAll.classList.add("btn-outline-primary")
+        buttonMonth.classList.add("btn-primary");
+        buttonMonth.classList.remove("btn-outline-primary");
+        banner.innerHTML = monthBannerMarkup;
+        document.querySelector(".patients-div-auth").innerHTML = monthlyPatientsAuthMarkup;
+        document.querySelector(".patients-div-unauth").innerHTML = monthlyPatientsUnauthMarkup;
+    });
+
+
+</script>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,31 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text"><%= notify.date %></h1>
+                <div style="display: flex; align-items: flex-start;">  
+                    <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %> 
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: #0275D8;"></i></a></p>
+                        <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                    <% } else { %>
+                        <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 3rem; color: white;"></i></a></p>
+                    <% } %> 
+                </div>
+            </div>
+        </header>
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div style="margin: 0 auto; padding: 1rem; background: white; height: fit-content; border: 1px solid lightgray; width: 50%;">
+            <p><%= notify.time.toUpperCase() %> </p>
+            <hr>
+            <br>
+            <p><%= notify.content %> </p>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

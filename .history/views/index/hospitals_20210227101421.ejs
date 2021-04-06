@@ -1,0 +1,38 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center;">
+                <h1 class="header-h1-text">Partner Hospitals</h1>
+                <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            </div>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer") { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="hospitals">
+            <% hospitals.forEach(function(hospital) { %>
+                <% if(hospital.role == 1) { %>
+                    <div class="hospital_div border border-2 rounded">
+                        <span class="text-center" style="height: 100%; font-size: 0.8rem;"><%= hospital.hospitalDetails.name %> </span>
+                        <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 100%;"><%= hospital.hospitalDetails.address %></span>
+                    </div>
+                <% } %> 
+            <% }); %>
+        </div>
+    </div>
+</div>
+<footer class="text-muted text-center position-relative bottom-0" id="footer" style="font-size: 0.7rem;">Designed and developed by <a href="https://web.facebook.com/Overstack-102533051819877" target="_blank">Overstack </a> &#169;2021</footer>
+
+<%- include("../partials/footer.ejs") %>

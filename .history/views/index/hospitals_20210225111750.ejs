@@ -1,0 +1,24 @@
+<%- include("./partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <h1 class="header-h1-text">Blog</h1>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer") { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+            <span style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></span>
+        </header>
+
+        <%- include("../partials/alert.ejs") %>
+        <br>
+    </div>
+</div>
+
+<%- include("./partials/footer.ejs") %>

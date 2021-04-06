@@ -1,0 +1,72 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <h1 class="header-h1-text">Create your profile</h1>
+    </header>
+
+    <div class="container"> <br>
+        <%- include("../partials/alert.ejs") %> 
+        <br>
+
+        <div class="holder_div">
+            <form action="/referrers/<%= currentUser.username %>/update" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                    <!--Professional tile-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="title" name="title" value="Doctor" readonly>
+                        <label for="name">Professional title</label>
+                    </div>
+                    <!--First name-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="firstname" name="firstname" required>
+                        <label for="firstname">First name</label>
+                    </div>
+                    <!--Last name-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="lastname" name="lastname" required>
+                        <label for="lastname">Last name</label>
+                    </div>
+                    <!--Phone number-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="phone" name="phone" required>
+                        <label for="phone">Phone number</label>
+                    </div>
+                    <!--Institution of practice-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="institution" name="institution" required>
+                        <label for="institution">Institution of practice</label>
+                    </div>
+                    <!--Address of institution-->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="address" name="address" style="height: 10rem;" required></textarea>
+                        <label for="address">Address of institution of practice</label>
+                    </div>
+                    <!--Account number-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="ac_number" name="ac_number" maxlength="10" required>
+                        <label for="ac_number">Account number</label>
+                    </div>
+                    <!--Account name-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="ac_name" name="ac_name" required>
+                        <label for="ac_name">Account name</label>
+                    </div>
+                    <!--Bank name-->
+                    <div class="form-floating mb-3">
+                        <input style="padding-left: 0.5rem; padding-right: 0.5rem;" type="text" class="form-control" id="bank" name="bank" required>
+                        <label for="bank">Bank name</label>
+                    </div>
+                    <!--Buttons-->
+                    <div class="button-group" id="button-group" style="width: 100%; margin-top: 5rem;">
+                        <input type="submit" class="button btn btn-primary" value="Confirm" style="font-family: 'Poppins', sans-serif; width: 45%;">
+                        <button type="reset" class="button btn btn-warning" style="font-family: 'Poppins', sans-serif; width: 45%;">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

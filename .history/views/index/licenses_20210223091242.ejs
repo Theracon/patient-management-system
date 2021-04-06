@@ -1,0 +1,28 @@
+<%- include("../partials/header.ejs") %>
+<% if(currentUser && currentUser.typeOfUser === "referrer") { %> 
+    <%- include("../partials/navbar.ejs") %>
+<% } %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center sticky-sm-top">
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer") { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else { %> 
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } %> 
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+            <h1>Licenses</h1>
+        </header>
+        <br><br>
+        <div class="container" style="background-color: white; padding: 1rem;">
+
+        </div>
+    </div>
+</div>
+<footer class="text-muted text-center position-relative bottom-0" id="footer" style="font-size: 0.7rem;">Designed and developed by <a href="https://web.facebook.com/Overstack-102533051819877" target="_blank">Overstack </a> &#169;2021</footer>
+
+<%- include("./partials/footer.ejs") %>

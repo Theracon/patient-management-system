@@ -1,0 +1,81 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <h1 class="header-h1-text">Register a Hospital or diagnostic centre</h1>
+            <small class="text-center">Stage 3 <em>of</em> 3: Procedures/Investigations.</small><br>
+            <small>Add all of the procedures carried out at your institution, one at a time.</em></small><br>
+            <small style="font-weight: 100;" class="text-center">Ensure that all information entered is correct before submitting form.</small>
+        </header>
+
+        <%- include("../partials/alert.ejs") %><br>
+        
+        <div style="background-color: white; padding: 1rem; width: 80%; margin: 0 auto; border: 1px solid lightgrey;">
+            <form action="/hospitals/<%=currentUser.username%>/procedures?_method=PUT" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" style="width: 50%; margin: 0 auto;">
+                    <h1 class="header-h1-text text-center">Procedures</h1>
+                    <!--Procedures-->
+                    <small class="text-muted">(Type in a procedure/investigation and click '+')</small>
+                    <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+                        <input type="text" class="procedure_input border border-secondary">
+                        <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+                    </div>
+                    <div class="procedures">
+                        <% currentUser.hospitalDetails.procedures.forEach(function(procedure, index) { %>
+                            <div class="input-group mb-1 procedure_div">
+                                <input type="text" class="procedure border" name="procedures[<%= index %> ]" value="<%= procedure %>" readonly>
+                                <button class="btn btn-outline-secondary procedure_button border" type="button">-</button>
+                            </div>
+                        <% }) %> 
+                    </div>
+                    <br>
+                    <!--Submit button-->
+                    <div class="button-group" style="width: 100%; margin-top: 4rem;">
+                        <input type="submit" class="button btn btn-primary" value="Confirm" style="width: 45%;">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<script>
+    var procedureArr = Array.from(document.querySelectorAll(".procedure_div")).len;
+    console.log(procedureArr);
+
+    var procedure_count = 0;
+    var departments = document.getElementById("departments");
+    var addButton = document.querySelector(".procedure_input_button");
+    var procedures = document.querySelector(".procedures");
+
+    // Add a procedure/investigation
+    addButton.addEventListener("click", function() {
+        var text = document.querySelector(".procedure_input").value;
+
+        if(text.length > 0) {
+            procedure_count++;
+            var div = document.createElement("div");
+
+            div.classList.add("input-group");
+            div.classList.add("mb-1");
+            div.innerHTML = `
+                <input type="text" class="procedure border" name="procedures[${procedure_count}]" value="${text}" readonly>
+                <button class="btn btn-outline-secondary procedure_button border" type="button">-</button>
+            `;
+            document.querySelector(".procedures").appendChild(div);
+            document.querySelector(".procedure_input").value = "";
+            document.querySelector(".procedure_input").focus();
+        }
+});
+
+    // Remove a procedure/investigation
+    procedures.addEventListener("click", function(e) {
+        if(e.target.classList.contains("procedure_button")) {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+        }
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

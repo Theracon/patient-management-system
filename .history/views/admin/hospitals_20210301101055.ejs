@@ -1,0 +1,46 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <div class="container">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <!--CLOCK-->
+                <div class="analog">
+                    <div class="hand hour"></div>
+                    <div class="hand minute"></div>
+                    <div class="hand second"></div>
+                </div>
+            </div>
+            <h1 class="header-h1-text">Hospitals</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <%- include("../partials/navbar_admin.ejs") %>
+        </header>
+        
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        
+        <div class="hospitals">
+
+            <% hospitals.forEach(function(hospital) { %>
+                <% if(hospital.role == 1) { %>
+
+                    <button type="button" class="btn btn-outline-primary hospital_button" onclick="window.location.href='/admin/hospitals/<%= hospital.username %>';">
+                        <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
+                        <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
+                    </button>
+
+                <% } else if(hospital.role < 1) { %>
+
+                    <button type="button" class="btn btn-outline-secondary hospital_button" onclick="window.location.href='/admin/hospitals/<%= hospital.username %>';">
+                        <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
+                        <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
+                    </button>
+
+                <% } %> 
+            <% }); %>
+
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>
