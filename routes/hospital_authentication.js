@@ -88,7 +88,7 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
                             patient.referrer_commission = 0.03 * (parseInt(req.body.amount_paid, 10));
                         }
                         // Update referrer's commission
-                        referrer.commission += patient.referrer_commission;
+                        referrer.referrerDetails.commission += patient.referrer_commission;
                         // Save patient
                         patient.save(function(err, patient) {
                             if (err) {

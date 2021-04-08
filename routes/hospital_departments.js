@@ -111,7 +111,6 @@ router.put("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
                 user.hospitalDetails.update_count++;
                 user.save(function(err, user) {
                     if (err) {
-                        console.log(err);
                         req.flash("error", "Oops! Something isn't quite right.");
                         return res.redirect("back");
                     }

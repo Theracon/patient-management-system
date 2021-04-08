@@ -72,8 +72,6 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                             // Find hospital
                             User.findOne({ typeOfUser: "hospital", _id: hospitalArray[req.body.hospital]._id }, function(err, hospital) {
                                 if (hospital) {
-                                    console.log(hospital);
-
                                     hospital.hospitalDetails.patients.unshift(patient);
                                     // Save hospital
                                     hospital.save(function(err, hospital) {
@@ -98,7 +96,6 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                                         });
                                     });
                                 } else {
-                                    console.log("No such hospital");
                                     req.flash("Oops! Something isn't quite right");
                                     return res.redirect("back");
                                 }
@@ -107,7 +104,6 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                         return;
                     }
                     req.flash("error", "Please login or create an account.");
-                    console.log("error at patient create route");
                     res.redirect("/login");
                     return;
                 }
@@ -135,7 +131,6 @@ router.get("/referrers/:username/patients/:accession_number", middleware.isUserL
             }
             req.flash("error", "Please login or create an account.");
             res.redirect("/login");
-            console.log("error at success route");
             return;
         }
         req.flash("error", "Oops! An error occurred.");
@@ -233,7 +228,6 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                 }
                 req.flash("error", "Please login or create an account.");
                 res.redirect("/login");
-                console.log("error at success find patient");
                 return;
             }
             req.flash("error", "Oops! An error occurred.");
@@ -259,7 +253,6 @@ router.get("/referrers/:username/patients", middleware.isUserLoggedIn, middlewar
             }
             req.flash("error", "Please login or create an account.");
             res.redirect("/login");
-            console.log("error at success find patient");
             return;
         }
         req.flash("error", "Oops! An error occurred.");
