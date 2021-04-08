@@ -38,6 +38,9 @@ var express = require('express'),
     referrerPatientsRoutes = require("./routes/referrer_patients"),
     referrerProfileRoutes = require("./routes/referrer_profile"),
 
+    // Import wildcard route file
+    wildcardRoute = require("./routes/wildcard"),
+
     // Import the user model
     User = require("./models/user");
 
@@ -114,6 +117,9 @@ app.use(referrerDeactivateRoutes);
 app.use(referrerNotificationsRoutes);
 app.use(referrerPatientsRoutes);
 app.use(referrerProfileRoutes);
+
+// Configure app to use wildcard route file
+app.use(wildcardRoute);
 
 
 /******************************************************************************************************************************/
