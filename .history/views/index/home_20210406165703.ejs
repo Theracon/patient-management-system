@@ -1,0 +1,44 @@
+<%- include("../partials/header.ejs") %>
+
+    <div class="container-fluid" id="container-fluid">
+        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <a href="/home"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            </div>
+            <h1 class="header-h1-text">Fastclinic</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                        <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+                            <%- include("../partials/navbar_hospital.ejs") %>
+                                <% } else if(currentUser.typeOfUser == "admin") { %>
+                                    <%- include("../partials/navbar_admin.ejs") %>
+                                        <% } else { %>
+                                            <%- include("../partials/navbar_nouser.ejs") %>
+                                                <% } %>
+                                                    <% } else { %>
+                                                        <%- include("../partials/navbar_nouser.ejs") %>
+                                                            <% } %>
+        </header>
+
+        <div class="container">
+            <%- include("../partials/alert.ejs") %>
+                <br>
+
+                <div class="content">
+                    <section>
+                        <article>
+                            <p class="lead text-center">Fastclinic is an efficient Software-as-a-Service (SaaS) platform for connecting patients to health and care institutions.</p>
+                            <br><br>
+                            <div class="button-group" style="width: 100%;">
+                                <button onclick="window.location.href='/login';" type="button" class="button btn btn-primary home__signin--button" style="width: 50%;">Sign in</button>
+                            </div>
+                        </article>
+                    </section>
+                </div>
+        </div>
+        <div class="space"></div>
+    </div>
+
+    <%- include("../partials/footer.ejs") %>
