@@ -1,6 +1,7 @@
 /******************************************************************************************************************************/
 // IMPORT DEPENDENCIES & FILES; DEFINE GLOBAL VARIABLES
 /******************************************************************************************************************************/
+// Import dependencies
 var express = require('express'),
     mongoose = require('mongoose'),
     passport = require("passport"),
@@ -10,13 +11,31 @@ var express = require('express'),
     session = require("express-session"),
     cookieParser = require("cookie-parser"),
     flash = require("connect-flash"),
-    adminRoutes = require("./routes/admin"),
-    hospitalRoutes = require("./routes/hospitals"),
-    referrerRoutes = require("./routes/referrers"),
-    patientRoutes = require("./routes/referrer_patients"),
-    profileRoutes = require("./routes/referrer_profile"),
+
+    // Import route files
     indexRoutes = require("./routes/index"),
+    adminIndexRoutes = require("./routes/admin_index"),
+    adminBroadcastRoutes = require("./routes/admin_broadcast"),
+    adminHospitalRoutes = require("./routes/admin_hospitals"),
+    adminReferrerRoutes = require("./routes/admin_referrers"),
+    hospitalIndexRoutes = require("./routes/hospital_index"),
+    hospitalAuthenticateRoutes = require("./routes/hospital_authentication"),
+    hospitalDeactivateRoutes = require("./routes/hospital_deactivate"),
+    hospitalDepartmentsRoutes = require("./routes/hospital_departments"),
+    hospitalNotificationsRoutes = require("./routes/hospital_notifications"),
+    hospitalPatientsRoutes = require("./routes/hospital_patients"),
+    hospitalProceduresRoutes = require("./routes/hospital_procedures"),
+    hospitalProfileRoutes = require("./routes/hospital_profile"),
+    referrerIndexRoutes = require("./routes/referrer_index"),
+    referrerDeactivateRoutes = require("./routes/referrer_deactivate"),
+    referrerNotificationsRoutes = require("./routes/referrer_notifications"),
+    referrerPatientsRoutes = require("./routes/referrer_patients"),
+    referrerProfileRoutes = require("./routes/referrer_profile"),
+
+    // Import the user model
     User = require("./models/user");
+
+// Import dotenv
 require('dotenv').config();
 
 
@@ -55,12 +74,33 @@ app.use(function(req, res, next) {
     next();
 });
 
+/******************************************************************************************************************************/
 // Configure express to use route files
-app.use(adminRoutes);
-app.use(hospitalRoutes);
-app.use(referrerRoutes);
-app.use(patientRoutes);
-app.use(profileRoutes);
+/******************************************************************************************************************************/
+// Use admin route files
+app.use(adminIndexRoutes);
+app.use(adminBroadcastRoutes);
+app.use(adminHospitalRoutes);
+app.use(adminReferrerRoutes);
+
+// Use hospital route files
+app.use(hospitalIndexRoutes);
+app.use(hospitalAuthenticateRoutes);
+app.use(hospitalDeactivateRoutes);
+app.use(hospitalDepartmentsRoutes);
+app.use(hospitalNotificationsRoutes);
+app.use(hospitalPatientsRoutes);
+app.use(hospitalProceduresRoutes);
+app.use(hospitalProfileRoutes);
+
+// Use referrer route files
+app.use(referrerIndexRoutes);
+app.use(referrerDeactivateRoutes);
+app.use(referrerNotificationsRoutes);
+app.use(referrerPatientsRoutes);
+app.use(referrerProfileRoutes);
+
+// Use index route file
 app.use(indexRoutes);
 
 
