@@ -21,7 +21,7 @@ router.get("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
     });
 });
 
-// SHOW(GET): AUTHENTICATION FORM FOR PATIENT WITH KNOWN ACCESSION NUMBER/HOSPITALS
+// SHOW(GET): AUTHENTICATION FORM (FOR PATIENT WITH KNOWN ACCESSION NUMBER)/HOSPITALS
 router.get("/hospitals/:username/authenticate/:accession_number", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
@@ -76,14 +76,16 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
                         // Set amount paid by patient 
                         patient.amount_paid = parseInt(req.body.amount_paid, 10);
                         // Calculate referrer commission
-                        if (parseInt(req.body.amount_paid, 10) < 5000) {
+                        if (parseInt(req.body.amount_paid, 10) < 5001) {
+                            patient.referrer_commission = 0.2 * (parseInt(req.body.amount_paid, 10));
+                        } else if (parseInt(req.body.amount_paid, 10) > 5000 && parseInt(req.body.amount_paid, 10) < 20001) {
                             patient.referrer_commission = 0.1 * (parseInt(req.body.amount_paid, 10));
-                        } else if (parseInt(req.body.amount_paid, 10) < 20000) {
+                        } else if (parseInt(req.body.amount_paid, 10) > 20000 && parseInt(req.body.amount_paid, 10) < 50001) {
                             patient.referrer_commission = 0.075 * (parseInt(req.body.amount_paid, 10));
-                        } else if (parseInt(req.body.amount_paid, 10) < 100000) {
+                        } else if (parseInt(req.body.amount_paid, 10) > 50000 && parseInt(req.body.amount_paid, 10) < 100001) {
                             patient.referrer_commission = 0.05 * (parseInt(req.body.amount_paid, 10));
-                        } else {
-                            patient.referrer_commission = 0.035 * (parseInt(req.body.amount_paid, 10));
+                        } else if (parseInt(req.body.amount_paid, 10) > 100000) {
+                            patient.referrer_commission = 0.03 * (parseInt(req.body.amount_paid, 10));
                         }
                         // Save patient
                         patient.save(function(err, patient) {
