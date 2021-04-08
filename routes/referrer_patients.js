@@ -1,21 +1,21 @@
-var express                 = require("express"),
-    router                  = express.Router(),
-    User                    = require("../models/user"),
-    Patient                 = require("../models/patient"),
-    uniqid                  = require("uniqid"),
-    middleware              = require("../middleware"),
-    functions               = require("../functions"),
-    date                    = new Date(),
-    months                  = ['January','February','March','April','May','June','July', 'August','September','October','November','December'];
+var express = require("express"),
+    router = express.Router(),
+    User = require("../models/user"),
+    Patient = require("../models/patient"),
+    uniqid = require("uniqid"),
+    middleware = require("../middleware"),
+    functions = require("../functions"),
+    date = new Date(),
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-// SHOW: FORM TO ADD NEW PATIENT/REFERRERS
-router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function (req, res) {
+// SHOW(GET): FORM TO ADD NEW PATIENT/REFERRERS
+router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer in database
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-                    if(err) {
+                    if (err) {
                         req.flash("error", "Oops! Something isn;t quite right.");
                         return res.redirect("back");
                     }
@@ -32,23 +32,23 @@ router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middl
     });
 });
 
-// CREATE: ADD NEW PATIENT/REFERRERS
+// CREATE(POST): ADD NEW PATIENT/REFERRERS
 router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
-    if(req.body.hospital && parseInt(req.body.hospital, 10) >= 0) {
+    if (req.body.hospital && parseInt(req.body.hospital, 10) >= 0) {
         var hospitalArray;
-    
+
         User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-            if(err) {
+            if (err) {
                 req.flash("error", "Oops! Something isn't quite right.");
                 return res.redirect("back");
             }
-    
+
             hospitalArray = hospitals.slice();
-    
+
             // Find referrer in database
             User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-                if(!err) {
-                    if(user) {
+                if (!err) {
+                    if (user) {
                         // Make a new patient object
                         var patient = new Patient({
                             name: req.body.name,
@@ -67,17 +67,17 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                             referral_date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
                             referral_time: functions.formatTime(date),
                         });
-        
+
                         patient.save(function(err, patient) {
                             // Find hospital
                             User.findOne({ typeOfUser: "hospital", _id: hospitalArray[req.body.hospital]._id }, function(err, hospital) {
-                                if(hospital) {
+                                if (hospital) {
                                     console.log(hospital);
-        
+
                                     hospital.hospitalDetails.patients.unshift(patient);
                                     // Save hospital
                                     hospital.save(function(err, hospital) {
-                                        if(err) {
+                                        if (err) {
                                             req.flash("error", "Oops! Something isn't quite right.");
                                             return res.redirect("back");
                                         }
@@ -87,7 +87,7 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                                         user.referrerDetails.patient_count++;
                                         // Save updated user details to the database
                                         user.save(function(err, user) {
-                                            if(!err) {
+                                            if (!err) {
                                                 req.flash("success", "Patient referral successful.");
                                                 res.redirect("/referrers/" + user.username + "/patients/" + patient.accession_number);
                                                 return;
@@ -121,12 +121,12 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
     }
 });
 
-// SHOW: PATIENT DETAILS/REFERRERS
+// SHOW(GET): PATIENT DETAILS/REFERRERS
 router.get("/referrers/:username/patients/:accession_number", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 // Find patient
                 Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
                     return res.render("referrers/patientDetails", { patient: patient });
@@ -136,26 +136,26 @@ router.get("/referrers/:username/patients/:accession_number", middleware.isUserL
             req.flash("error", "Please login or create an account.");
             res.redirect("/login");
             console.log("error at success route");
-            return;            
+            return;
         }
         req.flash("error", "Oops! An error occurred.");
         res.redirect("back");
     });
 });
 
-// SHOW: FORM TO EDIT PATIENT DETAILS/REFERRERS
+// SHOW(GET): FORM TO EDIT PATIENT DETAILS/REFERRERS
 router.get("/referrers/:username/patients/:accession_number/edit", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-                    if(err) {
+                    if (err) {
                         req.flash("error", "Oops! An error occurred.");
                         return res.redirect("back");
                     }
                     Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
-                        if(err) {
+                        if (err) {
                             req.flash("error", "Oops! An error occurred.");
                             return res.redirect("back");
                         }
@@ -165,14 +165,14 @@ router.get("/referrers/:username/patients/:accession_number/edit", middleware.is
                 return;
             }
             req.flash("error", "Please login or create an account.");
-            return res.redirect("/login");            
+            return res.redirect("/login");
         }
         req.flash("error", "Oops! An error occurred.");
         res.redirect("back");
     });
 });
 
-// UPDATE: UPDATE PATIENT DETAILS/REFERRERS
+// UPDATE(PUT): UPDATE PATIENT DETAILS/REFERRERS
 router.put("/referrers/:username/patients/:accession_number", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     var hospitalArray;
 
@@ -180,14 +180,14 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
         hospitalArray = hospitals.slice();
     });
 
-    if(req.body.hospital && parseInt(req.body.hospital, 10) >= 0) {
+    if (req.body.hospital && parseInt(req.body.hospital, 10) >= 0) {
         // Find referrer
         User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-            if(!err) {
-                if(user) {
+            if (!err) {
+                if (user) {
                     // Find and update patient in patient model
                     Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
-                        if(err) {
+                        if (err) {
                             req.flash("error", "Oops! An error occurred.");
                             return res.redirect("back");
                         }
@@ -201,12 +201,13 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                         referral_month = months[date.getMonth()];
                         // Save updated patient
                         patient.save(function(err, patient) {
-                            if(err) {
+                            if (err) {
                                 req.flash("error", "Oops! An error occurred.");
                                 return res.redirect("back");
                             }
                             // Find and remove patient in referrer's patients array
                             var id = req.params.patientId;
+
                             function spliceElement(arr) {
                                 var index = arr.findIndex(function(element) {
                                     return element._id === id;
@@ -218,7 +219,7 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                             user.referrerDetails.patients.unshift(patient);
                             // Save referrer with updated patients array
                             user.save(function(err, user) {
-                                if(err) {
+                                if (err) {
                                     req.flash("error", "Oops! An error occurred.");
                                     return res.redirect("back");
                                 }
@@ -233,7 +234,7 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                 req.flash("error", "Please login or create an account.");
                 res.redirect("/login");
                 console.log("error at success find patient");
-                return;            
+                return;
             }
             req.flash("error", "Oops! An error occurred.");
             res.redirect("back");
@@ -244,16 +245,16 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
     }
 });
 
-// SHOW: REFERRER'S PATIENTS/REFERRERS
+// SHOW(GET): REFERRER'S PATIENTS/REFERRERS
 router.get("/referrers/:username/patients", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 // Extract referrer's patients array and save it to a variable
                 var patients = user.referrerDetails.patients;
                 // Render patients template, pass in referrer's patients array
-                res.render("referrers/patients", { patients: patients }); 
+                res.render("referrers/patients", { patients: patients });
                 return;
             }
             req.flash("error", "Please login or create an account.");

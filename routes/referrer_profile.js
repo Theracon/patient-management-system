@@ -1,23 +1,16 @@
-var express                 = require("express"),
-    router                  = express.Router(),
-    User                    = require("../models/user"),
-    Patient                 = require("../models/patient"),
-    uniqid                  = require("uniqid"),
-    middleware              = require("../middleware"),
-    functions               = require("../functions"),
-    salt                    = Math.floor(Math.random() * 100),
-    randomID                = uniqid.time("", salt).toUpperCase(),
-    hospitals               = ["Mayfield Specialist Hospital", "Nizamiye Hospital", "e-Clinic & Diagnostics"],
-    date                    = new Date(),
-    months                  =   [ 'January','February','March','April','May','June','July',
-                                'August','September','October','November','December',
-                                ];
+var express = require("express"),
+    router = express.Router(),
+    User = require("../models/user"),
+    middleware = require("../middleware"),
+    functions = require("../functions"),
+    date = new Date(),
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 // SHOW(GET): REFERRER PROFILE CREATION FORM/REFERRERS
-router.get('/referrers/:username/update', middleware.isUserLoggedIn, function (req, res) {
+router.get('/referrers/:username/update', middleware.isUserLoggedIn, function(req, res) {
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 res.render("referrers/details");
                 return;
             }
@@ -31,35 +24,35 @@ router.get('/referrers/:username/update', middleware.isUserLoggedIn, function (r
 });
 
 // CREATE(POST): CREATE REFERRER PROFILE/REFERRERS
-router.post('/referrers/:username/update', middleware.isUserLoggedIn, function (req, res) {
+router.post('/referrers/:username/update', middleware.isUserLoggedIn, function(req, res) {
     // Find referrer in database, then update referrer info
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 user.role = 0;
                 user.referrerDetails = {
-                    title: req.body.title,
-                    firstname: req.body.firstname,
-                    lastname: req.body.lastname,
-                    name: req.body.firstname + " " + req.body.lastname,
-                    institution: req.body.institution,
-                    address: req.body.address, 
-                    phone: req.body.phone,
-                    bank: req.body.bank,
-                    ac_number: req.body.ac_number,
-                    ac_name: req.body.ac_name,
-                    patient_count: 0,
-                    commission: 0,
-                    update_count: 0,
-                }
-                // Create admin message
+                        title: req.body.title,
+                        firstname: req.body.firstname,
+                        lastname: req.body.lastname,
+                        name: req.body.firstname + " " + req.body.lastname,
+                        institution: req.body.institution,
+                        address: req.body.address,
+                        phone: req.body.phone,
+                        bank: req.body.bank,
+                        ac_number: req.body.ac_number,
+                        ac_name: req.body.ac_name,
+                        patient_count: 0,
+                        commission: 0,
+                        update_count: 0,
+                    }
+                    // Create admin message
                 var welcomeMessage = {
-                    date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
-                    time: functions.formatTime(date),
-                    content: "Hi " + user.referrerDetails.title + " " + user.referrerDetails.name + ", we're pleased to have you on Fastclinic. Feel free to use the FAQs section if you need any clarifications, or reach us by phone or email.",
-                    status: "unread"
-                }
-                // Push welcome message into referrer notifications array
+                        date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
+                        time: functions.formatTime(date),
+                        content: "Hi there! Welcome to Fastclinic. Feel free to visit the FAQs page if you need any clarifications or visit the contact page to reach us by phone or email.",
+                        status: "unread"
+                    }
+                    // Push welcome message into referrer notifications array
                 user.referrerDetails.notifications.push(welcomeMessage);
                 // Update referrer's unread notifications count
                 user.referrerDetails.unread_notifications_count = 1;
@@ -77,11 +70,11 @@ router.post('/referrers/:username/update', middleware.isUserLoggedIn, function (
 });
 
 // SHOW(GET): REFERRER PROFILE/REFERRERS
-router.get('/referrers/:username/profile', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function (req, res) {
+router.get('/referrers/:username/profile', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer from database
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 res.render("referrers/profile");
                 return;
             }
@@ -98,8 +91,8 @@ router.get('/referrers/:username/profile', middleware.isUserLoggedIn, middleware
 router.get("/referrers/:username/profile/edit", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find user from db
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 res.render("referrers/editProfile");
                 return;
             }
@@ -113,18 +106,18 @@ router.get("/referrers/:username/profile/edit", middleware.isUserLoggedIn, middl
 });
 
 // UPDATE(PUT): UPDATE REFERRER PROFILE/REFERRERS
-router.put('/referrers/:username/update', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function (req, res) {
+router.put('/referrers/:username/update', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer in db 
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
+        if (!err) {
+            if (user) {
                 var updateMessage = {
-                    date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
-                    time: functions.formatTime(date),
-                    content: "Hi " + user.referrerDetails.name + ", You updated your profile. Please let us know if you didn't authorize this.",
-                    status: "unread"
-                }
-                // Update referrer details
+                        date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
+                        time: functions.formatTime(date),
+                        content: "Hi " + user.referrerDetails.name + ", You updated your profile. Please let us know if you didn't authorize this.",
+                        status: "unread"
+                    }
+                    // Update referrer details
                 user.referrerDetails.firstname = req.body.firstname;
                 user.referrerDetails.lastname = req.body.lastname;
                 user.referrerDetails.name = req.body.firstname + ' ' + req.body.lastname;
@@ -150,32 +143,6 @@ router.put('/referrers/:username/update', middleware.isUserLoggedIn, middleware.
         }
         req.flash("error", "Oops! An error occurred.");
         res.redirect("back");
-    });
-});
-
-// SHOW(GET): FORM TO DEACTIVATE REFERRER/REFERRERS
-router.get("/referrers/:username/deactivate", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
-    User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
-        if(!err) {
-            if(user) {
-                return res.render("referrers/deactivate");
-            }
-            req.flash("error", "Please login or create an account.");
-            return res.redirect("/login");
-        }
-        req.flash("error", "Oops! An error occurred.");
-        res.redirect("back");
-    });
-});
-
-// DELETE(DELETE): DEACTIVATE REFERRER/REFERRERS + ADMIN
-router.delete("/referrers/:id", middleware.isUserLoggedIn, function(req, res) {
-    User.findByIdAndRemove(req.params.id, function(err) {
-        if(err) {
-            req.flash("error", "Oops! An error occurred.");
-            return res.redirect("back");
-        }
-        return res.redirect("/");
     });
 });
 
