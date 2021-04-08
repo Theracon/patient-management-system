@@ -302,9 +302,4 @@ router.get("/hospitals/:username", function(req, res) {
     });
 });
 
-// SHOW(GET): 404 PAGE/ALL
-router.get("/*", function(req, res) {
-    res.render("index/no-page");
-});
-
 module.exports = router;
