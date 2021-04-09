@@ -1,4 +1,5 @@
-# fastclinic-live
+# Fastclinic
+
 TABLE OF CONTENTS
 
 1. Overview
