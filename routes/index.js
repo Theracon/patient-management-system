@@ -1,72 +1,11 @@
 var express = require("express"),
     router = express.Router(),
-    passport = require("passport"),
-    User = require("../models/user"),
-    functions = require("../functions"),
-    date = new Date(),
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    User = require("../models/user");
+
 
 /******************************************************************************************************************************/
-// ADMIN ROUTES (VERB: ROUTE NAME/AUTHORIZATION)
+// OTHER AUTH ROUTES (VERB: ROUTE NAME/AUTHORIZATION)
 /******************************************************************************************************************************/
-// INDEX(GET): ADMIN SIGNUP PAGE/ADMIN
-router.get("/admin/register", function(req, res) {
-    res.render("admin/register");
-});
-
-// CREATE(POST): CREATE ADMIN/ADMIN
-router.post("/admin/register", function(req, res) {
-    User.findOne({ typeOfUser: "admin", username: req.body.username }, function(err, user) {
-        if (!err) {
-            if (user) {
-                req.flash("error", "A user with that username already exists.");
-                res.redirect("back");
-                return
-            }
-            var admin = { typeOfUser: "admin", username: req.body.username };
-            User.register(new User(admin), req.body.password, function(err, user) {
-                if (!err) {
-                    passport.authenticate("local")(req, res, function() {
-                        req.flash("success", "Welcome to PatientRef, Admin.");
-                        return res.redirect("/admin/dashboard");
-                    });
-                    return;
-                }
-                req.flash("error", "Oops! An error occurred at sign up.");
-                return res.redirect("back");
-            });
-            return;
-        }
-        req.flash("error", "Oops! An error occurred at sign up.");
-        return res.redirect("back");
-    });
-});
-
-// LOGIN(GET): SHOW ADMIN LOGIN FORM/ADMIN
-router.get("/admin/login", function(req, res) {
-    res.render("admin/login");
-});
-
-// LOGIN(POST): ADMIN LOGIN/ADMIN
-router.post("/admin/login", function(req, res) {
-    User.findOne({ typeOfUser: "admin", username: req.body.username }, function(err, user) {
-        if (!err) {
-            if (user) {
-                passport.authenticate("local")(req, res, function() {
-                    req.flash("success", "Welcome back, admin.");
-                    return res.redirect("/admin/dashboard");
-                });
-                return;
-            }
-            req.flash("error", "Sorry, user does not exist. Ensure username is correct.")
-            res.redirect("/admin/login");
-            return;
-        }
-        req.flash("error", "Oops! An error occurred.");
-        res.redirect("back");
-    });
-});
-
 // LOGOUT(GET): ADMIN LOGOUT/ADMIN
 router.get('/admin/logout', function(req, res) {
     req.logout();
@@ -74,136 +13,16 @@ router.get('/admin/logout', function(req, res) {
     res.redirect('/admin/login');
 });
 
-
-/******************************************************************************************************************************/
-// HOSPITAL ROUTES (VERB: ROUTE NAME/AUTHORIZATION)
-/******************************************************************************************************************************/
-// INDEX(GET): REGISTER HOSPITAL FORM/ALL
-router.get("/hospitals/register", function(req, res) {
-    res.render("hospitals/register");
-});
-
-// CREATE(POST): ADD NEW HOSPITAL TO DATABASE/ALL
-router.post('/hospitals/register', function(req, res) {
-    // Check if username exists in the db
-    User.findOne({ typeOfUser: "hospital", username: req.body.username }, function(err, user) {
-        if (!err) {
-            if (user) {
-                req.flash("error", "A hospital with that username already exists.");
-                res.redirect("back");
-                return
-            }
-            User.register(new User({
-                typeOfUser: "hospital",
-                username: req.body.username,
-                referrerDetails: null,
-                signup_time: functions.formatTime(date),
-                signup_date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
-                signup_month: months[date.getMonth()],
-                signup_year: date.getFullYear(),
-            }), req.body.password, function(err, user) {
-                if (!err) {
-                    passport.authenticate("local")(req, res, function() {
-                        req.flash("success", "Welcome to PatientRef.");
-                        res.redirect('/hospitals/' + req.user.username + "/details");
-                        return;
-                    });
-                    return;
-                }
-                req.flash("error", "Oops! An error occurred at sign up.");
-                return res.redirect("back");
-            });
-            return;
-        }
-        req.flash("error", "Oops! An error occurred at sign up.");
-        return res.redirect("back");
-    });
-});
-
-// LOGIN(POST): HOSPITAL LOGIN/HOSPITALS
-router.post("/hospitals/login", function(req, res) {
-    User.findOne({ typeOfUser: "hospital", username: req.body.username }, function(err, user) {
-        if (!err) {
-            if (user) {
-                passport.authenticate("local")(req, res, function() {
-                    req.flash("success", "Welcome back.");
-                    return res.redirect('/hospitals/' + req.user.username + "/dashboard");
-                });
-                return;
-            }
-            req.flash("error", "Sorry, user does not exist. Ensure username and password are correct.")
-            res.redirect("/login");
-            return;
-        }
-        req.flash("error", "Oops! An error occurred.");
-        res.redirect("back");
-    });
+// LOGOUT(GET): USER LOGOUT/REFERRERS + HOSPITALS
+router.get('/logout', function(req, res) {
+    req.logout();
+    req.flash("success", "Logged out.");
+    res.redirect('/login');
 });
 
 
 /******************************************************************************************************************************/
-// REFERRER ROUTES (VERB: ROUTE NAME/AUTHORIZATION)
-/******************************************************************************************************************************/
-// CREATE(POST): ADD NEW REFERRER TO DATABASE/ALL
-router.post('/referrers/register', function(req, res) {
-    // Check if username exists in the db
-    User.findOne({ typeOfUser: "referrer", username: req.body.username }, function(err, user) {
-        if (!err) {
-            if (user) {
-                req.flash("error", "A user with that username already exists.");
-                res.redirect("back");
-                return
-            }
-            User.register(new User({
-                typeOfUser: "referrer",
-                username: req.body.username,
-                hospitalDetails: null,
-                signup_time: functions.formatTime(date),
-                signup_date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
-                signup_month: months[date.getMonth()],
-                signup_year: date.getFullYear(),
-            }), req.body.password, function(err, user) {
-                if (!err) {
-                    passport.authenticate("local")(req, res, function() {
-                        req.flash("success", "Welcome to PatientRef.");
-                        res.redirect('/referrers/' + req.user.username + "/update");
-                        return;
-                    });
-                    return;
-                }
-                req.flash("error", "Oops! An error occurred at sign up.");
-                return res.redirect("back");
-            });
-            return;
-        }
-        req.flash("error", "Oops! An error occurred at sign up.");
-        return res.redirect("back");
-    });
-});
-
-// LOGIN(POST): REFERRER LOGIN LOGIC/REFERRERS
-router.post("/referrers/login", function(req, res) {
-    User.findOne({ typeOfUser: "referrer", username: req.body.username }, function(err, user) {
-        if (!err) {
-            if (user) {
-                passport.authenticate("local")(req, res, function() {
-                    req.flash("success", "Welcome back.");
-                    return res.redirect('/referrers/' + req.user.username + "/dashboard");
-                });
-                return;
-            }
-            req.flash("error", "Sorry, user does not exist. Ensure username and password are correct.")
-            res.redirect("/login");
-            return;
-        }
-        req.flash("error", "Oops! An error occurred.");
-        res.redirect("back");
-    });
-});
-
-
-/******************************************************************************************************************************/
-// SHARED AUTH ROUTES (VERB: ROUTE NAME/AUTHORIZATION)
+// GENERAL ROUTES/ALL
 /******************************************************************************************************************************/
 // REGISTER(GET): REGISTER FORM/ALL
 router.get("/register", function(req, res) {
@@ -215,17 +34,6 @@ router.get('/login', function(req, res) {
     res.render('index/login');
 });
 
-// LOGOUT(GET): USER LOGOUT/ALL
-router.get('/logout', function(req, res) {
-    req.logout();
-    req.flash("success", "Logged out.");
-    res.redirect('/login');
-});
-
-
-/******************************************************************************************************************************/
-// GENERAL (NON-AUTH) ROUTES/ALL
-/******************************************************************************************************************************/
 // INDEX(GET): SIGNUP FORM (REFERRERS & HOSPITALS)/ALL
 router.get('/', function(req, res) {
     res.render('index/index');

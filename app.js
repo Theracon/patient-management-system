@@ -2,15 +2,15 @@
 // IMPORT DEPENDENCIES & FILES, DEFINE GLOBAL VARIABLES
 /******************************************************************************************************************************/
 // Import dependencies
-var express = require('express'),
-    mongoose = require('mongoose'),
-    passport = require("passport"),
-    LocalStrategy = require("passport-local").Strategy,
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    session = require("express-session"),
+var bodyParser = require('body-parser'),
+    express = require('express'),
     cookieParser = require("cookie-parser"),
     flash = require("connect-flash"),
+    LocalStrategy = require("passport-local").Strategy,
+    mongoose = require('mongoose'),
+    methodOverride = require('method-override'),
+    passport = require("passport"),
+    session = require("express-session"),
 
     // Import index route file
     indexRoutes = require("./routes/index"),
@@ -20,6 +20,8 @@ var express = require('express'),
     adminBroadcastRoutes = require("./routes/admin_broadcast"),
     adminHospitalRoutes = require("./routes/admin_hospitals"),
     adminReferrerRoutes = require("./routes/admin_referrers"),
+    adminSignupRoutes = require("./routes/admin_signup"),
+    adminLoginRoutes = require("./routes/admin_login"),
 
     // Import hospital route files
     hospitalIndexRoutes = require("./routes/hospital_index"),
@@ -30,6 +32,8 @@ var express = require('express'),
     hospitalPatientsRoutes = require("./routes/hospital_patients"),
     hospitalProceduresRoutes = require("./routes/hospital_procedures"),
     hospitalProfileRoutes = require("./routes/hospital_profile"),
+    hospitalSignupRoutes = require("./routes/hospital_signup"),
+    hospitalLoginRoutes = require("./routes/hospital_login"),
 
     // Import referrer route files
     referrerIndexRoutes = require("./routes/referrer_index"),
@@ -37,6 +41,8 @@ var express = require('express'),
     referrerNotificationsRoutes = require("./routes/referrer_notifications"),
     referrerPatientsRoutes = require("./routes/referrer_patients"),
     referrerProfileRoutes = require("./routes/referrer_profile"),
+    referrerSignupRoutes = require("./routes/referrer_signup"),
+    referrerLoginRoutes = require("./routes/referrer_login"),
 
     // Import wildcard route file
     wildcardRoute = require("./routes/wildcard"),
@@ -56,6 +62,9 @@ var app = express();
 
 // Configure app to use cookie-parser
 app.use(cookieParser("secret"));
+
+// Configure app to parse json data from request object
+app.use(express.json());
 
 // Configure app to use express-session
 app.use(session({ secret: "wonders", resave: false, saveUninitialized: false }));
@@ -88,10 +97,6 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-/******************************************************************************************************************************/
-// Configure app to use route files
-/******************************************************************************************************************************/
 // Configure app to use index route file
 app.use(indexRoutes);
 
@@ -100,6 +105,8 @@ app.use(adminIndexRoutes);
 app.use(adminBroadcastRoutes);
 app.use(adminHospitalRoutes);
 app.use(adminReferrerRoutes);
+app.use(adminSignupRoutes);
+app.use(adminLoginRoutes);
 
 // Configure app to use hospital route files
 app.use(hospitalIndexRoutes);
@@ -110,6 +117,8 @@ app.use(hospitalNotificationsRoutes);
 app.use(hospitalPatientsRoutes);
 app.use(hospitalProceduresRoutes);
 app.use(hospitalProfileRoutes);
+app.use(hospitalSignupRoutes);
+app.use(hospitalLoginRoutes);
 
 // Configure app to use referrer route files
 app.use(referrerIndexRoutes);
@@ -117,6 +126,8 @@ app.use(referrerDeactivateRoutes);
 app.use(referrerNotificationsRoutes);
 app.use(referrerPatientsRoutes);
 app.use(referrerProfileRoutes);
+app.use(referrerSignupRoutes);
+app.use(referrerLoginRoutes);
 
 // Configure app to use wildcard route file
 app.use(wildcardRoute);

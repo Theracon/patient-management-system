@@ -1,5 +1,7 @@
-var mongoose  = require("mongoose");
+var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
+var bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
 
 // DEPARTMENT SCHEMA
 var DepartmentSchema = new mongoose.Schema({
@@ -45,7 +47,7 @@ var referrerDetailSchema = new mongoose.Schema({
     lastname: String,
     name: String,
     institution: String,
-    address: String, 
+    address: String,
     phone: String,
     bank: String,
     ac_number: String,
@@ -82,8 +84,8 @@ var hospitalDetailSchema = new mongoose.Schema({
 
 // USER SCHEMA
 var UserSchema = new mongoose.Schema({
-    username: String,
-    password: String,
+    username: { type: String, required: true, index: { unique: true } },
+    password: { type: String, required: true },
     typeOfUser: String,
     role: Number,
     signup_time: String,
@@ -93,6 +95,33 @@ var UserSchema = new mongoose.Schema({
     referrerDetails: referrerDetailSchema,
     hospitalDetails: hospitalDetailSchema,
 });
+
+UserSchema.pre('save', function(next) {
+    var user = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!user.isModified('password')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password using our new salt
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+            // override the cleartext password with the hashed one
+            user.password = hash;
+            next();
+        });
+    });
+});
+
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) return cb(err);
+        cb(null, isMatch);
+    });
+};
 
 UserSchema.plugin(passportLocalMongoose);
 
