@@ -1,29 +1,30 @@
 {
-  "name": "mayfielddoc",
-  "version": "1.0.0",
-  "description": "Mayfield Doc Packaage.json File",
-  "main": "app.js",
-  "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
-  },
-  "author": "Ashraf Yusuf",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.5",
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "generate-serial-number": "0.0.3",
-    "method-override": "^3.0.0",
-    "moment": "^2.29.1",
-    "mongoose": "^5.11.8",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1",
-    "uniqid": "^5.2.0"
-  }
+    "name": "mayfielddoc",
+    "version": "1.0.0",
+    "description": "Mayfield Doc Packaage.json File",
+    "main": "app.js",
+    "scripts": {
+        "start": "node server",
+        "dev": "nodemon server"
+    },
+    "author": "Ashraf Yusuf",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.19.0",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.5",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.1.5",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "generate-serial-number": "0.0.3",
+        "method-override": "^3.0.0",
+        "moment": "^2.29.1",
+        "mongoose": "^5.11.8",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0",
+        "passport-local-mongoose": "^6.0.1",
+        "uniqid": "^5.2.0"
+    }
 }
