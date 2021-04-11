@@ -21,17 +21,17 @@
                                 <div class="department">
                                     <!--Name-->
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="name" name="name">
+                                        <input type="text" class="form-control" id="name" name="name" required>
                                         <label for="name">Name of department</label>
                                     </div>
                                     <!--Staff count-->
                                     <div class="form-floating mb-3">
-                                        <input type="number" class="form-control" id="staff_count" name="staff_count">
+                                        <input type="number" class="form-control" id="staff_count" name="staff_count" required>
                                         <label for="staff_count">Number of clinical staff</label>
                                     </div>
-                                    <!--Procedures-->
-                                    <label for="procedures" class="text-muted">Procedures</label>
-                                    <small class="text-muted">(Type in a procedure and click '+')</small>
+                                    <!--Units-->
+                                    <label for="procedures" class="text-muted">Departmental units:</label><br>
+                                    <small class="text-muted">(Type and click + to add a unit.)</small>
                                     <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
                                         <input type="text" class="procedure_input border border-secondary">
                                         <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
@@ -57,7 +57,6 @@
     </div>
 
     <script>
-        var procedureSN = Math.floor(Math.random() * 10000);
         var procedure_count = 0;
 
         var departments = document.getElementById("departments");
@@ -71,7 +70,7 @@
                     div.classList.add("input-group");
                     div.classList.add("mb-1");
                     div.innerHTML = `
-                    <input type="text" class="procedure border" name="[procedures]-[${procedure_count}]" value="${text}" readonly>
+                    <input type="text" class="procedure border" name="[units]-[${procedure_count}]" value="${text}" readonly>
                     <button class="btn btn-outline-secondary procedure_button border" type="button">-</button>
                 `;
                     e.target.parentElement.nextElementSibling.appendChild(div);
@@ -88,7 +87,6 @@
         });
 
         document.querySelector("#add_department").addEventListener("click", function() {
-            procedureSN = Math.floor(Math.random() * 10000);
             procedure_count++;
 
             var div = document.createElement("div");
@@ -96,17 +94,17 @@
             div.innerHTML = `
             <!--Name-->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="name" name="name">
-                <label for="name">Department name (e.g. Internal Medicine)</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+                <label for="name">Name of department</label>
             </div>
             <!--Staff count-->
             <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="staff_count" name="staff_count">
-                <label for="staff_count">Number of clinical staff in department</label>
+                <input type="number" class="form-control" id="staff_count" name="staff_count" required>
+                <label for="staff_count">Number of clinical staff</label>
             </div>
             <!--Procedures-->
-            <label for="procedures" class="text-muted">Procedures</label>
-            <small class="text-muted">[Type in a procedure and click '+']</small>
+            <label for="procedures" class="text-muted">Departmental units:</label><br>
+            <small class="text-muted">(Type and click + to add a unit.)</small>
             <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
                 <input type="text" class="procedure_input border border-secondary">
                 <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>

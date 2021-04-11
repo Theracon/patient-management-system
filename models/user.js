@@ -7,12 +7,13 @@ var SALT_WORK_FACTOR = 10;
 var DepartmentSchema = new mongoose.Schema({
     name: String,
     staff_count: Number,
-    procedures: Array,
+    units: Array,
 });
 
 // PATIENT SCHEMA
 var PatientSchema = new mongoose.Schema({
     name: String,
+    department: String,
     investigation: String,
     phone: String,
     hospital_name: String,
@@ -74,9 +75,9 @@ var hospitalDetailSchema = new mongoose.Schema({
     consultants: Number,
     doctors: Number,
     departments: [DepartmentSchema],
+    procedures: Array,
     patients: [PatientSchema],
     notifications: [NotificationSchema],
-    procedures: Array,
     unread_notifications_count: Number,
     last_updated: String,
     update_count: Number,

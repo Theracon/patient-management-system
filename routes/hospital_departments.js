@@ -31,14 +31,14 @@ router.post("/hospitals/:username/departments", middleware.isUserLoggedIn, middl
                         user.hospitalDetails.departments.push({
                             name: req.body.name[i],
                             staff_count: req.body.staff_count[i],
-                            procedures: req.body.procedures[i],
+                            units: req.body.units[i],
                         });
                     }
                 } else {
                     user.hospitalDetails.departments.push({
                         name: req.body.name,
                         staff_count: req.body.staff_count,
-                        procedures: req.body.procedures,
+                        units: req.body.units,
                     });
                 }
 
@@ -87,7 +87,7 @@ router.put("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
                             user.hospitalDetails.departments.push({
                                 name: req.body.name[i],
                                 staff_count: req.body.staff_count[i],
-                                procedures: req.body.procedures[i],
+                                units: req.body.units[i],
                             });
                         }
                     }
@@ -95,7 +95,7 @@ router.put("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
                     user.hospitalDetails.departments.push({
                         name: req.body.name,
                         staff_count: req.body.staff_count,
-                        procedures: req.body.procedures,
+                        units: req.body.units,
                     });
                 }
 

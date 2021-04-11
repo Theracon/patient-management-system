@@ -1,16 +1,17 @@
-var mongoose  = require("mongoose");
+var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
 
 // DEPARTMENT SCHEMA
 var DepartmentSchema = new mongoose.Schema({
     name: String,
     staff_count: Number,
-    procedures: Array,
+    units: Array,
 });
 
 // PATIENT SCHEMA
 var PatientSchema = new mongoose.Schema({
     name: String,
+    department: String,
     investigation: String,
     phone: String,
     hospital_name: String,
@@ -45,7 +46,7 @@ var referrerDetailSchema = new mongoose.Schema({
     lastname: String,
     name: String,
     institution: String,
-    address: String, 
+    address: String,
     phone: String,
     bank: String,
     ac_number: String,
@@ -72,6 +73,7 @@ var hospitalDetailSchema = new mongoose.Schema({
     consultants: Number,
     doctors: Number,
     departments: [DepartmentSchema],
+    procedures: Array,
     patients: [PatientSchema],
     notifications: [NotificationSchema],
     unread_notifications_count: Number,
@@ -85,10 +87,10 @@ var RemovedUserSchema = new mongoose.Schema({
     password: String,
     typeOfUser: String,
     role: Number,
-    removal_time: String,
     removal_date: String,
-    removal_month: String,
     removal_year: String,
+    removal_month: String,
+    removal_time: String,
     referrerDetails: referrerDetailSchema,
     hospitalDetails: hospitalDetailSchema,
 });

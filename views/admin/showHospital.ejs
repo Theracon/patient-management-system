@@ -31,7 +31,7 @@
 
                                                                 <!--PROFILE-->
                                                                 <div class="profile">
-                                                                    <h1 class="header-h1-text text-center">Institution Profile</h1>
+                                                                    <h1 class="header-h1-text text-center">Profile Overview</h1>
                                                                     <hr>
                                                                     <% var status = (hospital.role == 1) ? "Active" : "Not active" %>
                                                                         <p class="profile-details-paragraph"><span class="lead">Status</span><br><span><%=status%></span></p>
@@ -55,28 +55,35 @@
                                                                                                         <% if(hospital.hospitalDetails.doctors >= 0) { %>
                                                                                                             <p class="profile-details-paragraph"><span class="lead">Number of doctors</span><br><span><%=hospital.hospitalDetails.doctors%></span></p>
                                                                                                             <% } %>
-                                                                                                                <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
-                                                                                                                    <% var currentMonth = months[new Date().getMonth()] %>
-                                                                                                                        <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
-                                                                                                                            <% hospital.hospitalDetails.patients.forEach(function(patient) { %>
-                                                                                                                                <% totalAmount += patient.amount_paid %>
-                                                                                                                                    <% totalCommission += patient.referrer_commission %>
-                                                                                                                                        <% if(patient.authentication_month == currentMonth) { %>
-                                                                                                                                            <% currentAmount += patient.amount_paid %>
-                                                                                                                                                <% currentCommission += patient.referrer_commission %>
-                                                                                                                                                    <% } %>
-                                                                                                                                                        <% })%>
-                                                                                                                                                            <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> revenue</span><br><span><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
-                                                                                                                                                            <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> commission</span><br><span><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                                                                            <p class="profile-details-paragraph"><span class="lead">Total revenue</span><br><span><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
-                                                                                                                                                            <p class="profile-details-paragraph"><span class="lead">Total commission</span><br><span><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+
+                                                                </div>
+                                                                <br>
+
+                                                                <div class="profile">
+                                                                    <h1 class="header-h1-text text-center">Account Information</h1>
+                                                                    <hr>
+                                                                    <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
+                                                                        <% var currentMonth = months[new Date().getMonth()] %>
+                                                                            <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
+                                                                                <% hospital.hospitalDetails.patients.forEach(function(patient) { %>
+                                                                                    <% totalAmount += patient.amount_paid %>
+                                                                                        <% totalCommission += patient.referrer_commission %>
+                                                                                            <% if(patient.authentication_month == currentMonth) { %>
+                                                                                                <% currentAmount += patient.amount_paid %>
+                                                                                                    <% currentCommission += patient.referrer_commission %>
+                                                                                                        <% } %>
+                                                                                                            <% })%>
+                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> revenue</span><br><span><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
+                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> commission</span><br><span><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
+                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total revenue</span><br><span><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
+                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total commission</span><br><span><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
                                                                 </div>
                                                                 <br>
 
                                                                 <!--DEPARTMENTS-->
                                                                 <% if(hospital.hospitalDetails.departments.length > 0) { %>
                                                                     <div class="departments overflow-auto">
-                                                                        <h1 class="header-h1-text text-center">Institution Structure</h1>
+                                                                        <h1 class="header-h1-text text-center">Departments</h1>
                                                                         <hr>
 
                                                                         <% hospital.hospitalDetails.departments.forEach(function(department) { %>
@@ -84,13 +91,13 @@
                                                                                 <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
                                                                                 <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
                                                                                 <p class="profile-details-paragraph">
-                                                                                    <span class="lead">Procedures</span><br>
+                                                                                    <span class="lead">Units</span><br>
                                                                                     <span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;">
-                                <% department.procedures.forEach(function(procedure, index, arr) { %>
+                                <% department.units.forEach(function(unit, index, arr) { %>
                                     <% if(index != (arr.length - 1)) { %>
-                                        <%= procedure %>,
+                                        <%= unit %>,
                                     <% } else { %>
-                                        <%= procedure %>
+                                        <%= unit %>
                                     <% } %>
                                 <% }); %>
                             </span>

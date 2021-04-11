@@ -118,7 +118,8 @@
                                                                                                                                                                                                                                     <% }) %>
                                                                                                                                                                                                                                         <% if(count < 1) { %>
                                                                                                                                                                                                                                             <p>No patients to
-                                                                                                                                                                                                                                                display.</p>
+                                                                                                                                                                                                                                                display.
+                                                                                                                                                                                                                                            </p>
                                                                                                                                                                                                                                             <% } %>
                                                                                                                                                                                                             </div>
                                                                                                                                                                                                             <br><br>
@@ -138,7 +139,8 @@
                                                                                                                                                                                                                                     <% }) %>
                                                                                                                                                                                                                                         <% if(count < 1) { %>
                                                                                                                                                                                                                                             <p>No patients to
-                                                                                                                                                                                                                                                display.</p>
+                                                                                                                                                                                                                                                display.
+                                                                                                                                                                                                                                            </p>
                                                                                                                                                                                                                                             <% } %>
                                                                                                                                                                                                             </div>
                                                                                                                                                                                                         </div>
@@ -267,7 +269,7 @@
             <hr>
         <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
             <hr>
-        <p class="lh-1 wallet-detail"><span>Total commission</span><span class="lead"><strike>N</strike><%=formatNumber(obj.commission)%></span></p>
+        <p class="lh-1 wallet-detail"><span><%= months[date.getMonth()] %> commission</span><span class="lead"><strike>N</strike><%=formatNumber(obj.commission)%></span></p>
     `;
 
         var banner = document.getElementById("banner");
