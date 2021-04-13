@@ -7,5 +7,6 @@ applications:
    timeout: 180
    buildpack: sdk-for-nodejs
    command: npm start
-   domain: not-used.net
-   host: not-used
+   domain: mybluemix.net
+
+   host: fastclinic
