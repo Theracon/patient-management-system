@@ -1,14 +1,23 @@
-FROM node:12-alpine
+FROM node:8-stretch
 
-ADD views /app/views
-ADD package.json /app
-ADD server.js /app
+# Change working directory
+WORKDIR /app
 
-RUN cd /app; npm install
+# Update packages and install dependency packages for services
+RUN apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get clean \
+    && echo 'Finished installing dependencies'
+
+# Install npm production packages
+COPY package.json /app/
+RUN cd /app; npm install --production
+
+COPY . /app
 
 ENV NODE_ENV production
-ENV PORT 8080
-EXPOSE 8080
+ENV PORT 3000
 
-WORKDIR "/app"
-CMD [ "npm", "start" ]
+EXPOSE 3000
+
+CMD ["npm", "start"]

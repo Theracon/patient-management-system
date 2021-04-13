@@ -4,7 +4,7 @@
     "description": "Fastclinic Package.json File",
     "main": "app.js",
     "scripts": {
-        "start": "node server",
+        "start": "node app.js",
         "dev": "nodemon server"
     },
     "author": "Ashraf Yusuf",
