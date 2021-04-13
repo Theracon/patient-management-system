@@ -19,7 +19,7 @@ TABLE OF CONTENTS
     - Authenticate a patient
     - View all patients
     - View profile
-5. Log out
+5. User log out
 
 ## Basic Starter
 
