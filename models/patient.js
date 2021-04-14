@@ -4,7 +4,6 @@ var passportLocalMongoose = require("passport-local-mongoose");
 // PATIENT SCHEMA
 var PatientSchema = new mongoose.Schema({
     name: String,
-    department: String,
     investigation: String,
     phone: String,
     hospital_name: String,
