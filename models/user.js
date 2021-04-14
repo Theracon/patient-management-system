@@ -13,7 +13,6 @@ var DepartmentSchema = new mongoose.Schema({
 // PATIENT SCHEMA
 var PatientSchema = new mongoose.Schema({
     name: String,
-    department: String,
     investigation: String,
     phone: String,
     hospital_name: String,
