@@ -52,7 +52,6 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                         // Make a new patient object
                         var patient = new Patient({
                             name: req.body.name,
-                            department: req.body.department,
                             investigation: req.body.investigation,
                             phone: req.body.phone,
                             hospital_name: hospitalArray[req.body.hospital].hospitalDetails.name,
