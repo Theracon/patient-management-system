@@ -71,10 +71,10 @@
                                                                             <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
                                                                                 <% currentUser.hospitalDetails.patients.forEach(function(patient) { %>
                                                                                     <% totalAmount += patient.amount_paid %>
-                                                                                        <% totalCommission += patient.referrer_commission %>
+                                                                                        <% totalCommission += patient.hospital_commission %>
                                                                                             <% if(patient.authentication_month == currentMonth) { %>
                                                                                                 <% currentAmount += patient.amount_paid %>
-                                                                                                    <% currentCommission += patient.referrer_commission %>
+                                                                                                    <% currentCommission += patient.hospital_commission %>
                                                                                                         <% } %>
                                                                                                             <% })%>
                                                                                                                 <h1 class="header-h1-text text-center">Account Information</h1>
