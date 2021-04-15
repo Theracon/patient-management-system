@@ -11,19 +11,19 @@
     -   Create a MongoDB Atlas database instance
     -   Connect app to cloud database
     -   Manage database with MongoDB Compass
-- [Using fatclinic as a doctor](#using-fatclinic-as-a-doctor)
+- [Use fatclinic as a doctor](#use-fatclinic-as-a-doctor)
     -   Sign up
     -   Sign in
     -   Refer a patient
     -   View all patients
     -   View profile
-- [Using fatclinic as a healthcare institution](#using-fatclinic-as-a-healthcare-institution)
+- [Use fatclinic as a healthcare institution](#use-fatclinic-as-a-healthcare-institution)
     -   Sign up
     -   Sign in
     -   Refer a patient
     -   View all patients
     -   View profile
-- [Using fatclinic as an admin](#using-fatclinic-as-an-admin)
+- [Use fatclinic as an admin](#use-fatclinic-as-an-admin)
     -   Sign up
     -   Sign in
     -   Send a broadcast message
