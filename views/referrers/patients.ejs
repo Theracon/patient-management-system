@@ -80,20 +80,59 @@
 
                                                                                                                                                                                                     <div class="container">
                                                                                                                                                                                                         <div style="display: flex; justify-content: center;">
-                                                                                                                                                                                                            <button type="button" class="btn btn-outline-primary btn-lg" id="button-month" style="margin-right: 0.15rem; padding: 1rem; font-weight: 400!important;"><%=months[date.getMonth()]%></span> <span><%=date.getFullYear()%></button>
-                                                                                                                                                                                                            <button type="button" class="btn btn-primary btn-lg" id="button-all" style="margin-left: 0.15rem; padding: 1rem; font-weight: 400!important;">All patients</button>
+                                                                                                                                                                                                            <button type="button" class="btn btn-primary btn-lg" id="button-month" style="margin-right: 0.15rem; padding: 1rem; font-weight: 400!important; width: 150px;"><%=months[date.getMonth()]%></span> <span><%=date.getFullYear()%></button>
+                                                                                                                                                                                                            <button type="button" class="btn btn-outline-primary btn-lg" id="button-all" style="margin-left: 0.15rem; padding: 1rem; font-weight: 400!important; width: 150px;">Total</button>
                                                                                                                                                                                                         </div>
 
                                                                                                                                                                                                         <br><br>
 
                                                                                                                                                                                                         <div class="banner" id="banner">
-                                                                                                                                                                                                            <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=patients.length%> </span></p>
-                                                                                                                                                                                                            <hr>
-                                                                                                                                                                                                            <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=authPatientsCount()%> </span></p>
-                                                                                                                                                                                                            <hr>
-                                                                                                                                                                                                            <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(patients.length, 10) - parseInt(authPatientsCount(), 10)%> </span></p>
-                                                                                                                                                                                                            <hr>
-                                                                                                                                                                                                            <p class="lh-1 wallet-detail"><span>Total commission</span><span class="lead"><strike>N</strike><%=formatNumber(commission)%></span></p>
+                                                                                                                                                                                                            <% var patientCount = 0; %>
+                                                                                                                                                                                                                <% var authPatientCount = 0; %>
+                                                                                                                                                                                                                    <% var commission = 0; %>
+
+                                                                                                                                                                                                                        <% var obj = {}; %>
+
+                                                                                                                                                                                                                            <% patients.forEach(function(patient) { %>
+                                                                                                                                                                                                                                <% if(patient.referral_month == months[date.getMonth()]) { %>
+                                                                                                                                                                                                                                    <% patientCount++ %>
+                                                                                                                                                                                                                                        <% commission += patient.referrer_commission %>
+
+                                                                                                                                                                                                                                            <% if(patient.status == "authenticated") { %>
+                                                                                                                                                                                                                                                <% authPatientCount++ %>
+                                                                                                                                                                                                                                                    <% } %>
+                                                                                                                                                                                                                                                        <% } %>
+                                                                                                                                                                                                                                                            <% }); %>
+
+                                                                                                                                                                                                                                                                <% obj = {patientCount: patientCount, authPatientCount: authPatientCount, commission: commission}; %>
+
+                                                                                                                                                                                                                                                                    <p class="lh-1 wallet-detail"><span>All patients in <%= months[date.getMonth()] %></span>
+                                                                                                                                                                                                                                                                        <span
+                                                                                                                                                                                                                                                                            class="lead">
+                                                                                                                                                                                                                                                                            <%=obj.patientCount%>
+                                                                                                                                                                                                                                                                                </span>
+                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                    <hr>
+                                                                                                                                                                                                                                                                    <p class="lh-1 wallet-detail"><span>Authenticated patients</span>
+                                                                                                                                                                                                                                                                        <span
+                                                                                                                                                                                                                                                                            class="lead">
+                                                                                                                                                                                                                                                                            <%=obj.authPatientCount%>
+                                                                                                                                                                                                                                                                                </span>
+                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                    <hr>
+                                                                                                                                                                                                                                                                    <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span>
+                                                                                                                                                                                                                                                                        <span
+                                                                                                                                                                                                                                                                            class="lead">
+                                                                                                                                                                                                                                                                            <%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%>
+                                                                                                                                                                                                                                                                                </span>
+                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                    <hr>
+                                                                                                                                                                                                                                                                    <p class="lh-1 wallet-detail"><span><%= months[date.getMonth()] %> commission</span>
+                                                                                                                                                                                                                                                                        <span
+                                                                                                                                                                                                                                                                            class="lead"><strike>N</strike>
+                                                                                                                                                                                                                                                                            <%=formatNumber(obj.commission)%>
+                                                                                                                                                                                                                                                                                </span>
+                                                                                                                                                                                                                                                                    </p>
                                                                                                                                                                                                         </div>
                                                                                                                                                                                                     </div>
 
@@ -109,11 +148,11 @@
                                                                                                                                                                                                                         <% if(patient.status === "authenticated") { %>
                                                                                                                                                                                                                             <% count++ %>
                                                                                                                                                                                                                                 <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
-                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
-                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
-                                <span class="patient-card-date lh-1 text-center">RD: <%= patient.referral_date %></span>
-                                <span class="patient-card-date lh-1 text-center">AD: <%= patient.authentication_date %></span>
-                            </button>
+                                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                                                <span class="patient-card-date lh-1 text-center">RD: <%= patient.referral_date %></span>
+                                                <span class="patient-card-date lh-1 text-center">AD: <%= patient.authentication_date %></span>
+                                            </button>
                                                                                                                                                                                                                                 <% } %>
                                                                                                                                                                                                                                     <% }) %>
                                                                                                                                                                                                                                         <% if(count < 1) { %>
@@ -131,10 +170,10 @@
                                                                                                                                                                                                                         <% if(patient.status === "unauthenticated") { %>
                                                                                                                                                                                                                             <% count++ %>
                                                                                                                                                                                                                                 <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
-                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
-                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
-                                <span class="patient-card-date lh-1 text-center">RD: <%= patient.referral_date %></span>
-                            </button>
+                                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                                                <span class="patient-card-date lh-1 text-center">RD: <%= patient.referral_date %></span>
+                                            </button>
                                                                                                                                                                                                                                 <% } %>
                                                                                                                                                                                                                                     <% }) %>
                                                                                                                                                                                                                                         <% if(count < 1) { %>
@@ -234,11 +273,11 @@
             <% commission += patient.referrer_commission %>
         <% }) %>
 
-        <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=patients.length%> </span></p>
+        <p class="lh-1 wallet-detail"><span>All patients</span><span class="lead"><%=patients.length%> </span></p>
             <hr>
-        <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=authPatientsCount()%> </span></p>
+        <p class="lh-1 wallet-detail"><span>Total authenticated patients</span><span class="lead"><%=authPatientsCount()%> </span></p>
             <hr>
-        <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(patients.length, 10) - parseInt(authPatientsCount(), 10)%> </span></p>
+        <p class="lh-1 wallet-detail"><span>Total unauthenticated patients</span><span class="lead"><%=parseInt(patients.length, 10) - parseInt(authPatientsCount(), 10)%> </span></p>
             <hr>
         <p class="lh-1 wallet-detail"><span>Total commission</span><span class="lead"><strike>N</strike><%=formatNumber(commission)%></span></p>
     `;
@@ -263,11 +302,11 @@
             
         <% obj = {patientCount: patientCount, authPatientCount: authPatientCount, commission: commission}; %>
 
-        <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=obj.patientCount%> </span></p>
+        <p class="lh-1 wallet-detail"><span>All patients in <%= months[date.getMonth()] %></span><span class="lead"><%=obj.patientCount%> </span></p>
             <hr>
-        <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=obj.authPatientCount%> </span></p>
+        <p class="lh-1 wallet-detail"><span>Authenticated patients</span><span class="lead"><%=obj.authPatientCount%> </span></p>
             <hr>
-        <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
+        <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
             <hr>
         <p class="lh-1 wallet-detail"><span><%= months[date.getMonth()] %> commission</span><span class="lead"><strike>N</strike><%=formatNumber(obj.commission)%></span></p>
     `;
