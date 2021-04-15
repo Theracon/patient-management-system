@@ -26,5 +26,5 @@ script:
 branches:
   only:
     - master
-    - stage1
+    - main
     - development
