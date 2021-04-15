@@ -1,46 +1,36 @@
 # Fastclinic
 
-TABLE OF CONTENTS
+[![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net)
 
-1. Overview
-2. Getting started
+### Table of Contents
+
+- [Overview](#overview)
+- [Getting started](#getting-started)
     -   Set up an environment
     -   Create a MongoDB account
     -   Create a MongoDB Atlas database instance
     -   Connect app to cloud database
     -   Manage database with MongoDB Compass
-3. Using fatclinic as a doctor
+- [Using fatclinic as a doctor](#using-fatclinic-as-a-doctor)
     -   Sign up
+    -   Sign in
     -   Refer a patient
     -   View all patients
     -   View profile
-4. Using fastclinic as a healthcare institution
-    - Sign up as a healthcare institution
-    - Authenticate a patient
-    - View all patients
-    - View profile
-5. User log out
-
-## Basic Starter
-
-Basic Bluemix Starter
-
-[![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net) [![Build Status](https://travis.ibm.com/Liz-Furlan/starter-basic.svg?token=mRtpopMofh1kN3mEA6W5&branch=master)](https://travis.ibm.com/Liz-Furlan/starter-basic)
-
-### Table of Contents
-
-- [Summary](#summary)
-- [Platforms](#platforms)
+- [Using fatclinic as a healthcare institution](#using-fatclinic-as-a-healthcare-institution)
+    -   Sign up
+    -   Sign in
+    -   Refer a patient
+    -   View all patients
+    -   View profile
+- [Using fatclinic as an admin](#using-fatclinic-as-an-admin)
+    -   Sign up
+    -   Sign in
+    -   Send a broadcast message
+    -   View Referrers
+    -   View hospitals
+- [Log out](#log-out)
 - [License](#license)
-
-### Summary
-
-The Basic Bluemix Starter is an empty project, without any actual code, with only the files needed to "bluemixify" an existing project.
-
-### Platforms
-
-| Maintainer | Email | Platform | Register | Generator |
-| ---------- | ----- | -------- | -------- | --------- |
 
 
 ### License
