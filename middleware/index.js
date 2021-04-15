@@ -8,7 +8,7 @@ middlewareMethods.isAdminLoggedIn = function(req, res, next) {
         next();
         return;
     }
-    req.flash("error", "Please log in or create an account.");
+    req.flash("error", "Session expired. Please log in.");
     res.redirect('/admin/login');
 }
 
@@ -26,7 +26,7 @@ middlewareMethods.isAdminAuthorized = function(req, res, next) {
         }
         return;
     }
-    req.flash("error", "Please log in or create an account.");
+    req.flash("error", "Session expired. Please log in.");
     res.redirect("/login");
 }
 
@@ -38,7 +38,7 @@ middlewareMethods.isUserLoggedIn = function(req, res, next) {
         next();
         return;
     }
-    req.flash("error", "Please log in or create an account.");
+    req.flash("error", "Session expired. Please log in.");
     res.redirect('/login');
 };
 
@@ -61,7 +61,7 @@ middlewareMethods.isReferrerAuthorized = function(req, res, next) {
         }
         return;
     }
-    req.flash("error", "Please log in or create an account.");
+    req.flash("error", "Session expired. Please log in.");
     res.redirect("/login");
 }
 
@@ -77,7 +77,7 @@ middlewareMethods.isHospitalProfileCreated = function(req, res, next) {
             return res.redirect("/hospitals/" + req.user.username + "/details");
         }
     }
-    req.flash("error", "Please log in or create an account.");
+    req.flash("error", "Session expired. Please log in.");
     res.redirect("/login");
 }
 
@@ -97,7 +97,7 @@ middlewareMethods.isHospitalDepartmentCreated = function(req, res, next) {
             }
         }
     }
-    req.flash("error", "Please log in or create an account.");
+    req.flash("error", "Session expired. Please log in.");
     res.redirect("/login");
 }
 
