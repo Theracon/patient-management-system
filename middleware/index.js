@@ -8,7 +8,7 @@ middlewareMethods.isAdminLoggedIn = function(req, res, next) {
         next();
         return;
     }
-    req.flash("error", "Please log in or sign up.");
+    req.flash("error", "Please log in or create an account.");
     res.redirect('/admin/login');
 }
 
@@ -26,7 +26,7 @@ middlewareMethods.isAdminAuthorized = function(req, res, next) {
         }
         return;
     }
-    req.flash("error", "Please log in or sign up.");
+    req.flash("error", "Please log in or create an account.");
     res.redirect("/login");
 }
 
@@ -38,7 +38,7 @@ middlewareMethods.isUserLoggedIn = function(req, res, next) {
         next();
         return;
     }
-    req.flash("error", "Please log in or sign up.");
+    req.flash("error", "Please log in or create an account.");
     res.redirect('/login');
 };
 
@@ -50,18 +50,18 @@ middlewareMethods.isReferrerAuthorized = function(req, res, next) {
         if (req.user.role === 1) {
             return next();
         } else {
-            if(req.user.role === 0) {
+            if (req.user.role === 0) {
                 return res.redirect("/referrers/" + req.user.username + "/pending");
-            } else if(req.user.role === -1) {
+            } else if (req.user.role === -1) {
                 return res.redirect("/referrers/" + req.user.username + "/suspended");
             } else {
-                req.flash("error", "Please update your profile to continue.");
+                req.flash("error", "Update your profile to proceed.");
                 return res.redirect("/referrers/" + req.user.username + "/update");
             }
         }
         return;
     }
-    req.flash("error", "Please log in or sign up.");
+    req.flash("error", "Please log in or create an account.");
     res.redirect("/login");
 }
 
@@ -73,11 +73,11 @@ middlewareMethods.isHospitalProfileCreated = function(req, res, next) {
         if (req.user.role === 0) {
             return next();
         } else {
-            req.flash("error", "Please finish creating your hospital profile.");
+            req.flash("error", "Create your institution's profile to proceed.");
             return res.redirect("/hospitals/" + req.user.username + "/details");
         }
     }
-    req.flash("error", "Please log in or sign up.");
+    req.flash("error", "Please log in or create an account.");
     res.redirect("/login");
 }
 
@@ -86,18 +86,18 @@ middlewareMethods.isHospitalDepartmentCreated = function(req, res, next) {
         if (req.user.role >= 0.75) {
             return next();
         } else {
-            if(req.user.role === 0) {
-                req.flash("error", "Please finish creating your hospital profile.");
+            if (req.user.role === 0) {
+                req.flash("error", "Complete your institution's profile to proceed.");
                 return res.redirect("/hospitals/" + req.user.username + "/departments");
-            } else if(req.user.role === -1) {
+            } else if (req.user.role === -1) {
                 return res.redirect("/hospitals/" + req.user.username + "/suspended");
             } else {
-                req.flash("error", "Please finish creating your hospital profile.");
+                req.flash("error", "Complete your institution's profile to proceed.");
                 return res.redirect("/hospitals/" + req.user.username + "/details");
             }
         }
     }
-    req.flash("error", "Please log in or sign up.");
+    req.flash("error", "Please log in or create an account.");
     res.redirect("/login");
 }
 
