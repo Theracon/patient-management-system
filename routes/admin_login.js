@@ -22,16 +22,16 @@ router.post("/admin/login", function(req, res) {
                             return res.redirect("/admin/dashboard");
                         });
                     } else {
-                        req.flash("error", "Wrong password. Try again.");
+                        req.flash("error", "Incorrect password. Try again.");
                         return res.redirect("back");
                     }
                 });
                 return;
             }
-            req.flash("error", "Wrong username. Try again.")
+            req.flash("error", "Incorrect username. Try again.")
             return res.redirect("/admin/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.");
         res.redirect("back");
     });
 });

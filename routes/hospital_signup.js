@@ -29,18 +29,18 @@ router.post('/hospitals/register', function(req, res) {
                 if (!err) {
                     hospital.save(function(err, hospital) {
                         passport.authenticate("local")(req, res, function() {
-                            req.flash("success", "Hi, welcome to Fastclinic!");
+                            req.flash("success", "Hello there! Welcome to Fastclinic.");
                             return res.redirect('/hospitals/' + req.user.username + "/details");
                         });
                     });
                     return;
                 }
-                req.flash("error", "Oops! An error occurred.");
+                req.flash("error", "Oops! Something isn't quite right.")
                 return res.redirect("back");
             });
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         return res.redirect("back");
     });
 });

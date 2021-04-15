@@ -17,7 +17,7 @@ router.get("/referrers/:username/pending", middleware.isUserLoggedIn, function(r
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -33,7 +33,7 @@ router.get('/referrers/:username/dashboard', middleware.isUserLoggedIn, middlewa
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -52,7 +52,7 @@ router.get("/referrers/:username/suspended", middleware.isUserLoggedIn, function
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

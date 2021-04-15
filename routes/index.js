@@ -9,14 +9,12 @@ var express = require("express"),
 // LOGOUT(GET): ADMIN LOGOUT/ADMIN
 router.get('/admin/logout', function(req, res) {
     req.logout();
-    req.flash("success", "Logged out.");
     res.redirect('/admin/login');
 });
 
 // LOGOUT(GET): USER LOGOUT/REFERRERS + HOSPITALS
 router.get('/logout', function(req, res) {
     req.logout();
-    req.flash("success", "Logged out.");
     res.redirect('/login');
 });
 

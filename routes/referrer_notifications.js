@@ -14,7 +14,7 @@ router.get("/referrers/:username/notifications", middleware.isUserLoggedIn, midd
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -43,7 +43,7 @@ router.get("/referrers/:username/notifications/:id", middleware.isUserLoggedIn, 
                 // Save updated user
                 user.save(function(err, user) {
                     if (err) {
-                        req.flash("error", "Oops! An error occurred.");
+                        req.flash("error", "Oops! Something isn't quite right.")
                         return res.redirect("back");
                     }
                     return res.render("referrers/showNotification", { notify });
@@ -54,7 +54,7 @@ router.get("/referrers/:username/notifications/:id", middleware.isUserLoggedIn, 
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

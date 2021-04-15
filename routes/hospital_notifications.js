@@ -13,7 +13,7 @@ router.get("/hospitals/:username/notifications", middleware.isUserLoggedIn, midd
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -42,7 +42,7 @@ router.get("/hospitals/:username/notifications/:id", middleware.isUserLoggedIn, 
                 // Save updated user
                 user.save(function(err, user) {
                     if (err) {
-                        req.flash("error", "Oops! An error occurred.");
+                        req.flash("error", "Oops! Something isn't quite right.")
                         return res.redirect("back");
                     }
                     return res.render("hospitals/showNotification", { notify });
@@ -52,7 +52,7 @@ router.get("/hospitals/:username/notifications/:id", middleware.isUserLoggedIn, 
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

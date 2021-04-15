@@ -13,7 +13,7 @@ router.get("/referrers/:username/deactivate", middleware.isUserLoggedIn, middlew
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -22,7 +22,7 @@ router.get("/referrers/:username/deactivate", middleware.isUserLoggedIn, middlew
 router.delete("/referrers/:id", middleware.isUserLoggedIn, function(req, res) {
     User.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
-            req.flash("error", "Oops! An error occurred.");
+            req.flash("error", "Oops! Something isn't quite right.")
             return res.redirect("back");
         }
         return res.redirect("/");

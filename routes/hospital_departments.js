@@ -16,7 +16,7 @@ router.get("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -44,7 +44,6 @@ router.post("/hospitals/:username/departments", middleware.isUserLoggedIn, middl
 
                 user.role = 0.75;
                 user.save(function(err, user) {
-                    req.flash("success", "You created your profile!");
                     return res.redirect("/hospitals/" + user.username + "/pending");
                 });
                 return;
@@ -52,7 +51,7 @@ router.post("/hospitals/:username/departments", middleware.isUserLoggedIn, middl
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -65,11 +64,11 @@ router.get("/hospitals/:username/departments/edit", middleware.isUserLoggedIn, m
                 res.render("hospitals/editDepartments");
                 return;
             }
-            req.flash("error", "Please create an account.");
+            req.flash("error", "Please login or create an account.");
             res.redirect("/hospitals/register");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -114,7 +113,7 @@ router.put("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
                         req.flash("error", "Oops! Something isn't quite right.");
                         return res.redirect("back");
                     }
-                    req.flash("success", "You edited your profile!");
+                    req.flash("success", "Profile edited.");
                     return res.redirect("/hospitals/" + user.username + "/profile");
                 });
                 return;
@@ -122,7 +121,7 @@ router.put("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

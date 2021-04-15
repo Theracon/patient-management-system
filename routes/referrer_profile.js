@@ -14,11 +14,11 @@ router.get('/referrers/:username/update', middleware.isUserLoggedIn, function(re
                 res.render("referrers/details");
                 return;
             }
-            req.flash("error", "Please create an account.");
+            req.flash("error", "Please login or create an account.");
             res.redirect("/");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -58,12 +58,11 @@ router.post('/referrers/:username/update', middleware.isUserLoggedIn, function(r
                 user.referrerDetails.unread_notifications_count = 1;
                 // Save updated user
                 user.save(function(err, savedUser) {
-                    req.flash("success", "Welcome to your dashboard.");
                     return res.redirect('/referrers/' + savedUser.username + '/dashboard');
                 });
                 return;
             }
-            req.flash("error", "Oops! An error occurred while updating profile.");
+            req.flash("error", "Oops! Something isn't quite right.")
             res.redirect("back");
         }
     });
@@ -82,7 +81,7 @@ router.get('/referrers/:username/profile', middleware.isUserLoggedIn, middleware
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -96,11 +95,11 @@ router.get("/referrers/:username/profile/edit", middleware.isUserLoggedIn, middl
                 res.render("referrers/editProfile");
                 return;
             }
-            req.flash("error", "Please create an account.");
+            req.flash("error", "Please login or create an account.");
             res.redirect("/");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -137,11 +136,11 @@ router.put('/referrers/:username/update', middleware.isUserLoggedIn, middleware.
                 });
                 return;
             }
-            req.flash("error", "Please create an account.");
+            req.flash("error", "Please login or create an account.");
             res.redirect("/");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

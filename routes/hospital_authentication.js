@@ -16,7 +16,7 @@ router.get("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -35,7 +35,7 @@ router.get("/hospitals/:username/authenticate/:accession_number", middleware.isU
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -132,7 +132,7 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

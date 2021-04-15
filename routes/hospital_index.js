@@ -17,7 +17,7 @@ router.get("/hospitals/:username/dashboard", middleware.isUserLoggedIn, middlewa
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -36,7 +36,7 @@ router.get("/hospitals/:username/pending", middleware.isUserLoggedIn, function(r
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -55,7 +55,7 @@ router.get("/hospitals/:username/suspended", middleware.isUserLoggedIn, function
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });

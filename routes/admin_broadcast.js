@@ -28,7 +28,7 @@ router.post("/admin/broadcast", middleware.isAdminLoggedIn, middleware.isAdminAu
 
     User.find({ typeOfUser: recipient }, function(err, users) {
         if (err) {
-            req.flash("error", "Oops! An error occurred.");
+            req.flash("error", "Oops! Something isn't quite right.");
             return res.redirect("back");
         }
         users.forEach(function(user) {
@@ -37,7 +37,7 @@ router.post("/admin/broadcast", middleware.isAdminLoggedIn, middleware.isAdminAu
                 user.referrerDetails.unread_notifications_count++;
                 user.save(function(err, user) {
                     if (err) {
-                        req.flash("Oops! Something isn't quite right.")
+                        req.flash("error", "Oops! Something isn't quite right.")
                         return res.redirect("back");
                     }
                 });
@@ -46,7 +46,7 @@ router.post("/admin/broadcast", middleware.isAdminLoggedIn, middleware.isAdminAu
                 user.hospitalDetails.unread_notifications_count++;
                 user.save(function(err, user) {
                     if (err) {
-                        req.flash("Oops! Something isn't quite right.")
+                        req.flash("error", "Oops! Something isn't quite right.")
                         return res.redirect("back");
                     }
                 });

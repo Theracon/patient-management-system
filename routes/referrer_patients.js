@@ -27,7 +27,7 @@ router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middl
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -86,17 +86,17 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                                         // Save updated user details to the database
                                         user.save(function(err, user) {
                                             if (!err) {
-                                                req.flash("success", "Patient referral successful.");
+                                                req.flash("success", "Congratulations! You referred a patient.");
                                                 res.redirect("/referrers/" + user.username + "/patients/" + patient.accession_number);
                                                 return;
                                             }
-                                            req.flash("error", "Oops! An error occurred.");
+                                            req.flash("error", "Oops! Something isn't quite right.")
                                             res.redirect("back");
                                             return;
                                         });
                                     });
                                 } else {
-                                    req.flash("Oops! Something isn't quite right");
+                                    req.flash("error", "Oops! Something isn't quite right.")
                                     return res.redirect("back");
                                 }
                             });
@@ -107,7 +107,7 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                     res.redirect("/login");
                     return;
                 }
-                req.flash("error", "Oops! An error occurred.");
+                req.flash("error", "Oops! Something isn't quite right.")
                 res.redirect("back");
             });
         });
@@ -133,7 +133,7 @@ router.get("/referrers/:username/patients/:accession_number", middleware.isUserL
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -146,12 +146,12 @@ router.get("/referrers/:username/patients/:accession_number/edit", middleware.is
             if (user) {
                 User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
                     if (err) {
-                        req.flash("error", "Oops! An error occurred.");
+                        req.flash("error", "Oops! Something isn't quite right.")
                         return res.redirect("back");
                     }
                     Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
                         if (err) {
-                            req.flash("error", "Oops! An error occurred.");
+                            req.flash("error", "Oops! Something isn't quite right.")
                             return res.redirect("back");
                         }
                         return res.render("referrers/editPatient", { user: user, patient: patient, hospitals: hospitals });
@@ -162,7 +162,7 @@ router.get("/referrers/:username/patients/:accession_number/edit", middleware.is
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
@@ -183,7 +183,7 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                     // Find and update patient in patient model
                     Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
                         if (err) {
-                            req.flash("error", "Oops! An error occurred.");
+                            req.flash("error", "Oops! Something isn't quite right.")
                             return res.redirect("back");
                         }
                         patient.hospital_id = hospitalArray[req.body.hospital]._id;
@@ -197,7 +197,7 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                         // Save updated patient
                         patient.save(function(err, patient) {
                             if (err) {
-                                req.flash("error", "Oops! An error occurred.");
+                                req.flash("error", "Oops! Something isn't quite right.")
                                 return res.redirect("back");
                             }
                             // Find and remove patient in referrer's patients array
@@ -215,11 +215,11 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                             // Save referrer with updated patients array
                             user.save(function(err, user) {
                                 if (err) {
-                                    req.flash("error", "Oops! An error occurred.");
+                                    req.flash("error", "Oops! Something isn't quite right.")
                                     return res.redirect("back");
                                 }
                                 // Redirect to patient show route
-                                req.flash("success", "You edited this patient's details.");
+                                req.flash("success", "Patient info edited.");
                                 return res.redirect("/referrers/" + user.username + "/patients/" + patient.accession_number);
                             });
                         });
@@ -230,7 +230,7 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                 res.redirect("/login");
                 return;
             }
-            req.flash("error", "Oops! An error occurred.");
+            req.flash("error", "Oops! Something isn't quite right.")
             res.redirect("back");
         });
     } else {
@@ -255,7 +255,7 @@ router.get("/referrers/:username/patients", middleware.isUserLoggedIn, middlewar
             res.redirect("/login");
             return;
         }
-        req.flash("error", "Oops! An error occurred.");
+        req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");
     });
 });
