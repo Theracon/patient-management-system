@@ -183,6 +183,9 @@
         
         #show_links {
             font-size: 1.5rem;
+            -moz-transition: all .5s linear;
+            -webkit-transition: all .5s linear;
+            transition: all .5s linear;
         }
         
         #toggle_content {
@@ -208,8 +211,8 @@
         .form_div {
             display: grid;
             background-color: white;
-            padding: 2rem 1rem 2rem 1rem;
-            width: 30%;
+            padding: 2rem 4rem 2rem 4rem;
+            width: 40%;
             margin: 0 auto;
             border-radius: 10px;
         }
@@ -1141,18 +1144,10 @@
         }
         
         .rotate_180 {
-            animation-name: rotate-nav-chevron;
-            animation-duration: 1.5s;
-            animation-timing-function: ease-out;
-        }
-        
-        @keyframes rotate-nav-chevron {
-            50% {
-                transform: rotate(90deg);
-            }
-            100% {
-                transform: rotate(180deg);
-            }
+            -ms-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
         }
         
         .small-content {

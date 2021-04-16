@@ -39,7 +39,7 @@
 
                                                         <!--PROFILE-->
                                                         <div class="profile">
-                                                            <h1 class="header-h1-text text-center">Profile</h1>
+                                                            <h1 class="header-h1-text text-center">Profile Overview</h1>
                                                             <hr>
                                                             <p class="profile-details-paragraph"><span class="lead">Institution type</span><br><span><%=hospital.hospitalDetails.institution_type%></span></p>
                                                             <p class="profile-details-paragraph"><span class="lead">Name</span><br><span><%=hospital.hospitalDetails.name%></span></p>
@@ -66,29 +66,29 @@
 
                                                         <!--DEPARTMENTS-->
                                                         <% if(hospital.hospitalDetails.departments.length > 0) { %>
-                                                            <div class="departments">
-                                                                <h1 class="header-h1-text text-center">Structure</h1>
+                                                            <div class="departments overflow-auto">
+                                                                <h1 class="header-h1-text text-center">Departments</h1>
                                                                 <hr>
-                                                                <div class="overflow-auto">
-                                                                    <% hospital.hospitalDetails.departments.forEach(function(department) { %>
-                                                                        <div class="department">
-                                                                            <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
-                                                                            <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
-                                                                            <p class="profile-details-paragraph">
-                                                                                <span class="lead">Procedures</span><br>
-                                                                                <span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;">
-                                    <% department.procedures.forEach(function(procedure, index, arr) { %>
-                                        <% if(index != (arr.length - 1)) { %>
-                                            <%= procedure %>,
-                                        <% } else { %>
-                                            <%= procedure %>
-                                        <% } %>
-                                    <% }); %>
-                                </span>
-                                                                            </p>
-                                                                        </div>
-                                                                        <% }); %>
-                                                                </div>
+
+                                                                <% hospital.hospitalDetails.departments.forEach(function(department) { %>
+                                                                    <div class="department">
+                                                                        <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
+                                                                        <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
+                                                                        <p class="profile-details-paragraph">
+                                                                            <span class="lead">Units</span><br>
+                                                                            <span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;">
+                                                                                <% department.units.forEach(function(unit, index, arr) { %>
+                                                                                    <% if(index != (arr.length - 1)) { %>
+                                                                                        <%= unit %>,
+                                                                                    <% } else { %>
+                                                                                        <%= unit %>
+                                                                                    <% } %>
+                                                                                <% }); %>
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <% }); %>
+                                                                        <br><br><br>
                                                             </div>
                                                             <% } %>
                                                                 <br>

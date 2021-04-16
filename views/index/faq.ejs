@@ -62,8 +62,8 @@
                                                             <div class="accordion-item">
                                                                 <h2 class="accordion-header" id="headingOne">
                                                                     <button class="accordion-button" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Why is my account pending?
-                    </button>
+                                                                        Why is my account pending?
+                                                                    </button>
                                                                 </h2>
                                                                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                     <div class="accordion-body">
@@ -75,8 +75,8 @@
                                                             <div class="accordion-item">
                                                                 <h2 class="accordion-header" id="headingTwo">
                                                                     <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Why is my account suspended?
-                    </button>
+                                                                        Why is my account suspended?
+                                                                    </button>
                                                                 </h2>
                                                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                                                     <div class="accordion-body">
@@ -84,6 +84,107 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <% if(currentUser && currentUser.typeOfUser == "referrer") { %>
+                                                                <div class="accordion-item">
+                                                                    <h2 class="accordion-header" id="headingThree">
+                                                                        <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                            How are my commissions calculated?
+                                                                        </button>
+                                                                    </h2>
+                                                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                                        <div class="accordion-body">
+                                                                            Referrer commissions are calculated as follows:
+                                                                            <br>
+                                                                            <small class="text-primary"><i class="fas fa-exclamation-circle"></i> All commissions are based on amount paid by referred patients for the investigations for which they are referred.</small>
+                                                                            <br><br>
+                                                                            <div class="list-group">
+                                                                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                                        <h5 class="mb-1">Amount paid is N5,000 or less</h5>
+                                                                                    </div>
+                                                                                    <p class="mb-1">Commission: 15.0%</p>
+                                                                                </a>
+                                                                                <a href="#" class="list-group-item list-group-item-action">
+                                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                                        <h5 class="mb-1">Amount paid is above N5,000 and up to N20,000</h5>
+                                                                                    </div>
+                                                                                    <p class="mb-1">Commission: 12.0%</p>
+                                                                                </a>
+                                                                                <a href="#" class="list-group-item list-group-item-action">
+                                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                                        <h5 class="mb-1">Amount paid is above N20,000 and up to N50,000</h5>
+                                                                                    </div>
+                                                                                    <p class="mb-1">Commission: 9.0%</p>
+                                                                                </a>
+                                                                                <a href="#" class="list-group-item list-group-item-action">
+                                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                                        <h5 class="mb-1">Amount paid is above N50,000 and up to N100,000</h5>
+                                                                                    </div>
+                                                                                    <p class="mb-1">Commission: 6.0%</p>
+                                                                                </a>
+                                                                                <a href="#" class="list-group-item list-group-item-action">
+                                                                                    <div class="d-flex w-100 justify-content-between">
+                                                                                        <h5 class="mb-1">Amount paid is above N100,000</h5>
+                                                                                    </div>
+                                                                                    <p class="mb-1">Commission: 4.5%</p>
+                                                                                </a>
+                                                                            </div>
+                                                                            <br>
+
+                                                                            <small class="text-primary"><i class="fas fa-exclamation-circle"></i> Commission rates increase with time on platform.</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+                                                                    <% if(currentUser && currentUser.typeOfUser == "hospital") { %>
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header" id="headingThree">
+                                                                                <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                                            How are my commissions calculated?
+                                                                        </button>
+                                                                            </h2>
+                                                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                                                <div class="accordion-body">
+                                                                                    Hospital commission charges are calculated as follows:
+                                                                                    <br>
+                                                                                    <small class="text-primary"><i class="fas fa-exclamation-circle"></i> All commissions are based on amount paid by referred patients for the investigations for which they are referred.</small>
+                                                                                    <br><br>
+                                                                                    <div class="list-group">
+                                                                                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                                                                            <div class="d-flex w-100 justify-content-between">
+                                                                                                <h5 class="mb-1">Amount paid is N5,000 or less</h5>
+                                                                                            </div>
+                                                                                            <p class="mb-1">Commission: 25.0%</p>
+                                                                                        </a>
+                                                                                        <a href="#" class="list-group-item list-group-item-action">
+                                                                                            <div class="d-flex w-100 justify-content-between">
+                                                                                                <h5 class="mb-1">Amount paid is above N5,000 and up to N20,000</h5>
+                                                                                            </div>
+                                                                                            <p class="mb-1">Commission: 20.0%</p>
+                                                                                        </a>
+                                                                                        <a href="#" class="list-group-item list-group-item-action">
+                                                                                            <div class="d-flex w-100 justify-content-between">
+                                                                                                <h5 class="mb-1">Amount paid is above N20,000 and up to N50,000</h5>
+                                                                                            </div>
+                                                                                            <p class="mb-1">Commission: 15.0%</p>
+                                                                                        </a>
+                                                                                        <a href="#" class="list-group-item list-group-item-action">
+                                                                                            <div class="d-flex w-100 justify-content-between">
+                                                                                                <h5 class="mb-1">Amount paid is above N50,000 and up to N100,000</h5>
+                                                                                            </div>
+                                                                                            <p class="mb-1">Commission: 10.0%</p>
+                                                                                        </a>
+                                                                                        <a href="#" class="list-group-item list-group-item-action">
+                                                                                            <div class="d-flex w-100 justify-content-between">
+                                                                                                <h5 class="mb-1">Amount paid is above N100,000</h5>
+                                                                                            </div>
+                                                                                            <p class="mb-1">Commission: 7.5%</p>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% } %>
                                                         </div>
                                                         <br>
                                                 </div>

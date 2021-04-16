@@ -99,14 +99,14 @@
                                                                                 <p class="profile-details-paragraph">
                                                                                     <span class="lead">Units</span><br>
                                                                                     <span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;">
-                                <% department.units.forEach(function(unit, index, arr) { %>
-                                    <% if(index != (arr.length - 1)) { %>
-                                        <%= unit %>, 
-                                    <% } else { %>
-                                        <%= unit %>
-                                    <% } %>
-                                <% }); %>
-                            </span>
+                                                                                        <% department.units.forEach(function(unit, index, arr) { %>
+                                                                                            <% if(index != (arr.length - 1)) { %>
+                                                                                                <%= unit %>, 
+                                                                                            <% } else { %>
+                                                                                                <%= unit %>
+                                                                                            <% } %>
+                                                                                        <% }); %>
+                                                                                    </span>
                                                                                 </p>
                                                                             </div>
                                                                             <% }); %>
