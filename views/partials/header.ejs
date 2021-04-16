@@ -200,9 +200,85 @@
         }
         
         #spinner {
-            color: lightgreen;
+            color: lightgrey;
             transform: scale(2);
-            opacity: 0.5;
+            opacity: .8;
+        }
+        
+        #articleOne {
+            position: relative;
+            margin: 0;
+        }
+        
+        #articleOne::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: url("https://images.pexels.com/photos/4769130/pexels-photo-4769130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: color-burn;
+            background-position: top center;
+            opacity: .4;
+        }
+        
+        #articleTwo {
+            position: relative;
+            margin: 0;
+        }
+        
+        #articleTwo::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: url("https://images.unsplash.com/photo-1579154341098-e4e158cc7f55?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=925&q=80") no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: color-burn;
+            background-position: top center;
+            opacity: .4;
+        }
+        
+        #articleThree {
+            position: relative;
+            margin: 0;
+        }
+        
+        #articleThree::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: url("https://images.pexels.com/photos/5327653/pexels-photo-5327653.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: color-burn;
+            background-position: top center;
+            opacity: .4;
+        }
+        
+        #articleFour {
+            position: relative;
+            margin: 0;
+        }
+        
+        #articleFour::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: url("https://images.pexels.com/photos/3727459/pexels-photo-3727459.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: color-burn;
+            background-position: top center;
+            opacity: .4;
         }
         
         .logo {
@@ -231,6 +307,11 @@
             background-color: white;
             padding: 3rem;
             width: 70%;
+        }
+        
+        .home__article {
+            width: 100%;
+            height: 130vh;
         }
         
         .blog {
