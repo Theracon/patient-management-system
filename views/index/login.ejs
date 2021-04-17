@@ -38,10 +38,10 @@
                                                         <br>
 
                                                         <div class="form_div">
-                                                            <p class="text-secondary" style="font-weight: bold;">Choose account type</p>
+                                                            <p class="text-secondary text-center" style="font-weight: bold;">Select account type</p>
                                                             <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
-                                                                <button id="doctor-button" class="text-break text-wrap button btn btn-primary" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
-                                                                <button id="hospital-button" class="text-break text-wrap button btn btn-outline-primary" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
+                                                                <button id="doctor-button" class="text-break text-wrap button btn btn-success" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
+                                                                <button id="hospital-button" class="text-break text-wrap button btn btn-outline-success" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
                                                             </div>
                                                             <br>
                                                             <div id="form-holder">
@@ -60,7 +60,7 @@
                                                                         </div>
                                                                         <!--Button-->
                                                                         <div class="button-group" style="width: 100%;">
-                                                                            <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                                                                            <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                                                                         </div>
                                                                         <br>
                                                                         <p class="text-center">Don't have an account? <a href="/register" style="font-family: 'Poppins', sans-serif;">Sign up</a></p>
@@ -70,7 +70,6 @@
                                                         </div>
                                                         <br><br><br><br><br>
                                                 </div>
-                                                <div class="space"></div>
                                             </div>
 
                                             <script>
@@ -97,17 +96,17 @@
                     </div>
                     <!--Button-->
                     <div class="button-group" style="width: 100%;">
-                        <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                     </div>
                     <br>
                     <p class="text-center">Don't have an account? <a href="/register" style="font-family: 'Poppins', sans-serif;">Sign up</a></p>
                 </div>
             </form>
             `;
-                                                        doctorButton.classList.add("btn-primary");
-                                                        doctorButton.classList.remove("btn-outline-primary");
-                                                        hospitalButton.classList.add("btn-outline-primary");
-                                                        hospitalButton.classList.remove("btn-primary");
+                                                        doctorButton.classList.add("btn-success");
+                                                        doctorButton.classList.remove("btn-outline-success");
+                                                        hospitalButton.classList.add("btn-outline-success");
+                                                        hospitalButton.classList.remove("btn-success");
 
                                                         return
                                                     }
@@ -128,17 +127,17 @@
                     </div>
                     <!--Button-->
                     <div class="button-group" style="width: 100%;">
-                        <input type="submit" class="button btn btn-primary" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                     </div>
                     <br>
                     <p class="text-center">Don't have an account? <a href="/register" style="font-family: 'Poppins', sans-serif;">Sign up</a></p>
                 </div>
             </form>
             `;
-                                                        doctorButton.classList.remove("btn-primary");
-                                                        doctorButton.classList.add("btn-outline-primary");
-                                                        hospitalButton.classList.remove("btn-outline-primary");
-                                                        hospitalButton.classList.add("btn-primary");
+                                                        doctorButton.classList.remove("btn-success");
+                                                        doctorButton.classList.add("btn-outline-success");
+                                                        hospitalButton.classList.remove("btn-outline-success");
+                                                        hospitalButton.classList.add("btn-success");
                                                     }
                                                 });
                                             </script>

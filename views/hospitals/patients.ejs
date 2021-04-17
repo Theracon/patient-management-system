@@ -54,15 +54,6 @@
                                                                                                             </div>
                                                                                                             <br><br>
                                                                                                             <div class="banner" id="banner">
-                                                                                                                <!--
-                <p class="lh-1 wallet-detail"><span>All</span><span class="lead"><%=patients.length%> </span></p>
-                <hr>
-                <p class="lh-1 wallet-detail"><span>Authenticated</span><span class="lead"><%=authPatientsCount()%> </span></p>
-                <hr>
-                <p class="lh-1 wallet-detail"><span>Not authenticated</span><span class="lead"><%=parseInt(patients.length, 10) - parseInt(authPatientsCount(), 10)%> </span></p>
-                -->
-
-
                                                                                                                 <% var patientCount = 0; %>
                                                                                                                     <% var authPatientCount = 0; %>
 
@@ -86,6 +77,7 @@
                                                                                                                                                                 <hr>
                                                                                                                                                                 <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
                                                                                                             </div>
+
                                                                                                         </div>
                                                                                                         <br><br><br><br>
                                                                                                         <div id="platform">
@@ -98,11 +90,11 @@
                                                                                                                             <% if(patient.status === "authenticated") { %>
                                                                                                                                 <% count++ %>
                                                                                                                                     <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
-                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
-                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
-                                <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
-                                <span class="patient-card-date lh-1 text-center">Authenticated: <%= patient.authentication_date %></span>
-                            </button>
+                                                                                                                                        <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                                                                                                                                        <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                                                                                                                                        <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                                                                                                                                        <span class="patient-card-date lh-1 text-center">Authenticated: <%= patient.authentication_date %></span>
+                                                                                                                                    </button>
                                                                                                                                     <% } %>
                                                                                                                                         <% }) %>
                                                                                                                                             <% if(count < 1) { %>
@@ -118,10 +110,10 @@
                                                                                                                             <% if(patient.status === "unauthenticated") { %>
                                                                                                                                 <% count++ %>
                                                                                                                                     <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/hospitals/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
-                                <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
-                                <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
-                                <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
-                            </button>
+                                                                                                                                        <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
+                                                                                                                                        <span class="patient-card-investigation overflow-auto text-center"><%= patient.investigation%></span>
+                                                                                                                                        <span class="patient-card-date lh-1 text-center">Referred: <%= patient.referral_date %></span>
+                                                                                                                                    </button>
                                                                                                                                     <% } %>
                                                                                                                                         <% }) %>
                                                                                                                                             <% if(count < 1) { %>
@@ -130,6 +122,7 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
+                                                                                                        <br><br><br><br><br>
                                                                                                 </div>
                                                                                                 <div class="space"></div>
     </div>

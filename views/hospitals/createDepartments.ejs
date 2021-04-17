@@ -5,7 +5,7 @@
             <div style="display: flex; align-items: center; justify-content: center;">
                 <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
             </div>
-            <h1 class="header-h1-text">Step 3 <em>of</em> 3: Hospital Structure</h1>
+            <h1 class="header-h1-text">Step 3 <em>of</em> 3</h1>
             <small>If your centre is not departmentalized, click Skip.</small>
         </header>
 
@@ -33,8 +33,8 @@
                                     <label for="procedures" class="text-muted">Departmental units:</label><br>
                                     <small class="text-muted">(Type and click + to add a unit.)</small>
                                     <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                                        <input type="text" class="procedure_input border border-secondary">
-                                        <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+                                        <input type="text" class="procedure_input border border-success">
+                                        <button class="btn btn-success procedure_input_button" type="button">+</button>
                                     </div>
                                     <div class="procedures"></div>
                                 </div>
@@ -42,16 +42,17 @@
                             <br>
                             <!--Add department button-->
                             <div style="width: 90%; padding: 0; margin: 1rem auto;">
-                                <button class="btn btn-outline-primary" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
+                                <button class="btn btn-outline-success" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
                             </div>
                             <!--Buttons-->
                             <div class="button-group" id="button-group" style="width: 100%; margin-top: 4rem;">
-                                <input type="submit" class="button btn btn-primary" value="Confirm" style="width: 45%;">
-                                <button type="button" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures';" class="button btn btn-outline-secondary" style="width: 45%;">Skip</button>
+                                <input type="submit" class="button btn btn-success" value="Confirm" style="width: 45%;">
+                                <button type="button" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures';" class="border border-3 border-success button btn btn-outline-success" style="width: 45%;">Skip</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <br><br><br><br><br>
         </div>
         <div class="space"></div>
     </div>
@@ -71,7 +72,7 @@
                     div.classList.add("mb-1");
                     div.innerHTML = `
                     <input type="text" class="procedure border" name="[units]-[${procedure_count}]" value="${text}" readonly>
-                    <button class="btn btn-outline-secondary procedure_button border" type="button">-</button>
+                    <button class="btn btn-secondary procedure_button border" type="button">-</button>
                 `;
                     e.target.parentElement.nextElementSibling.appendChild(div);
                     e.target.previousElementSibling.value = "";
@@ -106,8 +107,8 @@
             <label for="procedures" class="text-muted">Departmental units:</label><br>
             <small class="text-muted">(Type and click + to add a unit.)</small>
             <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                <input type="text" class="procedure_input border border-secondary">
-                <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+                <input type="text" class="procedure_input border border-success">
+                <button class="btn btn-success procedure_input_button" type="button">+</button>
             </div>
             <div class="procedures"></div>
         `;

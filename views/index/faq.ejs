@@ -73,7 +73,7 @@
                                                                 </h2>
                                                                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                     <div class="accordion-body">
-                                                                        By default, every referrer and hospital account is inactive upon sign up. In the first 72 hours following sign up, Fastclinic conducts a background check on the user and the findings of this background check directly influence whether or not a user account
+                                                                        By default, every referrer and hospital account is inactive upon sign up. In the first 24 hours following sign up, Fastclinic conducts a background check on the user and the findings of this background check directly influence whether or not a user account
                                                                         is activated.
                                                                     </div>
                                                                 </div>
@@ -193,21 +193,8 @@
                                                                         <% } %>
                                                         </div>
                                                         <br>
+                                                        <br><br><br><br><br>
                                                 </div>
-                                                <div class="space"></div>
                                             </div>
-
-                                            <script>
-                                                var toggleHideButtons = Array.from(document.querySelectorAll("#toggle_content"));
-                                                var hiddenContent = Array.from(document.querySelectorAll("#hidden_content"));
-
-                                                toggleHideButtons.forEach(function(toggleHideButton, index) {
-                                                    toggleHideButton.addEventListener("click", function() {
-                                                        hiddenContent[index].classList.toggle("toggleHide");
-                                                        hiddenContent[index].classList.toggle("toggleShow");
-                                                        toggleHideButton.classList.toggle("rotate_180");
-                                                    });
-                                                });
-                                            </script>
 
                                             <%- include("../partials/footer.ejs") %>

@@ -43,18 +43,18 @@
                                                 <input type="number" class="form-control" id="staff_count" name="staff_count" value="<%= department.staff_count %>">
                                                 <label for="staff_count">Number of clinical staff</label>
                                             </div>
-                                            <!--Procedures-->
+                                            <!--Units-->
                                             <label for="procedures" class="text-muted">Departmental units</label>
                                             <small class="text-muted">(Type and click + to add a unit.)</small>
                                             <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                                                <input type="text" class="procedure_input border border-secondary">
-                                                <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+                                                <input type="text" class="procedure_input border border-success">
+                                                <button class="btn btn-success procedure_input_button" type="button">+</button>
                                             </div>
                                             <div class="procedures">
                                                 <% department.units.forEach(function(unit) { %>
                                                     <div class="input-group mb-1" id="input-group" data-input="<%= index %>">
                                                         <input type="text" class="border procedure" name="[units]-[<%= index %>]" value="<%= unit %>" data-input="<%= index %> " readonly>
-                                                        <button class="btn btn-outline-secondary procedure_button border" type="button">x</button>
+                                                        <button class="btn btn-secondary procedure_button border" type="button">-</button>
                                                     </div>
                                                     <% }); %>
                                             </div>
@@ -69,18 +69,18 @@
                             <br>
                             <!--Add department button-->
                             <div style="width: 90%; padding: 0; margin: 1rem auto;">
-                                <button class="btn btn-outline-info" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
+                                <button class="btn btn-outline-success" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
                             </div>
                             <!--Buttons-->
                             <div class="button-group" id="button-group" style="width: 100%; margin-top: 4rem;">
-                                <input type="submit" class="button btn btn-primary" value="Confirm" style="width: 45%;">
-                                <button type="button" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" class="button btn btn-outline-secondary" style="width: 45%;">Cancel</button>
+                                <input type="submit" class="button btn btn-success" value="Confirm" style="width: 45%;">
+                                <button type="reset" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" class="button btn btn-outline-success" style="width: 45%;">Cancel</button>
                             </div>
                         </div>
                     </form>
                 </div>
+                <br><br><br><br><br>
         </div>
-        <div class="space"></div>
     </div>
 
     <script>
@@ -111,7 +111,7 @@
                     div.dataset.input = count;
                     div.innerHTML = `
                     <input type="text" class="procedure border" name="[units]-[${count}]" value="${text}" readonly>
-                    <button class="btn btn-outline-secondary procedure_button border" type="button">x</button>
+                    <button class="btn btn-secondary procedure_button border" type="button">-</button>
                 `;
                     e.target.parentElement.nextElementSibling.appendChild(div);
                     e.target.previousElementSibling.value = "";
@@ -142,12 +142,12 @@
                 <input type="number" class="form-control" id="staff_count" name="staff_count">
                 <label for="staff_count">Number of clinical staff</label>
             </div>
-            <!--Procedures-->
+            <!--Units-->
             <label for="procedures" class="text-muted">Procedures</label>
             <small class="text-muted">(Type and click + to add a unit.)</small>
             <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                <input type="text" class="procedure_input border border-secondary">
-                <button class="btn btn-outline-secondary procedure_input_button" type="button">+</button>
+                <input type="text" class="procedure_input border border-success">
+                <button class="btn btn-success procedure_input_button" type="button">+</button>
             </div>
             <div class="procedures"></div>
             <br>

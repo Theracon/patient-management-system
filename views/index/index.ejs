@@ -1,19 +1,18 @@
 <%- include("../partials/header.ejs") %>
 
-    <div class="container-fluid" id="container-fluid" style="overflow: hidden; background-color: white; display: grid; align-items: center; justify-content: center; height: 100%">
-        <div class="conatiner">
-            <img src="https://i.ibb.co/tD5YVxW/24-4.png" alt="24-4" border="0" style="transform: scale(0.5);">
-            <div class="text-center">
-                <div class="spinner-border" role="status">
-                    <span><i class="fas fa-circle-notch" id="spinner"></i></span>
-                </div>
+    <div class="container-fluid" id="container-fluid" style="overflow: hidden; background-color: white; width: 100%; height: 100%">
+        <div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <img class="fastclinic__logo" src="https://i.ibb.co/tD5YVxW/24-4.png" alt="24-4" border="0">
+            <div class="lds-heart">
+                <div></div>
             </div>
         </div>
+
     </div>
     <script>
         var containerFluid = document.getElementById("container-fluid");
 
         window.setTimeout(function() {
             window.location.href = "/home";
-        }, 3000);
+        }, 5000);
     </script>

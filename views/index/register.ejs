@@ -38,16 +38,16 @@
                                                         <br>
 
                                                         <div class="form_div">
-                                                            <p class="text-secondary" style="font-weight: bold;">Choose account type</p>
+                                                            <p class="text-secondary text-center" style="font-weight: bold;">Select account type</p>
                                                             <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
-                                                                <button id="doctor-button" class="text-break text-wrap button btn btn-primary" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
-                                                                <button id="hospital-button" class="text-break text-wrap button btn btn-outline-primary" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
+                                                                <button id="doctor-button" class="text-break text-wrap button btn btn-success" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
+                                                                <button id="hospital-button" class="text-break text-wrap button btn btn-outline-success" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
                                                             </div>
                                                             <br>
                                                             <div id="form-holder">
                                                                 <form action="/referrers/register" method="POST">
                                                                     <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                                                                        <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Currently creating a doctor account</p>
+                                                                        <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Create a doctor account</p>
                                                                         <!--Username-->
                                                                         <div class="form-floating mb-3">
                                                                             <input type="text" class="form-control" id="username" name="username" required>
@@ -60,15 +60,15 @@
                                                                         </div>
                                                                         <!--Button-->
                                                                         <div class="button-group" style="width: 100%;">
-                                                                            <input type="submit" class="button btn btn-primary" value="Sign up" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                                                                            <input type="submit" class="button btn btn-success" value="Create account" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                                                                         </div>
                                                                     </div>
                                                                     <div style="display: grid;">
-                                                                        <p class="text-justify lh-1" style="display: flex; align-items: center; justify-content: center; align-items: flex-start;">
-                                                                            <input type="checkbox" id="terms" style="margin-right: 0.5rem;" required>
-                                                                            <label for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
-                                                                        </p>
-                                                                        <p class="text-center text-muted lh-1" style="font-size: 0.8rem">We will never share your personal info with anyone else.</p>
+                                                                        <div class="text-justify lh-1" style="padding: 1rem; display: flex;">
+                                                                            <input class="form-check-input" type="checkbox" id="terms" style="padding: 6px; margin-right: 1rem;" required>
+                                                                            <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+                                                                        </div>
+                                                                        <p class="text-center text-muted lh-1" style="padding: 1rem; font-size: 0.8rem">We will never share your personal info with anyone else.</p>
                                                                         <br>
                                                                         <p class="text-center">Do you have an account? <a href="/login" style="font-family: 'Poppins', sans-serif;">Sign in</a></p>
                                                                     </div>
@@ -77,7 +77,6 @@
                                                         </div>
                                                         <br><br><br><br><br>
                                                 </div>
-                                                <div class="space"></div>
                                             </div>
 
                                             <script>
@@ -91,7 +90,7 @@
                                                         formHolder.innerHTML = `
             <form action="/referrers/register" method="POST">
                 <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="height: auto; margin-bottom: 2rem; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Currently creating a doctor account</p>
+                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="height: auto; margin-bottom: 2rem; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Create a doctor account</p>
                     <!--Username-->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -104,31 +103,31 @@
                     </div>
                     <!--Button-->
                     <div class="button-group" style="width: 100%;">
-                        <input type="submit" class="button btn btn-primary" value="Sign up" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Create account" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                     </div>
                 </div>
                 <div style="display: grid;">
-                    <p class="text-justify lh-1" style="display: flex; align-items: center; justify-content: center; align-items: flex-start;">
-                        <input type="checkbox" id="terms" style="margin-right: 0.5rem;" required>
-                        <label for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
-                    </p>
-                    <p class="text-center text-muted lh-1" style="font-size: 0.8rem">We will never share your personal info with anyone else.</p>
+                    <div class="text-justify lh-1" style="padding: 1rem; display: flex;">
+                        <input class="form-check-input" type="checkbox" id="terms" style="padding: 6px; margin-right: 1rem;" required>
+                        <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+                    </div>
+                    <p class="text-center text-muted lh-1" style="padding: 1rem; font-size: 0.8rem">We will never share your personal info with anyone else.</p>
                     <br>
                     <p class="text-center">Do you have an account? <a href="/login" style="font-family: 'Poppins', sans-serif;">Sign in</a></p>
                 </div>
             </form>
             `;
-                                                        doctorButton.classList.add("btn-primary");
-                                                        doctorButton.classList.remove("btn-outline-primary");
-                                                        hospitalButton.classList.add("btn-outline-primary");
-                                                        hospitalButton.classList.remove("btn-primary");
+                                                        doctorButton.classList.add("btn-success");
+                                                        doctorButton.classList.remove("btn-outline-success");
+                                                        hospitalButton.classList.add("btn-outline-success");
+                                                        hospitalButton.classList.remove("btn-success");
                                                         return;
                                                     }
                                                     if (e.target.value === "hospital") {
                                                         formHolder.innerHTML = `
             <form action="/hospitals/register" method="POST">
                 <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="height: auto; margin-bottom: 2rem; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Currently creating a hospital account</p>
+                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="height: auto; margin-bottom: 2rem; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Create a hospital account</p>
                     <!--Username-->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -141,24 +140,24 @@
                     </div>
                     <!--Button-->
                     <div class="button-group" style="width: 100%;">
-                        <input type="submit" class="button btn btn-primary" value="Sign up" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Create account" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                     </div>
                 </div>
                 <div style="display: grid;">
-                    <p class="text-justify lh-1" style="display: flex; align-items: center; justify-content: center; align-items: flex-start;">
-                        <input type="checkbox" id="terms" style="margin-right: 0.5rem;" required>
-                        <label for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
-                    </p>
-                    <p class="text-center text-muted lh-1" style="font-size: 0.8rem">We will never share your personal info with anyone else.</p>
+                    <div class="text-justify lh-1" style="padding: 1rem; display: flex;">
+                        <input class="form-check-input" type="checkbox" id="terms" style="padding: 6px; margin-right: 1rem;" required>
+                        <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+                    </div>
+                    <p class="text-center text-muted lh-1" style="padding: 1rem; font-size: 0.8rem">We will never share your personal info with anyone else.</p>
                     <br>
                     <p class="text-center">Do you have an account? <a href="/login" style="font-family: 'Poppins', sans-serif;">Sign in</a></p>
                 </div>
             </form>
             `;
-                                                        doctorButton.classList.remove("btn-primary");
-                                                        doctorButton.classList.add("btn-outline-primary");
-                                                        hospitalButton.classList.remove("btn-outline-primary");
-                                                        hospitalButton.classList.add("btn-primary");
+                                                        doctorButton.classList.remove("btn-success");
+                                                        doctorButton.classList.add("btn-outline-success");
+                                                        hospitalButton.classList.remove("btn-outline-success");
+                                                        hospitalButton.classList.add("btn-success");
                                                     }
                                                 });
                                             </script>

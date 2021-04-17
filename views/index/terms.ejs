@@ -16,7 +16,7 @@
                                                         <a href=<%=logoRoute %>> <img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo">
                                                             <a>
                                                     </div>
-                                                    <h1 class="header-h1-text">Terms and Conditions</h1>
+                                                    <h1 class="header-h1-text">Terms of Use</h1>
                                                     <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
                                                     <% if(currentUser) { %>
                                                         <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
@@ -33,7 +33,8 @@
                                                                                                     <% } %>
                                                 </header>
 
-                                                <div class="container" style="background-color: white; padding: 2rem;">
+                                                <div class="container">
+                                                    <div class="content">
 
                                                     <%- include("../partials/alert.ejs") %>
                                                         <br>
@@ -1014,7 +1015,10 @@
                                                 </style>
                                             </div>
                                             </div>
-                                            <div class="space"></div>
+                                            </div>
                                             </div>
 
+                                            </div>
+                                            <br><br><br><br><br>
+                                            </div>
                                             <%- include("../partials/footer.ejs") %>

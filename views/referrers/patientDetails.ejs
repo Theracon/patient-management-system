@@ -22,7 +22,7 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="container small-content">
+                <div class="container small-content" style="width: 80%;">
                     <% if(patient.status === "unauthenticated") { %>
                         <p style="font-weight: bold;">Copy the patient accession code below and give it to your patient!</p>
                         <br>
@@ -73,7 +73,7 @@
                                                                         <br><br>
                                                                         <div class="button-group" id="button-group">
                                                                             <% if(patient.status == "unauthenticated") { %>
-                                                                                <button class="button btn btn-outline-primary" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>/edit';" style="width: 45%;">Edit Patient Info</button>
+                                                                                <button class="button btn btn-success" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>/edit';" style="width: 45%;">Edit Patient Info</button>
                                                                                 <% } %>
                                                                         </div>
                                                                     </div>
@@ -84,6 +84,7 @@
                         <p class="text-center" style="font-size: 0.8rem;"><i class="fas fa-exclamation-circle"></i> <span>You cannot edit an authenticated patient.</span></p>
                     </div>
                     <% } %>
+                        <br><br><br><br><br>
         </div>
         <div class="space"></div>
     </div>

@@ -54,7 +54,7 @@
         body {
             margin: 0;
             height: 100vh;
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         
         header {
@@ -73,8 +73,8 @@
         
         button,
         input[type='submit'] {
-            font-family: 'Poppins', sans-serif!important;
-            font-weight: 700!important;
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 400 !important;
         }
         
         a {
@@ -86,6 +86,10 @@
             margin: 0 auto;
             width: 20%;
             height: 20%;
+        }
+        
+        article>section>h1 {
+            width: 100% !important;
         }
         
         header>small {
@@ -362,6 +366,72 @@
             font-family: 'Poppins', sans-serif;
             z-index: 100;
         }
+        /*
+        // LOADING SPINNER START
+        */
+        
+        .lds-heart {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+            transform: rotate(45deg);
+            transform-origin: 40px 40px;
+        }
+        
+        .lds-heart div {
+            top: 32px;
+            left: 32px;
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: #00fa9a;
+            animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .lds-heart div:after,
+        .lds-heart div:before {
+            content: " ";
+            position: absolute;
+            display: block;
+            width: 32px;
+            height: 32px;
+            background: #00fa9a;
+        }
+        
+        .lds-heart div:before {
+            left: -24px;
+            border-radius: 50% 0 0 50%;
+        }
+        
+        .lds-heart div:after {
+            top: -24px;
+            border-radius: 50% 50% 0 0;
+        }
+        
+        @keyframes lds-heart {
+            0% {
+                transform: scale(0.95);
+            }
+            5% {
+                transform: scale(1.1);
+            }
+            39% {
+                transform: scale(0.85);
+            }
+            45% {
+                transform: scale(1);
+            }
+            60% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(0.9);
+            }
+        }
+        /*
+        // LOADING SPINNER END
+        */
         
         .logo {
             width: 150px;
@@ -385,10 +455,11 @@
         }
         
         .content {
-            margin: 0 auto;
-            background-color: white;
             padding: 3rem;
+            margin: 0 auto;
             width: 70%;
+            background-color: white;
+            border-radius: 10px;
         }
         
         .home__article {
@@ -1358,13 +1429,27 @@
             width: 20rem;
             height: 20rem;
         }
+        
+        .fastclinic__logo {
+            transform: scale(0.8);
+        }
         /************************************************************************************************************************ 
-                                                STYLES FOR MOBILE DEVICES, TABLETS, & MINI-LAPTOPS
+                                                STYLES FOR MOBILE DEVICES & TABLETS
             *************************************************************************************************************************/
         
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 767px) {
+            button,
+            input[type='submit'] {
+                width: 100% !important;
+                padding: 1rem !important;
+            }
             nav>div>ul>div>li>a {
                 white-space: nowrap!important;
+            }
+            article>section>h1 {
+                width: 100% !important;
+                font-size: 1rem !important;
+                font-weight: bold !important;
             }
             #alert-div {
                 width: 100%!important;
@@ -1397,6 +1482,10 @@
                 width: 100%!important;
                 margin-top: 0.2rem;
             }
+            #header>small {
+                text-align: center;
+                font-size: .8rem;
+            }
             #accordion__button {
                 font-size: 0.8rem!important;
             }
@@ -1413,9 +1502,13 @@
             }
             .form_div {
                 width: 100%;
+                padding: 2rem .5rem 2rem .5rem;
             }
             .header-h1-text {
+                display: block;
+                margin: 0 auto;
                 font-size: 0.8rem;
+                font-weight: bold;
             }
             .dashboard-buttons-div {
                 width: 100%;
@@ -1459,6 +1552,9 @@
             .profile {
                 width: 100%;
             }
+            .profile-details {
+                padding: 0;
+            }
             .profile-details-paragraph {
                 display: block;
                 text-align: center;
@@ -1466,6 +1562,20 @@
             .profile_procedures {
                 width: 100%;
                 font-size: 0.8rem!important;
+            }
+            .procedure_input {
+                width: 85%;
+            }
+            .procedure_input_button {
+                padding: 0.5rem !important;
+                width: 15% !important;
+            }
+            .procedure {
+                width: 85% !important;
+            }
+            .procedure_button {
+                width: 15% !important;
+                padding: 0.5rem !important;
             }
             .departments {
                 width: 100%;
@@ -1484,6 +1594,7 @@
             }
             .holder_div {
                 width: 100%;
+                padding: 2rem .5rem 2rem .5rem;
             }
             .deactivate-account {
                 width: 100%;
@@ -1522,13 +1633,26 @@
             .patient-info {
                 white-space: nowrap;
             }
+            .paragraph__span {
+                width: 100%;
+                max-height: 20vh;
+                font-size: 0.8rem;
+            }
             .logo {
                 width: 5rem;
                 height: 5rem;
             }
+            .privacy {
+                width: 100%;
+                padding: 1rem;
+                text-align: justify;
+            }
             .image__404 {
                 width: 50vw;
                 height: 30vh;
+            }
+            .fastclinic__logo {
+                transform: scale(0.4);
             }
         }
     </style>
