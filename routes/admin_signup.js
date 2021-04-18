@@ -1,11 +1,28 @@
 var express = require("express"),
     passport = require("passport"),
     router = express.Router(),
-    User = require("../models/user");
+    User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '';
 
 // INDEX(GET): ADMIN SIGNUP PAGE/ADMIN
 router.get("/admin/register", function(req, res) {
-    res.render("admin/register");
+    // Fetch all hospitals
+    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+        // Fetch all referrers
+        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+            // Fetch all patients
+            Patient.find({}, function(err, patients) {
+                // Update counts
+                hospitalCount = hospitals.length;
+                referrerCount = referrers.length;
+                patientCount = patients.length;
+                return res.render("admin/register", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+            });
+        });
+    });
 });
 
 // CREATE(POST): SIGNUP LOGIC/ADMIN

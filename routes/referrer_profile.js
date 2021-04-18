@@ -1,6 +1,10 @@
 var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '',
     middleware = require("../middleware"),
     functions = require("../functions"),
     date = new Date(),
@@ -11,7 +15,20 @@ router.get('/referrers/:username/update', middleware.isUserLoggedIn, function(re
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                res.render("referrers/details");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("referrers/details", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
                 return;
             }
             req.flash("error", "Please login or create an account.");
@@ -74,7 +91,20 @@ router.get('/referrers/:username/profile', middleware.isUserLoggedIn, middleware
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                res.render("referrers/profile");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("referrers/profile", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
                 return;
             }
             req.flash("error", "Please login or create an account.");
@@ -92,7 +122,20 @@ router.get("/referrers/:username/profile/edit", middleware.isUserLoggedIn, middl
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                res.render("referrers/editProfile");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("referrers/editProfile", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
                 return;
             }
             req.flash("error", "Please login or create an account.");
@@ -137,8 +180,7 @@ router.put('/referrers/:username/update', middleware.isUserLoggedIn, middleware.
                 return;
             }
             req.flash("error", "Please login or create an account.");
-            res.redirect("/");
-            return;
+            return res.redirect("/");
         }
         req.flash("error", "Oops! Something isn't quite right.")
         res.redirect("back");

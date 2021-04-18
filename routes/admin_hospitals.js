@@ -1,6 +1,10 @@
 var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '',
     RemovedUser = require("../models/removedUser"),
     middleware = require("../middleware"),
     functions = require("../functions"),
@@ -9,12 +13,19 @@ var express = require("express"),
 
 // SHOW(GET): ALL HOSPITALS/ADMIN
 router.get("/admin/hospitals", middleware.isAdminLoggedIn, middleware.isAdminAuthorized, function(req, res) {
+    // Fetch all hospitals
     User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-        if (err) {
-            req.flash("error", "Oops! Something isn't quite right.");
-            return res.redirect("back");
-        }
-        res.render("admin/hospitals", { hospitals: hospitals });
+        // Fetch all referrers
+        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+            // Fetch all patients
+            Patient.find({}, function(err, patients) {
+                // Update counts
+                hospitalCount = hospitals.length;
+                referrerCount = referrers.length;
+                patientCount = patients.length;
+                return res.render("admin/hospitals", { hospitals: hospitals, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+            });
+        });
     });
 });
 
@@ -25,7 +36,20 @@ router.get("/admin/hospitals/:username", middleware.isAdminLoggedIn, middleware.
             req.flash("error", "Oops! Something isn't quite right.");
             return res.redirect("back");
         }
-        res.render("admin/showHospital", { hospital: hospital });
+        // Fetch all hospitals
+        User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+            // Fetch all referrers
+            User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                // Fetch all patients
+                Patient.find({}, function(err, patients) {
+                    // Update counts
+                    hospitalCount = hospitals.length;
+                    referrerCount = referrers.length;
+                    patientCount = patients.length;
+                    return res.render("admin/showHospital", { hospital: hospital, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                });
+            });
+        });
     });
 });
 

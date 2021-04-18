@@ -1,6 +1,10 @@
 var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '',
     middleware = require("../middleware"),
     functions = require("../functions"),
     date = new Date(),
@@ -12,7 +16,21 @@ router.get("/hospitals/:username/details", middleware.isUserLoggedIn, function(r
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                return res.render("hospitals/createProfile");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("hospitals/createProfile", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
+                return;
             }
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
@@ -80,7 +98,21 @@ router.get('/hospitals/:username/profile', middleware.isUserLoggedIn, middleware
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                return res.render("hospitals/profile");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("hospitals/profile", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
+                return;
             }
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
@@ -95,7 +127,20 @@ router.get("/hospitals/:username/profile/edit", middleware.isUserLoggedIn, middl
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                res.render("hospitals/editProfile");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("hospitals/editProfile", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
                 return;
             }
             req.flash("error", "Please login or create an account.");

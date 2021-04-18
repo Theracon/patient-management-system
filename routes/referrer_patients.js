@@ -2,6 +2,9 @@ var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
     Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '',
     uniqid = require("uniqid"),
     middleware = require("../middleware"),
     functions = require("../functions"),
@@ -14,12 +17,19 @@ router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middl
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                // Fetch all hospitals
                 User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-                    if (err) {
-                        req.flash("error", "Oops! Something isn;t quite right.");
-                        return res.redirect("back");
-                    }
-                    return res.render("referrers/newPatient", { hospitals: hospitals });
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("referrers/newPatient", { hospitals: hospitals, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
                 });
                 return;
             }
@@ -119,13 +129,26 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
 
 // SHOW(GET): PATIENT DETAILS/REFERRERS
 router.get("/referrers/:username/patients/:accession_number", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
-    // Find referrer
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
                 // Find patient
                 Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
-                    return res.render("referrers/patientDetails", { patient: patient });
+                    // Fetch all hospitals
+                    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                        // Fetch all referrers
+                        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                            // Fetch all patients
+                            Patient.find({}, function(err, patients) {
+                                // Update counts
+                                hospitalCount = hospitals.length;
+                                referrerCount = referrers.length;
+                                patientCount = patients.length;
+                                return res.render("referrers/patientDetails", { patient: patient, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                            });
+                        });
+                    });
+                    return;
                 });
                 return;
             }
@@ -154,7 +177,21 @@ router.get("/referrers/:username/patients/:accession_number/edit", middleware.is
                             req.flash("error", "Oops! Something isn't quite right.")
                             return res.redirect("back");
                         }
-                        return res.render("referrers/editPatient", { user: user, patient: patient, hospitals: hospitals });
+                        // Fetch all hospitals
+                        User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                            // Fetch all referrers
+                            User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                                // Fetch all patients
+                                Patient.find({}, function(err, patients) {
+                                    // Update counts
+                                    hospitalCount = hospitals.length;
+                                    referrerCount = referrers.length;
+                                    patientCount = patients.length;
+                                    return res.render("referrers/editPatient", { user: user, patient: patient, hospitals: hospitals, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                                });
+                            });
+                        });
+                        return;
                     });
                 });
                 return;
@@ -247,8 +284,20 @@ router.get("/referrers/:username/patients", middleware.isUserLoggedIn, middlewar
             if (user) {
                 // Extract referrer's patients array and save it to a variable
                 var patients = user.referrerDetails.patients;
-                // Render patients template, pass in referrer's patients array
-                res.render("referrers/patients", { patients: patients });
+                // fetch all patients
+                Patient.find({}, function(err, allPatients) {
+                    // Fetch all hospitals
+                    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                        // Fetch all referrers
+                        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = allPatients.length;
+                            return res.render("referrers/patients", { patients: patients, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
                 return;
             }
             req.flash("error", "Please login or create an account.");

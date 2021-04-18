@@ -1,3 +1,45 @@
+<!--PATIENT COUNT-->
+<footer class="bg-light text-black pt-5 pb-4" id="footer">
+    <div class="container text-center text-md-left">
+        <div class="row text-center text-md-left">
+            <p class="text-black text-uppercase text-bold display-6 text-muted lh-1" style="letter-spacing: 5px;">Since 2021</p>
+            <p class="text-muted lh-1">Our partners and us have done an amazing job at bringing patients a step closer to receiving quality healthcare.</p>
+        </div>
+
+        <br><br>
+
+        <div class="row text-center text-md-left">
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <div class="info__circle bg-warning">
+                    <h1 class="display-1 text-white">
+                        <strong><%= patientCount %></strong>
+                    </h1>
+                </div>
+                <h5 class="text-uppercase mb-4 font-weight-bold text-muted display-6">Patients</h5>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <div class="info__circle bg-warning">
+                    <h1 class="display-1 text-white">
+                        <strong><%= referrerCount %></strong>
+                    </h1>
+                </div>
+                <h5 class="text-uppercase mb-4 font-weight-bold text-muted display-6">Doctors</h5>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <div class="info__circle bg-warning">
+                    <h1 class="display-1 text-white">
+                        <strong><%= hospitalCount %></strong>
+                    </h1>
+                </div>
+                <h5 class="text-uppercase mb-4 font-weight-bold text-muted display-6">Hospitals</h5>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!--FOOTER-->
 <footer class="bg-dark text-white pt-5 pb-4" id="footer">
     <div class="container text-center text-md-left">
         <div class="row text-center text-md-left">
@@ -26,22 +68,24 @@
 
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h5 class="text-uppercase mb-4 font-weight-bold text-success display-6">Contact</h5>
-                <p class="text-uppercase"><i class="fas fa-map-marker-alt mr-3"></i> Abuja Nigeria 900107</p>
+                <p class="text-uppercase"><i class="fas fa-map-marker-alt mr-3"></i> Suncity, Abuja 900107</p>
                 <p class="text-uppercase"><i class="fas fa-envelope mr-3"></i> hello@myfastclinic.com</p>
-                <p class="text-uppercase"><i class="fas fa-phone mr-3"></i> 234 (0) 806-019-4496</p>
-                <p class="text-uppercase"><i class="fas fa-phone mr-3"></i> 234 (0) 913-228-3783</p>
+                <p><i class="fas fa-phone mr-3"></i> 234 (0) 806-019-4496</p>
+                <p><i class="fas fa-phone mr-3"></i> 234 (0) 913-228-3783</p>
             </div>
         </div>
+        <br><br><br>
 
         <hr class="mb-4">
 
         <div class="row align-items-center">
             <div class="col-md-7 col-lg-8">
-                <p>
+                <p class="text-uppercase" style="font-size: 0.8rem;">
                     &copy; 2021
                     <a href="/home" style="text-decoration: none;">
-                        <strong class="text-success text-uppercase">Fastclinic</strong>
+                        <strong class="text-success">Fastclinic.</strong>
                     </a>
+                    All rights reserved.
                 </p>
             </div>
 

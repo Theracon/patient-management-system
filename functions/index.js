@@ -1,5 +1,11 @@
+var moment = require("moment"),
+    User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '';
+
 var functions = {};
-var moment = require("moment");
 
 // SET REFERRER THUMBNAIL IMAGE
 functions.setReferrerTitle = function() {
@@ -10,13 +16,13 @@ functions.setReferrerTitle = function() {
     var regexOne = /doctor/i;
     var regexTwo = /dr/i;
     var regexThree = /dr./i;
-    
+
     if (
         regexOne.test(word) == true ||
         regexTwo.test(word) == true ||
         regexThree.test(word) == true
     ) { return docImage; }
-    
+
     return otherImage;
 }
 
@@ -36,11 +42,12 @@ functions.formatTime = function(date) {
     var ampm = hours >= 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
 }
 
+// FORMAT MESSAGE IN LIVE CHAT
 functions.formatMessage = function(username, text) {
     return {
         username: username,

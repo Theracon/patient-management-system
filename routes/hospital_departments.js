@@ -1,6 +1,10 @@
 var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '',
     middleware = require("../middleware"),
     functions = require("../functions"),
     date = new Date(),
@@ -11,7 +15,21 @@ router.get("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                return res.render("hospitals/createDepartments");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("hospitals/createDepartments", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
+                return;
             }
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
@@ -61,7 +79,20 @@ router.get("/hospitals/:username/departments/edit", middleware.isUserLoggedIn, m
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                res.render("hospitals/editDepartments");
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("hospitals/editDepartments", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
                 return;
             }
             req.flash("error", "Please login or create an account.");

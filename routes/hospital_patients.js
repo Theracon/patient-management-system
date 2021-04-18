@@ -2,6 +2,9 @@ var express = require("express"),
     router = express.Router(),
     User = require("../models/user"),
     Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '',
     middleware = require("../middleware");
 
 // SHOW(GET): ALL PATIENTS/HOSPITALS
@@ -9,10 +12,21 @@ router.get("/hospitals/:username/patients", middleware.isUserLoggedIn, middlewar
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                // Extract hospital's patients array and save it to a variable
-                var patients = user.hospitalDetails.patients;
-                // Render patients template, pass in hospital's patients array
-                return res.render("hospitals/patients", { patients: patients });
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        // Fetch all patients
+                        Patient.find({}, function(err, patients) {
+                            // Update counts
+                            hospitalCount = hospitals.length;
+                            referrerCount = referrers.length;
+                            patientCount = patients.length;
+                            return res.render("hospitals/patients", { patients: user.hospitalDetails.patients, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        });
+                    });
+                });
+                return;
             }
             req.flash("error", "Please login or create an account.");
             return res.redirect("/login");
@@ -22,13 +36,28 @@ router.get("/hospitals/:username/patients", middleware.isUserLoggedIn, middlewar
     });
 });
 
-// SHOW: A PATIENT'S DETAILS/HOSPITALS
+// SHOW(GET): A PATIENT'S DETAILS/HOSPITALS
 router.get("/hospitals/:username/patients/:accession_number", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                // Find patient
                 Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
-                    return res.render("hospitals/patientDetails", { patient: patient, user: user });
+                    // Fetch all hospitals
+                    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                        // Fetch all referrers
+                        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                            // Fetch all patients
+                            Patient.find({}, function(err, patients) {
+                                // Update counts
+                                hospitalCount = hospitals.length;
+                                referrerCount = referrers.length;
+                                patientCount = patients.length;
+                                return res.render("hospitals/patientDetails", { patient: patient, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                            });
+                        });
+                    });
+                    return;
                 });
                 return;
             }
