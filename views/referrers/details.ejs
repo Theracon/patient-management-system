@@ -12,7 +12,7 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="holder_div">
+                <div class="holder_div drop__shadow">
                     <form action="/referrers/<%= currentUser.username %>/update" method="POST">
                         <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
                             <!--Professional tile-->
@@ -63,7 +63,7 @@
                             <!--Buttons-->
                             <div class="button-group" id="button-group" style="width: 100%; margin-top: 5rem;">
                                 <input type="submit" class="button btn btn-success" value="Confirm" style="font-family: 'Poppins', sans-serif; width: 45%;">
-                                <button type="reset" class="border border-3 border-success button btn btn-outline-danger" style="font-family: 'Poppins', sans-serif; width: 45%;">Reset</button>
+                                <button type="reset" class="border border-3 border-success button btn btn-outline-success" style="font-family: 'Poppins', sans-serif; width: 45%;">Reset</button>
                             </div>
                         </div>
                     </form>

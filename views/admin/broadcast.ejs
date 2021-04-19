@@ -17,18 +17,18 @@
 
                 <div id="message">
                     <form action="/admin/broadcast" method="POST">
-                        <div class="small-content">
+                        <div class="small-content drop__shadow">
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="floatingSelect" name="recipient" required>
-                            <option value="-1" selected disabled> --- Select one --- </option>
+                            <option value="-1" selected disabled>Select one</option>
                             <option value="referrer">Referrers</option>
                             <option value="hospital">Hospitals</option>
                         </select>
-                                <label for="floatingSelect">Send broadcast message to:</label>
+                                <label for="floatingSelect">Send broadcast to</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <textarea class="form-control" id="content" name="content" style="height: 10rem;" required></textarea>
-                                <label for="content">Broadcast message...</label>
+                                <label for="content">Message</label>
                             </div>
                             <div class="button-group" style="width: 100%; margin-top: 3rem;">
                                 <input type="submit" class="button btn btn-success" value="Send" style="font-family: 'Poppins', sans-serif; width: 100%;">

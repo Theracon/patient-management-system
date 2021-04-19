@@ -22,7 +22,7 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="container small-content" style="width: 80%;">
+                <div class="container small-content drop__shadow">
                     <% if(patient.status === "unauthenticated") { %>
                         <p style="font-weight: bold;">Copy the patient accession code below and give it to your patient!</p>
                         <br>
@@ -39,7 +39,7 @@
                 </div>
                 <br>
 
-                <div class="row g-3 align-items-center justify-content-center holder_div">
+                <div class="row g-3 align-items-center justify-content-center holder_div drop__shadow">
                     <% function formatNumber(num) { %>
                         <% var numSplit, int, dec; %>
                             <% num = parseFloat(num, 10); %>

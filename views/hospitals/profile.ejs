@@ -36,7 +36,7 @@
                                                                 <br>
 
                                                                 <!--PROFILE-->
-                                                                <div class="profile">
+                                                                <div class="profile drop__shadow">
                                                                     <h1 class="header-h1-text text-center">Profile Overview</h1>
                                                                     <hr>
                                                                     <p class="profile-details-paragraph"><span class="lead">Institution type</span><br><span><%=currentUser.hospitalDetails.institution_type%></span></p>
@@ -65,7 +65,7 @@
                                                                 </div>
                                                                 <br>
 
-                                                                <div class="profile">
+                                                                <div class="profile drop__shadow">
                                                                     <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
                                                                         <% var currentMonth = months[new Date().getMonth()] %>
                                                                             <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
@@ -88,12 +88,12 @@
 
                                                                 <!--DEPARTMENTS-->
                                                                 <% if(currentUser.hospitalDetails.departments.length > 0) { %>
-                                                                    <div class="departments overflow-auto">
+                                                                    <div class="departments overflow-auto drop__shadow">
                                                                         <h1 class="header-h1-text text-center">Departments</h1>
                                                                         <hr>
 
                                                                         <% currentUser.hospitalDetails.departments.forEach(function(department) { %>
-                                                                            <div class="department">
+                                                                            <div class="department drop__shadow">
                                                                                 <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
                                                                                 <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
                                                                                 <p class="profile-details-paragraph">
@@ -118,7 +118,7 @@
 
                                                                         <!--PROCEDURES-->
                                                                         <% if(currentUser.hospitalDetails.procedures.length > 0) { %>
-                                                                            <div class="profile_procedures">
+                                                                            <div class="profile_procedures drop__shadow">
                                                                                 <h1 class="header-h1-text text-center" style="width: 100%;">Procedures</h1>
                                                                                 <hr>
                                                                                 <br>

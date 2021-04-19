@@ -13,12 +13,12 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="form-wrap">
+                <div class="form-wrap drop__shadow">
                     <form action="/hospitals/<%=currentUser.username%>/departments" method="POST">
                         <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
                             <h1 class="header-h1-text text-center">Departments</h1>
                             <div id="departments">
-                                <div class="department">
+                                <div class="department drop__shadow">
                                     <!--Name-->
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="name" name="name" required>
@@ -92,6 +92,7 @@
 
             var div = document.createElement("div");
             div.classList.add("department");
+            div.classList.add("drop__shadow");
             div.innerHTML = `
             <!--Name-->
             <div class="form-floating mb-3">

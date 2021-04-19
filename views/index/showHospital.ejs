@@ -38,7 +38,7 @@
                                                         <br>
 
                                                         <!--PROFILE-->
-                                                        <div class="profile">
+                                                        <div class="profile drop__shadow">
                                                             <h1 class="header-h1-text text-center">Profile Overview</h1>
                                                             <hr>
                                                             <p class="profile-details-paragraph lh-1"><span class="lead">Institution type</span><br><span><%=hospital.hospitalDetails.institution_type%></span></p>
@@ -66,12 +66,12 @@
 
                                                         <!--DEPARTMENTS-->
                                                         <% if(hospital.hospitalDetails.departments.length > 0) { %>
-                                                            <div class="departments overflow-auto">
+                                                            <div class="departments overflow-auto drop__shadow">
                                                                 <h1 class="header-h1-text text-center">Departments</h1>
                                                                 <hr>
 
                                                                 <% hospital.hospitalDetails.departments.forEach(function(department) { %>
-                                                                    <div class="department">
+                                                                    <div class="department drop__shadow">
                                                                         <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
                                                                         <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
                                                                         <p class="profile-details-paragraph">
@@ -95,7 +95,7 @@
 
                                                                 <!--PROCEDURES-->
                                                                 <% if(hospital.hospitalDetails.procedures.length > 0) { %>
-                                                                    <div class="profile_procedures">
+                                                                    <div class="profile_procedures drop__shadow">
                                                                         <h1 class="header-h1-text text-center" style="width: 100%;">Procedures</h1>
                                                                         <hr>
                                                                         <br>

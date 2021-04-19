@@ -22,14 +22,14 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="deregister-content overflow-auto">
+                <div class="deregister-content overflow-auto drop__shadow">
                     <p class="text-center" style="font-family: 'Open Sans', sans-serif;">What can we do to resolve this?</p>
                     <p class="text-center" style="font-family: 'Open Sans', sans-serif;"></p>
                 </div>
 
                 <br><br>
 
-                <div class="deregister-action">
+                <div class="deregister-action drop__shadow">
                     <p class="text-center" style="font-family: 'Open Sans', sans serif;">Still want to deactivate? We'll miss you.</p>
                     <form action="/hospitals/<%=currentUser._id%>?_method=DELETE" method="POST">
                         <!--Name-->

@@ -22,7 +22,7 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="deregister-content overflow-auto">
+                <div class="deregister-content overflow-auto drop__shadow">
                     <p class="text-center" style="font-family: 'Open Sans', sans-serif;"><strong>What can we do to resolve this?</strong></p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas justo ligula, commodo non gravida nec, dapibus ac quam. Etiam cursus libero eget interdum pellentesque. Phasellus ex neque, pharetra vel placerat a, tristique at turpis.
                         Phasellus eget mi ipsum. Proin commodo, sapien elementum scelerisque euismod, orci ex volutpat felis, in varius urna erat vestibulum nisl. Nam auctor enim vel accumsan volutpat. Duis et risus sapien. Cras imperdiet in lorem in
@@ -35,7 +35,7 @@
 
                 <br><br>
 
-                <div class="deregister-action">
+                <div class="deregister-action drop__shadow">
                     <p class="text-center" style="font-family: 'Open Sans', sans serif;">Still want to deactivate? We'll miss you.</p>
                     <form action="/referrers/<%=currentUser._id%>?_method=DELETE" method="POST">
                         <!--Name-->

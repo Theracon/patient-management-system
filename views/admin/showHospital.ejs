@@ -30,41 +30,41 @@
                                                                 <br>
 
                                                                 <!--PROFILE-->
-                                                                <div class="profile">
+                                                                <div class="profile drop__shadow">
                                                                     <h1 class="header-h1-text text-center">Profile Overview</h1>
                                                                     <hr>
                                                                     <% var status = (hospital.role == 1) ? "Active" : "Not active" %>
-                                                                        <p class="profile-details-paragraph"><span class="lead">Status</span><br><span><%=status%></span></p>
-                                                                        <p class="profile-details-paragraph"><span class="lead">Institution type</span><br><span><%=hospital.hospitalDetails.institution_type%></span></p>
-                                                                        <p class="profile-details-paragraph"><span class="lead">Name</span><br><span><%=hospital.hospitalDetails.name%></span></p>
-                                                                        <p class="profile-details-paragraph"><span class="lead">Address</span><br><span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;"><%=hospital.hospitalDetails.address%></span></p>
-                                                                        <p class="profile-details-paragraph"><span class="lead">Emails</span><br><span class="text-wrap text-break lh-1 overflow-auto"><%=hospital.hospitalDetails.email%></span></p>
-                                                                        <p class="profile-details-paragraph"><span class="lead">Phone numbers</span><br><span class="text-wrap text-break lh-1 overflow-auto"><%=hospital.hospitalDetails.phone%></span></p>
+                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span><%=status%></span></p>
+                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Institution type</span><br><span><%=hospital.hospitalDetails.institution_type%></span></p>
+                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span overflow-auto"><%=hospital.hospitalDetails.name%></span></p>
+                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Address</span><br><span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;"><%=hospital.hospitalDetails.address%></span></p>
+                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Emails</span><br><span class="text-wrap text-break lh-1 overflow-auto"><%=hospital.hospitalDetails.email%></span></p>
+                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Phone numbers</span><br><span class="text-wrap text-break lh-1 overflow-auto"><%=hospital.hospitalDetails.phone%></span></p>
                                                                         <% if(hospital.hospitalDetails.website.length > 0) { %>
-                                                                            <p class="profile-details-paragraph"><span class="lead">Website</span><br><span><%=hospital.hospitalDetails.website%></span></p>
+                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Website</span><br><span class="paragraph__span overflow-auto"><%=hospital.hospitalDetails.website%></span></p>
                                                                             <% } %>
                                                                                 <% if(hospital.hospitalDetails.cmd.length > 0) { %>
-                                                                                    <p class="profile-details-paragraph"><span class="lead">CMD</span><br><span><%=hospital.hospitalDetails.cmd%></span></p>
+                                                                                    <p class="profile-details-paragraph lh-1"><span class="lead">CMD</span><br><span class="paragraph__span overflow-auto"><%=hospital.hospitalDetails.cmd%></span></p>
                                                                                     <% } %>
                                                                                         <% if(hospital.hospitalDetails.ceo.length > 0) { %>
-                                                                                            <p class="profile-details-paragraph"><span class="lead">CEO</span><br><span><%=hospital.hospitalDetails.ceo%></span></p>
+                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">CEO</span><br><span class="paragraph__span overflow-auto"><%=hospital.hospitalDetails.ceo%></span></p>
                                                                                             <% } %>
                                                                                                 <% if(hospital.hospitalDetails.consultants >= 0) { %>
-                                                                                                    <p class="profile-details-paragraph"><span class="lead">Number of consultants</span><br><span><%=hospital.hospitalDetails.consultants%></span></p>
+                                                                                                    <p class="profile-details-paragraph lh-1"><span class="lead">Number of consultants</span><br><span><%=hospital.hospitalDetails.consultants%></span></p>
                                                                                                     <% } %>
                                                                                                         <% if(hospital.hospitalDetails.doctors >= 0) { %>
-                                                                                                            <p class="profile-details-paragraph"><span class="lead">Number of doctors</span><br><span><%=hospital.hospitalDetails.doctors%></span></p>
+                                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Number of doctors</span><br><span><%=hospital.hospitalDetails.doctors%></span></p>
                                                                                                             <% } %>
 
                                                                 </div>
                                                                 <br>
 
-                                                                <div class="profile">
+                                                                <div class="profile drop__shadow">
                                                                     <h1 class="header-h1-text text-center">Account Information</h1>
                                                                     <hr>
                                                                     <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
                                                                         <% var currentMonth = months[new Date().getMonth()] %>
-                                                                            <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0, totalReferrerCommission, totalPlatformCommission, currentReferrerCommission, currentPlatformCommission; %>
+                                                                            <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0, totalReferrerCommission = 0, totalPlatformCommission = 0, currentReferrerCommission = 0, currentPlatformCommission = 0; %>
                                                                                 <% hospital.hospitalDetails.patients.forEach(function(patient) { %>
                                                                                     <% totalAmount += patient.amount_paid %>
                                                                                         <% totalCommission += patient.hospital_commission %>
@@ -77,25 +77,25 @@
                                                                                                                     <% currentPlatformCommission += patient.platform_commission %>
                                                                                                                         <% } %>
                                                                                                                             <% })%>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> revenue</span><br><span><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> commission</span><br><span><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> referrer commission</span><br><span><strike>N</strike> <%=formatNumber(currentReferrerCommission)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> platform commission</span><br><span><strike>N</strike> <%=formatNumber(currentPlatformCommission)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total revenue</span><br><span><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total commission</span><br><span><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total referrer commission</span><br><span><strike>N</strike> <%=formatNumber(totalReferrerCommission)%></span></p>
-                                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total platform commission</span><br><span><strike>N</strike> <%=formatNumber(totalPlatformCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> referrer commission</span class="paragraph__span overflow-auto"><br><span><strike>N</strike> <%=formatNumber(currentReferrerCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> platform commission</span class="paragraph__span overflow-auto"><br><span><strike>N</strike> <%=formatNumber(currentPlatformCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total referrer commission</span class="paragraph__span overflow-auto"><br><span><strike>N</strike> <%=formatNumber(totalReferrerCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total platform commission</span class="paragraph__span overflow-auto"><br><span><strike>N</strike> <%=formatNumber(totalPlatformCommission)%></span></p>
                                                                 </div>
                                                                 <br>
 
                                                                 <!--DEPARTMENTS-->
                                                                 <% if(hospital.hospitalDetails.departments.length > 0) { %>
-                                                                    <div class="departments overflow-auto">
+                                                                    <div class="departments overflow-auto drop__shadow">
                                                                         <h1 class="header-h1-text text-center">Departments</h1>
                                                                         <hr>
 
                                                                         <% hospital.hospitalDetails.departments.forEach(function(department) { %>
-                                                                            <div class="department">
+                                                                            <div class="department drop__shadow">
                                                                                 <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
                                                                                 <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
                                                                                 <p class="profile-details-paragraph">
@@ -119,7 +119,7 @@
 
                                                                         <!--PROCEDURES-->
                                                                         <% if(hospital.hospitalDetails.procedures.length > 0) { %>
-                                                                            <div class="profile_procedures">
+                                                                            <div class="profile_procedures drop__shadow">
                                                                                 <h1 class="header-h1-text text-center" style="width: 100%;">Procedures</h1>
                                                                                 <hr>
                                                                                 <br>

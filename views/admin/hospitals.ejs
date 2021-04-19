@@ -15,7 +15,7 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="hospitals">
+                <div class="hospitals drop__shadow">
                     <% hospitals.forEach(function(hospital) { %>
                         <% if(hospital.role >= 1) { %>
                             <button type="button" class="btn btn-success hospital_button" onclick="window.location.href='/admin/hospitals/<%= hospital.username %>';">
