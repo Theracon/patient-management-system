@@ -18,21 +18,22 @@
                 <div class="referrers drop__shadow">
                     <% referrers.forEach(function(referrer) { %>
                         <% if(referrer.role == 1) { %>
-
                             <button type="button" class="btn btn-success referrer_button" onclick="window.location.href='/admin/referrers/<%= referrer.username %>';">
                                 <span style="height: 50%;"><%= referrer.referrerDetails.name %> </span>
                                 <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 50%;"><%= referrer.referrerDetails.institution %></span>
                             </button>
-
-                            <% } else if(referrer.role < 1) { %>
-
+                            <% } else if(referrer.role == 0) { %>
                                 <button type="button" class="btn btn-outline-success referrer_button" onclick="window.location.href='/admin/referrers/<%= referrer.username %>';">
-                                    <span style="height: 50%;"><%= referrer.referrerDetails.name %> </span>
-                                    <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 50%;"><%= referrer.referrerDetails.institution %></span>
-                                </button>
-
-                                <% } %>
-                                    <% }); %>
+                                <span style="height: 50%;"><%= referrer.referrerDetails.name %> </span>
+                                <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 50%;"><%= referrer.referrerDetails.institution %></span>
+                            </button>
+                                <% } else if(referrer.role == -1) { %>
+                                    <button type="button" class="btn btn-warning referrer_button" onclick="window.location.href='/admin/referrers/<%= referrer.username %>';">
+                                <span style="height: 50%;"><%= referrer.referrerDetails.name %> </span>
+                                <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.8rem; height: 50%;"><%= referrer.referrerDetails.institution %></span>
+                            </button>
+                                    <% } %>
+                                        <% }); %>
                 </div>
         </div>
         <br><br><br><br><br>

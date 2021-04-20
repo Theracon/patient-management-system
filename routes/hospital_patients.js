@@ -12,17 +12,18 @@ router.get("/hospitals/:username/patients", middleware.isUserLoggedIn, middlewar
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                var patients = user.hospitalDetails.patients;
+
                 // Fetch all hospitals
                 User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    hospitalCount = hospitals.length;
                     // Fetch all referrers
                     User.find({ typeOfUser: "referrer" }, function(err, referrers) {
-                        // Fetch all patients
-                        Patient.find({}, function(err, patients) {
-                            // Update counts
-                            hospitalCount = hospitals.length;
-                            referrerCount = referrers.length;
-                            patientCount = patients.length;
-                            return res.render("hospitals/patients", { patients: user.hospitalDetails.patients, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                        referrerCount = referrers.length;
+                        Patient.find({}, function(err, allPatients) {
+                            patientCount = allPatients.length;
+                            console.log(patientCount);
+                            return res.render("hospitals/patients", { patients, hospitalCount, referrerCount, patientCount });
                         });
                     });
                 });

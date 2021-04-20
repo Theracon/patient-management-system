@@ -172,11 +172,8 @@ router.get("/referrers/:username/patients/:accession_number/edit", middleware.is
                         req.flash("error", "Oops! Something isn't quite right.")
                         return res.redirect("back");
                     }
+
                     Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
-                        if (err) {
-                            req.flash("error", "Oops! Something isn't quite right.")
-                            return res.redirect("back");
-                        }
                         // Fetch all hospitals
                         User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
                             // Fetch all referrers
@@ -187,11 +184,10 @@ router.get("/referrers/:username/patients/:accession_number/edit", middleware.is
                                     hospitalCount = hospitals.length;
                                     referrerCount = referrers.length;
                                     patientCount = patients.length;
-                                    return res.render("referrers/editPatient", { user: user, patient: patient, hospitals: hospitals, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                                    return res.render("referrers/editPatient", { patient: patient, hospitals: hospitals, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
                                 });
                             });
                         });
-                        return;
                     });
                 });
                 return;
@@ -284,17 +280,17 @@ router.get("/referrers/:username/patients", middleware.isUserLoggedIn, middlewar
             if (user) {
                 // Extract referrer's patients array and save it to a variable
                 var patients = user.referrerDetails.patients;
-                // fetch all patients
-                Patient.find({}, function(err, allPatients) {
-                    // Fetch all hospitals
-                    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-                        // Fetch all referrers
-                        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
-                            // Update counts
-                            hospitalCount = hospitals.length;
-                            referrerCount = referrers.length;
+
+                // Fetch all hospitals
+                User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+                    hospitalCount = hospitals.length;
+                    // Fetch all referrers
+                    User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+                        referrerCount = referrers.length;
+                        Patient.find({}, function(err, allPatients) {
                             patientCount = allPatients.length;
-                            return res.render("referrers/patients", { patients: patients, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                            console.log(patientCount);
+                            return res.render("referrers/patients", { patients, hospitalCount, referrerCount, patientCount });
                         });
                     });
                 });

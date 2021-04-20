@@ -17,20 +17,23 @@
 
                 <div class="hospitals drop__shadow">
                     <% hospitals.forEach(function(hospital) { %>
-                        <% if(hospital.role >= 1) { %>
+                        <% if(hospital.role == 1) { %>
                             <button type="button" class="btn btn-success hospital_button" onclick="window.location.href='/admin/hospitals/<%= hospital.username %>';">
                                 <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
                                 <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.6rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
                             </button>
-
-                            <% } else if(hospital.role < 1) { %>
+                            <% } else if(hospital.role < 1 && hospital.role != -1) { %>
                                 <button type="button" class="btn btn-outline-success hospital_button" onclick="window.location.href='/admin/hospitals/<%= hospital.username %>';">
-                                    <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
-                                    <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.6rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
-                                </button>
-
-                                <% } %>
-                                    <% }); %>
+                                <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
+                                <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.6rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
+                            </button>
+                                <% } else if(hospital.role == -1) { %>
+                                    <button type="button" class="btn btn-warning hospital_button" onclick="window.location.href='/admin/hospitals/<%= hospital.username %>';">
+                                <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
+                                <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.6rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
+                            </button>
+                                    <% } %>
+                                        <% }); %>
                 </div>
                 <br><br><br><br><br>
         </div>

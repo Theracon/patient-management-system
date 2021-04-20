@@ -54,14 +54,14 @@
                                                                                                             </div>
                                                                                                             <br><br>
                                                                                                             <div class="banner" id="banner">
-                                                                                                                <% var patientCount = 0; %>
+                                                                                                                <% var patientNumber = 0; %>
                                                                                                                     <% var authPatientCount = 0; %>
 
                                                                                                                         <% var obj = {}; %>
 
                                                                                                                             <% patients.forEach(function(patient) { %>
                                                                                                                                 <% if(patient.referral_month == months[date.getMonth()]) { %>
-                                                                                                                                    <% patientCount++ %>
+                                                                                                                                    <% patientNumber++ %>
 
                                                                                                                                         <% if(patient.status == "authenticated") { %>
                                                                                                                                             <% authPatientCount++ %>
@@ -69,13 +69,13 @@
                                                                                                                                                     <% } %>
                                                                                                                                                         <% }); %>
 
-                                                                                                                                                            <% obj = { patientCount: patientCount, authPatientCount: authPatientCount }; %>
+                                                                                                                                                            <% obj = { patientNumber: patientNumber, authPatientCount: authPatientCount }; %>
 
-                                                                                                                                                                <p class="lh-1 wallet-detail"><span>All patients in <%= months[date.getMonth()] %></span><span class="lead"><%=obj.patientCount%> </span></p>
+                                                                                                                                                                <p class="lh-1 wallet-detail"><span>All patients in <%= months[date.getMonth()] %></span><span class="lead"><%=obj.patientNumber%> </span></p>
                                                                                                                                                                 <hr>
                                                                                                                                                                 <p class="lh-1 wallet-detail"><span>Authenticated patients</span><span class="lead"><%=obj.authPatientCount%> </span></p>
                                                                                                                                                                 <hr>
-                                                                                                                                                                <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
+                                                                                                                                                                <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span><span class="lead"><%=parseInt(obj.patientNumber, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
                                                                                                             </div>
 
                                                                                                         </div>
@@ -215,14 +215,14 @@
     `;
 
         var monthBannerMarkup = `
-        <% var patientCount = 0; %>
+        <% var patientNumber = 0; %>
         <% var authPatientCount = 0; %>
 
         <% var obj = {}; %>
 
         <% patients.forEach(function(patient) { %>
             <% if(patient.referral_month == months[date.getMonth()]) { %>
-                <% patientCount++ %>
+                <% patientNumber++ %>
                 
                 <% if(patient.status == "authenticated") { %>
                     <% authPatientCount++ %>
@@ -230,13 +230,13 @@
             <% } %>
         <% }); %>
             
-        <% obj = { patientCount: patientCount, authPatientCount: authPatientCount }; %>
+        <% obj = { patientNumber: patientNumber, authPatientCount: authPatientCount }; %>
 
-        <p class="lh-1 wallet-detail"><span>All patients in <%= months[date.getMonth()] %></span><span class="lead"><%=obj.patientCount%> </span></p>
+        <p class="lh-1 wallet-detail"><span>All patients in <%= months[date.getMonth()] %></span><span class="lead"><%=obj.patientNumber%> </span></p>
             <hr>
         <p class="lh-1 wallet-detail"><span>Authenticated patients</span><span class="lead"><%=obj.authPatientCount%> </span></p>
             <hr>
-        <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span><span class="lead"><%=parseInt(obj.patientCount, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
+        <p class="lh-1 wallet-detail"><span>Unauthenticated patients</span><span class="lead"><%=parseInt(obj.patientNumber, 10) - parseInt(obj.authPatientCount, 10)%> </span></p>
     `;
 
         var banner = document.getElementById("banner");
