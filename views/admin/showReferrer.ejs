@@ -14,60 +14,112 @@
 
             <%- include("../partials/alert.ejs") %>
                 <br>
-
-                <div class="profile drop__shadow">
-                    <h1 class="header-h1-text text-center">Profile Overview</h1>
-                    <hr>
-                    <p class="profile-details-paragraph"><span class="lead">Name</span><br><span class=""><%=referrer.referrerDetails.title%> <%=referrer.referrerDetails.name%></span></p>
-                    <p class="profile-details-paragraph"><span class="lead">Institution of practice</span><br><span><%=referrer.referrerDetails.institution%></span></p>
-                    <p class="profile-details-paragraph"><span class="lead">Address of Institution</span><br><span class="text-wrap text-break lh-1 overflow-auto   " style="font-size: 0.8rem;"><%=referrer.referrerDetails.address%></span></p>
-                    <p class="profile-details-paragraph"><span class="lead">Phone number</span><br><span><%=referrer.referrerDetails.phone%></span></p>
-                    <p class="profile-details-paragraph"><span class="lead">Account number</span><br><span><%=referrer.referrerDetails.ac_number%></span></p>
-                    <p class="profile-details-paragraph"><span class="lead">Account name</span><br><span><%=referrer.referrerDetails.ac_name%></span></p>
-                    <p class="profile-details-paragraph"><span class="lead">Bank<br></span><span><%=referrer.referrerDetails.bank%></span></p>
-                </div>
-
-                <br>
-
-                <div class="profile drop__shadow">
-                    <h1 class="header-h1-text text-center">Account Information</h1>
-                    <hr>
-                    <% function formatNumber(num) { %>
-                        <% var numSplit, int, dec; %>
-                            <% num = parseFloat(num, 10); %>
-                                <% num = num.toFixed(2); %>
-                                    <% numSplit = num.split("."); %>
-                                        <% int = numSplit[0]; %>
-                                            <% if(int.length > 3) { %>
-                                                <% int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3); %>
+                <% var status = '' ; %>
+                    <% if(referrer.role == 1) { %>
+                        <% status = "Active" ; %>
+                            <% } else if(referrer.role == -1) { %>
+                                <% status = "Suspended" ; %>
+                                    <% } else if(referrer.role == 0) { %>
+                                        <% status = "Pending" ; %>
+                                            <% } else { %>
+                                                <% status = "Incomplete profile"; %>
                                                     <% } %>
-                                                        <% dec = numSplit[1]; %>
-                                                            <% return int + "." + dec; %>
-                                                                <% } %>
-                                                                    <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
-                                                                        <% var currentMonth = months[new Date().getMonth()] %>
-                                                                            <% var currentCommission = 0, totalCommission = 0; %>
-                                                                                <% referrer.referrerDetails.patients.forEach(function(patient) { %>
-                                                                                    <% totalCommission += patient.referrer_commission %>
-                                                                                        <% if(patient.authentication_month == currentMonth) { %>
-                                                                                            <% currentCommission += patient.referrer_commission %>
-                                                                                                <% } %>
-                                                                                                    <% })%>
-                                                                                                        <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> commission</span><br><span><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                        <p class="profile-details-paragraph"><span class="lead">Total commission</span><br><span><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
-                </div>
+                                                        <div class="profile drop__shadow">
+                                                            <h1 class="header-h1-text text-center">Profile Overview</h1>
+                                                            <hr>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span><%=status%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Name</span><br><span class=""><%=referrer.referrerDetails.title%> <%=referrer.referrerDetails.name%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Institution of practice</span><br><span><%=referrer.referrerDetails.institution%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Address of Institution</span><br><span class="text-wrap text-break lh-1 overflow-auto   " style="font-size: 0.8rem;"><%=referrer.referrerDetails.address%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Phone number</span><br><span><%=referrer.referrerDetails.phone%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Account number</span><br><span><%=referrer.referrerDetails.ac_number%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Account name</span><br><span><%=referrer.referrerDetails.ac_name%></span></p>
+                                                            <p class="profile-details-paragraph"><span class="lead">Bank<br></span><span><%=referrer.referrerDetails.bank%></span></p>
+                                                        </div>
 
-                <br>
-                <div class="deactivate-account">
-                    <br>
-                    <h3 class="text-center">Remove Referrer</h3>
-                    <hr>
-                    <br><br>
-                    <form action="/admin/referrers/<%=referrer._id%>?_method=DELETE" method="POST">
-                        <button type="submit" class="btn btn-lg btn-danger" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Remove Referrer</button><br>
-                    </form>
-                </div>
-                <br><br><br><br><br>
+                                                        <br>
+
+                                                        <div class="profile drop__shadow">
+                                                            <h1 class="header-h1-text text-center">Account Information</h1>
+                                                            <hr>
+                                                            <% function formatNumber(num) { %>
+                                                                <% var numSplit, int, dec; %>
+                                                                    <% num = parseFloat(num, 10); %>
+                                                                        <% num = num.toFixed(2); %>
+                                                                            <% numSplit = num.split("."); %>
+                                                                                <% int = numSplit[0]; %>
+                                                                                    <% if(int.length > 3) { %>
+                                                                                        <% int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3); %>
+                                                                                            <% } %>
+                                                                                                <% dec = numSplit[1]; %>
+                                                                                                    <% return int + "." + dec; %>
+                                                                                                        <% } %>
+                                                                                                            <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
+                                                                                                                <% var currentMonth = months[new Date().getMonth()] %>
+                                                                                                                    <% var currentCommission = 0, totalCommission = 0; %>
+                                                                                                                        <% referrer.referrerDetails.patients.forEach(function(patient) { %>
+                                                                                                                            <% totalCommission += patient.referrer_commission %>
+                                                                                                                                <% if(patient.authentication_month == currentMonth) { %>
+                                                                                                                                    <% currentCommission += patient.referrer_commission %>
+                                                                                                                                        <% } %>
+                                                                                                                                            <% })%>
+                                                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> commission</span><br><span><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
+                                                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total commission</span><br><span><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+                                                        </div>
+                                                        <br>
+
+                                                        <% if(referrer.role == 0) { %>
+                                                            <!--ACTIVATE ACCOUNT-->
+                                                            <div class="profile drop__shadow">
+                                                                <br>
+                                                                <h3 class="text-center">Activate Referrer</h3>
+                                                                <hr>
+                                                                <br><br>
+                                                                <form action="/admin/referrers/<%=referrer.username%>/activate?_method=PUT" method="POST">
+                                                                    <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Activate Referrer</button>
+                                                                </form>
+                                                            </div>
+                                                            <br>
+                                                            <% } %>
+
+                                                                <% if(referrer.role != -1) { %>
+                                                                    <!--SUSPEND ACCOUNT-->
+                                                                    <div class="profile bg-warning">
+                                                                        <br>
+                                                                        <h3 class="text-center">Suspend Referrer</h3>
+                                                                        <hr>
+                                                                        <br><br>
+                                                                        <form action="/admin/referrers/<%=referrer.username%>/suspend?_method=PUT" method="POST">
+                                                                            <button type="submit" class="btn btn-lg btn-light" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Suspend Referrer</button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <br>
+                                                                    <% } %>
+
+                                                                        <% if(referrer.role == -1) { %>
+                                                                            <!--RECALL ACCOUNT-->
+                                                                            <div class="profile drop__shadow">
+                                                                                <br>
+                                                                                <h3 class="text-center">Recall Referrer</h3>
+                                                                                <hr>
+                                                                                <br><br>
+                                                                                <form action="/admin/referrers/<%=referrer.username%>/activate?_method=PUT" method="POST">
+                                                                                    <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Recall Referrer</button>
+                                                                                </form>
+                                                                            </div>
+                                                                            <br>
+                                                                            <% } %>
+
+                                                                                <div class="deactivate-account">
+                                                                                    <br>
+                                                                                    <h3 class="text-center">Remove Referrer</h3>
+                                                                                    <hr>
+                                                                                    <br><br>
+                                                                                    <form action="/admin/referrers/<%=referrer._id%>?_method=DELETE" method="POST">
+                                                                                        <button type="submit" class="btn btn-lg btn-danger" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Remove Referrer</button><br>
+                                                                                    </form>
+                                                                                </div>
+                                                                                <br><br><br><br><br>
         </div>
         <div class="space"></div>
     </div>

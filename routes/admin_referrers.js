@@ -53,6 +53,46 @@ router.get("/admin/referrers/:username", middleware.isAdminLoggedIn, middleware.
     });
 });
 
+// UPDATE(PUT): ACTIVATE REFERRER/ADMIN
+router.put("/admin/referrers/:username/activate", middleware.isAdminLoggedIn, middleware.isAdminAuthorized, function(req, res) {
+    User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
+        if (err) {
+            req.flash("error", "Oops! Something isn't quite right.");
+            res.redirect("back");
+        }
+        if (user) {
+            user.role = 1;
+            user.save(function(err, user) {
+                if (err) {
+                    req.flash("error", "Oops! Something isn't quite right.");
+                    res.redirect("back");
+                }
+                return res.redirect("/admin/referrers/" + user.username);
+            });
+        }
+    });
+});
+
+// UPDATE(PUT): SUSPEND REFERRER/ADMIN
+router.put("/admin/referrers/:username/suspend", middleware.isAdminLoggedIn, middleware.isAdminAuthorized, function(req, res) {
+    User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
+        if (err) {
+            req.flash("error", "Oops! Something isn't quite right.");
+            res.redirect("back");
+        }
+        if (user) {
+            user.role = -1;
+            user.save(function(err, user) {
+                if (err) {
+                    req.flash("error", "Oops! Something isn't quite right.");
+                    res.redirect("back");
+                }
+                return res.redirect("/admin/referrers/" + user.username);
+            });
+        }
+    });
+});
+
 // REMOVE(DELETE): DEACTIVATE REFERRER/ADMIN
 router.delete("/admin/referrers/:id", middleware.isAdminLoggedIn, middleware.isAdminAuthorized, function(req, res) {
     User.findOne({ typeOfUser: "referrer", _id: req.params.id }, function(err, user) {

@@ -24,26 +24,6 @@
 
                 <div class="form-content drop__shadow">
                     <form action="/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>?_method=PUT" method="POST">
-                        <!--List of hospital departments-->
-                        <div class="form-floating mb-3">
-                            <select class="form-select" id="department" name="department">
-                                <option value="-1" selected disabled>View list</option>
-                                <% hospitals.forEach(function(hospital, index) { %>
-                                    <% if(hospital.role==1) { %>
-                                        <optgroup label="<%= hospital.hospitalDetails.name %>">
-                                            <% hospital.hospitalDetails.departments.forEach(function(department, index) { %>
-                                                <option value="<%=department.name%>" disabled>
-                                                    <%=department.name%>
-                                                </option>
-                                                <% }); %>
-                                        </optgroup>
-                                        <% } %>
-                                            <% }); %>
-                            </select>
-                            <label for="department">Hospital departments</label>
-                            <i class="fas fa-exclamation-circle text-warning"></i>
-                            <small class="text-warning">Ensure your chosen referral institution can render required investigations.</small>
-                        </div>
                         <!--Select hospital-->
                         <div class="form-floating mb-3">
                             <select class="form-select" id="hospital" name="hospital" required>
@@ -57,6 +37,7 @@
                                             <% }); %>
                             </select>
                             <label for="hospital">Referral institution</label>
+                            <p class="lh-2"><a href="/hospitals" target="_blank">View list of hospitals</a> to see their departments and units.</p>
                         </div>
                         <!--Investigations-->
                         <div class="mb-3">
