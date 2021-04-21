@@ -227,6 +227,10 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                         patient.phone = req.body.phone;
                         patient.referral_time = functions.formatTime(date);
                         referral_month = months[date.getMonth()];
+                        patient.amount_paid = 0;
+                        patient.hospital_commission = 0;
+                        patient.referrer_commission = 0;
+                        patient.platform_commission = 0;
                         // Save updated patient
                         patient.save(function(err, patient) {
                             if (err) {
