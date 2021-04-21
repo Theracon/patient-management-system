@@ -22,7 +22,7 @@ router.get("/hospitals/:username/notifications", middleware.isUserLoggedIn, midd
                             hospitalCount = hospitals.length;
                             referrerCount = referrers.length;
                             patientCount = patients.length;
-                            return res.render("hospitals/notifications", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                            return res.render("hospitals/notifications", { hospitalCount, referrerCount, patientCount });
                         });
                     });
                 });
@@ -41,20 +41,19 @@ router.get("/hospitals/:username/notifications/:id", middleware.isUserLoggedIn, 
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
-                var notify;
-
+                var notify = {
+                    date: '1 January 2000',
+                    time: '00:00 AM',
+                    content: 'Sample data'
+                };
                 // Update hospital's unread notifications count and update status to "read"
-                user.hospitalDetails.notifications.forEach(function(notification) {
-                    if (notification._id == req.params.id && notification.status == "unread") {
-                        if (user.hospitalDetails.unread_notifications_count > 0) {
+                user.hospitalDetails.notifications.map(function(notification) {
+                    if (notification._id == req.params.id) {
+                        notify = notification;
+                        if (notification.status == "unread") {
+                            notification.status = "read";
                             user.hospitalDetails.unread_notifications_count--;
                         }
-                        notification.status = "read";
-                        notify = notification;
-                    } else if (notification._id == req.params.id && notification.status == "read") {
-                        notify = notification;
-                    } else {
-                        notify = notification;
                     }
                 });
                 // Save updated user
@@ -73,7 +72,7 @@ router.get("/hospitals/:username/notifications/:id", middleware.isUserLoggedIn, 
                                 hospitalCount = hospitals.length;
                                 referrerCount = referrers.length;
                                 patientCount = patients.length;
-                                return res.render("hospitals/showNotification", { notify: notify, hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                                return res.render("hospitals/showNotification", { notify, hospitalCount, referrerCount, patientCount });
                             });
                         });
                     });
