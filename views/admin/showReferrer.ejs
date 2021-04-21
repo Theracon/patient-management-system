@@ -27,14 +27,14 @@
                                                         <div class="profile drop__shadow">
                                                             <h1 class="header-h1-text text-center">Profile Overview</h1>
                                                             <hr>
-                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span><%=status%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Name</span><br><span class=""><%=referrer.referrerDetails.title%> <%=referrer.referrerDetails.name%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Institution of practice</span><br><span><%=referrer.referrerDetails.institution%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Address of Institution</span><br><span class="text-wrap text-break lh-1 overflow-auto   " style="font-size: 0.8rem;"><%=referrer.referrerDetails.address%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Phone number</span><br><span><%=referrer.referrerDetails.phone%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Account number</span><br><span><%=referrer.referrerDetails.ac_number%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Account name</span><br><span><%=referrer.referrerDetails.ac_name%></span></p>
-                                                            <p class="profile-details-paragraph"><span class="lead">Bank<br></span><span><%=referrer.referrerDetails.bank%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span class="paragraph__span overflow-auto"><%=status%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span overflow-auto"><%=referrer.referrerDetails.title%> <%=referrer.referrerDetails.name%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Institution of practice</span><br><span class="paragraph__span overflow-auto"><%=referrer.referrerDetails.institution%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Address of Institution</span><br><span class="paragraph__span text-wrap text-break overflow-auto"><%=referrer.referrerDetails.address%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Phone number</span><br><span class="paragraph__span overflow-auto"><%=referrer.referrerDetails.phone%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Account number</span><br><span class="paragraph__span overflow-auto"><%=referrer.referrerDetails.ac_number%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Account name</span><br><span class="paragraph__span overflow-auto"><%=referrer.referrerDetails.ac_name%></span></p>
+                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Bank<br></span><span class="paragraph__span overflow-auto"><%=referrer.referrerDetails.bank%></span></p>
                                                         </div>
 
                                                         <br>
@@ -63,8 +63,8 @@
                                                                                                                                     <% currentCommission += patient.referrer_commission %>
                                                                                                                                         <% } %>
                                                                                                                                             <% })%>
-                                                                                                                                                <p class="profile-details-paragraph"><span class="lead"><%= currentMonth %> commission</span><br><span><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                                                                <p class="profile-details-paragraph"><span class="lead">Total commission</span><br><span><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+                                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
+                                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
                                                         </div>
                                                         <br>
 

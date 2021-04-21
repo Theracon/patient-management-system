@@ -8,5 +8,5 @@ vcap-local.js
 credentials.json
 localdev-config.json
 node_modules
-.history
 .vscode
+.history
