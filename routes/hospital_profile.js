@@ -93,7 +93,7 @@ router.post('/hospitals/:username/update', middleware.isUserLoggedIn, function(r
 });
 
 // SHOW(GET): PROFILE/HOSPITALS
-router.get('/hospitals/:username/profile', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
+router.get('/hospitals/:username/profile', middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     // Find referrer from database
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
@@ -123,7 +123,7 @@ router.get('/hospitals/:username/profile', middleware.isUserLoggedIn, middleware
 });
 
 // SHOW(GET): PROFILE EDIT FORM/HOSPITALS
-router.get("/hospitals/:username/profile/edit", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
+router.get("/hospitals/:username/profile/edit", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {

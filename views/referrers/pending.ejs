@@ -11,13 +11,24 @@
         <div class="container">
             <%- include("../partials/alert.ejs") %>
                 <br>
-
-                <div class="container small-content drop__shadow">
-                    <small><i class="fas fa-hourglass-half big-icon"></i></small><br><br>
-                    <small>Your profile has been successfully created and is pending approval.</small>
-                    <small>Refresh this page often. If your account is not live in 24 hours, please <a href="/contact">contact us</a>.</small>
-                </div>
-                <br><br><br><br><br>
+                <% if(!currentUser.account_disabled || currentUser.account_disabled == false) { %>
+                    <div class="container small-content drop__shadow">
+                        <small><i class="fas fa-hourglass-half big-icon"></i></small><br><br>
+                        <small>Your profile has been successfully created and is pending approval.</small>
+                        <small>Refresh this page often. If your account is not live in 24 hours, please <a href="/contact">contact us</a>.</small>
+                    </div>
+                    <% } %>
+                        <% if(currentUser.account_disabled) { %>
+                            <div class="container small-content drop__shadow">
+                                <small><i class="fas fa-hourglass-half big-icon"></i></small><br><br>
+                                <small>Your account is temporarily disabled.</small>
+                                <br><br><br>
+                                <form action="/referrers/<%=currentUser.username%>/reactivate?_method=PUT" method="POST" style="margin: 0; padding: 0; height: fit-content;">
+                                    <input type="submit" class="button btn btn-warning" value="Reactivate my account">
+                                </form>
+                            </div>
+                            <% } %>
+                                <br><br><br><br><br>
         </div>
         <div class="space"></div>
     </div>

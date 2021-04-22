@@ -7,6 +7,48 @@ var express = require("express"),
     patientCount = '',
     middleware = require("../middleware");
 
+// UPDATE(PUT): TEMPORARILY DISABLE ACCOUNT/REFERRERS
+router.put("/referrers/:username/disable", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
+    User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
+        if (err) {
+            req.flash("error", "Oops! Something isn't quite right.");
+            res.redirect("back");
+        }
+        if (user) {
+            user.role = 0;
+            user.account_disabled = true;
+            user.save(function(err, user) {
+                if (err) {
+                    req.flash("error", "Oops! Something isn't quite right.");
+                    res.redirect("back");
+                }
+                return res.redirect("/referrers/" + user.username + "/dashboard");
+            });
+        }
+    });
+});
+
+// UPDATE(PUT): REACTIVATE TEMPORARILY DISABLED ACCOUNT/REFERRERS
+router.put("/referrers/:username/reactivate", middleware.isUserLoggedIn, function(req, res) {
+    User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
+        if (err) {
+            req.flash("error", "Oops! Something isn't quite right.");
+            res.redirect("back");
+        }
+        if (user) {
+            user.role = 1;
+            user.account_disabled = false;
+            user.save(function(err, user) {
+                if (err) {
+                    req.flash("error", "Oops! Something isn't quite right.");
+                    res.redirect("back");
+                }
+                return res.redirect("/referrers/" + user.username + "/dashboard");
+            });
+        }
+    });
+});
+
 // SHOW(GET): FORM TO DEACTIVATE REFERRER/REFERRERS
 router.get("/referrers/:username/deactivate", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {

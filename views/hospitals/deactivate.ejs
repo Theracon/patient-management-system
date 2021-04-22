@@ -43,10 +43,13 @@
                         <li>You will lose access to your account, but your data will be remain intact.</li>
                         <li>You can reactivate your account whenever you want.</li>
                     </ul>
-                    <p>When you wish to reactivate your account, simply give us a call via <span>+234 (0) 806-019-4496</span> or <span>+234
-                            (0) 913-228-3783</span>, or send us an email at <a href="#disable">hello@myfastclinic.com</a></p>
-                    <button type="button" class="button btn btn-warning" onclick="window.location.href='/hospitals/<%=currentUser.username%>/disable';">Disable my account</button>
-                    <br><br><br>
+                    <p>When you want to reactivate your account, simply click the <em>Reactivate account</em> button on the page you're redirected to after you log into your account.</p>
+                    <br>
+                    <form action="/hospitals/<%=currentUser.username%>/disable?_method=PUT" method="POST" style="margin: 0; padding: 0; height: fit-content;">
+                        <input type="submit" class="button btn btn-warning" value="Disable my account">
+                    </form>
+
+                    <br><br>
                     <p class="text-left" style="font-size: 1.5em;"><strong>Do you have a complaint?</strong></p>
                     <p class="text-left">It's fine to feel discontented by how we render one or more of our services. We take it into account that our services may not yet be perfect for every hospital and in every context. If there is a problem you will like us to discuss,
                         feel free to use any of the communication channels on the <a href="/contact">contact page</a>. You can be certain of our utmost cooperation in these circumstances.

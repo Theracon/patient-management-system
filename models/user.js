@@ -90,6 +90,7 @@ var UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     typeOfUser: String,
     role: Number,
+    account_disabled: Boolean,
     signup_time: String,
     signup_date: String,
     signup_month: String,

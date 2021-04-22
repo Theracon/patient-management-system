@@ -75,7 +75,7 @@ router.post("/hospitals/:username/departments", middleware.isUserLoggedIn, middl
 });
 
 // SHOW(GET): DEPARTMENTS EDIT FORM/HOSPITALS
-router.get("/hospitals/:username/departments/edit", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
+router.get("/hospitals/:username/departments/edit", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {

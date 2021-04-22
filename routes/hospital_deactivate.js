@@ -7,7 +7,49 @@ var express = require("express"),
     patientCount = '',
     middleware = require("../middleware");
 
-// SHOW(GET): FORM TO DEACTIVATE/HOSPITALS
+// UPDATE(PUT): TEMPORARILY DISABLE ACCOUNT/HOSPITALS
+router.put("/hospitals/:username/disable", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
+    User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
+        if (err) {
+            req.flash("error", "Oops! Something isn't quite right.");
+            res.redirect("back");
+        }
+        if (user) {
+            user.role = 0.75;
+            user.account_disabled = true;
+            user.save(function(err, user) {
+                if (err) {
+                    req.flash("error", "Oops! Something isn't quite right.");
+                    res.redirect("back");
+                }
+                return res.redirect("/hospitals/" + user.username + "/dashboard");
+            });
+        }
+    });
+});
+
+// UPDATE(PUT): REACTIVATE TEMPORARILY DISABLED ACCOUNT/REFERRER
+router.put("/hospitals/:username/reactivate", middleware.isUserLoggedIn, function(req, res) {
+    User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
+        if (err) {
+            req.flash("error", "Oops! Something isn't quite right.");
+            res.redirect("back");
+        }
+        if (user) {
+            user.role = 1;
+            user.account_disabled = false;
+            user.save(function(err, user) {
+                if (err) {
+                    req.flash("error", "Oops! Something isn't quite right.");
+                    res.redirect("back");
+                }
+                return res.redirect("/hospitals/" + user.username + "/dashboard");
+            });
+        }
+    });
+});
+
+// SHOW(GET): FORM TO DEACTIVATE HOSPITAL/HOSPITALS
 router.get("/hospitals/:username/deactivate", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {

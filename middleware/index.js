@@ -47,7 +47,7 @@ REFERRER AUTHORIZATION MIDDLEWARE
  ==================== */
 middlewareMethods.isReferrerAuthorized = function(req, res, next) {
     if (req.user) {
-        if (req.user.role === 1) {
+        if (req.user.role >= 1) {
             return next();
         } else {
             if (req.user.role === 0) {
@@ -83,10 +83,12 @@ middlewareMethods.isHospitalProfileCreated = function(req, res, next) {
 
 middlewareMethods.isHospitalDepartmentCreated = function(req, res, next) {
     if (req.user) {
-        if (req.user.role >= 0.75) {
+        if (req.user.role >= 1) {
             return next();
         } else {
-            if (req.user.role === 0) {
+            if (req.user.role === 0.75) {
+                return res.redirect("/hospitals/" + req.user.username + "/pending");
+            } else if (req.user.role === 0) {
                 req.flash("error", "Complete your institution's profile to proceed.");
                 return res.redirect("/hospitals/" + req.user.username + "/departments");
             } else if (req.user.role === -1) {
