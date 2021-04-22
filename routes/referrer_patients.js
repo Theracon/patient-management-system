@@ -293,7 +293,6 @@ router.get("/referrers/:username/patients", middleware.isUserLoggedIn, middlewar
                         referrerCount = referrers.length;
                         Patient.find({}, function(err, allPatients) {
                             patientCount = allPatients.length;
-                            console.log(patientCount);
                             return res.render("referrers/patients", { patients, hospitalCount, referrerCount, patientCount });
                         });
                     });
