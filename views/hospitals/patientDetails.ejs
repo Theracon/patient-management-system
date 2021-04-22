@@ -21,7 +21,7 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="row g-3 align-items-center justify-content-center holder_div drop__shadow" style="width: 80%; margin: 0 auto;">
+                <div class="row g-3 align-items-center justify-content-center holder_div drop__shadow">
                     <% function formatNumber(num) { %>
                         <% var numSplit, int, dec; %>
                             <% num = parseFloat(num, 10); %>
@@ -38,13 +38,13 @@
                                                                     <div class="container holder_div">
                                                                         <br>
                                                                         <div style="width: 100%; margin: 0 auto;">
-                                                                            <p class="text-center"><span class="patient-info lead">ACCESSION NUMBER </span><br><span><%=patient.accession_number%></span></p>
+                                                                            <p class="text-center lh-1"><span class="patient-info lead">ACCESSION NUMBER </span><br><span class="paragraph__span overflow-auto"><%=patient.accession_number%></span></p>
                                                                             <hr>
-                                                                            <p class="text-center"><span class="patient-info lead">NAME </span><br><span><%=patient.name%></span></p>
+                                                                            <p class="text-center lh-1"><span class="patient-info lead">NAME </span><br><span class="paragraph__span overflow-auto"><%=patient.name%></span></p>
                                                                             <hr>
-                                                                            <p class="text-center"><span class="patient-info lead overflow-auto">INVESTIGATIONS </span><br> <span><%=patient.investigation%> </span></p>
+                                                                            <p class="text-center lh-1"><span class="patient-info lead">INVESTIGATIONS </span><br> <span class="paragraph__span overflow-auto"><%=patient.investigation%> </span></p>
                                                                             <hr>
-                                                                            <p class="text-center"><span class="patient-info lead">AMOUNT PAID </span><br> <span><strike>N</strike><%=formatNumber(patient.amount_paid)%> </span></p>
+                                                                            <p class="text-center lh-1"><span class="patient-info lead">AMOUNT PAID </span><br> <span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(patient.amount_paid)%> </span></p>
                                                                             <br><br>
                                                                             <% if(patient.status == "unauthenticated") { %>
                                                                                 <div class="button-group" id="button-group">
