@@ -96,7 +96,7 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
                         }
                         // Check for incorrect accession number
                         if (!patient) {
-                            req.flash("error", "Patient not found.");
+                            req.flash("error", "Incorrect accession number.");
                             return res.redirect("back");
                         } else {
                             // Find referring doctor and delete patient from referring doctor's patients array
@@ -109,6 +109,7 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
                                     return el.accession_number == accessionNumber;
                                 });
                                 referrer.referrerDetails.patients.splice(index, 1);
+
                                 // Change patient's status to "authenticated"
                                 patient.status = "authenticated";
                                 // Set patient authentication month & date
@@ -116,28 +117,15 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
                                 patient.authentication_date = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
                                 // Set amount paid by patient 
                                 patient.amount_paid = parseInt(req.body.amount_paid, 10);
+
+                                // Set patient commission rates
+                                patient.commission_rate = req.body.commission_rate;
+
                                 // Calculate referrer commission
-                                if (parseInt(req.body.amount_paid, 10) < 5001) {
-                                    patient.hospital_commission = 0.25 * (parseInt(req.body.amount_paid, 10));
-                                    patient.referrer_commission = 0.6 * (0.25 * (parseInt(req.body.amount_paid, 10)));
-                                    patient.platform_commission = 0.4 * (0.25 * (parseInt(req.body.amount_paid, 10)));
-                                } else if (parseInt(req.body.amount_paid, 10) > 5000 && parseInt(req.body.amount_paid, 10) < 20001) {
-                                    patient.hospital_commission = 0.2 * (parseInt(req.body.amount_paid, 10));
-                                    patient.referrer_commission = 0.6 * (0.2 * (parseInt(req.body.amount_paid, 10)));
-                                    patient.platform_commission = 0.4 * (0.2 * (parseInt(req.body.amount_paid, 10)));
-                                } else if (parseInt(req.body.amount_paid, 10) > 20000 && parseInt(req.body.amount_paid, 10) < 50001) {
-                                    patient.hospital_commission = 0.15 * (parseInt(req.body.amount_paid, 10));
-                                    patient.referrer_commission = 0.6 * (0.15 * (parseInt(req.body.amount_paid, 10)));
-                                    patient.platform_commission = 0.4 * (0.15 * (parseInt(req.body.amount_paid, 10)));
-                                } else if (parseInt(req.body.amount_paid, 10) > 50000 && parseInt(req.body.amount_paid, 10) < 100001) {
-                                    patient.hospital_commission = 0.1 * (parseInt(req.body.amount_paid, 10));
-                                    patient.referrer_commission = 0.6 * (0.1 * (parseInt(req.body.amount_paid, 10)));
-                                    patient.platform_commission = 0.4 * (0.1 * (parseInt(req.body.amount_paid, 10)));
-                                } else if (parseInt(req.body.amount_paid, 10) > 100000) {
-                                    patient.hospital_commission = 0.075 * (parseInt(req.body.amount_paid, 10));
-                                    patient.referrer_commission = 0.6 * (0.075 * (parseInt(req.body.amount_paid, 10)));
-                                    patient.platform_commission = 0.4 * (0.075 * (parseInt(req.body.amount_paid, 10)));
-                                }
+                                patient.hospital_commission = (patient.commission_rate / 100) * (parseInt(req.body.amount_paid, 10));
+                                patient.referrer_commission = 0.5 * patient.hospital_commission;
+                                patient.platform_commission = patient.hospital_commission - patient.referrer_commission;
+
                                 // Update referrer's commission
                                 referrer.referrerDetails.commission += patient.referrer_commission;
                                 // Save patient

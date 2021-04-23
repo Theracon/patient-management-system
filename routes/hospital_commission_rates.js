@@ -84,6 +84,16 @@ router.post("/hospitals/:username/commissions", middleware.isUserLoggedIn, middl
                     max_amount_rate: parseFloat(req.body.max_amount_rate),
                 }
 
+                // Calculate hospital's average commission rate
+                user.hospitalDetails.average_commission_rate =
+                    (
+                        user.hospitalDetails.commission_rates.min_amount_rate +
+                        user.hospitalDetails.commission_rates.low_amount_rate +
+                        user.hospitalDetails.commission_rates.mid_amount_rate +
+                        user.hospitalDetails.commission_rates.high_amount_rate +
+                        user.hospitalDetails.commission_rates.max_amount_rate
+                    ) / 5;
+
                 // Mark hospital's profile as complete
                 user.hospitalDetails.profile_complete = true;
 
@@ -149,6 +159,16 @@ router.put("/hospitals/:username/commissions", middleware.isUserLoggedIn, middle
                     high_amount_rate: parseFloat(req.body.high_amount_rate),
                     max_amount_rate: parseFloat(req.body.max_amount_rate),
                 }
+
+                // Calculate hospital's average commission rate
+                user.hospitalDetails.average_commission_rate =
+                    (
+                        user.hospitalDetails.commission_rates.min_amount_rate +
+                        user.hospitalDetails.commission_rates.low_amount_rate +
+                        user.hospitalDetails.commission_rates.mid_amount_rate +
+                        user.hospitalDetails.commission_rates.high_amount_rate +
+                        user.hospitalDetails.commission_rates.max_amount_rate
+                    ) / 5;
 
                 // Create a notification
                 var updateMessage = {

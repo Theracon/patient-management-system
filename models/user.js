@@ -86,6 +86,7 @@ var hospitalDetailSchema = new mongoose.Schema({
         high_amount_rate: Number,
         max_amount_rate: Number,
     },
+    average_commission_rate: Number,
     profile_complete: Boolean,
     notifications: [NotificationSchema],
     unread_notifications_count: Number,

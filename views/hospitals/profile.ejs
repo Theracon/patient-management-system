@@ -147,24 +147,81 @@
                                                                                 </div>
                                                                                 <% } %>
                                                                                     <br>
-
-                                                                                    <!--DEACTIVATE ACCOUNT-->
-                                                                                    <div class="deactivate-account">
+                                                                                    <% if(currentUser.hospitalDetails.profile_complete) { %>
+                                                                                        <!--Commission Rates-->
+                                                                                        <div class="profile drop__shadow">
+                                                                                            <h1 class="header-h1-text text-center">Commission Rates</h1>
+                                                                                            <hr>
+                                                                                            <table class="table" id="commissionRatesTable">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th scope="col">Amount patient paid</th>
+                                                                                                        <th scope="col">Commission</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td>Up to <strike>N</strike>5,000</td>
+                                                                                                        <td>
+                                                                                                            <%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>%
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
+                                                                                                        <td>
+                                                                                                            <%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>%
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
+                                                                                                        <td>
+                                                                                                            <%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>%
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
+                                                                                                        <td>
+                                                                                                            <%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>%
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                        <td>Above <strike>N</strike>100,000</td>
+                                                                                                        <td>
+                                                                                                            <%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>%
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                            <p style="font-size: 0.8em;">
+                                                                                                <span>Average commission rate: </span>
+                                                                                                <span><%=currentUser.hospitalDetails.average_commission_rate%>% </span>
+                                                                                                <br>
+                                                                                                <small class="text-muted lh-1" style="display: block;"><i class="far fa-question-circle"></i> Why is this important?</small>
+                                                                                                <small class="text-muted lh-1" style="display: block;">This number may influence how often referrers select your hospital as their institution of choice for referral.</small>
+                                                                                            </p>
+                                                                                            <br>
+                                                                                            <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/commissions/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+                                                                                        </div>
                                                                                         <br>
-                                                                                        <h3 class="text-center">Deactivate Account</h3>
-                                                                                        <hr>
-                                                                                        <p class="deactivate-account-text text-center">
-                                                                                            <strong>Can we resolve this?</strong>
-                                                                                            <br><br>
-                                                                                            <small><a href="/contact" style="color: white; text-decoration: underline;">Reach us via email</a> with your complaints and/or queries.</small><br>
-                                                                                            <small>Or call our 24/7 hotlines:</small><br>
-                                                                                            <small><a href="#" style="color: white;">+234 (0) 806 019-4496</a></small><br>
-                                                                                            <small><a href="#" style="color: white;">+234 (0) 913 228-3783</a></small>
-                                                                                        </p>
-                                                                                        <br><br>
-                                                                                        <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/deactivate';" style="display: block; margin: 0 auto;">Deactivate account</button><br>
-                                                                                    </div>
-                                                                                    <br><br><br><br><br>
+                                                                                        <% } %>
+
+                                                                                            <!--DEACTIVATE ACCOUNT-->
+                                                                                            <div class="deactivate-account">
+                                                                                                <br>
+                                                                                                <h3 class="text-center">Deactivate Account</h3>
+                                                                                                <hr>
+                                                                                                <p class="deactivate-account-text text-center">
+                                                                                                    <strong>Can we resolve this?</strong>
+                                                                                                    <br><br>
+                                                                                                    <small><a href="/contact" style="color: white; text-decoration: underline;">Reach us via email</a> with your complaints and/or queries.</small><br>
+                                                                                                    <small>Or call our 24/7 hotlines:</small><br>
+                                                                                                    <small><a href="#" style="color: white;">+234 (0) 806 019-4496</a></small><br>
+                                                                                                    <small><a href="#" style="color: white;">+234 (0) 913 228-3783</a></small>
+                                                                                                </p>
+                                                                                                <br><br>
+                                                                                                <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/deactivate';" style="display: block; margin: 0 auto;">Deactivate account</button><br>
+                                                                                            </div>
+                                                                                            <br><br><br><br><br>
                                                         </div>
                                                         <div class="space"></div>
     </div>

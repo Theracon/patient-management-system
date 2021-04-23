@@ -26,16 +26,39 @@
                     <br>
 
                     <div class="form_div drop__shadow">
-                        <form action="/hospitals/<%=currentUser.username%>/authenticate?_method=PUT" method="POST">
+                        <form class="needs-validation" action="/hospitals/<%=currentUser.username%>/authenticate?_method=PUT" method="POST" novalidate>
                             <!--Accession number-->
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="accession_number" name="accession_number" value="<%= patient.accession_number %>" readonly>
                                 <label for="accession_number">Accession number</label>
+                                <div class="valid-feedback">
+                                    Looks good.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter patient accession number.
+                                </div>
                             </div>
                             <!--Amount paid-->
                             <div class="form-floating mb-3">
                                 <input type="number" class="form-control" id="amount_paid" name="amount_paid" required>
-                                <label for="amount_paid">Amount paid</label>
+                                <label for="amount_paid">Amount patient paid</label>
+                                <div class="valid-feedback">
+                                    Looks good.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter amount paid by patient.
+                                </div>
+                            </div>
+                            <!--Commission rate-->
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="commission_rate" name="commission_rate" required></select>
+                                <label for="commission_rate">Commission</label>
+                                <div class="valid-feedback">
+                                    Looks good.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please select an option.
+                                </div>
                             </div>
                             <!--Button-->
                             <div class="button-group" id="button-group" style="width: 100%; margin-top: 3rem;">
@@ -45,7 +68,33 @@
                     </div>
                     <br><br><br><br><br>
         </div>
-        <div class="space"></div>
     </div>
+
+    <script>
+        var amountPaidInput = document.getElementById("amount_paid");
+        var commissionRateSelector = document.getElementById("commission_rate");
+        var hiddenRates = document.getElementById("hiddenRates");
+
+        amountPaidInput.addEventListener("change", function(e) {
+            var amount = parseInt(e.target.value);
+
+            if (amount <= 5000) {
+                commissionRateSelector.options.length = 0;
+                commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>`);
+            } else if (amount > 5000 && amount <= 20000) {
+                commissionRateSelector.options.length = 0;
+                commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>`);
+            } else if (amount > 20000 && amount <= 50000) {
+                commissionRateSelector.options.length = 0;
+                commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>`);
+            } else if (amount > 50000 && amount <= 100000) {
+                commissionRateSelector.options.length = 0;
+                commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>`);
+            } else if (amount > 100000) {
+                commissionRateSelector.options.length = 0;
+                commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>`);
+            }
+        });
+    </script>
 
     <%- include("../partials/footer.ejs") %>
