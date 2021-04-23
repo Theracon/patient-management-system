@@ -22,34 +22,37 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="holder_div drop__shadow">
-                    <form action="/hospitals/<%=currentUser.username%>/procedures?_method=PUT" method="POST">
-                        <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
-                            <h1 class="header-h1-text text-center">Procedures</h1>
-                            <!--Procedures-->
-                            <small class="text-muted">(Type in a procedure/investigation and click '+')</small>
-                            <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                                <input type="text" class="procedure_input border border-success">
-                                <button class="btn btn-success procedure_input_button" type="button">+</button>
+                <%- include("../partials/alert-to-create-commission-rates.ejs") %>
+                    <br>
+
+                    <div class="holder_div drop__shadow">
+                        <form action="/hospitals/<%=currentUser.username%>/procedures?_method=PUT" method="POST">
+                            <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                                <h1 class="header-h1-text text-center">Procedures</h1>
+                                <!--Procedures-->
+                                <small class="text-muted">(Type in a procedure/investigation and click '+')</small>
+                                <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+                                    <input type="text" class="procedure_input border border-success">
+                                    <button class="btn btn-success procedure_input_button" type="button">+</button>
+                                </div>
+                                <div class="procedures">
+                                    <% currentUser.hospitalDetails.procedures.forEach(function(procedure, index) { %>
+                                        <div class="input-group mb-1 procedure_div">
+                                            <input type="text" class="procedure border" name="procedures[<%= index %>]" value="<%= procedure %>" readonly>
+                                            <button class="btn btn-secondary procedure_button border" type="button">-</button>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                                <br>
+                                <!--Submit button-->
+                                <div class="button-group" id="button-group" style="width: 100%; margin-top: 5rem;">
+                                    <input type="submit" class="button btn btn-success" value="Confirm" style="width: 45%;">
+                                    <button type="reset" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" class="button btn btn-outline-success" style="width: 45%;">Cancel</button>
+                                </div>
                             </div>
-                            <div class="procedures">
-                                <% currentUser.hospitalDetails.procedures.forEach(function(procedure, index) { %>
-                                    <div class="input-group mb-1 procedure_div">
-                                        <input type="text" class="procedure border" name="procedures[<%= index %>]" value="<%= procedure %>" readonly>
-                                        <button class="btn btn-secondary procedure_button border" type="button">-</button>
-                                    </div>
-                                    <% }) %>
-                            </div>
-                            <br>
-                            <!--Submit button-->
-                            <div class="button-group" id="button-group" style="width: 100%; margin-top: 5rem;">
-                                <input type="submit" class="button btn btn-success" value="Confirm" style="width: 45%;">
-                                <button type="reset" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" class="button btn btn-outline-success" style="width: 45%;">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <br><br><br><br><br>
+                        </form>
+                    </div>
+                    <br><br><br><br><br>
         </div>
         <div class="space"></div>
     </div>

@@ -21,40 +21,43 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="row g-3 align-items-center justify-content-center holder_div drop__shadow">
-                    <% function formatNumber(num) { %>
-                        <% var numSplit, int, dec; %>
-                            <% num = parseFloat(num, 10); %>
-                                <% num = num.toFixed(2); %>
-                                    <% numSplit = num.split("."); %>
-                                        <% int = numSplit[0]; %>
-                                            <% if(int.length > 3) { %>
-                                                <% int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3); %>
-                                                    <% } %>
-                                                        <% dec = numSplit[1]; %>
-                                                            <% return int + "." + dec; %>
-                                                                <% } %>
+                <%- include("../partials/alert-to-create-commission-rates.ejs") %>
+                    <br>
 
-                                                                    <div class="container holder_div">
-                                                                        <br>
-                                                                        <div style="width: 100%; margin: 0 auto;">
-                                                                            <p class="text-center lh-1"><span class="patient-info lead">ACCESSION NUMBER </span><br><span class="paragraph__span overflow-auto"><%=patient.accession_number%></span></p>
-                                                                            <hr>
-                                                                            <p class="text-center lh-1"><span class="patient-info lead">NAME </span><br><span class="paragraph__span overflow-auto"><%=patient.name%></span></p>
-                                                                            <hr>
-                                                                            <p class="text-center lh-1"><span class="patient-info lead">INVESTIGATIONS </span><br> <span class="paragraph__span overflow-auto"><%=patient.investigation%> </span></p>
-                                                                            <hr>
-                                                                            <p class="text-center lh-1"><span class="patient-info lead">AMOUNT PAID </span><br> <span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(patient.amount_paid)%> </span></p>
-                                                                            <br><br>
-                                                                            <% if(patient.status == "unauthenticated") { %>
-                                                                                <div class="button-group" id="button-group">
-                                                                                    <button type="button" class="button btn btn-success" style="display: block; margin: auto;" onclick="window.location.href='/hospitals/<%=currentUser.username%>/authenticate/<%=patient.accession_number%>';">Authenticate</button>
-                                                                                </div>
-                                                                                <% } %>
+                    <div class="row g-3 align-items-center justify-content-center holder_div drop__shadow">
+                        <% function formatNumber(num) { %>
+                            <% var numSplit, int, dec; %>
+                                <% num = parseFloat(num, 10); %>
+                                    <% num = num.toFixed(2); %>
+                                        <% numSplit = num.split("."); %>
+                                            <% int = numSplit[0]; %>
+                                                <% if(int.length > 3) { %>
+                                                    <% int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3); %>
+                                                        <% } %>
+                                                            <% dec = numSplit[1]; %>
+                                                                <% return int + "." + dec; %>
+                                                                    <% } %>
+
+                                                                        <div class="container holder_div">
+                                                                            <br>
+                                                                            <div style="width: 100%; margin: 0 auto;">
+                                                                                <p class="text-center lh-1"><span class="patient-info lead">ACCESSION NUMBER </span><br><span class="paragraph__span overflow-auto"><%=patient.accession_number%></span></p>
+                                                                                <hr>
+                                                                                <p class="text-center lh-1"><span class="patient-info lead">NAME </span><br><span class="paragraph__span overflow-auto"><%=patient.name%></span></p>
+                                                                                <hr>
+                                                                                <p class="text-center lh-1"><span class="patient-info lead">INVESTIGATIONS </span><br> <span class="paragraph__span overflow-auto"><%=patient.investigation%> </span></p>
+                                                                                <hr>
+                                                                                <p class="text-center lh-1"><span class="patient-info lead">AMOUNT PAID </span><br> <span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(patient.amount_paid)%> </span></p>
+                                                                                <br><br>
+                                                                                <% if(patient.status == "unauthenticated") { %>
+                                                                                    <div class="button-group" id="button-group">
+                                                                                        <button type="button" class="button btn btn-success" style="display: block; margin: auto;" onclick="window.location.href='/hospitals/<%=currentUser.username%>/authenticate/<%=patient.accession_number%>';">Authenticate</button>
+                                                                                    </div>
+                                                                                    <% } %>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                </div>
-                <br><br><br><br><br>
+                    </div>
+                    <br><br><br><br><br>
         </div>
         <div class="space"></div>
     </div>

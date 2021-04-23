@@ -10,6 +10,14 @@ var DepartmentSchema = new mongoose.Schema({
     units: Array,
 });
 
+// MESSAGE SCHEMA
+var NotificationSchema = new mongoose.Schema({
+    date: String,
+    time: String,
+    content: String,
+    status: String,
+});
+
 // PATIENT SCHEMA
 var PatientSchema = new mongoose.Schema({
     name: String,
@@ -23,6 +31,7 @@ var PatientSchema = new mongoose.Schema({
     referrer: String,
     referrer_id: String,
     amount_paid: Number,
+    commission_rate: Number,
     hospital_commission: Number,
     referrer_commission: Number,
     platform_commission: Number,
@@ -32,14 +41,6 @@ var PatientSchema = new mongoose.Schema({
     authentication_month: String,
     authentication_date: String,
     authentication_time: String,
-});
-
-// MESSAGE SCHEMA
-var NotificationSchema = new mongoose.Schema({
-    date: String,
-    time: String,
-    content: String,
-    status: String,
 });
 
 // REFERRER DETAILS SCHEMA
@@ -78,6 +79,14 @@ var hospitalDetailSchema = new mongoose.Schema({
     departments: [DepartmentSchema],
     procedures: Array,
     patients: [PatientSchema],
+    commission_rates: {
+        min_amount_rate: Number,
+        low_amount_rate: Number,
+        mid_amount_rate: Number,
+        high_amount_rate: Number,
+        max_amount_rate: Number,
+    },
+    profile_complete: Boolean,
     notifications: [NotificationSchema],
     unread_notifications_count: Number,
     last_updated: String,

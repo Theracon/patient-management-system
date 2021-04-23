@@ -14,6 +14,7 @@ var PatientSchema = new mongoose.Schema({
     referrer: String,
     referrer_id: String,
     amount_paid: Number,
+    commission_rate: Number,
     hospital_commission: Number,
     referrer_commission: Number,
     platform_commission: Number,

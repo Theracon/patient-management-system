@@ -24,16 +24,19 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="container small-content drop__shadow">
-                    <p style="letter-spacing: 1px;">
-                        <%= notify.time.toUpperCase() %>
-                    </p>
-                    <hr><br>
-                    <p>
-                        <%= notify.content %>
-                    </p>
-                </div>
-                <br><br><br><br><br>
+                <%- include("../partials/alert-to-create-commission-rates.ejs") %>
+                    <br>
+
+                    <div class="container small-content drop__shadow">
+                        <p style="letter-spacing: 1px;">
+                            <%= notify.time.toUpperCase() %>
+                        </p>
+                        <hr><br>
+                        <p>
+                            <%= notify.content %>
+                        </p>
+                    </div>
+                    <br><br><br><br><br>
         </div>
     </div>
 

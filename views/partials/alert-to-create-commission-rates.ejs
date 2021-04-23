@@ -1,0 +1,10 @@
+<div class="container" id="createCRAlertDiv">
+    <% if(!currentUser.hospitalDetails.profile_complete) { %>
+        <div class="small-content bg-warning">
+            <small class="text-secondary" id="createCRAlertSpan" style="cursor: pointer;">Close <i class="fas fa-times text-secondary"></i></small>
+            <small><i class="fas fa-eclamation-circle big-icon"></i></small><br><br>
+            <small>You have not provided your commission rates. Referrers will not be able to refer patients to you if you don't provide your rates. If you have already provided your rates, ignore this message.</small><br><br>
+            <small><a class="btn btn-outline-light" href="/hospitals/<%= currentUser.username %>/commissions/create">Enter commission rates</a></small><br><br>
+        </div>
+        <% } %>
+</div>

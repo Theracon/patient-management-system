@@ -31,6 +31,7 @@ var bodyParser = require('body-parser'),
     hospitalNotificationsRoutes = require("./routes/hospital_notifications"),
     hospitalPatientsRoutes = require("./routes/hospital_patients"),
     hospitalProceduresRoutes = require("./routes/hospital_procedures"),
+    hospitalCommissionRatesRoutes = require("./routes/hospital_commission_rates"),
     hospitalProfileRoutes = require("./routes/hospital_profile"),
     hospitalSignupRoutes = require("./routes/hospital_signup"),
     hospitalLoginRoutes = require("./routes/hospital_login"),
@@ -112,11 +113,12 @@ app.use(adminLoginRoutes);
 app.use(hospitalIndexRoutes);
 app.use(hospitalAuthenticateRoutes);
 app.use(hospitalDeactivateRoutes);
-app.use(hospitalDepartmentsRoutes);
 app.use(hospitalNotificationsRoutes);
 app.use(hospitalPatientsRoutes);
-app.use(hospitalProceduresRoutes);
 app.use(hospitalProfileRoutes);
+app.use(hospitalDepartmentsRoutes);
+app.use(hospitalProceduresRoutes);
+app.use(hospitalCommissionRatesRoutes);
 app.use(hospitalSignupRoutes);
 app.use(hospitalLoginRoutes);
 

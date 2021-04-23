@@ -134,7 +134,7 @@ router.delete("/admin/referrers/:id", middleware.isAdminLoggedIn, middleware.isA
                         req.flash("error", "Oops! Something isn't quite right.");
                         return res.redirect("back");
                     }
-                    return res.redirect("/admin/dashboard");
+                    return res.redirect("/admin/referrers");
                 });
                 return;
             }

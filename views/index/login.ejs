@@ -45,18 +45,30 @@
                                                             </div>
                                                             <br>
                                                             <div id="form-holder">
-                                                                <form action="/referrers/login" method="POST">
+                                                                <form class="needs-validation" action="/referrers/login" method="POST" novalidate>
                                                                     <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
                                                                         <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Log into your doctor account</p>
                                                                         <!--Username-->
                                                                         <div class="form-floating mb-3">
                                                                             <input type="text" class="form-control" id="username" name="username" required>
                                                                             <label for="username">Username</label>
+                                                                            <div class="valid-feedback">
+                                                                                Looks good.
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Please enter your username.
+                                                                            </div>
                                                                         </div>
                                                                         <!--Password-->
                                                                         <div class="form-floating">
                                                                             <input type="password" class="form-control" id="password" name="password" required>
                                                                             <label for="password">Password</label>
+                                                                            <div class="valid-feedback">
+                                                                                Looks good.
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Please enter your password.
+                                                                            </div>
                                                                         </div>
                                                                         <!--Button-->
                                                                         <div class="button-group" style="width: 100%;">

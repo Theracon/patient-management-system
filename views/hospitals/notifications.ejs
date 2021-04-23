@@ -22,44 +22,47 @@
             <%- include("../partials/alert.ejs") %>
                 <br>
 
-                <div class="notifications overflow-auto drop__shadow">
+                <%- include("../partials/alert-to-create-commission-rates.ejs") %>
+                    <br>
 
-                    <% currentUser.hospitalDetails.notifications.forEach(function(notification) { %>
-                        <% var date = new Date(); %>
-                            <% var months = ['January','February','March','April','May','June','July', 'August','September','October','November','December']; %>
-                                <% var today_formatted = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() %>
-                                    <% var today = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() %>
-                                        <% var timeOrDate = (notification.date === today_formatted) ? notification.time : notification.date %>
+                    <div class="notifications overflow-auto drop__shadow">
 
-                                            <% function formatTextLength(text, limit = 17) { %>
-                                                <% var newText = []; %>
+                        <% currentUser.hospitalDetails.notifications.forEach(function(notification) { %>
+                            <% var date = new Date(); %>
+                                <% var months = ['January','February','March','April','May','June','July', 'August','September','October','November','December']; %>
+                                    <% var today_formatted = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() %>
+                                        <% var today = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() %>
+                                            <% var timeOrDate = (notification.date === today_formatted) ? notification.time : notification.date %>
 
-                                                    <% if(text.length > limit) { %>
-                                                        <% text.split(" ").reduce(function(acc, cur) { %>
-                                                            <% if(acc + cur.length <= limit) { %>
-                                                                <% newText.push(cur); %>
-                                                                    <% } %>
+                                                <% function formatTextLength(text, limit = 17) { %>
+                                                    <% var newText = []; %>
 
-                                                                        <% return acc + cur.length; %>
-                                                                            <% }, 0); %>
+                                                        <% if(text.length > limit) { %>
+                                                            <% text.split(" ").reduce(function(acc, cur) { %>
+                                                                <% if(acc + cur.length <= limit) { %>
+                                                                    <% newText.push(cur); %>
+                                                                        <% } %>
 
-                                                                                <% return newText.join(" ") + " ..."; %>
-                                                                                    <% } %>
+                                                                            <% return acc + cur.length; %>
+                                                                                <% }, 0); %>
 
-                                                                                        <% return text; %>
-                                                                                            <% } %>
+                                                                                    <% return newText.join(" ") + " ..."; %>
+                                                                                        <% } %>
 
-                                                                                                <% var btnOutlineClass = notification.status === "unread" ? "btn-success" : "btn-outline-success"; %>
+                                                                                            <% return text; %>
+                                                                                                <% } %>
 
-                                                                                                    <button class="btn notification <%=btnOutlineClass%>" onclick="window.location.href='/hospitals/<%=currentUser.username%>/notifications/<%=notification._id%>';">
+                                                                                                    <% var btnOutlineClass = notification.status === "unread" ? "btn-success" : "btn-outline-success"; %>
+
+                                                                                                        <button class="btn notification <%=btnOutlineClass%>" onclick="window.location.href='/hospitals/<%=currentUser.username%>/notifications/<%=notification._id%>';">
                                                                                                         <span class="notification_time"><%= timeOrDate.toUpperCase() %> </span>
                                                                                                         <span class="notification_content"><%= formatTextLength(notification.content) %> </span>
                                                                                                     </button>
 
-                                                                                                    <% }); %>
-                                                                                                        <br><br><br><br><br>
-                </div>
-                <br><br><br><br><br>
+                                                                                                        <% }); %>
+                                                                                                            <br><br><br><br><br>
+                    </div>
+                    <br><br><br><br><br>
         </div>
     </div>
 

@@ -144,7 +144,7 @@ router.get("/hospitals/:username/profile/edit", middleware.isUserLoggedIn, middl
                 return;
             }
             req.flash("error", "Please login or create an account.");
-            res.redirect("/hospitals/register");
+            res.redirect("/login");
             return;
         }
         req.flash("error", "Oops! Something isn't quite right.")
