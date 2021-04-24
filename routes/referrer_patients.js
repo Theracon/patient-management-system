@@ -11,7 +11,7 @@ var express = require("express"),
     date = new Date(),
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-// SHOW(GET): FORM TO ADD NEW PATIENT/REFERRERS
+// SHOW(GET): FORM TO ADD A NEW PATIENT/REFERRERS
 router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     // Find referrer in database
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
@@ -42,7 +42,7 @@ router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middl
     });
 });
 
-// CREATE(POST): ADD NEW PATIENT/REFERRERS
+// CREATE(POST): LOGIC TO ADD A NEW PATIENT/REFERRERS
 router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     if (req.body.hospital && parseInt(req.body.hospital, 10) >= 0) {
         var hospitalArray;
@@ -61,6 +61,7 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                     if (user) {
                         // Make a new patient object
                         var patient = new Patient({
+                            // Initialize patient's basic info
                             name: req.body.name,
                             investigation: req.body.investigation,
                             phone: req.body.phone,
@@ -71,13 +72,19 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                             status: "unauthenticated",
                             referrer: user.referrerDetails.title + " " + user.referrerDetails.name,
                             referrer_id: user._id,
+                            // Initialize patient's finances
                             amount_paid: 0,
+                            hospital_commission: 0,
                             referrer_commission: 0,
+                            platform_commission: 0,
+                            // Initialize patient's referral info
+                            referral_year: date.getFullYear(),
                             referral_month: months[date.getMonth()],
                             referral_date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
                             referral_time: functions.formatTime(date),
                         });
 
+                        // Save patient data
                         patient.save(function(err, patient) {
                             // Find hospital
                             User.findOne({ typeOfUser: "hospital", _id: hospitalArray[req.body.hospital]._id }, function(err, hospital) {
@@ -227,10 +234,6 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
                         patient.phone = req.body.phone;
                         patient.referral_time = functions.formatTime(date);
                         referral_month = months[date.getMonth()];
-                        patient.amount_paid = 0;
-                        patient.hospital_commission = 0;
-                        patient.referrer_commission = 0;
-                        patient.platform_commission = 0;
                         // Save updated patient
                         patient.save(function(err, patient) {
                             if (err) {

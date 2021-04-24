@@ -6,6 +6,7 @@ var express = require("express"),
     referrerCount = '',
     patientCount = '',
     middleware = require("../middleware"),
+    functions = require("../functions"),
     date = new Date(),
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -71,7 +72,7 @@ router.get("/hospitals/:username/authenticate/:accession_number", middleware.isU
     });
 });
 
-// UPDATE(PUT): AUTHENTICATE A PATIENT/HOSPITALS
+// UPDATE(PUT): LOGIC TO AUTHENTICATE A PATIENT/HOSPITALS
 router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middleware.isHospitalDepartmentCreated, function(req, res) {
     // Check the format of entered amount
     if (isNaN(req.body.amount_paid)) {
@@ -112,9 +113,11 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
 
                                 // Change patient's status to "authenticated"
                                 patient.status = "authenticated";
-                                // Set patient authentication month & date
+                                // Set patient's authentication info
+                                patient.authentication_year = date.getFullYear();
                                 patient.authentication_month = months[date.getMonth()];
                                 patient.authentication_date = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+                                patient.authentication_time = functions.formatTime(date);
                                 // Set amount paid by patient 
                                 patient.amount_paid = parseInt(req.body.amount_paid, 10);
 
