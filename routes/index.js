@@ -139,7 +139,7 @@ router.get("/faq", function(req, res) {
                 hospitalCount = hospitals.length;
                 referrerCount = referrers.length;
                 patientCount = patients.length;
-                res.render("index/faq", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
+                res.render("index/faq", { hospitals, hospitalCount, referrerCount, patientCount });
             });
         });
     });

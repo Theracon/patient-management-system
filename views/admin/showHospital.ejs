@@ -154,58 +154,112 @@
                                                                             <% } %>
                                                                                 <br>
 
-                                                                                <% if(hospital.role <= 0.75 && hospital.role != -1) { %>
-                                                                                    <!--ACTIVATE ACCOUNT-->
+                                                                                <!--Commission Rates-->
+                                                                                <% if(hospital.hospitalDetails.profile_complete) { %>
                                                                                     <div class="profile drop__shadow">
-                                                                                        <br>
-                                                                                        <h3 class="text-center">Activate Hospital</h3>
+                                                                                        <h1 class="header-h1-text text-center">Commission Rates</h1>
                                                                                         <hr>
-                                                                                        <br><br>
-                                                                                        <form action="/admin/hospitals/<%=hospital.username%>/activate?_method=PUT" method="POST">
-                                                                                            <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Activate Hospital</button>
-                                                                                        </form>
+                                                                                        <table class="table" id="commissionRatesTable">
+                                                                                            <thead>
+                                                                                                <tr>
+                                                                                                    <th scope="col">Amount patient paid</th>
+                                                                                                    <th scope="col">Commission</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td>Up to <strike>N</strike>5,000</td>
+                                                                                                    <td>
+                                                                                                        <%= hospital.hospitalDetails.commission_rates.min_amount_rate %>%
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
+                                                                                                    <td>
+                                                                                                        <%= hospital.hospitalDetails.commission_rates.low_amount_rate %>%
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
+                                                                                                    <td>
+                                                                                                        <%= hospital.hospitalDetails.commission_rates.mid_amount_rate %>%
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
+                                                                                                    <td>
+                                                                                                        <%= hospital.hospitalDetails.commission_rates.high_amount_rate %>%
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                    <td>Above <strike>N</strike>100,000</td>
+                                                                                                    <td>
+                                                                                                        <%= hospital.hospitalDetails.commission_rates.max_amount_rate %>%
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                        <p style="font-size: 0.8em;">
+                                                                                            <span>Average commission rate: </span>
+                                                                                            <span>
+                                                                                                <%=hospital.hospitalDetails.average_commission_rate%>%
+                                                                                            </span>
                                                                                     </div>
-                                                                                    <br>
                                                                                     <% } %>
+                                                                                        <br>
 
-                                                                                        <% if(hospital.role != -1) { %>
-                                                                                            <!--SUSPEND ACCOUNT-->
-                                                                                            <div class="profile bg-warning">
+                                                                                        <% if(hospital.role <= 0.75 && hospital.role != -1) { %>
+                                                                                            <!--ACTIVATE ACCOUNT-->
+                                                                                            <div class="profile drop__shadow">
                                                                                                 <br>
-                                                                                                <h3 class="text-center">Suspend Hospital</h3>
+                                                                                                <h3 class="text-center">Activate Hospital</h3>
                                                                                                 <hr>
                                                                                                 <br><br>
-                                                                                                <form action="/admin/hospitals/<%=hospital.username%>/suspend?_method=PUT" method="POST">
-                                                                                                    <button type="submit" class="btn btn-lg btn-light" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Suspend Hospital</button>
+                                                                                                <form action="/admin/hospitals/<%=hospital.username%>/activate?_method=PUT" method="POST">
+                                                                                                    <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Activate Hospital</button>
                                                                                                 </form>
                                                                                             </div>
                                                                                             <br>
                                                                                             <% } %>
 
-                                                                                                <% if(hospital.role == -1) { %>
-                                                                                                    <!--RECALL ACCOUNT-->
-                                                                                                    <div class="profile drop__shadow">
+                                                                                                <% if(hospital.role != -1) { %>
+                                                                                                    <!--SUSPEND ACCOUNT-->
+                                                                                                    <div class="profile bg-warning">
                                                                                                         <br>
-                                                                                                        <h3 class="text-center">Recall Hospital</h3>
+                                                                                                        <h3 class="text-center">Suspend Hospital</h3>
                                                                                                         <hr>
                                                                                                         <br><br>
-                                                                                                        <form action="/admin/hospitals/<%=hospital.username%>/activate?_method=PUT" method="POST">
-                                                                                                            <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Recall Hospital</button>
+                                                                                                        <form action="/admin/hospitals/<%=hospital.username%>/suspend?_method=PUT" method="POST">
+                                                                                                            <button type="submit" class="btn btn-lg btn-light" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Suspend Hospital</button>
                                                                                                         </form>
                                                                                                     </div>
                                                                                                     <br>
                                                                                                     <% } %>
 
-                                                                                                        <!--DEACTIVATE ACCOUNT-->
-                                                                                                        <div class="deactivate-account">
+                                                                                                        <% if(hospital.role == -1) { %>
+                                                                                                            <!--RECALL ACCOUNT-->
+                                                                                                            <div class="profile drop__shadow">
+                                                                                                                <br>
+                                                                                                                <h3 class="text-center">Recall Hospital</h3>
+                                                                                                                <hr>
+                                                                                                                <br><br>
+                                                                                                                <form action="/admin/hospitals/<%=hospital.username%>/activate?_method=PUT" method="POST">
+                                                                                                                    <button type="submit" class="btn btn-lg btn-success" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Recall Hospital</button>
+                                                                                                                </form>
+                                                                                                            </div>
                                                                                                             <br>
-                                                                                                            <h3 class="text-center">Remove Hospital</h3>
-                                                                                                            <hr>
-                                                                                                            <br><br>
-                                                                                                            <form action="/admin/hospitals/<%=hospital._id%>?_method=DELETE" method="POST">
-                                                                                                                <button type="submit" class="btn btn-lg btn-danger" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Remove Hospital</button>
-                                                                                                            </form>
-                                                                                                        </div>
+                                                                                                            <% } %>
+
+                                                                                                                <!--DEACTIVATE ACCOUNT-->
+                                                                                                                <div class="deactivate-account">
+                                                                                                                    <br>
+                                                                                                                    <h3 class="text-center">Remove Hospital</h3>
+                                                                                                                    <hr>
+                                                                                                                    <br><br>
+                                                                                                                    <form action="/admin/hospitals/<%=hospital._id%>?_method=DELETE" method="POST">
+                                                                                                                        <button type="submit" class="btn btn-lg btn-danger" style="font-family: 'Poppins', sans-serif; padding: 1rem; display: block; margin: 0 auto;">Remove Hospital</button>
+                                                                                                                    </form>
+                                                                                                                </div>
                                                         </div>
                                                         <br><br><br><br><br>
                                                         <div class="space"></div>

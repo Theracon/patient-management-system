@@ -38,7 +38,7 @@
                                                         <br>
 
                                                         <div class="form_div drop__shadow">
-                                                            <p class="text-secondary text-center" style="font-weight: bold;">Select account type</p>
+                                                            <small class="text-muted">Choose account type:</small>
                                                             <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
                                                                 <button id="doctor-button" class="text-break text-wrap button btn btn-success" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
                                                                 <button id="hospital-button" class="text-break text-wrap button btn btn-outline-success" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
@@ -47,7 +47,7 @@
                                                             <div id="form-holder">
                                                                 <form class="needs-validation" action="/referrers/login" method="POST" novalidate>
                                                                     <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                                                                        <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Log into your doctor account</p>
+                                                                        <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your doctor account.</small>
                                                                         <!--Username-->
                                                                         <div class="form-floating mb-3">
                                                                             <input type="text" class="form-control" id="username" name="username" required>
@@ -74,8 +74,7 @@
                                                                         <div class="button-group" style="width: 100%;">
                                                                             <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                                                                         </div>
-                                                                        <br>
-                                                                        <p class="text-center">Don't have an account? <a href="/register" style="font-family: 'Poppins', sans-serif;">Sign up</a></p>
+                                                                        <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -95,7 +94,7 @@
                                                         formHolder.innerHTML = `
             <form action="/referrers/login" method="POST">
                 <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Log into your doctor account</p>
+                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your doctor account.</small>
                     <!--Username-->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -110,8 +109,7 @@
                     <div class="button-group" style="width: 100%;">
                         <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                     </div>
-                    <br>
-                    <p class="text-center">Don't have an account? <a href="/register" style="font-family: 'Poppins', sans-serif;">Sign up</a></p>
+                    <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
                 </div>
             </form>
             `;
@@ -126,7 +124,7 @@
                                                         formHolder.innerHTML = `
             <form action="/hospitals/login" method="POST">
                 <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Log into your hospital account</p>
+                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your hospital account.</small>
                     <!--Username-->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -141,8 +139,7 @@
                     <div class="button-group" style="width: 100%;">
                         <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
                     </div>
-                    <br>
-                    <p class="text-center">Don't have an account? <a href="/register" style="font-family: 'Poppins', sans-serif;">Sign up</a></p>
+                    <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
                 </div>
             </form>
             `;

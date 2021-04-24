@@ -38,7 +38,8 @@
                                                         <br>
 
                                                         <div class="form_div drop__shadow">
-                                                            <p class="text-secondary text-center" style="font-weight: bold;">Select account type</p>
+                                                            <br>
+                                                            <small class="text-muted">Choose account type:</small>
                                                             <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
                                                                 <button id="doctor-button" class="text-break text-wrap button btn btn-success" value="doctor" style="margin: 0.2rem; border-width: 2px;">Doctor</button>
                                                                 <button id="hospital-button" class="text-break text-wrap button btn btn-outline-success" value="hospital" style="margin: 0.2rem; border-width: 2px;">Hospital</button>
@@ -47,7 +48,7 @@
                                                             <div id="form-holder">
                                                                 <form class="needs-validation" action="/referrers/register" method="POST" novalidate>
                                                                     <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                                                                        <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="margin-bottom: 2rem; height: auto; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Create a doctor account</p>
+                                                                        <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Create a doctor account.</small>
                                                                         <!--Username-->
                                                                         <div class="form-floating mb-3">
                                                                             <input type="text" class="form-control" id="username" name="username" required>
@@ -61,13 +62,13 @@
                                                                         </div>
                                                                         <!--Password-->
                                                                         <div class="form-floating">
-                                                                            <input type="password" class="form-control" id="password" name="password" required>
+                                                                            <input type="password" class="form-control" id="password" name="password" minlength="4" required>
                                                                             <label for="password">Password</label>
                                                                             <div class="valid-feedback">
                                                                                 Looks good.
                                                                             </div>
                                                                             <div class="invalid-feedback">
-                                                                                Please choose a password.
+                                                                                Password must be at least 4 characters long.
                                                                             </div>
                                                                         </div>
                                                                         <!--Button-->
@@ -78,11 +79,10 @@
                                                                     <div style="display: grid;">
                                                                         <div class="text-justify lh-1" style="padding: 1rem; display: flex;">
                                                                             <input class="form-check-input" type="checkbox" id="terms" style="padding: 6px; margin-right: 1rem;" required>
-                                                                            <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+                                                                            <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
                                                                         </div>
                                                                         <p class="text-center text-muted lh-1" style="padding: 1rem; font-size: 0.8rem">We will never share your personal info with anyone else.</p>
-                                                                        <br>
-                                                                        <p class="text-center">Do you have an account? <a href="/login" style="font-family: 'Poppins', sans-serif;">Sign in</a></p>
+                                                                        <small class="text-center">Already have an account? <a href="/login" style="text-decoration: underline;">Sign in</a></small>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -102,7 +102,7 @@
                                                         formHolder.innerHTML = `
             <form action="/referrers/register" method="POST">
                 <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="height: auto; margin-bottom: 2rem; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Create a doctor account</p>
+                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Create a doctor account.</small>
                     <!--Username-->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -121,11 +121,10 @@
                 <div style="display: grid;">
                     <div class="text-justify lh-1" style="padding: 1rem; display: flex;">
                         <input class="form-check-input" type="checkbox" id="terms" style="padding: 6px; margin-right: 1rem;" required>
-                        <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+                        <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
                     </div>
                     <p class="text-center text-muted lh-1" style="padding: 1rem; font-size: 0.8rem">We will never share your personal info with anyone else.</p>
-                    <br>
-                    <p class="text-center">Do you have an account? <a href="/login" style="font-family: 'Poppins', sans-serif;">Sign in</a></p>
+                    <small class="text-center">Already have an account? <a href="/login" style="text-decoration: underline;">Sign in</a></small>
                 </div>
             </form>
             `;
@@ -139,7 +138,7 @@
                                                         formHolder.innerHTML = `
             <form action="/hospitals/register" method="POST">
                 <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <p class="text-center text-wrap text-break text-muted border border-success" id="login-info" style="height: auto; margin-bottom: 2rem; padding: 1rem; width: 95%; border-radius: 5px; font-family: 'Open Sans', 'Poppins', sans-serif; background-color: #fff;">Create a hospital account</p>
+                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Create a hospital account.</small>
                     <!--Username-->
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="username" name="username" required>
@@ -158,11 +157,10 @@
                 <div style="display: grid;">
                     <div class="text-justify lh-1" style="padding: 1rem; display: flex;">
                         <input class="form-check-input" type="checkbox" id="terms" style="padding: 6px; margin-right: 1rem;" required>
-                        <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms and Conditions of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
+                        <label class="form-check-label" for="terms" style="font-size: 0.8rem;">I acknowledge that I have read and agree to the <a href="/terms" target="_blank">Terms of Use</a> and <a href="/privacy" target="_blank">Privacy Policy</a>.</label>
                     </div>
                     <p class="text-center text-muted lh-1" style="padding: 1rem; font-size: 0.8rem">We will never share your personal info with anyone else.</p>
-                    <br>
-                    <p class="text-center">Do you have an account? <a href="/login" style="font-family: 'Poppins', sans-serif;">Sign in</a></p>
+                    <small class="text-center">Already have an account? <a href="/login" style="text-decoration: underline;">Sign in</a></small>
                 </div>
             </form>
             `;

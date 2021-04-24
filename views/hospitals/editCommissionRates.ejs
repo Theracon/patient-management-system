@@ -39,27 +39,27 @@
                             <!--Min amount rate-->
                             <div class="mb-3">
                                 <label for="min_amount_rate" class="lh-1">Commission rate when amount patient paid is up to <strike>N</strike>5,000</label>
-                                <input type="number" class="form-control" id="min_amount_rate" name="min_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>" required>
+                                <input type="number" step="0.01" class="form-control" id="min_amount_rate" name="min_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>" required>
                             </div>
                             <!--Low amount rate-->
                             <div class="mb-3">
                                 <label for="low_amount_rate" class="lh-1">Commission rate when amount patient paid is between <strike>N</strike>5,001 and <strike>N</strike>20,000</label>
-                                <input type="number" class="form-control" id="low_amount_rate" name="low_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>" required>
+                                <input type="number" step="0.01" class="form-control" id="low_amount_rate" name="low_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>" required>
                             </div>
                             <!--Mid amount rate-->
                             <div class="mb-3">
                                 <label for="mid_amount_rate" class="lh-1">Commission rate when amount patient paid is between <strike>N</strike>20,001 and <strike>N</strike>50,000</label>
-                                <input type="number" class="form-control" id="mid_amount_rate" name="mid_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>" required>
+                                <input type="number" step="0.01" class="form-control" id="mid_amount_rate" name="mid_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>" required>
                             </div>
                             <!--High amount rate-->
                             <div class="mb-3">
                                 <label for="high_amount_rate" class="lh-1">Commission rate when amount patient paid is between <strike>N</strike>50,001 and <strike>N</strike>100,000</label>
-                                <input type="number" class="form-control" id="high_amount_rate" name="high_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>" required>
+                                <input type="number" step="0.01" class="form-control" id="high_amount_rate" name="high_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>" required>
                             </div>
                             <!--Max amount rate-->
                             <div class="mb-3">
                                 <label for="max_amount_rate" class="lh-1">Commission rate when amount patient paid is above <strike>N</strike>100,000</label>
-                                <input type="number" class="form-control" id="max_amount_rate" name="max_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>" required>
+                                <input type="number" step="0.01" class="form-control" id="max_amount_rate" name="max_amount_rate" min="0" max="100" value="<%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>" required>
                             </div>
                             <br>
                             <!--Submit button-->

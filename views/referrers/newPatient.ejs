@@ -24,35 +24,56 @@
                     <br>
 
                     <div class="form-content drop__shadow">
-                        <form action="/referrers/<%=currentUser.username%>/patients" method="POST">
+                        <form class="needs-validation" action="/referrers/<%=currentUser.username%>/patients" method="POST" novalidate>
                             <!--Select hospital-->
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="hospital" name="hospital" required>
-                                    <option value="-1" selected disabled>Select an institution</option>
+                                    <option value="-1" selected disabled>-- Select one --</option>
                                     <% hospitals.forEach(function(hospital, index) { %>
-                                        <% if(hospital.role == 1) { %>
-                                            <option value="<%=index%>"> <%=hospital.hospitalDetails.name%> </option>
+                                        <% if(hospital.role === 1 && hospital.hospitalDetails.profile_complete) { %>
+                                            <optgroup label="Hospital <%=index + 1%>">
+                                                <option class="select__hospital--option" value="<%=index%>"><%=hospital.hospitalDetails.name%></option>
+                                                <option class="select__hospital--option" value="" disabled><span>(Average commission: <%=hospital.hospitalDetails.average_commission_rate%>%)</span></option>
+                                            </optgroup>
                                             <% } %> 
                                             <% }); %>
                                         </select>
                                 <label for="hospital">Referral institution</label>
-                                <p class="lh-2"><a href="/hospitals" target="_blank">View list of hospitals</a> to see their departments and units.</p>
-                            </div>
-                            <!--Investigations-->
-                            <div class="mb-3">
-                                <label for="investigation" class="form-label">Investigations to perform:</label>
-                                <textarea class="form-control" name="investigation" id="investigation" style="height: 10rem;" required></textarea>
                             </div>
                             <!--Name of patient-->
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Patient's name:</label>
+                            <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="name" name="name" required>
+                                <label for="name" class="form-label">Patient's name:</label>
+                                <div class="valid-feedback">
+                                    Looks good.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter a name.
+                                </div>
                             </div>
                             <!--Phone number-->
-                            <div class="mb-3">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="phone" name="phone" required>
                                 <label for="phone" class="form-label">Patient's phone number:</label>
-                                <input type="text" class="form-control" id="phone" name="phone">
+                                <div class="valid-feedback">
+                                    Looks good.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter a valid phone number.
+                                </div>
                             </div>
+                            <!--Investigations-->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" name="investigation" id="investigation" style="height: 10rem;" required></textarea>
+                                <label for="investigation" class="form-label">Required investigations:</label>
+                                <div class="valid-feedback">
+                                    Looks good.
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter an investigation.
+                                </div>
+                            </div>
+                            <small class="lh-1"><i class="fas fa-exclamation-circle"></i> Check <a href="/hospitals" target="_blank">list of hospitals</a> to see their departments and units or <a href="/faq#referrerCommission">see how commissions are calculated</a>.</small>
                             <br><br>
                             <!--Button group-->
                             <div class="button-group">

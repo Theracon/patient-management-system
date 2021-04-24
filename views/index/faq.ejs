@@ -91,7 +91,7 @@
                                                                 </div>
                                                             </div>
                                                             <% if(currentUser && currentUser.typeOfUser == "referrer") { %>
-                                                                <div class="accordion-item">
+                                                                <div class="accordion-item" id="referrerCommission">
                                                                     <h2 class="accordion-header" id="headingThree">
                                                                         <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                                                             How are my commissions calculated?
@@ -99,45 +99,58 @@
                                                                     </h2>
                                                                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
-                                                                            Referrer commissions are calculated as follows:
-                                                                            <br>
-                                                                            <small class="text-primary"><i class="fas fa-exclamation-circle"></i> All commissions are based on amount paid by referred patients for the investigations for which they are referred.</small>
-                                                                            <br><br>
-                                                                            <div class="list-group">
-                                                                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                                        <h5 class="mb-1">Amount paid is N5,000 or less</h5>
-                                                                                    </div>
-                                                                                    <p class="mb-1">Commission: 15.0%</p>
-                                                                                </a>
-                                                                                <a href="#" class="list-group-item list-group-item-action">
-                                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                                        <h5 class="mb-1">Amount paid is above N5,000 and up to N20,000</h5>
-                                                                                    </div>
-                                                                                    <p class="mb-1">Commission: 12.0%</p>
-                                                                                </a>
-                                                                                <a href="#" class="list-group-item list-group-item-action">
-                                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                                        <h5 class="mb-1">Amount paid is above N20,000 and up to N50,000</h5>
-                                                                                    </div>
-                                                                                    <p class="mb-1">Commission: 9.0%</p>
-                                                                                </a>
-                                                                                <a href="#" class="list-group-item list-group-item-action">
-                                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                                        <h5 class="mb-1">Amount paid is above N50,000 and up to N100,000</h5>
-                                                                                    </div>
-                                                                                    <p class="mb-1">Commission: 6.0%</p>
-                                                                                </a>
-                                                                                <a href="#" class="list-group-item list-group-item-action">
-                                                                                    <div class="d-flex w-100 justify-content-between">
-                                                                                        <h5 class="mb-1">Amount paid is above N100,000</h5>
-                                                                                    </div>
-                                                                                    <p class="mb-1">Commission: 4.5%</p>
-                                                                                </a>
-                                                                            </div>
-                                                                            <br>
+                                                                            <p><strong>Breakdown of hospital commission rates:</strong></p>
 
-                                                                            <small class="text-primary"><i class="fas fa-exclamation-circle"></i> Commission rates increase with time on platform.</small>
+                                                                            <% hospitals.forEach(function(hospital, index) { %>
+                                                                                <p>
+                                                                                    <%= hospital.hospitalDetails.name.toUpperCase() %>
+                                                                                </p>
+                                                                                <table class="table" id="commissionRatesTable">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th scope="col">Amount patient paid</th>
+                                                                                            <th scope="col">Commission</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td>Up to <strike>N</strike>5,000</td>
+                                                                                            <td>
+                                                                                                <%= hospital.hospitalDetails.commission_rates.min_amount_rate %>%
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
+                                                                                            <td>
+                                                                                                <%= hospital.hospitalDetails.commission_rates.low_amount_rate %>%
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
+                                                                                            <td>
+                                                                                                <%= hospital.hospitalDetails.commission_rates.mid_amount_rate %>%
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
+                                                                                            <td>
+                                                                                                <%= hospital.hospitalDetails.commission_rates.high_amount_rate %>%
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td>Above <strike>N</strike>100,000</td>
+                                                                                            <td>
+                                                                                                <%= hospital.hospitalDetails.commission_rates.max_amount_rate %>%
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                                <small>Average commission rate: <%= hospital.hospitalDetails.average_commission_rate %>%</small>
+                                                                                <br><br><br>
+                                                                                <% }); %>
+
+                                                                                    <p><strong>What you get:</strong></p>
+                                                                                    <small>You get 50% of total commission per referral.</small>
                                                                         </div>
                                                                     </div>
                                                                 </div>
