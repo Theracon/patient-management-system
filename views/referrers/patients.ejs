@@ -94,7 +94,7 @@
                                                                                                                                                                                                                         <% var obj = {}; %>
 
                                                                                                                                                                                                                             <% patients.forEach(function(patient) { %>
-                                                                                                                                                                                                                                <% if(patient.referral_month == months[date.getMonth()]) { %>
+                                                                                                                                                                                                                                <% if(patient.referral_month == months[date.getMonth()] && patient.referral_year == date.getFullYear()) { %>
                                                                                                                                                                                                                                     <% patientNumber++ %>
                                                                                                                                                                                                                                         <% commission += patient.referrer_commission %>
 
@@ -141,7 +141,7 @@
                                                                                                                                                                                                             <div class="patients-div-auth overflow-auto">
                                                                                                                                                                                                                 <% var count = 0; %>
                                                                                                                                                                                                                     <% patients.forEach(function(patient, index, array) { %>
-                                                                                                                                                                                                                        <% if(patient.status === "authenticated") { %>
+                                                                                                                                                                                                                        <% if(patient.status == "authenticated" && patient.authentication_month == months[date.getMonth()] && patient.authentication_year == date.getFullYear()) { %>
                                                                                                                                                                                                                             <% count++ %>
                                                                                                                                                                                                                                 <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
                                                                                                                                                                                                                                     <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
@@ -163,7 +163,7 @@
                                                                                                                                                                                                             <div class="patients-div-unauth overflow-auto">
                                                                                                                                                                                                                 <% var count = 0; %>
                                                                                                                                                                                                                     <% patients.forEach(function(patient, index, array) { %>
-                                                                                                                                                                                                                        <% if(patient.status === "unauthenticated") { %>
+                                                                                                                                                                                                                        <% if(patient.status === "unauthenticated" && patient.referral_month == months[date.getMonth()] && patient.referral_year == date.getFullYear()) { %>
                                                                                                                                                                                                                             <% count++ %>
                                                                                                                                                                                                                                 <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
                                                                                                                                                                                                                                     <span class="patient-card-name lh-1 text-center"><%= limitText(patient.name) %></span>
@@ -226,7 +226,7 @@
         var monthlyPatientsAuthMarkup = `
         <% var count = 0; %> 
         <% patients.forEach(function(patient, index, array) { %>
-            <% if(patient.status == "authenticated") { %>
+            <% if(patient.status == "authenticated" && patient.authentication_month == months[date.getMonth()] && patient.authentication_year == date.getFullYear()) { %>
                 <% if(patient.referral_month == months[date.getMonth()]) { %>
                     <% count++ %> 
                     <button class="btn btn-outline-primary patient-card-auth" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
@@ -247,7 +247,7 @@
         var monthlyPatientsUnauthMarkup = `
         <% var count = 0; %> 
         <% patients.forEach(function(patient, index, array) { %>
-            <% if(patient.status == "unauthenticated") { %>
+            <% if(patient.status == "unauthenticated" && patient.referral_month == months[date.getMonth()] && patient.referral_year == date.getFullYear()) { %>
                 <% if(patient.referral_month == months[date.getMonth()]) { %>
                     <% count++ %> 
                     <button class="btn btn-outline-secondary patient-card-unauth" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';">
@@ -287,7 +287,7 @@
         <% var obj = {}; %>
 
         <% patients.forEach(function(patient) { %>
-            <% if(patient.referral_month == months[date.getMonth()]) { %>
+            <% if(patient.referral_month == months[date.getMonth()] && patient.referral_year == date.getFullYear()) { %>
                 <% patientNumber++ %>
                 <% commission += patient.referrer_commission %>
                 
