@@ -3,17 +3,21 @@
     <div style="position: relative;">
         <div id="home__intro--container">
             <div class="container-fluid" id="container-fluid">
-                <div style="display: flex; justify-content: center; align-items: center;">
-                    <a href="/home">
-                        <img src="https://i.ibb.co/PmwPpHt/24-3.png" style="width: 60px; height: 60px;" border="0" alt="Fastclinic logo.">
-                    </a>
-                    <a href="/home">
-                        <span class="text-white display-6 bold-text">fastclinic</span>
-                    </a>
-                </div>
                 <div style="display: grid; justify-content: center; align-items: center;">
-                    <p style="cursor: pointer; justify-self: center; opacity: 0.75;"><i class="fas fa-chevron-down text-white" id="show_links"></i></p>
-                    <%- include("../partials/navbar_nouser.ejs") %>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <a href="/home">
+                            <img src="https://i.ibb.co/PmwPpHt/24-3.png" style="width: 60px; height: 60px;" border="0" alt="Fastclinic logo.">
+                        </a>
+                        <a href="/home">
+                            <span class="text-white display-6 bold-text">fastclinic</span>
+                        </a>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <% if(!currentUser) { %>
+                            <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-right: 7px;" href="/login">Login</a>
+                            <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-left: 7px;" href="/register">Register</a>
+                            <% } %>
+                    </div>
                 </div>
             </div>
             <div style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
