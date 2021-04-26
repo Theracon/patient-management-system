@@ -246,6 +246,7 @@
         }
         
         #home__intro--container {
+            position: relative;
             width: 100%;
             min-height: 100vh;
             overflow: hidden;
@@ -1858,6 +1859,11 @@
             -ms-transform: scale(0.8);
             transform: scale(0.8);
         }
+        
+        .article__content {
+            background: none;
+            margin-top: 50vh;
+        }
         /************************************************************************************************************************ 
                                                 STYLES FOR MOBILE DEVICES & TABLETS
             *************************************************************************************************************************/
@@ -2096,9 +2102,7 @@
                 transform: scale(0.4);
             }
             #home__intro--container::before {
-                background: url("https://i.ibb.co/S7Jtn0n/001-pexels-photo.jpg") no-repeat center center fixed;
-                background-size: cover;
-                mix-blend-mode: hard-light;
+                background: #23395d;
             }
             #articleOne::before {
                 background: #198754;
@@ -2111,6 +2115,21 @@
             }
             #articleFour::before {
                 background: #ffc107;
+            }
+            .article__image--div {
+                display: block;
+            }
+            .article__content {
+                margin: 0;
+                width: 100%;
+                height: fit-content;
+                border-radius: 0;
+            }
+            .flexer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
         }
         /************************************************************************************************************************ 
