@@ -2095,43 +2095,29 @@
                 -ms-transform: scale(0.4);
                 transform: scale(0.4);
             }
+            #home__intro--container::before {
+                background: url("https://i.ibb.co/S7Jtn0n/001-pexels-photo.jpg") no-repeat center center fixed;
+                background-size: cover;
+                mix-blend-mode: hard-light;
+            }
+            #articleOne::before {
+                background: #198754;
+            }
+            #articleTwo::before {
+                background: #152238;
+            }
+            #articleThree::before {
+                background: #6c757d;
+            }
+            #articleFour::before {
+                background: #ffc107;
+            }
         }
         /************************************************************************************************************************ 
                                                 STYLES FOR MOBILE DEVICES ONLY
             *************************************************************************************************************************/
         
-        @media screen and (max-width: 479px) {
-            #home__intro--container::before {
-                background-image: url("https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=500") no-repeat center center;
-                background-size: cover;
-                width: 100%;
-                min-height: 100vh;
-            }
-            #articleOne::before {
-                background-image: url("https://images.pexels.com/photos/4769130/pexels-photo-4769130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=500") no-repeat center center;
-                background-size: cover;
-                width: 100%;
-                min-height: 100vh;
-            }
-            #articleTwo::before {
-                background-image: url("https://images.unsplash.com/photo-1579154341098-e4e158cc7f55?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80") no-repeat center center;
-                background-size: cover;
-                width: 100%;
-                min-height: 100vh;
-            }
-            #articleThree::before {
-                background-image: url("https://images.pexels.com/photos/5327653/pexels-photo-5327653.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=500") no-repeat center center;
-                background-size: cover;
-                width: 100%;
-                min-height: 100vh;
-            }
-            #articleFour::before {
-                background-image: url("https://images.pexels.com/photos/3727459/pexels-photo-3727459.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=500") no-repeat center center;
-                background-size: cover;
-                width: 100%;
-                min-height: 100vh;
-            }
-        }
+        @media screen and (max-width: 479px) {}
     </style>
 </head>
 
