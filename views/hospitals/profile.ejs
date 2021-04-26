@@ -69,25 +69,26 @@
                                                                     <br>
 
                                                                     <div class="profile drop__shadow">
-                                                                        <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
-                                                                            <% var currentMonth = months[new Date().getMonth()] %>
-                                                                                <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
-                                                                                    <% if(currentUser.hospitalDetails.patients.length > 0) { %>
-                                                                                        <% currentUser.hospitalDetails.patients.forEach(function(patient) { %>
-                                                                                            <% totalAmount += patient.amount_paid %>
-                                                                                                <% totalCommission += patient.hospital_commission %>
-                                                                                                    <% if(patient.authentication_month == currentMonth) { %>
-                                                                                                        <% currentAmount += patient.amount_paid %>
-                                                                                                            <% currentCommission += patient.hospital_commission %>
-                                                                                                                <% } %>
-                                                                                                                    <% })%>
-                                                                                                                        <% } %>
-                                                                                                                            <h1 class="header-h1-text text-center">Account Information</h1>
-                                                                                                                            <hr>
-                                                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
-                                                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
-                                                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+                                                                        <% var date = new Date() %>
+                                                                            <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
+                                                                                <% var currentMonth = months[date.getMonth()] %>
+                                                                                    <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
+                                                                                        <% if(currentUser.hospitalDetails.patients.length > 0) { %>
+                                                                                            <% currentUser.hospitalDetails.patients.forEach(function(patient) { %>
+                                                                                                <% totalAmount += patient.amount_paid %>
+                                                                                                    <% totalCommission += patient.hospital_commission %>
+                                                                                                        <% if(patient.authentication_month == currentMonth && patient.authentication_year == date.getFullYear()) { %>
+                                                                                                            <% currentAmount += patient.amount_paid %>
+                                                                                                                <% currentCommission += patient.hospital_commission %>
+                                                                                                                    <% } %>
+                                                                                                                        <% })%>
+                                                                                                                            <% } %>
+                                                                                                                                <h1 class="header-h1-text text-center">Account Information</h1>
+                                                                                                                                <hr>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
+                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
                                                                     </div>
                                                                     <br>
 

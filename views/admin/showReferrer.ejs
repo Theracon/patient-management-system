@@ -54,17 +54,18 @@
                                                                                                 <% dec = numSplit[1]; %>
                                                                                                     <% return int + "." + dec; %>
                                                                                                         <% } %>
-                                                                                                            <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
-                                                                                                                <% var currentMonth = months[new Date().getMonth()] %>
-                                                                                                                    <% var currentCommission = 0, totalCommission = 0; %>
-                                                                                                                        <% referrer.referrerDetails.patients.forEach(function(patient) { %>
-                                                                                                                            <% totalCommission += patient.referrer_commission %>
-                                                                                                                                <% if(patient.authentication_month == currentMonth) { %>
-                                                                                                                                    <% currentCommission += patient.referrer_commission %>
-                                                                                                                                        <% } %>
-                                                                                                                                            <% })%>
-                                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                                                                <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+                                                                                                            <% var date = new Date() %>
+                                                                                                                <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
+                                                                                                                    <% var currentMonth = months[date.getMonth()] %>
+                                                                                                                        <% var currentCommission = 0, totalCommission = 0; %>
+                                                                                                                            <% referrer.referrerDetails.patients.forEach(function(patient) { %>
+                                                                                                                                <% totalCommission += patient.referrer_commission %>
+                                                                                                                                    <% if(patient.authentication_month == currentMonth && patient.authentication_year == date.getFullYear()) { %>
+                                                                                                                                        <% currentCommission += patient.referrer_commission %>
+                                                                                                                                            <% } %>
+                                                                                                                                                <% })%>
+                                                                                                                                                    <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
+                                                                                                                                                    <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
                                                         </div>
                                                         <br>
 
