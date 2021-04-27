@@ -60,7 +60,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <!--Password-->
-                                                                        <div class="form-floating">
+                                                                        <div class="form-floating mb-3">
                                                                             <input type="password" class="form-control" id="password" name="password" required>
                                                                             <label for="password">Password</label>
                                                                             <div class="valid-feedback">
@@ -68,6 +68,17 @@
                                                                             </div>
                                                                             <div class="invalid-feedback">
                                                                                 Please enter your password.
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Confirm Password-->
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                                                            <label for="confirmPassword">Confirm Password</label>
+                                                                            <div class="valid-feedback">
+                                                                                Looks good.
+                                                                            </div>
+                                                                            <div class="invalid-feedback">
+                                                                                Passwords don't match.
                                                                             </div>
                                                                         </div>
                                                                         <!--Button-->
@@ -92,27 +103,38 @@
                                                 buttonHolder.addEventListener("click", function(e) {
                                                     if (e.target.value === "doctor") {
                                                         formHolder.innerHTML = `
-            <form action="/referrers/login" method="POST">
-                <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your doctor account.</small>
-                    <!--Username-->
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="username" name="username" required>
-                        <label for="username">Username</label>
-                    </div>
-                    <!--Password-->
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="password" name="password" required>
-                        <label for="password">Password</label>
-                    </div>
-                    <!--Button-->
-                    <div class="button-group" style="width: 100%;">
-                        <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
-                    </div>
-                    <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
-                </div>
-            </form>
-            `;
+                                                            <form action="/referrers/login" method="POST">
+                                                                <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
+                                                                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your doctor account.</small>
+                                                                    <!--Username-->
+                                                                    <div class="form-floating mb-3">
+                                                                        <input type="text" class="form-control" id="username" name="username" required>
+                                                                        <label for="username">Username</label>
+                                                                    </div>
+                                                                    <!--Password-->
+                                                                    <div class="form-floating mb-3">
+                                                                        <input type="password" class="form-control" id="password" name="password" required>
+                                                                        <label for="password">Password</label>
+                                                                    </div>
+                                                                    <!--Confirm Password-->
+                                                                    <div class="form-floating mb-3">
+                                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                                                        <label for="confirmPassword">Confirm Password</label>
+                                                                        <div class="valid-feedback">
+                                                                            Looks good.
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                            Passwords don't match.
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--Button-->
+                                                                    <div class="button-group" style="width: 100%;">
+                                                                        <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                                                                    </div>
+                                                                    <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
+                                                                </div>
+                                                            </form>
+                                                            `;
                                                         doctorButton.classList.add("btn-success");
                                                         doctorButton.classList.remove("btn-outline-success");
                                                         hospitalButton.classList.add("btn-outline-success");
@@ -122,27 +144,37 @@
                                                     }
                                                     if (e.target.value === "hospital") {
                                                         formHolder.innerHTML = `
-            <form action="/hospitals/login" method="POST">
-                <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your hospital account.</small>
-                    <!--Username-->
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="username" name="username" required>
-                        <label for="username">Username</label>
-                    </div>
-                    <!--Password-->
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="password" name="password" required>
-                        <label for="password">Password</label>
-                    </div>
-                    <!--Button-->
-                    <div class="button-group" style="width: 100%;">
-                        <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
-                    </div>
-                    <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
-                </div>
-            </form>
-            `;
+                                                            <form action="/hospitals/login" method="POST">
+                                                                <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
+                                                                    <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your hospital account.</small>
+                                                                    <!--Username-->
+                                                                    <div class="form-floating mb-3">
+                                                                        <input type="text" class="form-control" id="username" name="username" required>
+                                                                        <label for="username">Username</label>
+                                                                    </div>
+                                                                    <!--Password-->
+                                                                    <div class="form-floating mb-3">
+                                                                        <input type="password" class="form-control" id="password" name="password" required>
+                                                                        <label for="password">Password</label>
+                                                                    </div>
+                                                                    <div class="form-floating mb-3">
+                                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                                                        <label for="confirmPassword">Confirm Password</label>
+                                                                        <div class="valid-feedback">
+                                                                            Looks good.
+                                                                        </div>
+                                                                        <div class="invalid-feedback">
+                                                                            Passwords don't match.
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--Button-->
+                                                                    <div class="button-group" style="width: 100%;">
+                                                                        <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                                                                    </div>
+                                                                    <small class="text-center">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
+                                                                </div>
+                                                            </form>
+                                                            `;
                                                         doctorButton.classList.remove("btn-success");
                                                         doctorButton.classList.add("btn-outline-success");
                                                         hospitalButton.classList.remove("btn-outline-success");
