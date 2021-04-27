@@ -45,7 +45,7 @@ router.get('/referrers/:username/patients/new', middleware.isUserLoggedIn, middl
 // CREATE(POST): LOGIC TO ADD A NEW PATIENT/REFERRERS
 router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middleware.isReferrerAuthorized, function(req, res) {
     if (req.body.hospital && parseInt(req.body.hospital, 10) >= 0) {
-        var hospitalArray;
+        var hospitalArray, hospital;
 
         User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
             if (err) {
@@ -54,6 +54,7 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
             }
 
             hospitalArray = hospitals.slice();
+            hospital = hospitalArray[req.body.hospital];
 
             // Find referrer in database
             User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
@@ -65,24 +66,47 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
                             name: req.body.name,
                             investigation: req.body.investigation,
                             phone: req.body.phone,
-                            hospital_name: hospitalArray[req.body.hospital].hospitalDetails.name,
-                            hospital_address: hospitalArray[req.body.hospital].hospitalDetails.address,
-                            hospital_id: hospitalArray[req.body.hospital]._id,
+                            hospital_name: hospital.hospitalDetails.name,
+                            hospital_address: hospital.hospitalDetails.address,
+                            hospital_id: hospital._id,
                             accession_number: uniqid.time("", Math.floor(Math.random() * 100)).toUpperCase(),
                             status: "unauthenticated",
                             referrer: user.referrerDetails.title + " " + user.referrerDetails.name,
                             referrer_id: user._id,
+
                             // Initialize patient's finances
                             amount_paid: 0,
                             hospital_commission: 0,
                             referrer_commission: 0,
                             platform_commission: 0,
+
                             // Initialize patient's referral info
                             referral_year: date.getFullYear(),
                             referral_month: months[date.getMonth()],
                             referral_date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
                             referral_time: functions.formatTime(date),
                         });
+
+                        // Create notification to notify referral hospital
+                        var referralMessage = {
+                            date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
+                            time: functions.formatTime(new Date()),
+                            content: `Hi ${hospital.hospitalDetails.name}, A patient with the following details has been referred to you - 
+                                        Name: ${patient.name},
+                                        Phone number: ${patient.phone}, 
+                                        Investigations: ${patient.investigation},
+                                        Referrer: ${user.referrerDetails.title} ${user.referrerDetails.name}`,
+                            status: "unread"
+                        }
+
+                        // Send notification to hospital
+                        hospital.hospitalDetails.notifications.unshift(referralMessage);
+
+                        // Update hospital's notifications count
+                        hospital.hospitalDetails.unread_notifications_count++;
+
+                        // Save hospital data
+                        hospital.save(function(err, hospital) {});
 
                         // Save patient data
                         patient.save(function(err, patient) {

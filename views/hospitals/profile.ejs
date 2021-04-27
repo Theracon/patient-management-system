@@ -87,10 +87,10 @@
                                                                                                                                     <% } %>
                                                                                                                                         <h1 class="header-h1-text text-center">Account Information</h1>
                                                                                                                                         <hr>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentAmount)%></span></p>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(currentCommission)%></span></p>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalAmount)%></span></p>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike> <%=formatNumber(totalCommission)%></span></p>
+                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(currentAmount)%></span></p>
+                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(currentCommission)%></span></p>
+                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(totalAmount)%></span></p>
+                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(totalCommission)%></span></p>
                                                                     </div>
                                                                     <br>
 
@@ -211,7 +211,7 @@
                                                                                             <!--DEACTIVATE ACCOUNT-->
                                                                                             <div class="deactivate-account">
                                                                                                 <br>
-                                                                                                <h3 class="text-center">Deactivate Account</h3>
+                                                                                                <h3 class="text-center">Delete My Account</h3>
                                                                                                 <hr>
                                                                                                 <p class="deactivate-account-text text-center">
                                                                                                     <strong>Can we resolve this?</strong>
@@ -222,7 +222,7 @@
                                                                                                     <small><a href="#" style="color: white;">+234 (0) 913 228-3783</a></small>
                                                                                                 </p>
                                                                                                 <br><br>
-                                                                                                <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/deactivate';" style="display: block; margin: 0 auto;">Deactivate account</button><br>
+                                                                                                <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/deactivate';" style="display: block; margin: 0 auto;">Delete account</button><br>
                                                                                             </div>
                                                                                             <br><br><br><br><br>
                                                         </div>

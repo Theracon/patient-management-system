@@ -13,7 +13,7 @@
                             <% } %>
                 </div>
             </div>
-            <h1 class="header-h1-text">Deactivate Account</h1>
+            <h1 class="header-h1-text">Delete My Account</h1>
             <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
             <%- include("../partials/navbar_hospital.ejs") %>
         </header>
@@ -26,7 +26,7 @@
                     <br>
 
                     <div class="deregister-content overflow-auto drop__shadow">
-                        <p class="text-left" style="font-size: 1.5em;"><strong>What happens if I deactivate my account?</strong></p>
+                        <p class="text-left" style="font-size: 1.5em;"><strong>What happens if I delete my account?</strong></p>
                         <ul class="text-left">
                             <li>You won't have access to your account or any Fastclinic service.</li>
                             <li>Fastclinic's referrers will not be able to send patients to you.</li>
@@ -36,9 +36,9 @@
                             <li>You will have to sign up and create a new profile if you intend to use Fastclinic again.</li>
                         </ul>
                         <br>
-                        <p class="text-left" style="font-size: 1.5em;" id="disable"><strong>What if I just want to temporarily disable my
+                        <p class="text-left" style="font-size: 1.5em;" id="disable"><strong>What if I just want to temporarily deactivate my
                             account?</strong></p>
-                        <p class="text-left">You can take a break from Fastclinic and temporarily disable your account. When you disable your account:
+                        <p class="text-left">You can take a break from Fastclinic and temporarily disable your account. When you deactivate your account:
                         </p>
                         <ul>
                             <li>Your account will show <em>pending</em> when you login.</li>
@@ -49,7 +49,7 @@
                         <p>When you want to reactivate your account, simply click the <em>Reactivate account</em> button on the page you're redirected to after you log into your account.</p>
                         <br>
                         <form action="/hospitals/<%=currentUser.username%>/disable?_method=PUT" method="POST" style="margin: 0; padding: 0; height: fit-content;">
-                            <input type="submit" class="button btn btn-warning" value="Disable my account">
+                            <input type="submit" class="button btn btn-warning" value="Deactivate my account">
                         </form>
 
                         <br><br>

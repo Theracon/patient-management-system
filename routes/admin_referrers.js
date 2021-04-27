@@ -61,7 +61,24 @@ router.put("/admin/referrers/:username/activate", middleware.isAdminLoggedIn, mi
             res.redirect("back");
         }
         if (user) {
+            // Change referrer role
             user.role = 1;
+
+            // Send notification to referrer
+            var activationMessage = {
+                date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
+                time: functions.formatTime(new Date()),
+                content: `Hi ${user.referrerDetails.title} ${user.referrerDetails.firstname}, your profile is now active!`,
+                status: "unread"
+            }
+
+            // Send notification to referrer
+            user.referrerDetails.notifications.unshift(activationMessage);
+
+            // Update referrer's notifications count
+            user.referrerDetails.unread_notifications_count++;
+
+            // Save referrer data to database
             user.save(function(err, user) {
                 if (err) {
                     req.flash("error", "Oops! Something isn't quite right.");
@@ -93,7 +110,7 @@ router.put("/admin/referrers/:username/suspend", middleware.isAdminLoggedIn, mid
     });
 });
 
-// REMOVE(DELETE): DEACTIVATE REFERRER/ADMIN
+// REMOVE(DELETE): DELETE REFERRER/ADMIN
 router.delete("/admin/referrers/:id", middleware.isAdminLoggedIn, middleware.isAdminAuthorized, function(req, res) {
     User.findOne({ typeOfUser: "referrer", _id: req.params.id }, function(err, user) {
         if (err) {

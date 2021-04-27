@@ -61,7 +61,24 @@ router.put("/admin/hospitals/:username/activate", middleware.isAdminLoggedIn, mi
             res.redirect("back");
         }
         if (user) {
+            // Change hospital role
             user.role = 1;
+
+            // Send notification to hospital
+            var activationMessage = {
+                date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
+                time: functions.formatTime(new Date()),
+                content: `Hi ${user.hospitalDetails.name}, your profile is now active!`,
+                status: "unread"
+            }
+
+            // Send notification to hospital
+            user.hospitalDetails.notifications.unshift(activationMessage);
+
+            // Update hospital's notifications count
+            user.hospitalDetails.unread_notifications_count++;
+
+            // Save hospital data to database
             user.save(function(err, user) {
                 if (err) {
                     req.flash("error", "Oops! Something isn't quite right.");
@@ -93,7 +110,7 @@ router.put("/admin/hospitals/:username/suspend", middleware.isAdminLoggedIn, mid
     });
 });
 
-// REMOVE(DELETE): DEACTIVATE HOSPITAL/ADMIN
+// REMOVE(DELETE): DELETE HOSPITAL/ADMIN
 router.delete("/admin/hospitals/:id", middleware.isAdminLoggedIn, middleware.isAdminAuthorized, function(req, res) {
     User.findOne({ typeOfUser: "hospital", _id: req.params.id }, function(err, user) {
         if (err) {

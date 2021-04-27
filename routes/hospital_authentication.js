@@ -139,6 +139,24 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
                                     }
                                     // Push patient into referring doctor's patients array
                                     referrer.referrerDetails.patients.unshift(patient);
+
+                                    // Create notification to referrer
+                                    var authenticationMessage = {
+                                        date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
+                                        time: functions.formatTime(new Date()),
+                                        content: `Hi ${referrer.referrerDetails.title} ${referrer.referrerDetails.firstname}, Your patient with the following details has been authenticated - 
+                                                    Name: ${patient.name}, 
+                                                    Investigations: ${patient.investigation}, 
+                                                    Referral hospital: ${patient.hospital_name}`,
+                                        status: "unread"
+                                    }
+
+                                    // Send notification to referrer
+                                    referrer.referrerDetails.notifications.unshift(authenticationMessage);
+
+                                    // Update referrer's notifications count
+                                    referrer.referrerDetails.unread_notifications_count++;
+
                                     // Save referrer
                                     referrer.save(function(err, referrer) {
                                         if (err) {

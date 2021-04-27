@@ -97,62 +97,67 @@
                                                                             How are my commissions calculated?
                                                                         </button>
                                                                     </h2>
+
                                                                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <p><strong>Breakdown of hospital commission rates:</strong></p>
 
                                                                             <% hospitals.forEach(function(hospital, index) { %>
-                                                                                <p>
-                                                                                    <%= hospital.hospitalDetails.name.toUpperCase() %>
-                                                                                </p>
-                                                                                <table class="table" id="commissionRatesTable">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th scope="col">Amount patient paid</th>
-                                                                                            <th scope="col">Commission</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td>Up to <strike>N</strike>5,000</td>
-                                                                                            <td>
-                                                                                                <%= hospital.hospitalDetails.commission_rates.min_amount_rate %>%
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
-                                                                                            <td>
-                                                                                                <%= hospital.hospitalDetails.commission_rates.low_amount_rate %>%
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
-                                                                                            <td>
-                                                                                                <%= hospital.hospitalDetails.commission_rates.mid_amount_rate %>%
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
-                                                                                            <td>
-                                                                                                <%= hospital.hospitalDetails.commission_rates.high_amount_rate %>%
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td>Above <strike>N</strike>100,000</td>
-                                                                                            <td>
-                                                                                                <%= hospital.hospitalDetails.commission_rates.max_amount_rate %>%
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                                <small>Average commission rate: <%= hospital.hospitalDetails.average_commission_rate %>%</small>
-                                                                                <br><br><br>
-                                                                                <% }); %>
+                                                                                <% if(hospital.hospitalDetails.profile_complete) { %>
+                                                                                    <p>
+                                                                                        <%= hospital.hospitalDetails.name.toUpperCase() %>
+                                                                                    </p>
+                                                                                    <table class="table" id="commissionRatesTable">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th scope="col">Amount patient paid</th>
+                                                                                                <th scope="col">Commission</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>Up to <strike>N</strike>5,000</td>
+                                                                                                <td>
+                                                                                                    <%= hospital.hospitalDetails.commission_rates.min_amount_rate %>%
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
+                                                                                                <td>
+                                                                                                    <%= hospital.hospitalDetails.commission_rates.low_amount_rate %>%
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
+                                                                                                <td>
+                                                                                                    <%= hospital.hospitalDetails.commission_rates.mid_amount_rate %>%
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
+                                                                                                <td>
+                                                                                                    <%= hospital.hospitalDetails.commission_rates.high_amount_rate %>%
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Above <strike>N</strike>100,000</td>
+                                                                                                <td>
+                                                                                                    <%= hospital.hospitalDetails.commission_rates.max_amount_rate %>%
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                    <small>Average commission rate: <%= hospital.hospitalDetails.average_commission_rate %>%</small>
+                                                                                    <br><br><br>
+                                                                                    <% } %>
 
-                                                                                    <p><strong>What you get:</strong></p>
-                                                                                    <small>You get 50% of total commission per referral.</small>
+                                                                                        <% }); %>
+
+                                                                                            <p><strong>What you get:</strong></p>
+                                                                                            <small>You get 50% of total commission per referral.</small>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                                 <% } %>
                                                                     <% if(currentUser && currentUser.typeOfUser == "hospital") { %>
