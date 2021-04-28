@@ -1,39 +1,39 @@
 <!--PATIENT, DOCTORS & HOSPITALS COUNT-->
-<footer class="bg-light text-black pt-5 pb-4 footer__footer" id="footer">
+<footer class="bg-success text-secondary pt-5 pb-4 footer__footer" id="footer" style="background-color: white!important; margin-top: 10rem!important;">
     <div class="container text-center text-md-left">
         <div class="row text-center text-md-left">
-            <p class="text-black  text-bold display-6 text-muted lh-1" style="letter-spacing: 5px;">Since 2021</p>
-            <p class="text-muted lh-1">Our partners and us have done an amazing job at bringing patients a step closer to receiving quality healthcare.</p>
+            <p class="text-bold display-6 lh-1" style="letter-spacing: 5px; opacity: 0.7;">SINCE 2021</p>
+            <p class="lh-1" style="opacity: 0.7;">Our partners and us have done an amazing job at bringing patients a step closer to receiving quality healthcare.</p>
         </div>
 
         <br><br>
 
         <div class="row text-center text-md-left">
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <div class="info__circle bg-warning">
+                <div class="info__circle bg-success">
                     <h1 class="display-1 text-white">
                         <strong><%= patientCount %></strong>
                     </h1>
                 </div>
-                <h5 class="text-uppercase mb-4 font-weight-bold text-muted display-6">Patients</h5>
+                <h5 class="text-uppercase mb-4 font-weight-bold display-6" style="opacity: 0.7;">Patients</h5>
             </div>
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <div class="info__circle bg-warning">
+                <div class="info__circle bg-success">
                     <h1 class="display-1 text-white">
                         <strong><%= referrerCount %></strong>
                     </h1>
                 </div>
-                <h5 class="text-uppercase mb-4 font-weight-bold text-muted display-6">Doctors</h5>
+                <h5 class="text-uppercase mb-4 font-weight-bold display-6" style="opacity: 0.7;">Doctors</h5>
             </div>
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                <div class="info__circle bg-warning">
+                <div class="info__circle bg-success">
                     <h1 class="display-1 text-white">
                         <strong><%= hospitalCount %></strong>
                     </h1>
                 </div>
-                <h5 class="text-uppercase mb-4 font-weight-bold text-muted display-6">Hospitals</h5>
+                <h5 class="text-uppercase mb-4 font-weight-bold display-6" style="opacity: 0.7;">Hospitals</h5>
             </div>
         </div>
     </div>
@@ -45,12 +45,9 @@
         <div class="row text-left text-md-left">
             <div class="col-md-4 col-lg-2 col-xl-2 mx-auto mt-3">
                 <h5 class=" mb-4 font-weight-bold text-success">Fastclinic</h5>
-                <!--
-                <p><a href="/about" class="text-white " style="text-decoration: none;">About</a></p>
-                -->
                 <p><a href="/about" class="text-white" style="text-decoration: none;">About</a></p>
                 <p><a href="/faq" class="text-white" style="text-decoration: none;">FAQs</a></p>
-                <p><a href="/blog" class="text-white" style="text-decoration: none;">Fastclinic blog</a></p>
+                <p><a href="/blog" class="text-white" style="text-decoration: none;">Blog</a></p>
                 <p><a href="/terms" class="text-white" style="text-decoration: none;">Terms of use</a></p>
                 <p><a href="/privacy" class="text-white" style="text-decoration: none;">Privacy policy</a></p>
                 <p><a href="/contact" class="text-white" style="text-decoration: none;">Contact us</a></p>
@@ -118,7 +115,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script>
-    // Toggle nav links visibility
+    // TOGGLE VISIBILITY OF NAVBAR LINKS
     var hiddenNavLinks = document.getElementById("hiddenNavLinks");
     var showLinksButton = document.getElementById("show_links");
     showLinksButton.addEventListener("click", function() {
@@ -127,14 +124,17 @@
         showLinksButton.classList.toggle("rotate_180");
     });
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    // DISABLE FORM SUBMISSION IF THERE ARE INVALID FIELDS
     (function() {
         'use strict'
+
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
+
             // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function(form) {
+                // Add 'submit' event listener to form
                 form.addEventListener('submit', function(event) {
                     if (!form.checkValidity()) {
                         event.preventDefault()
@@ -146,11 +146,12 @@
             })
     })()
 
-    // Close alert to create commission rates
+    // CLOSE BOX THAT ALERTS HOSPITALS TO CREATE THEIR COMMISSION RATES
     document.getElementById("createCRAlertSpan").addEventListener("click", function() {
         document.getElementById("createCRAlertDiv").innerHTML = '';
     });
 </script>
+
 </body>
 
 </html>
