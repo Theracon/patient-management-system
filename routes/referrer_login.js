@@ -1,10 +1,32 @@
 var express = require("express"),
     passport = require("passport"),
     router = express.Router(),
-    User = require("../models/user");
+    User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '';
+
+// INDEX(GET): LOGIN PAGE/ALL
+router.get("/accounts/referrers/login", function(req, res) {
+    // Fetch all hospitals
+    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+        // Fetch all referrers
+        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+            // Fetch all patients
+            Patient.find({}, function(err, patients) {
+                // Update counts
+                hospitalCount = hospitals.length;
+                referrerCount = referrers.length;
+                patientCount = patients.length;
+                return res.render("referrers/login", { hospitalCount, referrerCount, patientCount });
+            });
+        });
+    });
+});
 
 // LOGIN(POST): REFERRER LOGIN LOGIC/REFERRERS
-router.post("/referrers/login", function(req, res) {
+router.post("/accounts/referrers/login", function(req, res) {
     // Check if username exists in the database
     User.findOne({ typeOfUser: "referrer", username: req.body.username }, function(err, user) {
         if (!err) {

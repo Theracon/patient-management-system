@@ -1,5 +1,4 @@
 {
     "restructuredtext.languageServer.disabled": true,
-    "git.ignoreLimitWarning": true,
-    "editor.formatOnSaveMode": "modifications"
+    "git.ignoreLimitWarning": true
 }

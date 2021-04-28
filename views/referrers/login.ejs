@@ -15,7 +15,7 @@
                                                     <div style="display: flex; align-items: center; justify-content: center;">
                                                         <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
                                                     </div>
-                                                    <h1 class="header-h1-text">Sign Up</h1>
+                                                    <h1 class="header-h1-text">Doctor Login</h1>
                                                     <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
                                                     <% if(currentUser) { %>
                                                         <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
@@ -33,21 +33,42 @@
                                                 </header>
 
                                                 <div class="container">
+
                                                     <%- include("../partials/alert.ejs") %>
                                                         <br>
 
                                                         <div class="form_div drop__shadow">
-                                                            <br>
-                                                            <p class="text-center lead">Choose account type</p>
-                                                            <small class="text-muted text-center">I am registering as a:</small>
-                                                            <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
-                                                                <button id="doctor-button" class="text-break text-wrap button btn btn-success" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/referrers/register';">Doctor</button>
-                                                                <button id="hospital-button" class="text-break text-wrap button btn btn-success" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/hospitals/register';">Hospital</button>
+                                                            <div id="form-holder">
+                                                                <form class="needs-validation" action="/accounts/referrers/login" method="POST" novalidate>
+                                                                    <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
+                                                                        <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Log into your doctor account.</small>
+                                                                        <!--Username-->
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="text" class="form-control border border-success" id="username" name="username" required>
+                                                                            <label for="username">Username</label>
+                                                                            <div class="invalid-feedback">
+                                                                                    Username field cannot be empty.
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Password-->
+                                                                        <div class="form-floating mb-3">
+                                                                            <input type="password" class="form-control border border-success" id="password" name="password" minlength="4" required>
+                                                                            <label for="password">Password</label>
+                                                                            <div class="invalid-feedback">
+                                                                                Password field cannot be empty.
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--Submit Button-->
+                                                                        <div class="button-group" style="width: 100%;">
+                                                                            <input type="submit" class="button btn btn-success" value="Login" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                                                                        </div>
+                                                                    </div>
+                                                                    <small class="text-center" style="display: block;">Don't have an account yet? <a href="/register" style="text-decoration: underline;">Sign up</a></small>
+                                                                </form>
                                                             </div>
-                                                            <br>
                                                         </div>
                                                         <br><br><br><br><br>
                                                 </div>
                                             </div>
-
+                                            
                                             <%- include("../partials/footer.ejs") %>

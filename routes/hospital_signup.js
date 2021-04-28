@@ -4,10 +4,32 @@ var date = new Date(),
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     passport = require("passport"),
     router = express.Router(),
-    User = require("../models/user");
+    User = require("../models/user"),
+    Patient = require("../models/patient"),
+    hospitalCount = '',
+    referrerCount = '',
+    patientCount = '';
+
+// INDEX(GET): SIGN UP PAGE/ALL
+router.get("/accounts/hospitals/register", function(req, res) {
+    // Fetch all hospitals
+    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
+        // Fetch all referrers
+        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
+            // Fetch all patients
+            Patient.find({}, function(err, patients) {
+                // Update counts
+                hospitalCount = hospitals.length;
+                referrerCount = referrers.length;
+                patientCount = patients.length;
+                return res.render("hospitals/register", { hospitalCount, referrerCount, patientCount });
+            });
+        });
+    });
+});
 
 // CREATE(POST): ADD A NEW HOSPITAL TO DATABASE/ALL
-router.post('/hospitals/register', function(req, res) {
+router.post('/accounts/hospitals/register', function(req, res) {
     // Check if username exists in the database
     User.findOne({ typeOfUser: "hospital", username: req.body.username }, function(err, user) {
         if (!err) {
