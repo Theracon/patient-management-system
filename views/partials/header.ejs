@@ -20,6 +20,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <script src="https://kit.fontawesome.com/955da05a97.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         /************************************************************************************************************************ 
                                                             DEFAULT STYLES
@@ -1863,6 +1864,44 @@
             background: none;
             margin-top: 50vh;
         }
+
+        /*
+        SLIDESHOW STYLES START
+        */
+        .slider {
+            position: relative;
+            height: 100vh;
+        }
+
+        .slider * {margin: 0; box-sizing: border-box;}
+
+        .slider-overflow {
+            overflow: hidden; /* use an overflow parent! You don't want scrollbars */
+            height: inherit;
+        }
+
+        .slider-items {
+            display: flex; /* Use flex */
+            flex-flow: row nowrap;
+            height: inherit;
+            transition: transform 1s; /* Don't use margin, use transform */
+        }
+
+        .slider-item {
+            flex: 0 0 100%;
+            height: inherit;
+        }
+
+        .slider-nav {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            text-align: center;
+        }
+        /*
+        SLIDESHOW STYLES END
+        */
+
         /************************************************************************************************************************ 
                                                 STYLES FOR MOBILE DEVICES & TABLETS
             *************************************************************************************************************************/
