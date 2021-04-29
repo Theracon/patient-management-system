@@ -1,16 +1,18 @@
 <%- include("../partials/header.ejs") %>
 
 <div style="position: relative; height: 100vh; background-color: white;">
-    <div style="display: grid; justify-content: center; align-items: center; width: 100%; height: 5vh; position: fixed; top: 0px; left: 50%; margin-left: -50%; z-index: 999;">
-        <div style="display: flex; justify-content: center; align-items: center; justify-self: center; align-self: center;">
-            <div class="display-6 text-white"><img src="https://i.ibb.co/PmwPpHt/24-3.png" style="width: 60px; height: 60px;" border="0" alt="Fastclinic logo.">fastclinic</div>
+    <div style="position: absolute; width: 100%; height: 50vh;">       
+        <div style="display: grid; justify-content: center; align-items: center; width: 100%; height: 0; position: sticky; top: 0; z-index: 999;">
+            <div style="display: flex; justify-content: center; align-items: center; justify-self: center; align-self: center;">
+                <div class="display-6 text-white"><img src="https://i.ibb.co/PmwPpHt/24-3.png" style="width: 60px; height: 60px;" border="0" alt="Fastclinic logo.">fastclinic</div>
+            </div>
+            <% if(!currentUser) { %>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-right: 7px;" href="/login">Login</a>
+                <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-left: 7px;" href="/register">Register</a>
+            </div>
+            <% } %>
         </div>
-        <% if(!currentUser) { %>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-right: 7px;" href="/login">Login</a>
-            <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-left: 7px;" href="/register">Register</a>
-        </div>
-        <% } %>
     </div>
     <!--SLIDESHOW MARKUP BEGIN-->
     <div class="slider">
