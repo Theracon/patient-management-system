@@ -1,82 +1,120 @@
 <%- include("../partials/header.ejs") %>
-    <% var logoRoute="/home" ;%>
-        <% if(currentUser && currentUser.typeOfUser=="admin" ) { %>
-            <% logoRoute="/admin/dashboard" ; %>
-                <% } %>
 
-                    <div class="container-fluid" id="container-fluid">
-                        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
-                            <div style="display: flex; align-items: center; justify-content: center;">
-                                <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+<!--Set redirect route on clicking logo-->
+<% var logoRoute="/home" ;%>
+<% if(currentUser && currentUser.typeOfUser=="admin" ) { %>
+    <% logoRoute="/admin/dashboard" ; %>
+<% } %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">Sign Up</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <% if(currentUser) { %>
+            <% if(currentUser.typeOfUser=="referrer" && currentUser.role>= 1) { %>
+                <%- include("../partials/navbar_referrer.ejs") %>
+            <% } else if(currentUser.typeOfUser=="hospital" && currentUser.role>= 1) { %>
+                <%- include("../partials/navbar_hospital.ejs") %>
+            <% } else if(currentUser.typeOfUser=="admin" ) { %>
+                <%- include("../partials/navbar_admin.ejs") %>
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        <% } else { %>
+            <%- include("../partials/navbar_nouser.ejs") %>
+        <% } %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form_div drop__shadow">
+            <form class="needs-validation" action="/admin/register" method="POST" novalidate>
+                <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
+                    <!--Username-->
+                    <div class="form-floating mb-3">
+                        <input type="text" pattern="[A-Za-z0-9]{5,}" class="form-control border border-success" id="username" name="username" required>
+                        <label for="username">Username</label>
+                        <div class="invalid-feedback">
+                            Please adhere to these username rules:
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Username field cannot be empty.</label>
                             </div>
-                            <h1 class="header-h1-text">Sign Up</h1>
-                            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-                            <% if(currentUser) { %>
-                                <% if(currentUser.typeOfUser=="referrer" && currentUser.role>= 1) { %>
-                                    <%- include("../partials/navbar_referrer.ejs") %>
-                                        <% } else if(currentUser.typeOfUser=="hospital" && currentUser.role>= 1) { %>
-                                            <%- include("../partials/navbar_hospital.ejs") %>
-                                                <% } else if(currentUser.typeOfUser=="admin" ) { %>
-                                                    <%- include("../partials/navbar_admin.ejs") %>
-                                                        <% } else { %>
-                                                            <%- include("../partials/navbar_nouser.ejs") %>
-                                                                <% } %>
-                                                                    <% } else { %>
-                                                                        <%- include("../partials/navbar_nouser.ejs") %>
-                                                                            <% } %>
-                        </header>
-
-                        <div class="container">
-
-                            <%- include("../partials/alert.ejs") %>
-                                <br>
-
-                                <div class="form_div drop__shadow">
-                                    <form class="needs-validation" action="/admin/register" method="POST" novalidate>
-                                        <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                                            <!--Username-->
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="username" name="username" required>
-                                                <label for="username">Username</label>
-                                                <div class="valid-feedback">
-                                                    Looks good.
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please choose a username.
-                                                </div>
-                                            </div>
-                                            <!--Password-->
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="password" name="password" required>
-                                                <label for="password">Password</label>
-                                                <div class="valid-feedback">
-                                                    Looks good.
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Password must be at least 4 characters long.
-                                                </div>
-                                            </div>
-                                            <!--Confirm Password-->
-                                            <div class="form-floating mb-3">
-                                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                                                <label for="confirmPassword">Confirm Password</label>
-                                                <div class="valid-feedback">
-                                                    Looks good.
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Passwords don't match.
-                                                </div>
-                                            </div>
-                                            <!--Button-->
-                                            <div class="button-group" style="width: 100%;">
-                                                <input type="submit" class="button btn btn-success" value="Sign up" style="width: 100%; font-family: 'Poppins', sans-serif;">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <br><br><br><br><br>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Username can only be alpha-numeric.</label>
+                            </div>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Username cannot contain special characters.</label>
+                            </div>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Username must be 5 or more characters long.</label>
+                            </div>
                         </div>
-                        <div class="space"></div>
                     </div>
+                    <!--Password-->
+                    <div class="form-floating mb-3">
+                        <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control border border-success" id="password" name="password" onkeyup='check();' required>
+                        <label for="password">Password</label>
+                        <div class="invalid-feedback">
+                            Please adhere to these password rules:
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Password field cannot be empty.</label>
+                            </div>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Password must be 8 or more characters long.</label>
+                            </div>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Password must contain at least one uppercase letter.</label>
+                            </div>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Password must contain at least one lowercase letter.</label>
+                            </div>
+                            <div class="form-check text-secondary">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                <label class="form-check-label" for="flexRadioDisabled">Password must contain at least one number.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Confirm Password-->
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control border border-success" id="confirmPassword" name="confirmPassword" onkeyup='check();' required>
+                        <label for="confirmPassword">Confirm Password</label>
+                        <small id="message"></small>
+                    </div>
+                    <!--Submit Button-->
+                    <div class="button-group" style="width: 100%;">
+                        <input type="submit" class="button btn btn-success" value="Sign up" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+                    </div>
+                    <small class="text-center" style="display: block;">Already have an account? <a href="/admin/login" style="text-decoration: underline;">Sign in</a></small>
+                </div>
+            </form>
+        </div>
+        <br><br><br><br><br>
+    </div>
+</div>
+<div style="height: 50vh;"></div>
 
-                    <%- include("../partials/footer.ejs") %>
+<script>
+    var check = function() {
+        if (document.getElementById('password').value ==
+            document.getElementById('confirmPassword').value) {
+            document.getElementById('message').innerHTML = 'Passwords match'
+            document.getElementById('message').style.color = 'green'
+        } else {
+            document.getElementById('message').innerHTML = "Passwords don't match"
+            document.getElementById('message').style.color = 'red'
+        }
+    }
+</script>
+
+<%- include("../partials/footer.ejs") %>
