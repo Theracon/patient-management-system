@@ -206,27 +206,14 @@
                                                                                             <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/commissions/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
                                                                                         </div>
                                                                                         <br>
-                                                                                        <% } %>
+                                                                                    <% } %>
 
                                                                                             <!--DEACTIVATE ACCOUNT-->
-                                                                                            <div class="deactivate-account">
-                                                                                                <br>
-                                                                                                <h3 class="text-center">Delete My Account</h3>
-                                                                                                <hr>
-                                                                                                <p class="deactivate-account-text text-center">
-                                                                                                    <strong>Can we resolve this?</strong>
-                                                                                                    <br><br>
-                                                                                                    <small><a href="/contact" style="color: white; text-decoration: underline;">Reach us via email</a> with your complaints and/or queries.</small><br>
-                                                                                                    <small>Or call our 24/7 hotlines:</small><br>
-                                                                                                    <small><a href="#" style="color: white;">+234 (0) 806 019-4496</a></small><br>
-                                                                                                    <small><a href="#" style="color: white;">+234 (0) 913 228-3783</a></small>
-                                                                                                </p>
-                                                                                                <br><br>
-                                                                                                <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/deactivate';" style="display: block; margin: 0 auto;">Delete account</button><br>
+                                                                                            <div style="width: 100%; margin: 0 auto;">
+                                                                                                <a href="/hospitals/<%=currentUser.username%>/deactivate" class="text-danger"><p class="text-center" style="font-size: 14px;">Delete my account</p></a>
                                                                                             </div>
                                                                                             <br><br><br><br><br>
                                                         </div>
-                                                        <div class="space"></div>
     </div>
 
     <%- include("../partials/footer.ejs") %>
