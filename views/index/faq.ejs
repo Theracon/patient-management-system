@@ -1,168 +1,153 @@
 <%- include("../partials/header.ejs") %>
-    <% var logoRoute = "/home"; %>
+
+<!--Define logo route on getting clicked-->
+<% var logoRoute = "/home"; %>
+<% if(currentUser) { %>
+    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+        <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
+    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
+    <% } else if(currentUser.typeOfUser == "admin") { %>
+        <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
+    <% } %>
+<% } %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <% if(currentUser) { %>
-            <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-                <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+                <% if(currentUser) {  %>
+                    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                        <div style="display: flex; align-items: flex-start; width: 10%;">
+                            <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %>
+                                <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                                <span><%= currentUser.referrerDetails.unread_notifications_count %></span>
+                            <% } else { %>
+                                <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                            <% } %>
+                        </div>
                     <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-                        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
-                            <% } else if(currentUser.typeOfUser == "admin") { %>
-                                <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
-                                    <% } %>
-                                        <% } %>
+                        <div style="display: flex; align-items: flex-start; width: 10%;">
+                                <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
+                                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                                    <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
+                                <% } else { %>
+                                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                                <% } %>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+        <% } else { %>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            </div>
+        <% } %>
+            <h1 class="header-h1-text">FAQs</h1>
+            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+            <% if(currentUser) { %>
+                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_referrer.ejs") %>
+                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+                    <%- include("../partials/navbar_hospital.ejs") %>
+                <% } else if(currentUser.typeOfUser == "admin") { %>
+                    <%- include("../partials/navbar_admin.ejs") %>
+                <% } else { %>
+                    <%- include("../partials/navbar_nouser.ejs") %>
+                <% } %>
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Why is my account pending?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        By default, every referrer and hospital account is inactive upon sign up. In the first 24 hours following sign up, Fastclinic conducts a background check on the user and the findings of this background check directly influence whether or not a user account
+                        is activated.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Why is my account suspended?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        An account is suspended when used by the account holder in ways that are in clear violation of one or more of Fastclinic's <a href="/terms">terms and conditions</a> and/or <a href="privacy">privacy policies</a>.
+                    </div>
+                </div>
+            </div>
+            <% if(currentUser && currentUser.typeOfUser == "referrer") { %>
+                <div class="accordion-item" id="referrerCommission">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How are my commissions calculated?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <p><strong>Breakdown of hospital commission rates:</strong></p>
+                            <% hospitals.forEach(function(hospital, index) { %>
+                                <% if(hospital.role === 1 && hospital.hospitalDetails.profile_complete) { %>
+                                    <p><%= hospital.hospitalDetails.name.toUpperCase() %></p>
+                                    <table class="table" id="commissionRatesTable">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Amount patient paid</th>
+                                                <th scope="col">Commission</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="letter-spacing: 1px;">
+                                            <tr>
+                                                <td>Up to <strike>N</strike>5,000</td>
+                                                <td><%= hospital.hospitalDetails.commission_rates.min_amount_rate %>%</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
+                                                <td><%= hospital.hospitalDetails.commission_rates.low_amount_rate %>%</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
+                                                <td><%= hospital.hospitalDetails.commission_rates.mid_amount_rate %>%</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
+                                                <td>
+                                                    <%= hospital.hospitalDetails.commission_rates.high_amount_rate %>%
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Above <strike>N</strike>100,000</td>
+                                                <td><%= hospital.hospitalDetails.commission_rates.max_amount_rate %>%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <small>Average commission rate: <%= hospital.hospitalDetails.average_commission_rate %>%</small>
+                                    <br><br><br>
+                                <% } %>
+                            <% }); %>
+                            <p><strong>What you get:</strong></p>
+                            <small>You get 50% of total commission per referral.</small>
+                        </div>
+                    </div>
+                </div>
+            <% } %>        
+        </div>
+        <br>
+        <br><br><br><br><br>
+    </div>
+</div>
 
-                                            <div class="container-fluid" id="container-fluid">
-                                                <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
-                                                    <% if(currentUser) { %>
-                                                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                                                            <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-                                                            <% if(currentUser) {  %>
-                                                                <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-                                                                    <div style="display: flex; align-items: flex-start; width: 10%;">
-                                                                        <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %>
-                                                                            <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                                                                            <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
-                                                                            <% } else { %>
-                                                                                <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
-                                                                                <% } %>
-                                                                    </div>
-                                                                    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-                                                                        <div style="display: flex; align-items: flex-start; width: 10%;">
-                                                                            <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
-                                                                                <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                                                                                <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
-                                                                                <% } else { %>
-                                                                                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
-                                                                                    <% } %>
-                                                                        </div>
-                                                                        <% } %>
-                                                                            <% } %>
-                                                        </div>
-                                                        <% } else { %>
-                                                            <div style="display: flex; align-items: center; justify-content: center;">
-                                                                <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-                                                            </div>
-                                                            <% } %>
-                                                                <h1 class="header-h1-text">FAQs</h1>
-                                                                <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-                                                                <% if(currentUser) { %>
-                                                                    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-                                                                        <%- include("../partials/navbar_referrer.ejs") %>
-                                                                            <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-                                                                                <%- include("../partials/navbar_hospital.ejs") %>
-                                                                                    <% } else if(currentUser.typeOfUser == "admin") { %>
-                                                                                        <%- include("../partials/navbar_admin.ejs") %>
-                                                                                            <% } else { %>
-                                                                                                <%- include("../partials/navbar_nouser.ejs") %>
-                                                                                                    <% } %>
-                                                                                                        <% } else { %>
-                                                                                                            <%- include("../partials/navbar_nouser.ejs") %>
-                                                                                                                <% } %>
-                                                </header>
-
-                                                <div class="container">
-
-                                                    <%- include("../partials/alert.ejs") %>
-                                                        <br>
-
-                                                        <div class="accordion" id="accordionExample">
-                                                            <div class="accordion-item">
-                                                                <h2 class="accordion-header" id="headingOne">
-                                                                    <button class="accordion-button" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        Why is my account pending?
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                    <div class="accordion-body">
-                                                                        By default, every referrer and hospital account is inactive upon sign up. In the first 24 hours following sign up, Fastclinic conducts a background check on the user and the findings of this background check directly influence whether or not a user account
-                                                                        is activated.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="accordion-item">
-                                                                <h2 class="accordion-header" id="headingTwo">
-                                                                    <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                        Why is my account suspended?
-                                                                    </button>
-                                                                </h2>
-                                                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                                    <div class="accordion-body">
-                                                                        An account is suspended when used by the account holder in ways that are in clear violation of one or more of Fastclinic's <a href="/terms">terms and conditions</a> and/or <a href="privacy">privacy policies</a>.
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <% if(currentUser && currentUser.typeOfUser == "referrer") { %>
-                                                                <div class="accordion-item" id="referrerCommission">
-                                                                    <h2 class="accordion-header" id="headingThree">
-                                                                        <button class="accordion-button collapsed" id="accordion__button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                                            How are my commissions calculated?
-                                                                        </button>
-                                                                    </h2>
-
-                                                                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                                        <div class="accordion-body">
-                                                                            <p><strong>Breakdown of hospital commission rates:</strong></p>
-
-                                                                            <% hospitals.forEach(function(hospital, index) { %>
-                                                                                <% if(hospital.hospitalDetails.profile_complete) { %>
-                                                                                    <p>
-                                                                                        <%= hospital.hospitalDetails.name.toUpperCase() %>
-                                                                                    </p>
-                                                                                    <table class="table" id="commissionRatesTable">
-                                                                                        <thead>
-                                                                                            <tr>
-                                                                                                <th scope="col">Amount patient paid</th>
-                                                                                                <th scope="col">Commission</th>
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td>Up to <strike>N</strike>5,000</td>
-                                                                                                <td>
-                                                                                                    <%= hospital.hospitalDetails.commission_rates.min_amount_rate %>%
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
-                                                                                                <td>
-                                                                                                    <%= hospital.hospitalDetails.commission_rates.low_amount_rate %>%
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
-                                                                                                <td>
-                                                                                                    <%= hospital.hospitalDetails.commission_rates.mid_amount_rate %>%
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
-                                                                                                <td>
-                                                                                                    <%= hospital.hospitalDetails.commission_rates.high_amount_rate %>%
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <td>Above <strike>N</strike>100,000</td>
-                                                                                                <td>
-                                                                                                    <%= hospital.hospitalDetails.commission_rates.max_amount_rate %>%
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <small>Average commission rate: <%= hospital.hospitalDetails.average_commission_rate %>%</small>
-                                                                                    <br><br><br>
-                                                                                    <% } %>
-
-                                                                                        <% }); %>
-
-                                                                                            <p><strong>What you get:</strong></p>
-                                                                                            <small>You get 50% of total commission per referral.</small>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <% } %>
-                                                        </div>
-                                                        <br>
-                                                        <br><br><br><br><br>
-                                                </div>
-                                            </div>
-
-                                            <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>
