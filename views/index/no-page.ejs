@@ -1,48 +1,46 @@
 <%- include("../partials/header.ejs") %>
+    
+    <!--Set redirect route on clicking logo-->
     <% var logoRoute = "/home"; %>
+    <% if(currentUser) { %>
+        <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+            <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
+        <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+            <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
+        <% } else if(currentUser.typeOfUser == "admin") { %>
+            <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
+        <% } %>
+    <% } %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #f0ad4e!important;">
+        <div style="display: flex; align-items: center; justify-content: center;"><a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a></div>
+        <h1 class="header-h1-text">Error 404</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <% if(currentUser) { %>
             <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-                <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
-                    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-                        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
-                            <% } else if(currentUser.typeOfUser == "admin") { %>
-                                <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
-                                    <% } %>
-                                        <% } %>
+                <%- include("../partials/navbar_referrer.ejs") %>
+            <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+                <%- include("../partials/navbar_hospital.ejs") %>
+            <% } else if(currentUser.typeOfUser == "admin") { %>
+                <%- include("../partials/navbar_admin.ejs") %>
+            <% } else { %>
+                <%- include("../partials/navbar_nouser.ejs") %>
+            <% } %>
+        <% } else { %>
+            <%- include("../partials/navbar_nouser.ejs") %>
+        <% } %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="container small-content drop__shadow">
+            <small><i class="fas fa-exclamation-triangle"></i> Oops! Page not found.</small>
+            <img class="image__404" src="https://i.ibb.co/DCQ3T7X/18.png" alt="3" border="0">
+        </div>
+        <br><br><br><br><br>
+    </div>
+</div>
+<div style="height: 50vh;"></div>
 
-                                            <div class="container-fluid" id="container-fluid">
-                                                <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #f0ad4e!important;">
-                                                    <div style="display: flex; align-items: center; justify-content: center;">
-                                                        <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-                                                    </div>
-                                                    <h1 class="header-h1-text">Error 404</h1>
-                                                    <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-                                                    <% if(currentUser) { %>
-                                                        <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-                                                            <%- include("../partials/navbar_referrer.ejs") %>
-                                                                <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-                                                                    <%- include("../partials/navbar_hospital.ejs") %>
-                                                                        <% } else if(currentUser.typeOfUser == "admin") { %>
-                                                                            <%- include("../partials/navbar_admin.ejs") %>
-                                                                                <% } else { %>
-                                                                                    <%- include("../partials/navbar_nouser.ejs") %>
-                                                                                        <% } %>
-                                                                                            <% } else { %>
-                                                                                                <%- include("../partials/navbar_nouser.ejs") %>
-                                                                                                    <% } %>
-                                                </header>
-
-                                                <div class="container">
-
-                                                    <%- include("../partials/alert.ejs") %>
-                                                        <br>
-
-                                                        <div class="container small-content drop__shadow">
-                                                            <small><i class="fas fa-exclamation-triangle"></i> Oops! Page not found.</small>
-                                                            <img class="image__404" src="https://i.ibb.co/DCQ3T7X/18.png" alt="3" border="0">
-                                                        </div>
-                                                        <br><br><br><br><br>
-                                                </div>
-                                            </div>
-
-                                            <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>
