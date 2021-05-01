@@ -1,219 +1,198 @@
 <%- include("../partials/header.ejs") %>
 
-    <div class="container-fluid" id="container-fluid">
-        <% function formatNumber(num) { %>
-            <% var numSplit, int, dec; %>
-                <% num = parseFloat(num, 10); %>
-                    <% num = num.toFixed(2); %>
-                        <% numSplit = num.split("."); %>
-                            <% int = numSplit[0]; %>
-                                <% if(int.length > 3) { %>
-                                    <% int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3); %>
-                                        <% } %>
-                                            <% dec = numSplit[1]; %>
-                                                <% return int + "." + dec; %>
-                                                    <% } %>
+<div class="container-fluid" id="container-fluid">
+    <% function formatNumber(num) { %>
+        <% var numSplit, int, dec; %>
+        <% num = parseFloat(num, 10); %>
+        <% num = num.toFixed(2); %>
+        <% numSplit = num.split("."); %>
+        <% int = numSplit[0]; %>
+        <% if(int.length > 3) { %>
+            <% int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3); %>
+        <% } %>
+        <% dec = numSplit[1]; %>
+        <% return int + "." + dec; %>
+    <% } %>
 
-                                                        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
-                                                            <div style="display: flex; align-items: center; justify-content: space-between;">
-                                                                <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-                                                                <div style="display: flex; align-items: flex-start; width: 10%;">
-                                                                    <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
-                                                                        <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                                                                        <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
-                                                                        <% } else { %>
-                                                                            <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
-                                                                            <% } %>
-                                                                </div>
-                                                            </div>
-                                                            <h1 class="header-h1-text">Profile</h1>
-                                                            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-                                                            <%- include("../partials/navbar_hospital.ejs") %>
-                                                        </header>
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
+                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">Profile</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_hospital.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <%- include("../partials/alert-to-create-commission-rates.ejs") %>
+        <br>
+        <!--PROFILE OVERVIEW-->
+        <div class="profile drop__shadow">
+            <h1 class="header-h1-text text-center">Profile Overview</h1>
+            <hr>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Institution type</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.institution_type%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.name%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Address</span><br><span class="paragraph__span overflow-auto text-wrap text-break" style="font-size: 0.8rem;"><%=currentUser.hospitalDetails.address%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Emails</span><br><span class="paragraph__span overflow-auto text-wrap text-break"><%=currentUser.hospitalDetails.email%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Phone numbers</span><br><span class="paragraph__span overflow-auto text-wrap text-break"><%=currentUser.hospitalDetails.phone%></span></p>
+            <% if(currentUser.hospitalDetails.website.length > 0) { %>
+                <p class="profile-details-paragraph lh-1"><span class="lead">Website</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.website%></span></p>
+            <% } %>
+            <% if(currentUser.hospitalDetails.cmd.length > 0) { %>
+                <p class="profile-details-paragraph lh-1"><span class="lead">CMD</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.cmd%></span></p>
+            <% } %>
+            <% if(currentUser.hospitalDetails.ceo.length > 0) { %>
+                <p class="profile-details-paragraph lh-1"><span class="lead">CEO</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.ceo%></span></p>
+            <% } %>
+            <% if(currentUser.hospitalDetails.consultants >= 0) { %>
+                <p class="profile-details-paragraph lh-1"><span class="lead">Number of consultants</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.consultants%></span></p>
+            <% } %>
+            <% if(currentUser.hospitalDetails.doctors >= 0) { %>
+                <p class="profile-details-paragraph lh-1"><span class="lead">Number of doctors</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.doctors%></span></p>
+            <% } %>
+            <br><br>
+            <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile/edit';" style="display: block; margin: 0 auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+        </div><br>
 
-                                                        <div class="container">
-                                                            <%- include("../partials/alert.ejs") %>
-                                                                <br>
+        <!--ACCOUNT INFORMATION-->
+        <div class="profile drop__shadow">
+            <% var date = new Date() %>
+            <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
+            <% var currentMonth = months[date.getMonth()] %>
+            <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
+            <% if(currentUser.hospitalDetails.patients.length > 0) { %>
+                <% currentUser.hospitalDetails.patients.forEach(function(patient) { %>
+                    <% if(patient.status == "authenticated") { %>
+                        <% totalAmount += patient.amount_paid %>
+                        <% totalCommission += patient.hospital_commission %>
+                        <% if(patient.authentication_month == currentMonth) { %>
+                            <% currentAmount += patient.amount_paid %>
+                            <% currentCommission += patient.hospital_commission %>
+                        <% } %>
+                    <% } %>
+                <% }); %>
+            <% } %>
+            <h1 class="header-h1-text text-center">Account Information</h1>
+            <hr>
+            <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(currentAmount)%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(currentCommission)%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(totalAmount)%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(totalCommission)%></span></p>
+        </div><br>
 
-                                                                <%- include("../partials/alert-to-create-commission-rates.ejs") %>
-                                                                    <br>
+        <!--DEPARTMENTS-->
+        <% if(currentUser.hospitalDetails.departments.length > 0) { %>
+            <div class="departments overflow-auto drop__shadow">
+                <h1 class="header-h1-text text-center">Departments</h1>
+                <hr>
+                <% currentUser.hospitalDetails.departments.forEach(function(department) { %>
+                    <div class="department drop__shadow">
+                        <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
+                        <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
+                        <p class="profile-details-paragraph">
+                            <span class="lead">Units</span><br>
+                            <span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;">
+                            <% department.units.forEach(function(unit, index, arr) { %>
+                                <% if(index != (arr.length - 1)) { %>
+                                    <%= unit %>, 
+                                <% } else { %>
+                                    <%= unit %>
+                                <% } %>
+                            <% }); %>
+                        </span>
+                        </p>
+                    </div>
+                <% }); %>
+                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/departments/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+                <br>
+            </div>
+        <% } %>
 
-                                                                    <!--PROFILE-->
-                                                                    <div class="profile drop__shadow">
-                                                                        <h1 class="header-h1-text text-center">Profile Overview</h1>
-                                                                        <hr>
-                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Institution type</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.institution_type%></span></p>
-                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.name%></span></p>
-                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Address</span><br><span class="paragraph__span overflow-auto text-wrap text-break" style="font-size: 0.8rem;"><%=currentUser.hospitalDetails.address%></span></p>
-                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Emails</span><br><span class="paragraph__span overflow-auto text-wrap text-break"><%=currentUser.hospitalDetails.email%></span></p>
-                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Phone numbers</span><br><span class="paragraph__span overflow-auto text-wrap text-break"><%=currentUser.hospitalDetails.phone%></span></p>
-                                                                        <% if(currentUser.hospitalDetails.website.length > 0) { %>
-                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Website</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.website%></span></p>
-                                                                            <% } %>
-                                                                                <% if(currentUser.hospitalDetails.cmd.length > 0) { %>
-                                                                                    <p class="profile-details-paragraph lh-1"><span class="lead">CMD</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.cmd%></span></p>
-                                                                                    <% } %>
-                                                                                        <% if(currentUser.hospitalDetails.ceo.length > 0) { %>
-                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">CEO</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.ceo%></span></p>
-                                                                                            <% } %>
-                                                                                                <% if(currentUser.hospitalDetails.consultants >= 0) { %>
-                                                                                                    <p class="profile-details-paragraph lh-1"><span class="lead">Number of consultants</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.consultants%></span></p>
-                                                                                                    <% } %>
-                                                                                                        <% if(currentUser.hospitalDetails.doctors >= 0) { %>
-                                                                                                            <p class="profile-details-paragraph lh-1"><span class="lead">Number of doctors</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.doctors%></span></p>
-                                                                                                            <% } %>
+        <!--PROCEDURES-->
+        <% if(currentUser.hospitalDetails.procedures.length > 0) { %>
+            <div class="profile_procedures drop__shadow">
+                <h1 class="header-h1-text text-center" style="width: 100%;">Procedures</h1>
+                <hr>
+                <br>
+                <div class="overflow auto" style="display: flex; justify-content: space-evenly; height: 70%;">
+                    <div>
+                        <% for(var i = 0; i < currentUser.hospitalDetails.procedures.length; i+=2) { %>
+                            <p><%= currentUser.hospitalDetails.procedures[i] %></p>
+                        <% } %>
+                    </div>
+                    <div>
+                        <% for(var i = 1; i < currentUser.hospitalDetails.procedures.length; i+=2) { %>
+                            <p><%= currentUser.hospitalDetails.procedures[i] %></p>
+                        <% } %>
+                    </div>
+                </div>
+                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+            </div>
+        <% } %><br>
 
-                                                                                                                <br><br>
-                                                                                                                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile/edit';" style="display: block; margin: 0 auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
-                                                                    </div>
-                                                                    <br>
+        <!--Commission Rates-->
+        <% if(currentUser.hospitalDetails.profile_complete) { %>
+            <div class="profile drop__shadow">
+                <h1 class="header-h1-text text-center">Commission Rates</h1>
+                <hr>
+                <table class="table" id="commissionRatesTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Amount patient paid</th>
+                            <th scope="col">Commission</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Up to <strike>N</strike>5,000</td>
+                            <td><%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>%</td>
+                        </tr>
+                        <tr>
+                            <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
+                            <td><%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>%</td>
+                        </tr>
+                        <tr>
+                            <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
+                            <td><%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>%</td>
+                        </tr>
+                        <tr>
+                            <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
+                            <td><%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>%</td>
+                        </tr>
+                        <tr>
+                            <td>Above <strike>N</strike>100,000</td>
+                            <td><%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.8em;">
+                    <span>Average commission rate: </span>
+                    <span><%=currentUser.hospitalDetails.average_commission_rate%>% </span>
+                    <br>
+                    <small class="text-muted lh-1" style="display: block;"><i class="far fa-question-circle"></i> Why is this important?</small>
+                    <small class="text-muted lh-1" style="display: block;">This number may influence how often referrers select your hospital as their institution of choice for referral.</small>
+                </p><br>
+                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/commissions/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+            </div>
+            <br>
+        <% } %>
 
-                                                                    <div class="profile drop__shadow">
-                                                                        <% var date = new Date() %>
-                                                                            <% var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; %>
-                                                                                <% var currentMonth = months[date.getMonth()] %>
-                                                                                    <% var currentAmount = 0, currentCommission = 0, totalAmount = 0, totalCommission = 0; %>
-                                                                                        <% if(currentUser.hospitalDetails.patients.length > 0) { %>
-                                                                                            <% currentUser.hospitalDetails.patients.forEach(function(patient) { %>
-                                                                                                <% if(patient.status == "authenticated") { %>
-                                                                                                    <% totalAmount += patient.amount_paid %>
-                                                                                                        <% totalCommission += patient.hospital_commission %>
-                                                                                                            <% if(patient.authentication_month == currentMonth) { %>
-                                                                                                                <% currentAmount += patient.amount_paid %>
-                                                                                                                    <% currentCommission += patient.hospital_commission %>
-                                                                                                                        <% } %>
-                                                                                                                            <% } %>
-                                                                                                                                <% })%>
-                                                                                                                                    <% } %>
-                                                                                                                                        <h1 class="header-h1-text text-center">Account Information</h1>
-                                                                                                                                        <hr>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(currentAmount)%></span></p>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead"><%= currentMonth %> commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(currentCommission)%></span></p>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Total revenue</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(totalAmount)%></span></p>
-                                                                                                                                        <p class="profile-details-paragraph lh-1"><span class="lead">Total commission</span><br><span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(totalCommission)%></span></p>
-                                                                    </div>
-                                                                    <br>
-
-                                                                    <!--DEPARTMENTS-->
-                                                                    <% if(currentUser.hospitalDetails.departments.length > 0) { %>
-                                                                        <div class="departments overflow-auto drop__shadow">
-                                                                            <h1 class="header-h1-text text-center">Departments</h1>
-                                                                            <hr>
-
-                                                                            <% currentUser.hospitalDetails.departments.forEach(function(department) { %>
-                                                                                <div class="department drop__shadow">
-                                                                                    <p class="profile-details-paragraph"><span class="lead">Department name</span><br><span><%=department.name%></span></p>
-                                                                                    <p class="profile-details-paragraph"><span class="lead">Number of clinical staff</span><br><span><%=department.staff_count%></span></p>
-                                                                                    <p class="profile-details-paragraph">
-                                                                                        <span class="lead">Units</span><br>
-                                                                                        <span class="text-wrap text-break lh-1 overflow-auto" style="font-size: 0.8rem;">
-                                                                                        <% department.units.forEach(function(unit, index, arr) { %>
-                                                                                            <% if(index != (arr.length - 1)) { %>
-                                                                                                <%= unit %>, 
-                                                                                            <% } else { %>
-                                                                                                <%= unit %>
-                                                                                            <% } %>
-                                                                                        <% }); %>
-                                                                                    </span>
-                                                                                    </p>
-                                                                                </div>
-                                                                                <% }); %>
-
-                                                                                    <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/departments/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
-                                                                                    <br>
-                                                                        </div>
-                                                                        <% } %>
-
-                                                                            <!--PROCEDURES-->
-                                                                            <% if(currentUser.hospitalDetails.procedures.length > 0) { %>
-                                                                                <div class="profile_procedures drop__shadow">
-                                                                                    <h1 class="header-h1-text text-center" style="width: 100%;">Procedures</h1>
-                                                                                    <hr>
-                                                                                    <br>
-                                                                                    <div class="overflow auto" style="display: flex; justify-content: space-evenly; height: 70%;">
-                                                                                        <div>
-                                                                                            <% for(var i = 0; i < currentUser.hospitalDetails.procedures.length; i+=2) { %>
-                                                                                                <p>
-                                                                                                    <%= currentUser.hospitalDetails.procedures[i] %>
-                                                                                                </p>
-                                                                                                <% } %>
-                                                                                        </div>
-                                                                                        <div>
-                                                                                            <% for(var i = 1; i < currentUser.hospitalDetails.procedures.length; i+=2) { %>
-                                                                                                <p>
-                                                                                                    <%= currentUser.hospitalDetails.procedures[i] %>
-                                                                                                </p>
-                                                                                                <% } %>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
-                                                                                </div>
-                                                                                <% } %>
-                                                                                    <br>
-                                                                                    <!--Commission Rates-->
-                                                                                    <% if(currentUser.hospitalDetails.profile_complete) { %>
-                                                                                        <div class="profile drop__shadow">
-                                                                                            <h1 class="header-h1-text text-center">Commission Rates</h1>
-                                                                                            <hr>
-                                                                                            <table class="table" id="commissionRatesTable">
-                                                                                                <thead>
-                                                                                                    <tr>
-                                                                                                        <th scope="col">Amount patient paid</th>
-                                                                                                        <th scope="col">Commission</th>
-                                                                                                    </tr>
-                                                                                                </thead>
-                                                                                                <tbody>
-                                                                                                    <tr>
-                                                                                                        <td>Up to <strike>N</strike>5,000</td>
-                                                                                                        <td>
-                                                                                                            <%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>%
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><strike>N</strike>5,001 - <strike>N</strike>20,000</td>
-                                                                                                        <td>
-                                                                                                            <%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>%
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><strike>N</strike>20,001 - <strike>N</strike>50,000</td>
-                                                                                                        <td>
-                                                                                                            <%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>%
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td><strike>N</strike>50,001 - <strike>N</strike>100,000</td>
-                                                                                                        <td>
-                                                                                                            <%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>%
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                    <tr>
-                                                                                                        <td>Above <strike>N</strike>100,000</td>
-                                                                                                        <td>
-                                                                                                            <%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>%
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                </tbody>
-                                                                                            </table>
-                                                                                            <p style="font-size: 0.8em;">
-                                                                                                <span>Average commission rate: </span>
-                                                                                                <span><%=currentUser.hospitalDetails.average_commission_rate%>% </span>
-                                                                                                <br>
-                                                                                                <small class="text-muted lh-1" style="display: block;"><i class="far fa-question-circle"></i> Why is this important?</small>
-                                                                                                <small class="text-muted lh-1" style="display: block;">This number may influence how often referrers select your hospital as their institution of choice for referral.</small>
-                                                                                            </p>
-                                                                                            <br>
-                                                                                            <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/commissions/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
-                                                                                        </div>
-                                                                                        <br>
-                                                                                    <% } %>
-
-                                                                                            <!--DEACTIVATE ACCOUNT-->
-                                                                                            <div style="width: 100%; margin: 0 auto;">
-                                                                                                <a href="/hospitals/<%=currentUser.username%>/deactivate" class="text-danger"><p class="text-center" style="font-size: 14px;">Delete my account</p></a>
-                                                                                            </div>
-                                                                                            <br><br><br><br><br>
-                                                        </div>
+        <!--DELETE ACCOUNT-->
+        <div style="width: 100%; margin: 0 auto;">
+            <a href="/hospitals/<%=currentUser.username%>/deactivate" class="text-danger"><p class="text-center" style="font-size: 14px;">Delete my account</p></a>
+        </div>
+        <br><br><br><br><br>
     </div>
+</div>
+<div style="height: 50vh;"></div>
 
-    <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>

@@ -1,120 +1,119 @@
 <%- include("../partials/header.ejs") %>
 
-    <div class="container-fluid" id="container-fluid">
-        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
-            <div style="display: flex; align-items: center; justify-content: center;">
-                <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-            </div>
-            <h1 class="header-h1-text">Step 3 <em>of</em> 3</h1>
-            <small>If your centre is not departmentalized, click Skip.</small>
-        </header>
-
-        <div class="container">
-            <%- include("../partials/alert.ejs") %>
-                <br>
-
-                <div class="form-wrap drop__shadow">
-                    <form action="/hospitals/<%=currentUser.username%>/departments" method="POST">
-                        <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
-                            <h1 class="header-h1-text text-center">Departments</h1>
-                            <div id="departments">
-                                <div class="department drop__shadow">
-                                    <!--Name-->
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="name" name="name" required>
-                                        <label for="name">Name of department</label>
-                                    </div>
-                                    <!--Staff count-->
-                                    <div class="form-floating mb-3">
-                                        <input type="number" class="form-control" id="staff_count" name="staff_count" required>
-                                        <label for="staff_count">Number of clinical staff</label>
-                                    </div>
-                                    <!--Units-->
-                                    <label for="procedures" class="text-muted">Departmental units:</label><br>
-                                    <small class="text-muted">(Type and click + to add a unit.)</small>
-                                    <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                                        <input type="text" class="procedure_input border border-success">
-                                        <button class="btn btn-success procedure_input_button" type="button">+</button>
-                                    </div>
-                                    <div class="procedures"></div>
-                                </div>
-                            </div>
-                            <br>
-                            <!--Add department button-->
-                            <div style="width: 90%; padding: 0; margin: 1rem auto;">
-                                <button class="btn btn-outline-success" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
-                            </div>
-                            <!--Buttons-->
-                            <div class="button-group" id="button-group" style="width: 100%; margin-top: 4rem;">
-                                <input type="submit" class="button btn btn-success" value="Confirm" style="width: 45%;">
-                                <button type="button" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures';" class="border border-3 border-success button btn btn-outline-success" style="width: 45%;">Skip</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <br><br><br><br><br>
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
-        <div class="space"></div>
+        <h1 class="header-h1-text">Step 3 <em>of</em> 3</h1>
+        <small>If your institution is not departmentalized, click Skip.</small>
+    </header>
+
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-wrap drop__shadow">
+            <form action="/hospitals/<%=currentUser.username%>/departments" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                    <h1 class="header-h1-text text-center">Departments</h1>
+                    <div id="departments">
+                        <div class="department drop__shadow">
+                            <!--Name-->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="name" name="name" required>
+                                <label for="name">Name of department</label>
+                            </div>
+                            <!--Staff count-->
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="staff_count" name="staff_count" required>
+                                <label for="staff_count">Number of clinical staff</label>
+                            </div>
+                            <!--Units-->
+                            <label for="procedures" class="text-muted">Departmental units:</label><br>
+                            <small class="text-muted">(Type and click + to add a unit.)</small>
+                            <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+                                <input type="text" class="procedure_input border border-success">
+                                <button class="btn btn-success procedure_input_button" type="button">+</button>
+                            </div>
+                            <div class="procedures"></div>
+                        </div>
+                    </div>
+                    <br>
+                    <!--Add department button-->
+                    <div style="width: 90%; padding: 0; margin: 1rem auto;">
+                        <button class="btn btn-outline-success" type="button" id="add_department" style="width: 100%; display: flex; justify-content: center; justify-self: center; padding: 1rem; font-family: 'Poppins', sans-serif;">Add another department +</button>
+                    </div>
+                    <!--Buttons-->
+                    <div id="button-group" style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Confirm" style="width: 100%;">
+                        <button type="button" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures';" class="button btn btn-outline-success" style="width: 100%;">Skip</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br><br><br><br><br>
     </div>
+</div>
+<div style="height: 50vh;"></div>
 
-    <script>
-        var procedure_count = 0;
+<script>
+    var procedure_count = 0;
 
-        var departments = document.getElementById("departments");
+    var departments = document.getElementById("departments");
 
-        departments.addEventListener("click", function(e) {
-            if (e.target.classList.contains("procedure_input_button")) {
-                var text = e.target.previousElementSibling.value;
+    departments.addEventListener("click", function(e) {
+        if (e.target.classList.contains("procedure_input_button")) {
+            var text = e.target.previousElementSibling.value;
 
-                if (text.length > 0) {
-                    var div = document.createElement("div");
-                    div.classList.add("input-group");
-                    div.classList.add("mb-1");
-                    div.innerHTML = `
-                    <input type="text" class="procedure border" name="[units]-[${procedure_count}]" value="${text}" readonly>
-                    <button class="btn btn-secondary procedure_button border" type="button">-</button>
-                `;
-                    e.target.parentElement.nextElementSibling.appendChild(div);
-                    e.target.previousElementSibling.value = "";
-                    e.target.previousElementSibling.focus();
-                }
+            if (text.length > 0) {
+                var div = document.createElement("div");
+                div.classList.add("input-group");
+                div.classList.add("mb-1");
+                div.innerHTML = `
+                <input type="text" class="procedure border" name="[units]-[${procedure_count}]" value="${text}" readonly>
+                <button class="btn btn-secondary procedure_button border" type="button">-</button>
+            `;
+                e.target.parentElement.nextElementSibling.appendChild(div);
+                e.target.previousElementSibling.value = "";
+                e.target.previousElementSibling.focus();
             }
-        });
+        }
+    });
 
-        departments.addEventListener("click", function(e) {
-            if (e.target.classList.contains("procedure_button")) {
-                e.target.parentElement.parentElement.removeChild(e.target.parentElement);
-            }
-        });
+    departments.addEventListener("click", function(e) {
+        if (e.target.classList.contains("procedure_button")) {
+            e.target.parentElement.parentElement.removeChild(e.target.parentElement);
+        }
+    });
 
-        document.querySelector("#add_department").addEventListener("click", function() {
-            procedure_count++;
+    document.querySelector("#add_department").addEventListener("click", function() {
+        procedure_count++;
 
-            var div = document.createElement("div");
-            div.classList.add("department");
-            div.classList.add("drop__shadow");
-            div.innerHTML = `
-            <!--Name-->
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="name" name="name" required>
-                <label for="name">Name of department</label>
-            </div>
-            <!--Staff count-->
-            <div class="form-floating mb-3">
-                <input type="number" class="form-control" id="staff_count" name="staff_count" required>
-                <label for="staff_count">Number of clinical staff</label>
-            </div>
-            <!--Procedures-->
-            <label for="procedures" class="text-muted">Departmental units:</label><br>
-            <small class="text-muted">(Type and click + to add a unit.)</small>
-            <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
-                <input type="text" class="procedure_input border border-success">
-                <button class="btn btn-success procedure_input_button" type="button">+</button>
-            </div>
-            <div class="procedures"></div>
-        `;
-            document.getElementById("departments").appendChild(div);
-        });
-    </script>
+        var div = document.createElement("div");
+        div.classList.add("department");
+        div.classList.add("drop__shadow");
+        div.innerHTML = `
+        <!--Name-->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="name">Name of department</label>
+        </div>
+        <!--Staff count-->
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="staff_count" name="staff_count" required>
+            <label for="staff_count">Number of clinical staff</label>
+        </div>
+        <!--Procedures-->
+        <label for="procedures" class="text-muted">Departmental units:</label><br>
+        <small class="text-muted">(Type and click + to add a unit.)</small>
+        <div class="input-group mb-3" style="margin-top: 1rem; margin-bottom: 1rem;">
+            <input type="text" class="procedure_input border border-success">
+            <button class="btn btn-success procedure_input_button" type="button">+</button>
+        </div>
+        <div class="procedures"></div>
+    `;
+        document.getElementById("departments").appendChild(div);
+    });
+</script>
 
-    <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>

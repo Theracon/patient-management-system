@@ -1,93 +1,85 @@
 <%- include("../partials/header.ejs") %>
 
-    <div class="container-fluid" id="container-fluid">
-        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #d9534f!important;">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-                <div style="display: flex; align-items: flex-start; width: 10%;">
-                    <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
-                        <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                        <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
-                        <% } else { %>
-                            <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
-                            <% } %>
-                </div>
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header" style="background-color: #d9534f!important;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
+                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
             </div>
-            <h1 class="header-h1-text">Delete My Account</h1>
-            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-            <%- include("../partials/navbar_hospital.ejs") %>
-        </header>
-
-        <div class="container">
-            <%- include("../partials/alert.ejs") %>
-                <br>
-
-                <%- include("../partials/alert-to-create-commission-rates.ejs") %>
-                    <br>
-
-                    <div class="deregister-content overflow-auto drop__shadow">
-                        <p class="text-left" style="font-size: 1.5em;"><strong>What happens if I delete my account?</strong></p>
-                        <ul class="text-left">
-                            <li>You won't have access to your account or any Fastclinic service.</li>
-                            <li>Fastclinic's referrers will not be able to send patients to you.</li>
-                            <li>You will lose access to all of your patients' details.</li>
-                            <li>We will irreversibly delete your information from our databases.</li>
-                            <li>You won't be able to reactivate your account in the future.</li>
-                            <li>You will have to sign up and create a new profile if you intend to use Fastclinic again.</li>
-                        </ul>
-                        <br>
-                        <p class="text-left" style="font-size: 1.5em;" id="disable"><strong>What if I just want to temporarily deactivate my
-                            account?</strong></p>
-                        <p class="text-left">You can take a break from Fastclinic and temporarily disable your account. When you deactivate your account:
-                        </p>
-                        <ul>
-                            <li>Your account will show <em>pending</em> when you login.</li>
-                            <li>You won't be able to authenticate patients or perform any other action that requires that you have an active account.</li>
-                            <li>You will lose access to your account, but your data will be remain intact.</li>
-                            <li>You can reactivate your account whenever you want.</li>
-                        </ul>
-                        <p>When you want to reactivate your account, simply click the <em>Reactivate account</em> button on the page you're redirected to after you log into your account.</p>
-                        <br>
-                        <form action="/hospitals/<%=currentUser.username%>/disable?_method=PUT" method="POST" style="margin: 0; padding: 0; height: fit-content;">
-                            <input type="submit" class="button btn btn-warning" value="Deactivate my account">
-                        </form>
-
-                        <br><br>
-                        <p class="text-left" style="font-size: 1.5em;"><strong>Do you have a complaint?</strong></p>
-                        <p class="text-left">It's fine to feel discontented by how we render one or more of our services. We take it into account that our services may not yet be perfect for every hospital and in every context. If there is a problem you will like us to discuss,
-                            feel free to use any of the communication channels on the <a href="/contact">contact page</a>. You can be certain of our utmost cooperation in these circumstances.
-                        </p>
-                    </div>
-
-                    <br><br>
-
-                    <div class="deregister-action drop__shadow">
-                        <form action="/hospitals/<%=currentUser._id%>?_method=DELETE" method="POST">
-                            <!--Name-->
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="name" name="name" value="<%= currentUser.hospitalDetails.name %>" readonly>
-                                <label for="name">Name</label>
-                            </div>
-                            <!--Reason for deactivating-->
-                            <div class="form-floating mb-3">
-                                <textarea class="form-control" id="content" name="reason" style="height: 10rem;"></textarea>
-                                <label for="content">Reason for deactivating</label>
-                            </div>
-                            <!--Warning-->
-                            <p class="text-left lh-1">
-                                <i class="fa fa-exclamation-circle text-danger"></i> This action is irreversible. You will lose all of your data if you click the <em>Deactivate</em> button. Consider
-                                <a href="#disable">deactivating your account temporarily</a> instead.
-                            </p>
-                            <!--Buttons-->
-                            <div class="button-group" id="button-group" style="width: 50%; margin: 3rem auto 0 auto;">
-                                <button type="reset" class="button btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" style="width: 50%; margin: 0.25rem;">Cancel</button>
-                                <input type="submit" class="button btn btn-danger text-wrap" value="Deactivate" style="width: 50%; margin: 0.25rem;">
-                            </div>
-                        </form>
-                    </div>
-                    <br><br><br><br><br>
         </div>
-        <div class="space"></div>
+        <h1 class="header-h1-text">Delete My Account</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_hospital.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <%- include("../partials/alert-to-create-commission-rates.ejs") %>
+        <br>
+        <div class="deregister-content overflow-auto drop__shadow">
+            <p class="text-left" style="font-size: 1.5em;"><strong>What happens if I delete my account?</strong></p>
+            <ul class="text-left">
+                <li>You won't have access to your account or any Fastclinic service.</li>
+                <li>Fastclinic's referrers will not be able to send patients to you.</li>
+                <li>You will lose access to all of your patients' details.</li>
+                <li>We will irreversibly delete your information from our databases.</li>
+                <li>You won't be able to reactivate your account in the future.</li>
+                <li>You will have to sign up and create a new profile if you intend to use Fastclinic again.</li>
+            </ul>
+            <br>
+            <p class="text-left" style="font-size: 1.5em;" id="disable"><strong>What if I just want to temporarily deactivate my
+                account?</strong></p>
+            <p class="text-left">You can take a break from Fastclinic and temporarily disable your account. When you deactivate your account:
+            </p>
+            <ul>
+                <li>Your account will show <em>pending</em> when you login.</li>
+                <li>You won't be able to authenticate patients or perform any other action that requires that you have an active account.</li>
+                <li>You will lose access to your account, but your data will be remain intact.</li>
+                <li>You can reactivate your account whenever you want.</li>
+            </ul>
+            <p>When you want to reactivate your account, simply click the <em>Reactivate account</em> button on the page you're redirected to after you log into your account.</p>
+            <br>
+            <form action="/hospitals/<%=currentUser.username%>/disable?_method=PUT" method="POST" style="margin: 0; padding: 0; height: fit-content;">
+                <input type="submit" class="button btn btn-warning" value="Deactivate my account">
+            </form><br><br>
+            <p class="text-left" style="font-size: 1.5em;"><strong>Do you have a complaint?</strong></p>
+            <p class="text-left">It's fine to feel discontented by how we render one or more of our services. We take it into account that our services may not yet be perfect for every hospital and in every context. If there is a problem you will like us to discuss,
+                feel free to use any of the communication channels on the <a href="/contact">contact page</a>. You can be certain of our utmost cooperation in these circumstances.
+            </p>
+        </div><br><br>
+        <div class="deregister-action drop__shadow">
+            <form action="/hospitals/<%=currentUser._id%>?_method=DELETE" method="POST">
+                <!--Name-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" name="name" value="<%= currentUser.hospitalDetails.name %>" readonly>
+                    <label for="name">Name</label>
+                </div>
+                <!--Reason for deactivating-->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="content" name="reason" style="height: 10rem;"></textarea>
+                    <label for="content">Reason for deactivating</label>
+                </div>
+                <!--Warning-->
+                <p class="text-left lh-1">
+                    <i class="fa fa-exclamation-circle text-danger"></i> This action is irreversible. You will lose all of your data if you click the <em>Deactivate</em> button. Consider
+                    <a href="#disable">deactivating your account temporarily</a> instead.
+                </p>
+                <!--Buttons-->
+                <div class="button-group" id="button-group" style="width: 50%; margin: 3rem auto 0 auto;">
+                    <button type="reset" class="button btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" style="width: 50%; margin: 0.25rem;">Cancel</button>
+                    <input type="submit" class="button btn btn-danger text-wrap" value="Deactivate" style="width: 50%; margin: 0.25rem;">
+                </div>
+            </form>
+        </div>
+        <br><br><br><br><br>
     </div>
+</div>
+<div style="height: 50vh;"></div>
 
-    <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>
