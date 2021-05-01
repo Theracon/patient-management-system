@@ -2,14 +2,13 @@
 
 <div style="position: relative; height: 100vh; background-color: white;">
     <div style="position: absolute; width: 100%; height: 50vh;">       
-        <div style="display: grid; justify-content: center; align-items: center; width: 100%; height: 0; position: sticky; top: 0; z-index: 999;">
-            <div style="display: flex; justify-content: center; align-items: center; justify-self: center; align-self: center;">
-                <div class="display-6 text-white"><img src="https://i.ibb.co/PmwPpHt/24-3.png" style="width: 60px; height: 60px;" border="0" alt="Fastclinic logo.">fastclinic</div>
-            </div>
+        <div style="display: grid; justify-content: center; align-items: center; position: sticky; z-index: 999;">
+            <img src="https://i.ibb.co/PmwPpHt/24-3.png" style="display: block; width: 4rem; height: 4rem; padding: 0; margin: 0; justify-self: center" alt="Fastclinic logo.">
+            <h1 class="logo-text" style="justify-self: center; padding: 0; margin: 0;">fastclinic</h1>
             <% if(!currentUser) { %>
-            <div style="display: flex; justify-content: center; align-items: center;">
-                <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-right: 7px;" href="/login">Login</a>
-                <a class="text-white" style="text-decoration: underline; font-size: 12px; margin-left: 7px;" href="/register">Register</a>
+            <div style="display: flex; justify-content: center; align-items: center; justify-self: center;">
+                <a class="text-white text-center" style="font-size: 12px; margin: 0 10px 0 0;" href="/login">Login</a>
+                <a class="text-white text-center" style="font-size: 12px; margin-left: 0 0 0 10px;" href="/register">Register</a>
             </div>
             <% } %>
         </div>
@@ -21,46 +20,45 @@
                 <div class="slider-item" style="background:url('https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center; background-size: cover; background-position: top center;">
                     <section style="position: absolute; bottom: 0px; width: 100%; height: fit-content; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <div class="small-content article__content">
-                            <p><i class="fas fa-heartbeat text-white big-icon"></i></p><br>
-                            <p class="lead text-white lh-1" style="font-family: 'Josefin sans', sans-serif;">We bridge the gap between patients and quality healthcare. Fastclinic eliminates the bottlenecks in the patient referral pipeline by seamlessly matching patients with the best health and care facilities nearest them.</p>
+                            <p><i class="fas fa-heartbeat text-white"></i></p><br>
+                            <p class="text-white lh-1">We bridge the gap between patients and quality healthcare. Fastclinic eliminates the bottlenecks in the patient referral pipeline by seamlessly matching patients with the best health and care facilities nearest them.</p>
                         </div>
                     </section>
                 </div>
                 <div class="slider-item" style="background:url('https://images.unsplash.com/photo-1542884748-2b87b36c6b90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80') no-repeat center center; background-size: cover; background-position: top center;">
                     <section style="position: absolute; bottom: 0px; width: 100%; height: fit-content; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <div class="small-content article__content">
-                            <p><i class="fas fa-procedures text-white big-icon"></i></p><br>
-                            <p class="lead text-white lh-1" style="font-family: 'Josefin sans', sans-serif;">We provide a vital organ to the system of solving this problem by redirecting patient flow from overcrowded hospitals to highly functional, efficient and less crowded ones closest to the patients.</p>
+                            <p><i class="fas fa-procedures text-white"></i></p><br>
+                            <p class="text-white lh-1">We provide a vital organ to the system of solving this problem by redirecting patient flow from overcrowded hospitals to highly functional, efficient and less crowded ones closest to the patients.</p>
                         </div>
                     </section>
                 </div>
                 <div class="slider-item" style="background:url('https://images.unsplash.com/photo-1579154341098-e4e158cc7f55?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=925&q=80') no-repeat center center; background-size: cover; background-position: top center;">
                     <section style="position: absolute; bottom: 0px; width: 100%; height: fit-content; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <div class="small-content article__content">
-                            <p><i class="fas fa-hourglass-start text-white big-icon"></i></p><br>
-                            <p class="lead text-white lh-1" style="font-family: 'Josefin sans', sans-serif;">Our referrers effectively shorten waiting time by easing patient throughput in over-booked institutions, and transferring same to institutions that have the capacity and quality to handle it.</p>
+                            <p><i class="fas fa-hourglass-start text-white"></i></p><br>
+                            <p class="text-white lh-1">Our referrers effectively shorten waiting time by easing patient throughput in over-booked institutions, and transferring same to institutions that have the capacity and quality to handle it.</p>
                         </div>
                     </section>
                 </div>
                 <div class="slider-item" style="background:url('https://images.pexels.com/photos/5327653/pexels-photo-5327653.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center; background-size: cover; background-position: top center;">
                     <section style="position: absolute; bottom: 0px; width: 100%; height: fit-content; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <div class="small-content article__content">
-                            <p><i class="fas fa-user-md text-white big-icon"></i></p><br>
-                            <p class="lead text-white lh-1" style="font-family: 'Josefin sans', sans-serif;">At Fastclinic we are helping to shape the future of healthcare – which we believe is largely remote.</p>
+                            <p><i class="fas fa-user-md text-white"></i></p><br>
+                            <p class="text-white lh-1">At Fastclinic we are helping to shape the future of healthcare – which we believe is largely remote.</p>
                         </div>
                     </section>
                 </div>
                 <div class="slider-item" style="background:url('https://images.pexels.com/photos/3727459/pexels-photo-3727459.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat center center; background-size: cover; background-position: top center;">
                     <section style="position: absolute; bottom: 0px; width: 100%; height: fit-content; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <div class="small-content article__content">
-                            <p><i class="fas fa-pen-alt text-white big-icon"></i></p><br>
-                            <p class="lead text-white lh-1" style="font-family: 'Josefin sans', sans-serif;">If you are passionate about health & wellness and wish to be part of our writers community, get in touch with us. You can also suggest quality articles you think we could feature on our blog.</p>
+                            <p><i class="fas fa-chalkboard text-white"></i></p><br>
+                            <p class="text-white lh-1">If you are passionate about health & wellness and wish to be part of our writers community, get in touch with us. You can also suggest quality articles you think we could feature on our blog.</p>
                         </div>
                     </section>
                 </div>
             </div>
         </div>
-        <div class="slider-nav"></div>
     </div>
     <!--SLIDSHOW MARKUP END-->
 </div>
