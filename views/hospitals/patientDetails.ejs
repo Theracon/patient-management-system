@@ -46,8 +46,8 @@
                     <hr>
                     <p class="text-center lh-1"><span class="patient-info lead">AMOUNT PAID </span><br> <span class="paragraph__span overflow-auto"><strike>N</strike><%=formatNumber(patient.amount_paid)%> </span></p>    <br><br>
                     <% if(patient.status == "unauthenticated") { %>
-                        <div class="button-group" id="button-group">
-                            <button type="button" class="button btn btn-success" style="display: block; margin: auto;" onclick="window.location.href='/hospitals/<%=currentUser.username%>/authenticate/<%=patient.accession_number%>';">Authenticate</button>
+                        <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                            <button type="button" class="button btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/authenticate/<%=patient.accession_number%>';" style="width: 100%; padding: 2rem;">Authenticate</button>
                         </div>
                     <% } %>
                 </div>

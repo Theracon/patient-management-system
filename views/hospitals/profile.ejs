@@ -59,8 +59,9 @@
             <% if(currentUser.hospitalDetails.doctors >= 0) { %>
                 <p class="profile-details-paragraph lh-1"><span class="lead">Number of doctors</span><br><span class="paragraph__span overflow-auto"><%=currentUser.hospitalDetails.doctors%></span></p>
             <% } %>
-            <br><br>
-            <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile/edit';" style="display: block; margin: 0 auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+            <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                <button class="btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile/edit';" style="width: 100%; padding: 2rem;">Edit profile</button>
+            </div>
         </div><br>
 
         <!--ACCOUNT INFORMATION-->
@@ -112,7 +113,9 @@
                         </p>
                     </div>
                 <% }); %>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/departments/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+                <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                    <button class="btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/departments/edit';" style="width: 100%; padding: 2rem;">Edit departments</button>
+                </div>
                 <br>
             </div>
         <% } %>
@@ -135,7 +138,9 @@
                         <% } %>
                     </div>
                 </div>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+                <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                    <button class="btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/procedures/edit';" style="width: 100%; padding: 2rem;">Edit procedures</button>
+                </div>
             </div>
         <% } %><br>
 
@@ -180,8 +185,10 @@
                     <br>
                     <small class="text-muted lh-1" style="display: block;"><i class="far fa-question-circle"></i> Why is this important?</small>
                     <small class="text-muted lh-1" style="display: block;">This number may influence how often referrers select your hospital as their institution of choice for referral.</small>
-                </p><br>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='/hospitals/<%=currentUser.username%>/commissions/edit';" style="display: block; margin: 2rem auto 1rem auto; padding: 1rem 5rem 1rem 5rem; font-family: 'Poppins', sans-serif;">Edit</button>
+                </p>
+                <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                    <button class="btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/commissions/edit';" style="width: 100%; padding: 2rem;">Edit commissions</button>
+                </div>
             </div>
             <br>
         <% } %>

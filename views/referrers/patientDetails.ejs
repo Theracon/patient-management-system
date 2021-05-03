@@ -76,8 +76,8 @@
                 </div>
                 <% if(patient.status == "unauthenticated") { %>
                     <br><br>
-                    <div class="button-group" id="button-group">
-                        <button class="button btn btn-success" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>/edit';" style="width: 45%;">Edit Patient Info</button>
+                    <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                        <button class="button btn btn-success" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>/edit';" style="width: 100%; padding: 2rem;">Edit patient info</button>
                     </div>
                 <% } %>
             </div>

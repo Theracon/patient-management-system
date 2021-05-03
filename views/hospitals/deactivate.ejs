@@ -71,9 +71,9 @@
                     <a href="#disable">deactivating your account temporarily</a> instead.
                 </p>
                 <!--Buttons-->
-                <div class="button-group" id="button-group" style="width: 50%; margin: 3rem auto 0 auto;">
-                    <button type="reset" class="button btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" style="width: 50%; margin: 0.25rem;">Cancel</button>
-                    <input type="submit" class="button btn btn-danger text-wrap" value="Deactivate" style="width: 50%; margin: 0.25rem;">
+                <div id="button-group" style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                    <button type="reset" class="button btn btn-success" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" style="width: 100%; padding: 2rem;">Cancel</button>
+                    <input type="submit" class="button btn btn-outline-danger text-wrap" value="Deactivate" style="width: 100%; padding: 1rem;">
                 </div>
             </form>
         </div>

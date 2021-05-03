@@ -55,8 +55,9 @@
                     </div>
                     <br>
                     <!--Submit button-->
-                    <div class="button-group" id="button-group" style="width: 100%; margin-top: 5rem;">
-                        <input type="submit" class="button btn btn-success" value="Confirm" style="width: 80%;">
+                    <div id="button-group" style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Confirm" style="width: 100%; padding: 2rem;">
+                        <button type="reset" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" class="button btn btn-outline-success" style="width: 100%; padding: 1rem;">Cancel</button>
                     </div>
                 </div>
             </form>

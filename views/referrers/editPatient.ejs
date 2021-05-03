@@ -57,9 +57,9 @@
                 </div>
                 <small class="lh-1"><i class="fas fa-exclamation-circle"></i> Check <a href="/hospitals" target="_blank">list of hospitals</a> to see their departments and units or <a href="/faq#referrerCommission">see how commissions are calculated</a>.</small><br><br>
                 <!--Button group-->
-                <div class="button-group">
-                    <input type="submit" class="text-wrap button btn btn-success button-group-child" value="Confirm" style="width: 45%;">
-                    <button type="reset" class="text-wrap border border-3 border-success button btn btn-outline-success button-group-child" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';" style="width: 45%;">Cancel</button>
+                <div id="button-group" style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                    <input type="submit" class="button btn btn-success button-group-child" value="Confirm" style="width: 100%; padding: 2rem;">
+                    <button type="reset" class="button btn btn-outline-success button-group-child" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/<%=patient.accession_number%>';" style="width: 100%; padding: 1rem;">Cancel</button>
                 </div>
             </form>
         </div>

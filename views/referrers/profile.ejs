@@ -30,7 +30,9 @@
                 <p class="profile-details-paragraph lh-1"><span class="lead">Account name</span><br><span class="paragraph__span overflow-auto"><%=currentUser.referrerDetails.ac_name%></span></p>
                 <p class="profile-details-paragraph lh-1"><span class="lead">Bank<br></span><span class="paragraph__span overflow-auto"><%=currentUser.referrerDetails.bank%></span></p>
                 <br><br>
-                <button class="btn btn-success btn-lg" onclick="window.location.href='/referrers/<%=currentUser.username%>/profile/edit';" style="width: 250px; display: block; margin: 0 auto; padding: 1rem 3rem 1rem 3rem; font-family: 'Poppins', sans-serif;">Edit profile</button>
+                <div id="button-group" style="width: 100%; margin-top: 4rem;">
+                    <button class="btn btn-success" onclick="window.location.href='/referrers/<%=currentUser.username%>/profile/edit';" style="width: 100%; padding: 2rem;">Edit profile</button>
+                </div>
             </div>
         </div><br>
         <div style="width: 100%; margin: 0 auto;">
