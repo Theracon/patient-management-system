@@ -43,30 +43,24 @@
                         <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Creating a doctor account.</small>
                         <!--Username-->
                         <div class="form-floating mb-3">
-                            <input type="text" pattern="[A-Za-z0-9]{5,}" class="form-control border border-success" id="username" name="username" required>
+                            <input type="text" pattern="[A-Za-z0-9]{5,}" class="form-control border border-success" id="username" name="username" onkeyup="validateUsernameRealtime();" required>
                             <label for="username">Username</label>
                             <div class="invalid-feedback text-warning" style="display: block;">
                             Please adhere to these username rules:
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input username-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Username field cannot be empty.
                                     </label>
                                 </div>
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input username-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
-                                        Username can only be alpha-numeric.
+                                        Username can only be alpha-numeric. It cannot contain special characters.
                                     </label>
                                 </div>
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
-                                    <label class="form-check-label" for="flexRadioDisabled">
-                                        Username cannot contain special characters.
-                                    </label>
-                                </div>
-                                <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input username-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Username must be 5 or more characters long.
                                     </label>
@@ -75,36 +69,36 @@
                         </div>
                         <!--Password-->
                         <div class="form-floating mb-3">
-                            <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control border border-success" id="password" name="password" onkeyup='check();' required>
+                            <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control border border-success" id="password" name="password" onkeyup="check();" required>
                             <label for="password">Password</label>
                             <div class="invalid-feedback text-warning" style="display: block;">
                                 Please adhere to these password rules:
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input password-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Password field cannot be empty.
                                     </label>
                                 </div>
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input password-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Password must be 8 or more characters long.
                                     </label>
                                 </div>
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input password-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Password must contain at least one uppercase letter.
                                     </label>
                                 </div>
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input password-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Password must contain at least one lowercase letter.
                                     </label>
                                 </div>
                                 <div class="form-check text-secondary">
-                                    <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                                    <input class="form-check-input password-checkbox" type="checkbox" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
                                     <label class="form-check-label" for="flexRadioDisabled">
                                         Password must contain at least one number.
                                     </label>
@@ -142,17 +136,5 @@
 </div>
 <div style="height: 50vh;"></div>
 
-<script>
-    var check = function() {
-        if (document.getElementById('password').value ==
-            document.getElementById('confirmPassword').value) {
-            document.getElementById('message').innerHTML = 'Passwords match'
-            document.getElementById('message').style.color = 'green'
-        } else {
-            document.getElementById('message').innerHTML = "Passwords don't match"
-            document.getElementById('message').style.color = 'red'
-        }
-    }
-</script>
-
+<%- include("../partials/validate-username-and-password.ejs") %>
 <%- include("../partials/footer.ejs") %>
