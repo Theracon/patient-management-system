@@ -51,6 +51,10 @@
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control border border-success" id="password" name="password" minlength="4" required>
                             <label for="password">Password</label>
+                            <p id="togglePasswordButton" style="cursor: pointer; width: fit-content; font-size: 14px;" onclick="togglePasswordVisibility();">
+                                <span>Show password<span>
+                                <i class="far fa-eye"></i>
+                            </p>
                             <div class="invalid-feedback">Please enter your password.</div>
                         </div>
                         <!--Submit Button-->
@@ -66,5 +70,6 @@
     </div>
 </div>
 <div style="height: 50vh;"></div>
-    
+
+<%- include("../partials/validate-username-and-password.ejs") %>
 <%- include("../partials/footer.ejs") %>

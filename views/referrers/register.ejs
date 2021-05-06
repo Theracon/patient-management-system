@@ -71,6 +71,10 @@
                         <div class="form-floating mb-3">
                             <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control border border-success" id="password" name="password" onkeyup="check();" required>
                             <label for="password">Password</label>
+                            <p id="togglePasswordButton" style="cursor: pointer; width: fit-content; font-size: 14px;" onclick="togglePasswordVisibility();">
+                                <span>Show password<span>
+                                <i class="far fa-eye"></i>
+                            </p>
                             <div class="invalid-feedback text-warning" style="display: block;">
                                 Please adhere to these password rules:
                                 <div class="form-check text-secondary">
@@ -127,7 +131,7 @@
                             <input id="submit-button" type="submit" class="button btn btn-success" value="Create account" style="width: 100%; margin: 1rem 0; padding: 2rem;">
                         </div>
                     </div>
-                    <small class="text-center" style="display: block;">Already have an account? <a href="/login" style="text-decoration: underline;">Sign in</a></small>
+                    <small class="text-center" style="display: block;">Already have an account? <a class="text-success" href="/login" style="text-decoration: underline;">Sign in</a></small>
                 </form>
             </div>
         </div>
