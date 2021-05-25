@@ -35,6 +35,8 @@ router.post("/admin/broadcast", middleware.isAdminLoggedIn, middleware.isAdminAu
         return res.redirect("back");
     }
 
+    date = new Date();
+
     var recipient = req.body.recipient;
     var broadcastMessage = {
         date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
@@ -48,6 +50,7 @@ router.post("/admin/broadcast", middleware.isAdminLoggedIn, middleware.isAdminAu
             req.flash("error", "Oops! Something isn't quite right.");
             return res.redirect("back");
         }
+
         users.forEach(function(user) {
             if (user.typeOfUser === "referrer" && user.role === 1) {
                 user.referrerDetails.notifications.unshift(broadcastMessage);

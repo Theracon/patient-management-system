@@ -30,6 +30,10 @@
                         <span style="height: 50%;"><%= hospital.hospitalDetails.name %> </span>
                         <span class="overflow-auto" style="font-family: 'Open Sans', sans-serif!important; font-size: 0.6rem; height: 50%;"><%= hospital.hospitalDetails.address %></span>
                     </button>
+                <% } else { %>
+                    <button type="button" class="btn btn-secondary hospital_button">
+                        <span style="height: 50%;"><%= hospital.username %> </span>
+                    </button>
                 <% } %>
             <% }); %>
         </div>

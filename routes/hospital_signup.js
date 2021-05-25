@@ -37,6 +37,9 @@ router.post('/accounts/hospitals/register', function(req, res) {
                 req.flash("error", "Sorry, that username is taken.");
                 return res.redirect("back");
             }
+
+            date = new Date();
+
             var hospital = new User({
                 typeOfUser: "hospital",
                 username: req.body.username,

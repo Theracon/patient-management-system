@@ -61,13 +61,14 @@ router.put("/admin/referrers/:username/activate", middleware.isAdminLoggedIn, mi
             res.redirect("back");
         }
         if (user) {
+            date = new Date();
             // Change referrer role
             user.role = 1;
 
             // Send notification to referrer
             var activationMessage = {
-                date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
-                time: functions.formatTime(new Date()),
+                date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
+                time: functions.formatTime(date),
                 content: `Hi ${user.referrerDetails.title} ${user.referrerDetails.firstname}, your profile is now active!`,
                 status: "unread"
             }

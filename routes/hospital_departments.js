@@ -109,6 +109,8 @@ router.put("/hospitals/:username/departments", middleware.isUserLoggedIn, middle
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                date = new Date();
+
                 user.hospitalDetails.departments = [];
 
                 if (typeof req.body.name == "object") {

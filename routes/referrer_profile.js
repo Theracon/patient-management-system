@@ -46,6 +46,8 @@ router.post('/referrers/:username/update', middleware.isUserLoggedIn, function(r
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                date = new Date();
+
                 user.role = 0;
                 user.referrerDetails = {
                         title: req.body.title,
@@ -153,6 +155,8 @@ router.put('/referrers/:username/update', middleware.isUserLoggedIn, middleware.
     User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                date = new Date();
+
                 var updateMessage = {
                         date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
                         time: functions.formatTime(date),

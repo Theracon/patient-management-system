@@ -37,6 +37,9 @@ router.post('/accounts/referrers/register', function(req, res) {
                 req.flash("error", "Sorry, that username is taken.");
                 return res.redirect("back");
             }
+
+            date = new Date();
+
             var referrer = new User({
                 typeOfUser: "referrer",
                 username: req.body.username,

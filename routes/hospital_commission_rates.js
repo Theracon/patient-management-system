@@ -75,6 +75,8 @@ router.post("/hospitals/:username/commissions", middleware.isUserLoggedIn, middl
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                date = new Date();
+
                 // Create hospital commission rates
                 user.hospitalDetails.commission_rates = {
                     min_amount_rate: parseFloat(req.body.min_amount_rate),

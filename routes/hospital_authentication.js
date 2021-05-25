@@ -79,6 +79,8 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
         req.flash("error", "Amount paid must be a number.");
         return res.redirect("back");
     } else {
+        date = new Date();
+
         User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, hospital) {
             if (!err) {
                 if (hospital) {
@@ -142,8 +144,8 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
 
                                     // Create notification to referrer
                                     var authenticationMessage = {
-                                        date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
-                                        time: functions.formatTime(new Date()),
+                                        date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
+                                        time: functions.formatTime(date),
                                         content: `Hi ${referrer.referrerDetails.title} ${referrer.referrerDetails.firstname}, Your patient with the following details has been authenticated - 
                                                     Name: ${patient.name}, 
                                                     Investigations: ${patient.investigation}, 

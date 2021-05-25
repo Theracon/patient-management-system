@@ -60,6 +60,8 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
             User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
                 if (!err) {
                     if (user) {
+                        date = new Date();
+
                         // Make a new patient object
                         var patient = new Patient({
                             // Initialize patient's basic info
@@ -89,8 +91,8 @@ router.post("/referrers/:username/patients", middleware.isUserLoggedIn, middlewa
 
                         // Create notification to notify referral hospital
                         var referralMessage = {
-                            date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
-                            time: functions.formatTime(new Date()),
+                            date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
+                            time: functions.formatTime(date),
                             content: `Hi ${hospital.hospitalDetails.name}, A patient with the following details has been referred to you - 
                                         Name: ${patient.name},
                                         Phone number: ${patient.phone}, 
@@ -244,6 +246,8 @@ router.put("/referrers/:username/patients/:accession_number", middleware.isUserL
         User.findOne({ typeOfUser: "referrer", username: req.params.username }, function(err, user) {
             if (!err) {
                 if (user) {
+                    date = new Date();
+
                     // Find and update patient in patient model
                     Patient.findOne({ accession_number: req.params.accession_number }, function(err, patient) {
                         if (err) {

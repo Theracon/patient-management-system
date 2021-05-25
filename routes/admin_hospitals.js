@@ -61,13 +61,14 @@ router.put("/admin/hospitals/:username/activate", middleware.isAdminLoggedIn, mi
             res.redirect("back");
         }
         if (user) {
+            date = new Date();
             // Change hospital role
             user.role = 1;
 
             // Send notification to hospital
             var activationMessage = {
-                date: new Date().getDate() + ' ' + months[new Date().getMonth()] + ' ' + new Date().getFullYear(),
-                time: functions.formatTime(new Date()),
+                date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
+                time: functions.formatTime(date),
                 content: `Hi ${user.hospitalDetails.name}, your profile is now active!`,
                 status: "unread"
             }

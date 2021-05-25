@@ -95,6 +95,8 @@ router.put("/hospitals/:username/procedures", middleware.isUserLoggedIn, middlew
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                date = new Date();
+
                 var updateMessage = {
                     date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
                     time: functions.formatTime(date),

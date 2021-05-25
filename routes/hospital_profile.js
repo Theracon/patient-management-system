@@ -54,6 +54,8 @@ router.post('/hospitals/:username/update', middleware.isUserLoggedIn, function(r
         User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
             if (!err) {
                 if (user) {
+                    date = new Date();
+
                     user.role = 0;
                     user.hospitalDetails = {
                             institution_type: hospitalType[parseInt(req.body.institution_type, 10)],
@@ -158,6 +160,8 @@ router.put("/hospitals/:username/update", middleware.isUserLoggedIn, middleware.
     User.findOne({ typeOfUser: "hospital", username: req.params.username }, function(err, user) {
         if (!err) {
             if (user) {
+                date = new Date();
+
                 var institutionType;
                 var updateMessage = {
                     date: date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear(),
