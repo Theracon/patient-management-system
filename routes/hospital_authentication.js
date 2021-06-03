@@ -128,7 +128,7 @@ router.put("/hospitals/:username/authenticate", middleware.isUserLoggedIn, middl
 
                                 // Calculate referrer commission
                                 patient.hospital_commission = (patient.commission_rate / 100) * (parseInt(req.body.amount_paid, 10));
-                                patient.referrer_commission = 0.5 * patient.hospital_commission;
+                                patient.referrer_commission = 0.9 * patient.hospital_commission;
                                 patient.platform_commission = patient.hospital_commission - patient.referrer_commission;
 
                                 // Update referrer's commission
