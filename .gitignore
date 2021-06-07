@@ -1,3 +1,4 @@
+.env
 .DS_Store
 *.orig
 /build
@@ -10,4 +11,3 @@ localdev-config.json
 node_modules
 .vscode
 .history
-.env
