@@ -1,16 +1,16 @@
 <%- include("../partials/header.ejs") %>
     
-    <!--Set redirect route on clicking logo-->
-    <% var logoRoute = "/home"; %>
-    <% if(currentUser) { %>
-        <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-            <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
-        <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-            <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
-        <% } else if(currentUser.typeOfUser == "admin") { %>
-            <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
-        <% } %>
+<!--Set redirect route on clicking logo-->
+<% var logoRoute = "/home"; %>
+<% if(currentUser) { %>
+    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+        <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
+    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
+    <% } else if(currentUser.typeOfUser == "admin") { %>
+        <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
     <% } %>
+<% } %>
 
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
@@ -36,13 +36,20 @@
         <br>
         <div class="form_div drop__shadow">
             <br>
-            <p class="text-center lead">Choose account type</p>                                                            
+            <small class="text-center">Select your account type to continue.</small>
+            <br><br>
             <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
-                <button class="text-break text-wrap button btn btn-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/referrers/login';">Log into your doctor account</button>
-                <button class="text-break text-wrap button btn btn-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/hospitals/login';">Log into your hospital account</button>
+                <button class="text-break text-wrap button btn btn-outline-secondary user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/referrers/login';">
+                    <p class="lead bold-text">DOCTOR</p>
+                    <p class="lh-1" style="font-weight: 400;">Log into your doctor account.</p>
+                </button>
+                <button class="text-break text-wrap button btn btn-outline-secondary user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/hospitals/login';">
+                    <p class="lead bold-text">HOSPITAL</p>
+                    <p class="lh-1" style="font-weight: 400;">Log into your hospital account.</p>
+                </button>
             </div>
             <br>
-            <p class="text-center"><small><a class="text-success" href="/register" style="text-decoration: underline;">Sign up </a>instead</small></p>
+            <p class="text-center"><small><a class="text-success" href="/register" style="text-decoration: underline;">Sign up </a>instead.</small></p>
         </div>
         <br><br><br><br><br>
     </div>

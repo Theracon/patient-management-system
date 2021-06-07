@@ -25,8 +25,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         /************************************************************************************************************************ 
-                                                            DEFAULT STYLES
-            *************************************************************************************************************************/
+                                                // Start of desktop styles
+        *************************************************************************************************************************/
         .logo-text {
             font-family: 'Zen Dots','Poppins', sans-serif, monospace;
             font-weight: 900;
@@ -1866,9 +1866,7 @@
             height: 200px;            
         }
 
-        /*
-        SLIDESHOW STYLES START
-        */
+        /* Start of slideshow styles */
         .slider {
             position: relative;
             height: 100vh;
@@ -1877,15 +1875,15 @@
         .slider * {margin: 0; box-sizing: border-box;}
 
         .slider-overflow {
-            overflow: hidden; /* use an overflow parent! You don't want scrollbars */
+            overflow: hidden;
             height: inherit;
         }
 
         .slider-items {
-            display: flex; /* Use flex */
+            display: flex;
             flex-flow: row nowrap;
             height: inherit;
-            transition: transform 1s; /* Don't use margin, use transform */
+            transition: transform 1s;
         }
 
         .slider-item {
@@ -1899,76 +1897,90 @@
             bottom: 0;
             text-align: center;
         }
-        /*
-        SLIDESHOW STYLES END
-        */
-
-        /************************************************************************************************************************ 
-                                                STYLES FOR MOBILE DEVICES & TABLETS
-            *************************************************************************************************************************/
+        /* End of slideshow styles */
         
-        @media screen and (max-width: 1000px) {
+        /************************************************************************************************************************ 
+                                                // Start of large tablet styles
+        *************************************************************************************************************************/        
+        @media screen and (max-width: 991px) {
             button,
             input[type='submit'] {
                 width: 100% !important;
                 padding: 1rem !important;
             }
+
             nav>div>ul>div>li>a {
                 white-space: nowrap!important;
             }
+
             article>section>h1 {
                 width: 100% !important;
                 font-size: 1rem !important;
             }
+
             #alert-div {
                 width: 100%!important;
             }
+
             #button-group {
                 width: 100%!important;
             }
+
             #button-group>* {
                 width: 100%!important;
                 margin-bottom: 1rem!important;
             }
+
             #form_row_div {
                 width: 100%!important;
             }
+
             #profile {
                 width: 100%;
             }
+
             #input-group {
                 width: 100%!important;
             }
+
             #ht__input-group {
                 display: -webkit-box!important;
                 display: -ms-flexbox!important;
                 display: flex!important;
                 width: 100%!important;
             }
+
             #ht__input-group>input {
                 width: 100%!important;
                 margin-bottom: 0.2rem;
             }
+
             #ht__input-group>select {
                 width: 100%!important;
                 margin-top: 0.2rem;
             }
+
             #header>small {
                 text-align: center;
                 font-size: .8rem;
             }
+
             #accordion__button {
                 font-size: 0.8rem!important;
             }
+
             #commissionRatesTable {
                 font-size: 0.6em;
             }
+
             .select__hospital--option {
                 font-size: 0.7em;
             }
+
             .home__signin--button {
                 width: 100%!important;
             }
+
             .button-group {
                 display: -webkit-box!important;
                 display: -ms-flexbox!important;
@@ -1976,196 +1988,254 @@
                 -ms-flex-wrap: wrap!important;
                 flex-wrap: wrap!important;
             }
+
             .button-group-child {
                 width: 100%!important;
                 margin-bottom: 1.5rem!important;
             }
+
             .form_div {
                 width: 100%;
                 padding: 2rem .5rem 2rem .5rem;
             }
+
             .header-h1-text {
                 display: block;
                 margin: 0 auto;
                 font-size: 0.8rem;
                 font-weight: bold;
             }
+
             .dashboard-buttons-div {
                 width: 100%;
             }
+
             .dashboard-button-normal {
                 width: 100%;
             }
+
             .dashboard-button-grey {
                 width: 100%;
             }
+
             .analog {
                 width: 50px;
                 height: 50px;
             }
+
             .content {
                 width: 100%;
                 padding: 2rem;
             }
+
             .blog {
                 width: 100%;
                 grid-template-columns: 1fr;
             }
+
             .small-content {
                 width: 100%;
             }
+
             .form-content {
                 width: 100%;
             }
+
             .form-wrap {
                 width: 100%;
                 padding: 1rem;
             }
+
             .hospital_button {
                 width: 100%;
                 margin-bottom: 1rem;
             }
+
             .referrer_button {
                 width: 100%;
                 margin-bottom: 1rem;
             }
+
             .profile {
                 width: 100%;
             }
+
             .profile-details {
                 padding: 0;
             }
+
             .profile-details-paragraph {
                 display: block;
                 text-align: center;
             }
+
             .profile_procedures {
                 width: 100%;
                 font-size: 0.8rem!important;
             }
+
             .procedure_input {
                 width: 85%;
             }
+
             .procedure_input_button {
                 padding: 0.5rem !important;
                 width: 15% !important;
             }
+
             .procedure {
                 width: 85% !important;
             }
+
             .procedure_button {
                 width: 15% !important;
                 padding: 0.5rem !important;
             }
+
             .departments {
                 width: 100%;
                 padding: 1rem;
             }
+
             .department {
                 padding: 1rem;
             }
+
             .deregister-content {
                 width: 100%;
                 padding: 1rem;
             }
+
             .deregister-action {
                 width: 100%;
                 padding: 1rem;
             }
+
             .holder_div {
                 width: 100%;
                 padding: 2rem .5rem;
             }
+
             .deactivate-account {
                 width: 100%;
             }
+
             .deactivate-account * button {
                 padding: 1rem!important;
             }
+
             .notification {
                 width: 100%;
             }
+
             .notification_time {
                 font-size: 0.5rem!important;
                 white-space: nowrap;
                 width: 35%;
             }
+
             .notification_content {
                 font-size: 0.8rem!important;
                 width: 50%;
                 white-space: nowrap;
             }
+
             .banner {
                 width: 100%;
             }
+
             .patient-card-auth {
                 width: 48%;
                 height: 20vmax;
             }
+
             .patient-card-unauth {
                 width: 48%;
                 height: 20vmax;
             }
+
             .patient-card-name {
                 font-size: 0.8rem;
             }
+
             .patient-card-investigation {
                 font-size: 0.6rem;
                 padding-top: 1rem;
                 padding-bottom: 1rem;
             }
+
             .patient-info {
                 white-space: nowrap;
             }
+
             .paragraph__span {
                 width: 100%;
                 max-height: 20vh;
                 font-size: 0.8rem;
             }
+
             .logo {
                 width: 5rem;
                 height: 5rem;
             }
+
             .privacy {
                 width: 100%;
                 padding: 1rem;
                 text-align: justify;
             }
+
             .image__404 {
                 width: 50vw;
                 height: 30vh;
             }
+
             .fastclinic__logo {
                 -webkit-transform: scale(0.4);
                 -ms-transform: scale(0.4);
                 transform: scale(0.4);
             }
+
             .article__image--div {
                 display: block;
             }
+
             .article__content {
                 margin: 0;
                 width: 100%;
                 height: fit-content;
                 border-radius: 0;
             }
+
             .flexer {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
             }
+            
             .footer__footer {
                 text-align: center;
             }
         }
+
         /************************************************************************************************************************ 
-                                                STYLES FOR MOBILE DEVICES ONLY
-            *************************************************************************************************************************/
-        
+                                                // Start of medium tablet styles
+        *************************************************************************************************************************/
+        @media screen and (max-width: 479px) {}
+
+
+        /************************************************************************************************************************ 
+                                                // Start of mobile phone styles
+        *************************************************************************************************************************/
         @media screen and (max-width: 479px) {
             #button-holder {
                 display: grid!important;
+            }
+
+            .user-button {
+                height: 50vh;
+                margin: 1rem auto !important;
             }
         }
     </style>
