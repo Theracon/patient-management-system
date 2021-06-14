@@ -11,7 +11,7 @@
         <div style="display: flex; align-items: center; justify-content: center;">
             <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
-        <h1 class="header-h1-text">Login</h1>
+        <h1 class="header-h1-text">Admin Login</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <% if(currentUser) { %>
             <% if(currentUser.typeOfUser=="referrer" && currentUser.role>= 1) { %>

@@ -49,21 +49,13 @@ var PatientSchema = new mongoose.Schema({
 var referrerDetailSchema = new mongoose.Schema({
     title: String,
     firstname: String,
+    middlename: String,
     lastname: String,
-    name: String,
-    institution: String,
-    address: String,
-    phone: String,
-    bank: String,
-    ac_number: String,
-    ac_name: String,
+    department: String,
     patient_count: Number,
-    commission: Number,
     patients: [PatientSchema],
     notifications: [NotificationSchema],
-    unread_notifications_count: Number,
-    last_updated: String,
-    update_count: Number,
+    unread_notifications_count: Number
 });
 
 // HOSPITAL DETAILS SCHEMA

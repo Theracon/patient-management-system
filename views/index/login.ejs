@@ -34,7 +34,7 @@
     <div class="container">
         <%- include("../partials/alert.ejs") %>
         <br>
-        <div class="form_div drop__shadow">
+        <div class="form_div drop__shadow" style="width: 100%;">
             <br>
             <small class="text-center">Select your account type to continue.</small>
             <br><br>
@@ -44,12 +44,15 @@
                     <p class="lh-1" style="font-weight: 400;">Log into your doctor account.</p>
                 </button>
                 <button class="text-break text-wrap button btn btn-outline-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/hospitals/login';">
-                    <p class="lead bold-text">HOSPITAL</p>
-                    <p class="lh-1" style="font-weight: 400;">Log into your hospital account.</p>
+                    <p class="lead bold-text">DEPARTMENT</p>
+                    <p class="lh-1" style="font-weight: 400;">Log into your departmental account.</p>
+                </button>
+                <button class="text-break text-wrap button btn btn-outline-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/admin/login';">
+                    <p class="lead bold-text">HOSPITAL ADMIN</p>
+                    <p class="lh-1" style="font-weight: 400;">Log into your hospital admin account.</p>
                 </button>
             </div>
-            <br>
-            <p class="text-center"><small><a class="text-success" href="/register" style="text-decoration: underline;">Sign up </a>instead.</small></p>
+            <br><br>
         </div>
         <br><br><br><br><br>
     </div>
