@@ -3,17 +3,17 @@
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: space-between;">
-            <a href="/referrers/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <a href="/doctors/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
             <div style="display: flex; align-items: flex-start; width: 10%;">
-                <% if(currentUser.referrerDetails.unread_notifications_count > 0) { %>
-                    <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                    <span><%= currentUser.referrerDetails.unread_notifications_count %> </span>
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/doctors/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
                 <% } else { %>
-                    <p><a href="/referrers/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                    <p><a href="/doctors/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
                 <% } %>
             </div>
         </div>
-        <h1 class="header-h1-text">Dashboard</h1>
+        <h1 class="header-h1-text">Doctor Dashboard</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <%- include("../partials/navbar_referrer.ejs") %>
     </header>
@@ -22,41 +22,24 @@
         <br>
         <div class="container">
             <div class="dashboard-buttons-div">
-                <!--REFER A PATIENT-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients/new';">
+                <!--New booking-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
                     <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-hospital-user extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">New Patient</span>
+                    <span class="lh-1" style="font-weight: 500;">New booking</span>
                 </button>
-                <!--PATIENTS-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/referrers/<%=currentUser.username%>/patients';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-procedures extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Patients</span>
+                <!--View all patients-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-users extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">My patients</span>
                 </button>
-                <!--PROFILE-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/referrers/<%=currentUser.username%>/profile';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-user-md extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Profile</span>
-                </button>
-                <!--FAQs-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/faq';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-question extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">FAQs</span>
-                </button>
-                <!--CONTACT US-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/contact';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-phone-alt extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Contact</span>
-                </button>
-                <!--LOG OUT-->
+                <!--Log out-->
                 <button class="dashboard-button-grey" onclick="window.location.href='/logout';">
                     <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-power-off extra-big-icon"></i></span> 
                     <span class="lh-1" style="font-weight: 500;">Log Out</span>
                 </button>
             </div>
-            <br><br><br><br><br>
         </div>
     </div>
 </div>
-<div style="height: 50vh;"></div>
 
 <%- include("../partials/footer.ejs") %>
