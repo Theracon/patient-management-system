@@ -8,10 +8,17 @@ router.get("/admin/dashboard", function(req, res) {
     return res.render("admin/dashboard");
 });
 
-// SHOW(GET): SHOW INFO OF CREATED USER
-router.get("/admin/:username/user-created", function(req, res) {
+// SHOW(GET): SHOW INFO OF CREATED DEPARTMENT
+router.get("/admin/:username/department-created", function(req, res) {
     User.findOne({ typeOfUser: "department", username: req.params.username }, function(err, user) {
-        return res.render("admin/userCreated", { user });
+        return res.render("admin/departmentCreated", { user });
+    });
+});
+
+// SHOW(GET): SHOW INFO OF CREATED DOCTOR
+router.get("/admin/:username/doctor-created", function(req, res) {
+    User.findOne({ typeOfUser: "doctor", username: req.params.username }, function(err, user) {
+        return res.render("admin/doctorCreated", { user });
     });
 });
 

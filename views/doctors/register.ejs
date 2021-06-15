@@ -1,21 +1,9 @@
 <%- include("../partials/header.ejs") %>
 
-<!--Set redirect route on clicking logo-->
-<% var logoRoute = "/home"; %>
-<% if(currentUser) { %>
-    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-        <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
-    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
-    <% } else if(currentUser.typeOfUser == "admin") { %>
-        <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
-    <% } %>
-<% } %>
-
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: center;">
-            <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <a href=""><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
         <h1 class="header-h1-text">Doctor Registration</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
@@ -38,9 +26,36 @@
             <br>
         <div class="form_div drop__shadow">
             <div id="form-holder">
-                <form class="needs-validation" action="/accounts/referrers/register" method="POST" novalidate>
+                <form class="needs-validation" action="/accounts/doctors/register" method="POST" novalidate>
                     <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
                         <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Creating a doctor account.</small>
+                        <!--First name-->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-success" id="firstname" name="firstname" required>
+                            <label for="firstname">First name</label>
+                        </div>
+                        <!--Middle name-->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-success" id="middlename" name="middlename">
+                            <label for="middlename">Middle name</label>
+                        </div>
+                        <!--Last name-->
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-success" id="lastname" name="lastname" required>
+                            <label for="lastname">Last name</label>
+                        </div>
+                        <!--Select department-->
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="department" name="department">
+                                <option value="-1" selected disabled>-- Select one --</option>
+                                <% departments.forEach((department) => { %>
+                                    <% if(department.department_details) { %>
+                                        <option class="select__hospital--option" value="<%=department.username%>"><%=department.department_details.name%></option>
+                                    <% } %>
+                                <% })%>
+                            </select>
+                            <label for="hospital">Referral institution</label>
+                        </div>
                         <!--Username-->
                         <div class="form-floating mb-3">
                             <input type="text" pattern="[A-Za-z0-9]{5,}" class="form-control border border-success" id="username" name="username" onkeyup="validateUsernameRealtime();" required>
@@ -135,10 +150,9 @@
                 </form>
             </div>
         </div>
-        <br><br><br><br><br>
+        <br>
     </div>
 </div>
-<div style="height: 50vh;"></div>
 
 <%- include("../partials/validate-username-and-password.ejs") %>
 <%- include("../partials/footer.ejs") %>

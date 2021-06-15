@@ -5,7 +5,7 @@
         <div style="display: flex; align-items: center; justify-content: center;">
             <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
-        <h1 class="header-h1-text">User Info</h1>
+        <h1 class="header-h1-text">Department Info</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <%- include("../partials/navbar_admin.ejs") %>
     </header>
@@ -14,14 +14,15 @@
         <%- include("../partials/alert.ejs") %>
             <br>
         <div class="profile drop__shadow">
-            <p class="text-center">The following user was successfully created:</p>
+            <p class="text-center">The following department was successfully added to My Clinic:</p>
             <br><br>
             <p class="profile-details-paragraph lh-1"><span class="lead">Username</span><br><span class="paragraph__span overflow-auto"><%=user.username%></span></p>
             <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span overflow-auto"><%=user.department_details.name%></span></p>
             <br><br><br><br><br>
-            <small>The created user can now now log into their account with the generated username and password. Click <a href="/login">here</a> to login.</small>
+            <small>The created department can now now log into their account with the generated username and password. Click <a href="/accounts/departments/login">here</a> to login.</small>
         </div>
     </div>
+    <br>
 </div>
 
 <%- include("../partials/footer.ejs") %>

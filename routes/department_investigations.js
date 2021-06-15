@@ -45,7 +45,7 @@ router.post("/departments/:username/investigations", function(req, res) {
 
                 user.role = 1;
                 user.save(function(err, user) {
-                    return res.redirect("/admin/" + user.username + "/user-created");
+                    return res.redirect("/admin/" + user.username + "/department-created");
                 });
                 return;
             }

@@ -41,8 +41,8 @@ var bodyParser = require('body-parser'),
     referrerNotificationsRoutes = require("./routes/referrer_notifications"),
     referrerPatientsRoutes = require("./routes/referrer_patients"),
     referrerProfileRoutes = require("./routes/referrer_profile"),
-    referrerSignupRoutes = require("./routes/referrer_signup"),
     referrerLoginRoutes = require("./routes/referrer_login"),
+    doctorRegisterRoutes = require("./routes/doctor_register"),
 
     // Import wildcard route file
     wildcardRoute = require("./routes/wildcard"),
@@ -126,8 +126,8 @@ app.use(referrerDeactivateRoutes);
 app.use(referrerNotificationsRoutes);
 app.use(referrerPatientsRoutes);
 app.use(referrerProfileRoutes);
-app.use(referrerSignupRoutes);
 app.use(referrerLoginRoutes);
+app.use(doctorRegisterRoutes);
 
 // Configure app to use wildcard route file
 app.use(wildcardRoute);

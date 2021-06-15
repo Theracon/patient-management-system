@@ -57,6 +57,7 @@ var DoctorSchema = new mongoose.Schema({
     middlename: String,
     lastname: String,
     department: String,
+    department_id: String,
     patients: [PatientSchema]
 });
 
