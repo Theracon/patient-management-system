@@ -1,28 +1,16 @@
 <%- include("../partials/header.ejs") %>
 
-<!--Set redirect route on clicking logo-->
-<% var logoRoute = "/home"; %>
-<% if(currentUser) { %>
-    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-        <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
-    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
-    <% } else if(currentUser.typeOfUser == "admin") { %>
-        <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
-    <% } %>
-<% } %>
-
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: center;">
-            <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <a href="#"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
-        <h1 class="header-h1-text">Hospital Registration</h1>
+        <h1 class="header-h1-text">Department Registration</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <% if(currentUser) { %>
-            <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
+            <% if(currentUser.typeOfUser == "referrer") { %>
                 <%- include("../partials/navbar_referrer.ejs") %>
-            <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
+            <% } else if(currentUser.typeOfUser == "department") { %>
                 <%- include("../partials/navbar_hospital.ejs") %>
             <% } else if(currentUser.typeOfUser == "admin") { %>
                 <%- include("../partials/navbar_admin.ejs") %>
@@ -38,9 +26,9 @@
             <br>
         <div class="form_div drop__shadow">
             <div id="form-holder">
-                <form class="needs-validation" action="/accounts/hospitals/register" method="POST" onsubmit="checkIfPasswordsMatch()" novalidate>
+                <form class="needs-validation" action="/accounts/departments/register" method="POST" onsubmit="checkIfPasswordsMatch()" novalidate>
                     <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
-                        <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Creating a hospital account.</small>
+                        <small class="text-center text-muted border border-2" id="login-info" style="margin-bottom: 2rem; padding: 1rem; width: 100%; border-radius: 10px;">Create a departmental account.</small>
                         <!--Username-->
                         <div class="form-floating mb-3">
                             <input type="text" pattern="[A-Za-z0-9]{5,}" class="form-control border border-success" id="username" name="username" onkeyup="validateUsernameRealtime();" required>
@@ -136,10 +124,9 @@
                 </form>
             </div>
         </div>
-        <br><br><br><br><br>
+        <br>
     </div>
 </div>
-<div style="height: 50vh;"></div>
 
 <%- include("../partials/validate-username-and-password.ejs") %>
 <%- include("../partials/footer.ejs") %>

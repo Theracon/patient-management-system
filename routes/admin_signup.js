@@ -1,28 +1,10 @@
 var express = require("express"),
     passport = require("passport"),
-    router = express.Router(),
-    User = require("../models/user"),
-    Patient = require("../models/patient"),
-    hospitalCount = '',
-    referrerCount = '',
-    patientCount = '';
+    router = express.Router();
 
 // INDEX(GET): ADMIN SIGNUP PAGE/ADMIN
 router.get("/admin/register", function(req, res) {
-    // Fetch all hospitals
-    User.find({ typeOfUser: "hospital" }, function(err, hospitals) {
-        // Fetch all referrers
-        User.find({ typeOfUser: "referrer" }, function(err, referrers) {
-            // Fetch all patients
-            Patient.find({}, function(err, patients) {
-                // Update counts
-                hospitalCount = hospitals.length;
-                referrerCount = referrers.length;
-                patientCount = patients.length;
-                return res.render("admin/register", { hospitalCount: hospitalCount, referrerCount: referrerCount, patientCount: patientCount });
-            });
-        });
-    });
+    return res.render("admin/register");
 });
 
 // CREATE(POST): SIGNUP LOGIC/ADMIN
@@ -33,16 +15,18 @@ router.post("/admin/register", function(req, res) {
                 req.flash("error", "Sorry, that username is taken.");
                 return res.redirect("back");
             }
+
             var admin = new User({
                 typeOfUser: "admin",
                 username: req.body.username,
                 password: req.body.password
             });
+
             User.register(admin, admin.password, function(err, user) {
                 if (!err) {
                     admin.save(function(err, admin) {
                         passport.authenticate("local")(req, res, function() {
-                            req.flash("success", "Hello there! Welcome to Fastclinic.");
+                            req.flash("success", "Hello, Admin! Welcome to My Clinic.");
                             return res.redirect("/admin/dashboard");
                         });
                     });

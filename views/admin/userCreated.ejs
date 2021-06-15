@@ -1,0 +1,27 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">User Info</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_admin.ejs") %>
+    </header>
+
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+            <br>
+        <div class="profile drop__shadow">
+            <p class="text-center">The following user was successfully created:</p>
+            <br><br>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Username</span><br><span class="paragraph__span overflow-auto"><%=user.username%></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span overflow-auto"><%=user.department_details.name%></span></p>
+            <br><br><br><br><br>
+            <small>The created user can now now log into their account with the generated username and password. Click <a href="/login">here</a> to login.</small>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

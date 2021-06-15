@@ -5,7 +5,7 @@
         <div style="display: flex; align-items: center; justify-content: center;">
             <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
-        <h1 class="header-h1-text">Dashboard</h1>
+        <h1 class="header-h1-text">Admin Dashboard</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <%- include("../partials/navbar_admin.ejs") %>
     </header>
@@ -14,26 +14,39 @@
         <br>
         <div class="container">
             <div class="dashboard-buttons-div">
-                <!--HOSPITALS-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/admin/hospitals';">
+                <!--DEPARTRMENTS-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
                     <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-clinic-medical extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Hospitals</span>
+                    <span class="lh-1 text-wrap" style="font-weight: 500;">Departments, clinics & units</span>
                 </button>
-                <!--REFERRERS-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/admin/referrers';">
+                <!--DOCTORS-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
                     <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-user-md extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Referrers</span>
+                    <span class="lh-1" style="font-weight: 500;">Doctors</span>
                 </button>
-                <!--BROADCAST-->
-                <button class="dashboard-button-normal" onclick="window.location.href='/admin/broadcast';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-comments extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Broadcast</span>
+                <!--PATIENTS-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-procedures extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Patients</span>
+                </button>
+                <!--REGISTER A USER-->
+                <button class="dashboard-button-normal" onclick="window.location.href='/register';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-user-plus extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Register an account</span>
+                </button>
+                <!--GENERATE AN INVOICE-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-file-invoice-dollar extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Generate invoice</span>
+                </button>
+                <!--BROADCAST MESSAGE-->
+                <button class="dashboard-button-normal" onclick="window.location.href='';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-broadcast-tower extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">Send a broadcast message</span>
                 </button>
             </div>
         </div>
-        <br><br><br><br><br>
     </div>
 </div>
-<div style="height: 50vh;"></div>
 
 <%- include("../partials/footer.ejs") %>

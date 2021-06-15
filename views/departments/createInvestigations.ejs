@@ -1,0 +1,82 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="#"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">Step 3 <em>of</em> 3</h1>
+    </header>
+
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-wrap drop__shadow">
+            <form action="/departments/<%=user.username%>/investigations" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                    <h1 class="text-center lead">INVESTIGATIONS & PROCEDURES</h1>
+                    <div id="departments">
+                        <div class="department drop__shadow">
+                            <!--Name-->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="name" name="name" required>
+                                <label for="name">Name of investigation</label>
+                            </div>
+                            <!--Price-->
+                            <div class="form-floating mb-3">
+                                <input type="number" class="form-control" id="price" name="price" required>
+                                <label for="price">Price</label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!--Add new investigation button-->
+                    <div style="width: 30%; padding: 0; margin: 1rem auto;">
+                    <br>
+                        <p class="text-center"><i class="text-success fas fa-plus-circle extra-big-icon" id="add-investigation" style="cursor: pointer;"></i></p>
+                    </div>
+                    <!--Buttons-->
+                    <div id="button-group" style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Confirm" style="width: 100%; padding: 2rem;">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+    </div>
+</div>
+
+<script>
+    // Add a new investigation
+    document.querySelector("#add-investigation").addEventListener("click", function() {
+        var count = 1;
+        var div = document.createElement("div");
+        div.classList.add("department");
+        div.classList.add("drop__shadow");
+        div.innerHTML = `
+        <!--Name-->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="name">Name of investigation</label>
+        </div>
+        <!--Price-->
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="price" name="price" required>
+            <label for="price">Price</label>
+        </div>
+        <!--Remove department-->
+        <p class="text-center"><i class="fas fa-trash-alt big-icon text-danger delete-investigation" style="cursor: pointer;"></i></p>
+    `;
+        document.getElementById("departments").appendChild(div);
+    });
+
+    
+    // Remove an investigation
+    document.getElementById("departments").addEventListener("click", function(e) {
+        if (e.target.classList.contains("delete-investigation")) {
+            e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+        }
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

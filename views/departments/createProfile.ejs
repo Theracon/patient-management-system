@@ -1,0 +1,40 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="#"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">Step 2 <em>of</em> 3</h1>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="holder_div drop__shadow">
+            <form action="/departments/<%=user.username%>/update" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                    <!--Name-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="name">Name of department</label>
+                        <div class="invalid-feedback">Please enter your department's name</div>
+                    </div>
+                    <!--HOD-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="hod" name="hod">
+                        <label for="hod">HOD's name</label>
+                    </div>
+                    <!--Buttons-->
+                    <div id="button-group" style="width: 100%; margin-top: 3rem; display: grid; grid-row-gap: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Confirm" style="width: 100%; padding: 2rem;">
+                        <button type="reset" class="button btn btn-outline-danger" style="width: 100%; padding: 1rem;">Clear form</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs") %>

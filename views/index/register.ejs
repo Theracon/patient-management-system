@@ -8,14 +8,14 @@
     <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
         <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
     <% } else if(currentUser.typeOfUser == "admin") { %>
-        <% logoRoute = "/admin/" + currentUser.username + "/dashboard"; %>
+        <% logoRoute = "/" + currentUser.username + "/dashboard"; %>
     <% } %>
 <% } %>
 
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: center;">    <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a></div>
-        <h1 class="header-h1-text">Register</h1>
+        <h1 class="header-h1-text">Register an account</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <% if(currentUser) { %>
             <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
@@ -39,20 +39,18 @@
             <small class="text-center">Select an account type to continue.</small>
             <br><br>
             <div id="button-holder" style="width: 100%; margin: 0 auto; display: flex;">
+                <button class="text-break text-wrap button btn btn-outline-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/departments/register';">
+                    <p class="lead bold-text">DEPARTMENT</p>
+                    <p class="lh-1" style="font-weight: 400;">Register a department.</p>
+                </button>
                 <button class="text-break text-wrap button btn btn-outline-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/referrers/register';">
                     <p class="lead bold-text">DOCTOR</p>
                     <p class="lh-1" style="font-weight: 400;">Register a doctor.</p>
                 </button>
-                <button class="text-break text-wrap button btn btn-outline-success user-button" style="margin: 0.2rem; border-width: 2px;" onclick="window.location.href='/accounts/hospitals/register';">
-                    <p class="lead bold-text">DEPARTMENT</p>
-                    <p class="lh-1" style="font-weight: 400;">Register a department.</p>
-                </button>
             </div>
             <br><br>
         </div>
-        <br><br><br><br><br>
     </div>
 </div>
-<div style="height: 50vh;"></div>
 
 <%- include("../partials/footer.ejs") %>

@@ -23,18 +23,17 @@ var bodyParser = require('body-parser'),
     adminSignupRoutes = require("./routes/admin_signup"),
     adminLoginRoutes = require("./routes/admin_login"),
 
-    // Import hospital route files
-    hospitalIndexRoutes = require("./routes/hospital_index"),
+    // Import department route files
     hospitalAuthenticateRoutes = require("./routes/hospital_authentication"),
     hospitalDeactivateRoutes = require("./routes/hospital_deactivate"),
-    hospitalDepartmentsRoutes = require("./routes/hospital_departments"),
     hospitalNotificationsRoutes = require("./routes/hospital_notifications"),
     hospitalPatientsRoutes = require("./routes/hospital_patients"),
     hospitalProceduresRoutes = require("./routes/hospital_procedures"),
-    hospitalCommissionRatesRoutes = require("./routes/hospital_commission_rates"),
-    hospitalProfileRoutes = require("./routes/hospital_profile"),
-    hospitalSignupRoutes = require("./routes/hospital_signup"),
-    hospitalLoginRoutes = require("./routes/hospital_login"),
+    departmentDashboardRoutes = require("./routes/department_dashboard"),
+    departmentInvestigationsRoutes = require("./routes/department_investigations"),
+    departmentProfileRoutes = require("./routes/department_profile"),
+    departmentRegisterRoutes = require("./routes/department_register"),
+    departmentLoginRoutes = require("./routes/department_login"),
 
     // Import referrer route files
     referrerIndexRoutes = require("./routes/referrer_index"),
@@ -110,17 +109,16 @@ app.use(adminSignupRoutes);
 app.use(adminLoginRoutes);
 
 // Configure app to use hospital route files
-app.use(hospitalIndexRoutes);
 app.use(hospitalAuthenticateRoutes);
 app.use(hospitalDeactivateRoutes);
 app.use(hospitalNotificationsRoutes);
 app.use(hospitalPatientsRoutes);
-app.use(hospitalProfileRoutes);
-app.use(hospitalDepartmentsRoutes);
 app.use(hospitalProceduresRoutes);
-app.use(hospitalCommissionRatesRoutes);
-app.use(hospitalSignupRoutes);
-app.use(hospitalLoginRoutes);
+app.use(departmentDashboardRoutes);
+app.use(departmentProfileRoutes);
+app.use(departmentInvestigationsRoutes);
+app.use(departmentRegisterRoutes);
+app.use(departmentLoginRoutes);
 
 // Configure app to use referrer route files
 app.use(referrerIndexRoutes);
@@ -144,6 +142,7 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, { useUnifie
 /******************************************************************************************************************************/
 // CONFIGURE APP LISTEN ROUTE
 /******************************************************************************************************************************/
-app.listen(process.env.PORT, function() {
-    console.log(`Fastclinic local server now live at port ${process.env.PORT}`);
+var port = Math.round(Math.random() * 1000);
+app.listen(port, function() {
+    console.log(`Fastclinic local server now live at port ${port}`);
 });
