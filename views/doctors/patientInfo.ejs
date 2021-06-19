@@ -59,18 +59,21 @@
         <div class="profile drop__shadow overflow-auto"  style="max-height: 100vh">
             <p class="lead text-center bold-text">REPORTS</p>
             <br>
-            <% if (patient.reports && patient.reports.length > 0) { %>
-                <% patient.reports.forEach(report => { %>
-                    <div class="profile border border-primary";>
-                        <p class="paragraph__span text-wrap text-break overflow-auto"><%= report.investigation_date %></p>
-                        <p class="paragraph__span text-wrap text-break overflow-auto"><%= report.department_name %></p>
-                        <p class="paragraph__span text-wrap text-break overflow-auto"><%= report.investigation_name %></p>
-                        <p class="paragraph__span text-wrap text-break overflow-auto">Reported by: <%= report.reported_by %></p>
-                        <p class="paragraph__span text-wrap text-break overflow-auto">Reported on: <%= report.reported_on %></p>
-                        <p class="paragraph__span text-wrap text-break overflow-auto" style="display: none;" id="report-body"><%= report.body %></p>
-                        <button type="button" id="show-report-body-btn" class="btn btn-outline-success">Display report</button>
-                    </div>
-                <% }) %>
+            <% if (patient.bookings && patient.bookings.length > 0) { %>
+                <% patient.bookings.forEach(booking => { %>
+                    <% if (booking.reports && booking.reports.length > 0) { %>
+                        <% booking.reports.forEach(report => { %>
+                            <div class="profile border border-primary mb-3">
+                                <p class="profile-details-paragraph lh-1"><span class="lead">Investigation</span><br><span class="paragraph__span text-wrap text-break"><%= report.investigation %></span></p>
+                                <p class="profile-details-paragraph lh-1"><span class="lead">Reported by</span><br><span class="paragraph__span text-wrap text-break"><%= report.reported_by %></span></p>
+                                <p class="profile-details-paragraph lh-1"><span class="lead">Reported on</span><br><span class="paragraph__span text-wrap text-break"><%= report.reported_on %></span></p>
+                                <br>
+                                <button type="button" class="mb-3 btn btn-success btn-sm" id="report-body-btn">Display report</button>
+                                <p class="hide-report-body overflow-auto lh-1 hide-report-body" id="report-body" style="max-height: 80vh;"><%= report.body %></p>
+                            </div>
+                        <% }); %>
+                    <% } %>
+                <% }); %>
             <% } else { %>
                 <p class="text-center">No reports yet.</p>
             <% } %>
@@ -80,13 +83,16 @@
 </div>
 
 <script>
-    var reportBody = document.getElementById("report-body");
-    var reportBodyBtn = document.getElementById("show-report-body-btn");
+    var toggleReportButtons = document.querySelectorAll("#report-body-btn");
+    var reportBodys = document.querySelectorAll("#report-body");
 
-    reportBodyBtn.addEventListener("click", function() {
-        reportBody.classList.toggle("toggle-patient-report");
-        reportBody.innerHTML = reportBody.innerHTML == "Display report" ? "Hide report" : "Display report";
+    toggleReportButtons.forEach(function(toggleReportButton, index) {
+        toggleReportButton.addEventListener("click", function() {
+            reportBodys[index].classList.toggle("hide-report-body");
+            toggleReportButton.innerHTML = toggleReportButton.innerHTML === "Display report" ? "Hide report" : "Display report";
+        });
     });
+    
 </script>
 
 <%- include("../partials/footer.ejs") %>

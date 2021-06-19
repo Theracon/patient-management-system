@@ -25,25 +25,15 @@ router.get("/admin/departments-clinics-and-units/:username", function(req, res) 
 
 // REMOVE(DELETE): REMOVE A DEPARTMENT
 router.delete("/admin/departments/:id", function(req, res) {
-    User.findById(req.params.id, function(err, department) {
+    User.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
             req.flash("error", "Oops! Something isn't quite right.");
             return res.redirect("back");
         }
-        if (department) {
-            User.findByIdAndRemove(req.params.id, function(err) {
-                if (err) {
-                    req.flash("error", "Oops! Something isn't quite right.");
-                    return res.redirect("back");
-                }
 
-                return res.redirect("/admin/departments-clinics-and-units");
-            });
-            return;
-        }
-        req.flash("error", "Oops! Something isn't quite right.");
-        return res.redirect("back");
+        return res.redirect("/admin/departments-clinics-and-units");
     });
+    return;
 });
 
 module.exports = router;

@@ -70,7 +70,15 @@
         </div>
     </div>
     <br><br>
-    <p class="text-center"><a class="text-danger" href="/admin/departments/<%=department._id%>">Remove Department</a></p>
+    <form action="/admin/departments/<%=department._id%>?_method=DELETE" method="POST">
+        <div class="row g-3 align-items-center justify-content-center" style="width: fit-content; margin: 0 auto;">
+            <!--Button-->
+            <div class="button-group">
+                <input type="submit" class="button btn btn-danger" value="Remove department" style="width: 100%; margin-top: 1rem; margin-bottom: 1rem;">
+            </div>
+            <small class="text-center">This action cannot be undone.</small>
+        </div>
+    </form>
     <br><br>
 </div>
 
