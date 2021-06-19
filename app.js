@@ -138,7 +138,6 @@ mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true }, { useUnifie
 /******************************************************************************************************************************/
 // CONFIGURE APP LISTEN ROUTE
 /******************************************************************************************************************************/
-var port = Math.round(Math.random() * 1000);
-app.listen(port, function() {
-    console.log("My Clinic local server running at port " + port);
+app.listen(process.env.PORT, function() {
+    console.log("My Clinic local server running at port " + process.env.PORT);
 });
