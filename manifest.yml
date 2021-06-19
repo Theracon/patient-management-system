@@ -1,6 +1,0 @@
----
-applications:
- - name: fastclinic
-   random-route: true
-   memory: 256M
-
