@@ -23,6 +23,13 @@ router.post('/accounts/doctors/register', function(req, res) {
 
             date = new Date();
 
+            // Create admin message
+            var welcomeMessage = {
+                date: date.toLocaleString("en-NG"),
+                content: "Hello, there! Welcome to My Clinic.",
+                status: "unread"
+            }
+
             var doctor = new User({
                 typeOfUser: "doctor",
                 username: req.body.username,
@@ -40,6 +47,12 @@ router.post('/accounts/doctors/register', function(req, res) {
                 doctor.doctor_details.department_id = department._id;
                 doctor.doctor_details.department = department.department_details.name;
             });
+
+            // Push welcome message into doctor notifications array
+            doctor.notifications.push(welcomeMessage);
+
+            // Update doctor unread notifications count
+            doctor.unread_notifications_count = 1;
 
             User.register(doctor, doctor.password, function(err, user) {
                 if (!err) {

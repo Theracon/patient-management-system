@@ -1,0 +1,54 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/departments/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">Bookings</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_hospital.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        
+        <!--BOOKINGS-->
+        <div class="profile drop__shadow overflow-auto"  style="max-height: 100vh">
+            <% if (user.department_details.bookings && user.department_details.bookings.length > 0) { %>
+                <% user.department_details.bookings.forEach(booking => { %>
+                    <% var status = booking.status === 1 ? "Done" : "Not done" %>
+                    <% var borderColor = booking.status === 1 ? "border border-success" : "border border-secondary"; %>
+
+                    <div class="profile <%= borderColor %> mb-3">
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Booked by</span><br><span class="paragraph__span text-wrap text-break"><%= booking.doctor %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Date/time</span><br><span class="paragraph__span text-wrap text-break"><%= booking.date %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span class="paragraph__span text-wrap text-break"><%= status %></span></p>
+                        <% if(booking.status == 1) { %>
+                            <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed by </span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_by %></span></p>
+                            <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed on </span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_on %></span></p>
+                            <button onclick="window.location.href='/departments/<%=user.username%>/bookings/<%=booking.id%>/new-report';" class="btn btn-outline-success mb-3" style="width: 100%; padding: 1rem;">Write a report</button>
+                            <button onclick="window.location.href='/departments/<%=user.username%>/bookings/<%=booking.id%>/reports';" class="btn btn-outline-success mb-3" style="width: 100%; padding: 1rem;">View reports</button>
+                        <% } else { %>
+                            <button onclick="window.location.href='/departments/<%=user.username%>/bookings/<%=booking.id%>/authenticate';" class="btn btn-success" style="width: 100%; padding: 1rem;">Authenticate</button>
+                        <% } %>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">No bookings yet.</p>
+            <% } %>
+        </div>
+        <br>
+    </div>
+    <br>
+</div>
+
+<%- include("../partials/footer.ejs") %>

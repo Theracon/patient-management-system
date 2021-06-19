@@ -1,21 +1,9 @@
 <%- include("../partials/header.ejs") %>
 
-<!--Set redirect route on clicking logo-->
-<% var logoRoute = "/home"; %>
-<% if(currentUser) { %>
-    <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-        <% logoRoute = "/referrers/" + currentUser.username + "/dashboard"; %>
-    <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-        <% logoRoute = "/hospitals/" + currentUser.username + "/dashboard"; %>
-    <% } else if(currentUser.typeOfUser == "admin") { %>
-        <% logoRoute = "/" + currentUser.username + "/dashboard"; %>
-    <% } %>
-<% } %>
-
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: center;">
-            <a href=<%=logoRoute %> ><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <a href=""><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
         <h1 class="header-h1-text">Department Login</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>

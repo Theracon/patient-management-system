@@ -23,19 +23,19 @@
         <div class="container">
             <div class="dashboard-buttons-div">
                 <!--New booking-->
-                <button class="dashboard-button-normal" onclick="window.location.href='';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-hospital-user extra-big-icon"></i></span> 
+                <button class="dashboard-button-normal" onclick="window.location.href='/doctors/<%=user.username%>/patients/find-patient';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-person-booth extra-big-icon"></i></span> 
                     <span class="lh-1" style="font-weight: 500;">New booking</span>
                 </button>
-                <!--View all patients-->
-                <button class="dashboard-button-normal" onclick="window.location.href='';">
+                <!--My bookings-->
+                <button class="dashboard-button-normal" onclick="window.location.href='/doctors/<%=user.username%>/bookings';">
                     <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-users extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">My patients</span>
+                    <span class="lh-1" style="font-weight: 500;">My bookings</span>
                 </button>
-                <!--Log out-->
-                <button class="dashboard-button-grey" onclick="window.location.href='/logout';">
-                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-power-off extra-big-icon"></i></span> 
-                    <span class="lh-1" style="font-weight: 500;">Log Out</span>
+                <!--View all patients-->
+                <button class="dashboard-button-normal" onclick="window.location.href='/doctors/<%=user.username%>/patients/search';">
+                    <span class="lh-1" style="padding-top: 0.5rem;"><i class="fas fa-hospital-user extra-big-icon"></i></span> 
+                    <span class="lh-1" style="font-weight: 500;">View patient info</span>
                 </button>
             </div>
         </div>

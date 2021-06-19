@@ -3,81 +3,42 @@
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: space-between;">
-            <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <a href="/departments/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
             <div style="display: flex; align-items: flex-start; width: 10%;">
-                <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
-                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                    <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
                 <% } else { %>
-                    <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
                 <% } %>
             </div>
         </div>
-        <h1 class="header-h1-text">Authenticate a Patient</h1>
+        <h1 class="header-h1-text">Authenticate appointment</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <%- include("../partials/navbar_hospital.ejs") %>
     </header>
     <div class="container">
         <%- include("../partials/alert.ejs") %>
         <br>
-        <%- include("../partials/alert-to-create-commission-rates.ejs") %>
-        <br>
-        <div class="form_div drop__shadow">
-            <form class="needs-validation" action="/hospitals/<%=currentUser.username%>/authenticate?_method=PUT" method="POST" novalidate>
-                <!--Accession number-->
-                <div class="form-floating mb-3">
-                    <input type="text" pattern=".{10}" class="form-control" id="accession_number" name="accession_number" maxlength="10" required>
-                    <label for="accession_number">Accession number</label>
-                    <div class="invalid-feedback">Please enter patient accession number.</div>
-                </div>
-                <!--Amount paid-->
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="amount_paid" name="amount_paid" required>
-                    <label for="amount_paid">Amount patient paid</label>
-                    <div class="invalid-feedback">Please enter amount paid by patient.</div>
-                </div>
-                <!--Commission rate-->
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="commission_rate" name="commission_rate" required></select>
-                    <label for="commission_rate">Commission</label>
-                    <div class="invalid-feedback">Please select an option.</div>
-                </div>
-                <!--Button-->
-                <div class="button-group" id="button-group" style="width: 100%; margin-top: 4rem;">
-                    <input type="submit" class="button btn btn-success" value="Authenticate" style="width: 100%; padding: 2rem;">
+
+        <div class="holder_div drop__shadow">
+            <form action="/departments/<%=user.username%>/bookings/<%=bookingId%>/authenticate?_method=PUT" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                    <!--Name-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="performed_by" name="performed_by" required>
+                        <label for="performed_by">Perfomed by</label>
+                    </div>
+                    <!--Buttons-->
+                    <div id="button-group" style="width: 100%; margin-top: 3rem; display: grid; grid-row-gap: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Authenticate appointment" style="width: 100%; padding: 2rem;">
+                        <button type="reset" class="button btn btn-outline-danger" style="width: 100%; padding: 1rem;">Clear form</button>
+                    </div>
                 </div>
             </form>
         </div>
-        <br><br><br><br><br>
+        <br>
     </div>
 </div>
-<div style="height: 50vh;"></div>
-
-<script>
-    var amountPaidInput = document.getElementById("amount_paid");
-    var commissionRateSelector = document.getElementById("commission_rate");
-    var hiddenRates = document.getElementById("hiddenRates");
-
-    amountPaidInput.addEventListener("change", function(e) {
-        var amount = parseInt(e.target.value);
-
-        if (amount <= 5000) {
-            commissionRateSelector.options.length = 0;
-            commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.min_amount_rate %>`);
-        } else if (amount > 5000 && amount <= 20000) {
-            commissionRateSelector.options.length = 0;
-            commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.low_amount_rate %>`);
-        } else if (amount > 20000 && amount <= 50000) {
-            commissionRateSelector.options.length = 0;
-            commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.mid_amount_rate %>`);
-        } else if (amount > 50000 && amount <= 100000) {
-            commissionRateSelector.options.length = 0;
-            commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.high_amount_rate %>`);
-        } else if (amount > 100000) {
-            commissionRateSelector.options.length = 0;
-            commissionRateSelector.options[commissionRateSelector.options.length] = new Option(`<%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>%`, `<%= currentUser.hospitalDetails.commission_rates.max_amount_rate %>`);
-        }
-    });
-</script>
 
 <%- include("../partials/footer.ejs") %>

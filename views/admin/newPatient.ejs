@@ -1,0 +1,69 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">Patient Registration</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_admin.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-content drop__shadow">
+            <p class="lead text-center bold-text">ENTER PATIENT INFO</p>
+            <br>
+            <form class="needs-validation" action="/admin/patients" method="POST" novalidate>
+                <!--First name of patient-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    <label for="firstname" class="form-label">First name</label>
+                    <div class="invalid-feedback">Please enter a name.</div>
+                </div>
+                <!--Middle name of patient-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="middlename" name="middlename">
+                    <label for="middlename" class="form-label">Middle name</label>
+                </div>
+                <!--Last name of patient-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    <label for="lastname" class="form-label">Last name</label>
+                    <div class="invalid-feedback">Please enter a name.</div>
+                </div>
+                <!--Phone number-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                    <label for="phone" class="form-label">Phone number</label>
+                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                </div>
+                <!--Age-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="age" name="age" required>
+                    <label for="age" class="form-label">Age</label>
+                    <div class="invalid-feedback">Please enter patient's age.</div>
+                </div>
+                <!--Sex-->
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="male" value="M">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="female" value="F">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+                <!--Button group-->
+                <div id="button-group"  style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                    <input type="submit" class="button btn btn-success button-group-child" value="Register patient" style="width: 100%; padding: 2rem;">
+                    <input type="reset" class="button btn btn-warning button-group-child" value="Clear" style="width: 100%; padding: 1rem;">
+                    <button type="reset" class="button btn btn-outline-success button-group-child" onclick="window.location.href='/admin/dashboard';" style="width: 100%; padding: 1rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,56 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/doctors/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/doctors/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/referrers/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">Bookings</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_referrer.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="profile drop__shadow">
+            <% user.doctor_details.bookings.forEach(booking => { %>
+                <% var status = booking.status == 1 ? "Done" : "Not done"; %>
+                <% var borderStatus = booking.status == 1 ? "border border-primary" : "border border-secondary"; %>
+
+                <div class="profile <%= borderStatus %>">
+                    <p class="profile-details-paragraph lh-1"><span class="lead">Date</span><br><span class="paragraph__span text-wrap text-break"><%= booking.date %></span></p>
+                    <p class="profile-details-paragraph lh-1"><span class="lead">Patient</span><br><span class="paragraph__span text-wrap text-break"><%= booking.patient %></span></p>
+                    <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span class="paragraph__span text-wrap text-break"><%= status %></span></p>
+                    <p class="profile-details-paragraph lh-1"><span class="lead">Investigations</span><br>
+                        <span class="paragraph__span text-wrap text-break overflow-auto" style="max-width: 60%;">
+                            <% booking.data.forEach((el, i, arr) => { %>
+                                <% if(i != arr.length - 1) { %>
+                                    <%= el.investigations %>,
+                                <% } else { %>
+                                    <%= el.investigations %>
+                                <% } %>
+                            <% }); %>
+                        </span>
+                    </p>
+                    <% if(booking.status == 1) { %>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Performed by</span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_by %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed on</span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_on %></span></p>
+                    <% } %>
+                </div><br>
+            <% }); %>
+        </div>
+        
+    </div>
+    <br>
+</div>
+
+<%- include("../partials/footer.ejs") %>

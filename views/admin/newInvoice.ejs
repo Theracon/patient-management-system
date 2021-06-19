@@ -1,0 +1,184 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">New Invoice</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_admin.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-content drop__shadow">
+            <p class="lead text-center bold-text">PATIENT INFO</p>
+            <!--First name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="firstname" name="firstname" onkeyup="getPatientName();">
+                <label for="firstname" class="form-label">First name</label>
+                <div class="invalid-feedback">Please enter a name.</div>
+            </div>
+            <!--Middle name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="middlename" name="middlename">
+                <label for="middlename" class="form-label">Middle name</label>
+            </div>
+            <!--Last name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="lastname" name="lastname">
+                <label for="lastname" class="form-label">Last name</label>
+                <div class="invalid-feedback">Please enter a name.</div>
+            </div>
+            <br><br>
+            <p class="lead text-center bold-text">INVESTIGATIONS</p>
+            <!--Investigations-->
+            <div id="departments">
+                <div class="department drop__shadow mb-3">
+                    <!--Name-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="investigation-name" name="name">
+                        <label for="name">Name of investigation</label>
+                    </div>
+                    <!--Price-->
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="investigation-price" name="price">
+                        <label for="price">Price</label>
+                    </div>
+                </div>
+            </div>
+            <!--Add new investigation button-->
+            <div style="width: 30%; padding: 0; margin: 1rem auto;">
+            <br>
+                <p class="text-center"><i class="text-success fas fa-plus-circle extra-big-icon" id="add-investigation" style="cursor: pointer;"></i></p>
+                <br><br><br>
+            </div>
+            <!--Button group-->
+            <div id="button-group"  style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                <small class="text-primary" id="success-create" style="display: none; margin: 0; padding: 0;">Invoice generated successfully!</small>
+                <small class="text-primary" id="success-download" style="display: none; margin 0; padding: 0;">Invoice downloaded.</small>
+                <button type="button" class="button btn btn-success button-group-child" onclick="createInvoice()" style="width: 100%; padding: 1rem;">Generate Invoice</button>
+                <button type="button" class="button btn btn-success button-group-child" onclick="downloadInvoice()" style="width: 100%; padding: 1rem;">Download Invoice</button>
+                <button type="reset" class="button btn btn-outline-success button-group-child" onclick="window.location.href='/admin/dashboard';" style="width: 100%; padding: 1rem;">Go to dashboard</button>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script>
+    // Add a new investigation
+    document.querySelector("#add-investigation").addEventListener("click", function() {
+        var count = 1;
+        var div = document.createElement("div");
+        div.classList.add("department");
+        div.classList.add("drop__shadow");
+        div.classList.add("mb-3");
+        div.innerHTML = `
+        <!--Name-->
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="investigation-name" name="name" required>
+            <label for="name">Name of investigation</label>
+        </div>
+        <!--Price-->
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="investigation-price" name="price" required>
+            <label for="price">Price</label>
+        </div>
+        <!--Remove department-->
+        <p class="text-center"><i class="fas fa-trash-alt big-icon text-danger delete-investigation" style="cursor: pointer;"></i></p>
+    `;
+        document.getElementById("departments").appendChild(div);
+    });
+
+    
+    // Remove an investigation
+    document.getElementById("departments").addEventListener("click", function(e) {
+        if (e.target.classList.contains("delete-investigation")) {
+            e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+        }
+    });
+
+    // Get Patient Name
+    function getPatientName() {
+        var patientFirstName = document.getElementById("firstname").value;
+        var patientMiddleName = document.getElementById("middlename").value;
+        var patientLastName = document.getElementById("lastname").value;
+        var patientName = `${patientFirstName} ${patientMiddleName} ${patientLastName}`;
+        return patientName;
+    }
+
+    // Make Invoice Products Data
+    function getInvoiceProducts() {
+        var invoiceData = [];
+        var allProductNames = Array.from(document.querySelectorAll("#investigation-name"));
+        var allProductPrices = Array.from(document.querySelectorAll("#investigation-price"));
+
+        for (var i = 0; i < allProductNames.length; i++) {
+            var obj = {
+                    "quantity": "1",
+                    "description": `${allProductNames[i].value}`,
+                    "tax": 0,
+                    "price": `${allProductPrices[i].value}`
+                }
+                invoiceData.push(obj);
+        }
+        return invoiceData;
+    }
+
+    // Create Invoice
+    function createInvoice() {
+        var data = getSampleData();
+            easyinvoice.createInvoice(data, function(result) {
+            document.getElementById('success-create').style.display = "block";
+        });
+    }
+
+    // Download Invoice
+    function downloadInvoice() {
+        var data = getSampleData();
+            easyinvoice.createInvoice(data, function(result) {
+            easyinvoice.download('myInvoice.pdf', result.pdf);
+            document.getElementById('success-download').style.display = "block";
+        });
+    }
+
+    // Get Invoice Data
+    function getSampleData() {
+        var data = getInvoiceProducts();
+
+        return {
+            "documentTitle": "PATIENT INVOICE",
+            "locale": "en-NG", 
+            "currency": "NGN", 
+            "taxNotation": "vat",
+            "marginTop": 25,
+            "marginRight": 25,
+            "marginLeft": 25,
+            "marginBottom": 25,
+            "logo": "https://i.ibb.co/PmwPpHt/24-3.png",
+                "background": "",
+            "sender": {
+                "company": "My Hospital",
+                "address": "Garki",
+                "zip": "900107",
+                "city": "Abuja",
+                "country": "Nigeria"
+            },
+            "client": {
+                "company": `${getPatientName()}`,
+                "address": "Wuse II",
+                "zip": "",
+                "city": "Abuja",
+                "country": "Nigeria"
+            },
+            "invoiceNumber": `${Date.now()}`,
+            "invoiceDate": `${new Date().toLocaleDateString("en-NG")}, ${new Date().toLocaleTimeString("en-NG")}`,
+            "products": [...data],
+            "bottomNotice": "Kindly pay the stipulated total at any of the official cash points within the hospital. Thank you.",
+        };
+    }
+</script>
+
+<%- include("../partials/footer.ejs") %>

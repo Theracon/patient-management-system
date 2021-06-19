@@ -1,0 +1,69 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">Patient Info</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_admin.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="profile drop__shadow">
+            <p class="lead text-center bold-text">BASIC INFORMATION</p>
+            <br>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Accession number</span><br><span class="paragraph__span text-wrap text-break"><%= patient.accession_number %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">First name</span><br><span class="paragraph__span text-wrap text-break"><%= patient.firstname %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Middle name</span><br><span class="paragraph__span text-wrap text-break"><%= patient.middlename %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Last name</span><br><span class="paragraph__span text-wrap text-break"><%= patient.lastname %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Sex</span><br><span class="paragraph__span text-wrap text-break"><%= patient.sex %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Age</span><br><span class="paragraph__span text-wrap text-break"><%= patient.age %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Contact</span><br><span class="paragraph__span text-wrap text-break"><%= patient.phone %></span></p>
+        </div>
+        <br>
+        <div class="profile drop__shadow overflow-auto"  style="max-height: 100vh">
+            <p class="lead text-center bold-text">APPOINTMENTS</p>
+            <br>
+            <% if (patient.bookings && patient.bookings.length > 0) { %>
+                <% patient.bookings.forEach(booking => { %>
+                    <% var borderColor = booking.status == 1 ? "border border-success" : "border border-secondary"; %>
+                    <% var status = booking.status == 1 ? "Done" : "Not Done"; %>
+
+                    <div class="profile <%= borderColor %>">
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Booked by</span><br><span class="paragraph__span text-wrap text-break"><%= booking.doctor %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Date/time</span><br><span class="paragraph__span text-wrap text-break"><%= booking.date %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span class="paragraph__span text-wrap text-break"><%= status %></span></p>
+                        <% if(booking.status == 1) { %>
+                            <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed on</span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_on %></span></p>
+                            <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed by</span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_by %></span></p>
+                            
+                            <% if(booking.reports && booking.reports.length > 0) { %>
+                                <button class="btn btn-success" onclick="window.location.href='/admin/patients/bookings/reports';" style="width: 100%; padding: 1rem;">View reports</button>
+                            <% } %>
+                        <% } %>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">No bookings yet.</p>
+            <% } %>
+        </div>
+        <br>
+    </div>
+    <br>
+</div>
+
+<script>
+    var reportBody = document.getElementById("report-body");
+    var reportBodyBtn = document.getElementById("show-report-body-btn");
+
+    reportBodyBtn.addEventListener("click", function() {
+        reportBody.classList.toggle("toggle-patient-report");
+        reportBody.innerHTML = reportBody.innerHTML == "Display report" ? "Hide report" : "Display report";
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

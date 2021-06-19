@@ -1,0 +1,63 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <% var index = null; %>
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/departments/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">New report</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_hospital.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-content drop__shadow" id="department-investigation-groups">
+            <form action="/departments/<%=user.username%>/bookings/<%=bookingId%>/reports" method="POST">
+                <!--Investigation-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="investigation" name="investigation" required>
+                    <label for="investigation" class="form-label">Investigation</label>
+                </div>                
+                <!--Reported by-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="reported_by" name="reported_by" required>
+                    <label for="reported_by" class="form-label">Reported by</label>
+                </div>
+                <!--Body-->
+                <div class="form-floating mb-3">
+                    <textarea spellcheck="yes" class="form-control" name="body" id="body" style="height: 70vh;" required></textarea>
+                    <label for="body" class="form-label">Type report here...</label>
+                    <br>
+                </div>
+                <!--Button group-->
+                <div id="button-group"  style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                    <input type="submit" class="button btn btn-success button-group-child" value="Submit report" style="width: 100%; padding: 2rem;">
+                    <input type="reset" class="button btn btn-warning button-group-child" value="Clear" style="font-weight: bold; width: 100%; padding: 1rem;">
+                    <button type="reset" class="button btn btn-outline-success button-group-child" onclick="window.location.href='/departments/<%=user.username%>/bookings';" style="width: 100%; padding: 1rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script>
+    // Remove a department-investigation group
+    document.getElementById("department-investigation-groups").addEventListener("click", function(e) {
+        if (e.target.classList.contains("delete-dpt-inv-grp")) {
+            e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+        }
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

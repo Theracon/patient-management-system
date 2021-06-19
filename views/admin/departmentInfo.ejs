@@ -1,0 +1,77 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">Department Info</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_admin.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="profile drop__shadow">
+            <p class="lead text-center bold-text">BASIC INFORMATION</p>
+            <br>
+            <p class="profile-details-paragraph lh-1"><span class="lead">Name</span><br><span class="paragraph__span text-wrap text-break"><%= department.department_details.name %></span></p>
+            <p class="profile-details-paragraph lh-1"><span class="lead">H.O.D</span><br><span class="paragraph__span text-wrap text-break"><%= department.department_details.hod %></span></p>
+        </div>
+        <br>
+        <div class="profile drop__shadow overflow-auto"  style="max-height: 100vh">
+            <p class="lead text-center bold-text">BOOKINGS</p>
+            <br>
+            <% if (department.department_details.bookings && department.department_details.bookings.length > 0) { %>
+                <% department.department_details.bookings.forEach(booking => { %>
+                    <% var borderColor = booking.status == 1 ? "border border-success" : "border border-secondary"; %>
+                    <% var status = booking.status == 1 ? "Done" : "Not Done"; %>
+
+                    <div class="profile <%= borderColor %>">
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Booked by</span><br><span class="paragraph__span text-wrap text-break"><%= booking.doctor %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Date/time</span><br><span class="paragraph__span text-wrap text-break"><%= booking.date %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Status</span><br><span class="paragraph__span text-wrap text-break"><%= status %></span></p>
+                        <% if(booking.status == 1) { %>
+                            <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed on</span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_on %></span></p>
+                            <p class="profile-details-paragraph lh-1"><span class="lead">Perfomed by</span><br><span class="paragraph__span text-wrap text-break"><%= booking.performed_by %></span></p>
+                        <% } %>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">No bookings yet.</p>
+            <% } %>
+        </div>
+        <br>
+        <div class="profile drop__shadow overflow-auto"  style="max-height: 100vh">
+            <p class="lead text-center bold-text">INVESTIGATIONS</p>
+            <br>
+            <table class="table" id="commissionRatesTable">
+                <% var serial = 1; %>
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% department.department_details.investigations.forEach(investigation => { %>
+                        <tr>
+                            <td><%= serial %></td>
+                            <td><%= investigation.name %></td>
+                            <td><%= investigation.price %></td>
+                        </tr>
+
+                        <% serial += 1; %>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+    <p class="text-center"><a class="text-danger" href="/admin/departments/<%=department._id%>">Remove Department</a></p>
+    <br><br>
+</div>
+
+<%- include("../partials/footer.ejs") %>

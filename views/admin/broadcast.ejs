@@ -5,7 +5,7 @@
         <div style="display: flex; align-items: center; justify-content: center;">
             <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
-        <h1 class="header-h1-text">Broadcast</h1>
+        <h1 class="header-h1-text">Broadcast Message</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
         <%- include("../partials/navbar_admin.ejs") %>
     </header>
@@ -13,31 +13,31 @@
         <%- include("../partials/alert.ejs") %>
         <br>
         <div id="message">
-            <form action="/admin/broadcast" method="POST">
+            <form class="needs-validation" action="/admin/broadcast-message" method="POST" novalidate>
                 <div class="small-content drop__shadow">
                     <!--SELECT USER GROUP-->
                     <div class="form-floating mb-3">
                         <select class="form-select" id="floatingSelect" name="recipient" required>
-                            <option value="-1" selected disabled>Select one</option>
-                            <option value="referrer">Referrers</option>
-                            <option value="hospital">Hospitals</option>
+                            <option value="-1" selected disabled> --Select one-- </option>
+                            <option value="department">Departments</option>
+                            <option value="doctor">Doctors</option>
                         </select>
-                        <label for="floatingSelect">Send broadcast to</label>
+                        <label for="floatingSelect">Send a broadcast message to</label>
                     </div>
                     <!--MESSAGE-->
                     <div class="form-floating mb-3">
                         <textarea class="form-control" id="content" name="content" spellcheck="true" style="height: 10rem;" required></textarea>
-                        <label for="content">Message</label>
+                        <label for="content">Type message here...</label>
+                        <div class="invalid-feedback">Please enter a message.</div>
                     </div>
                     <div class="button-group" style="width: 100%; margin-top: 3rem;">
-                        <input type="submit" class="button btn btn-success" value="Send" style="font-family: 'Poppins', sans-serif; width: 100%;">
+                        <input type="submit" class="button btn btn-success" value="Send message" style="font-family: 'Poppins', sans-serif; width: 100%;">
                     </div>
                 </div>
             </form>
         </div>
-        <br><br><br><br><br>
     </div>
+    <br>
 </div>
-<div style="height: 50vh;"></div>
 
 <%- include("../partials/footer.ejs") %>

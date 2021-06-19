@@ -1,0 +1,42 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/doctors/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/doctors/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/referrers/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">Search for a patient</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_referrer.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-content drop__shadow">
+            <form class="needs-validation" action="/doctors/<%=user.username%>/patients/search" method="POST" novalidate>
+                <!--Patient's accession number-->
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="accession_number" name="accession_number" required>
+                    <label for="accession_number">Patient's accession number</label>
+                    <div class="invalid-feedback">Please enter patient accession number.</div>
+                </div>
+                <!--Button group-->
+                <div id="button-group"  style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                    <input type="submit" class="button btn btn-success button-group-child" value="Search for patient" style="width: 100%; padding: 2rem;">
+                    <button type="reset" class="button btn btn-outline-success button-group-child" onclick="window.location.href='/doctors/<%=user.username%>/dashboard';" style="width: 100%; padding: 1rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+
+<%- include("../partials/footer.ejs") %>

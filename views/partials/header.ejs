@@ -23,10 +23,29 @@
     <link rel="manifest" href="/site.webmanifest">
     <script src="https://kit.fontawesome.com/955da05a97.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--Start of easyinvoice scripts-->
+    <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+    <!-- Only include when rendering is required -->
+    <script src="https://unpkg.com/pdfjs-dist/build/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist/build/pdf.worker.min.js"></script>
+    <!-- Include pdfjs version 2.3.200 for Internet Explorer compatibility, no worker required -->
+    <script src="https://unpkg.com/pdfjs-dist@2.3.200/build/pdf.min.js"></script>
+    <!--End of easyinvoice scripts-->
     <style>
         /************************************************************************************************************************ 
                                                 // Start of desktop styles
         *************************************************************************************************************************/
+        /* Start of invoice styles */
+        #pdf {
+            text-align: center;
+        }
+
+        #pdf canvas {
+            border: 1px solid black;
+            width: 95%;
+        }
+        /* End of invoice styles */
+        
         .logo-text {
             font-family: 'Zen Dots','Poppins', sans-serif, monospace;
             font-weight: 900;
@@ -1898,6 +1917,11 @@
             text-align: center;
         }
         /* End of slideshow styles */
+
+        /* Toggle visibility of report body */
+        .hide-report-body {
+            display: none;
+        }
         
         /************************************************************************************************************************ 
                                                 // Start of large tablet styles
@@ -1970,6 +1994,10 @@
             }
 
             #commissionRatesTable {
+                font-size: 0.6em;
+            }
+
+            #allDepartmentsTable {
                 font-size: 0.6em;
             }
 

@@ -3,23 +3,11 @@
 <div class="container-fluid" id="container-fluid">
     <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
         <div style="display: flex; align-items: center; justify-content: center;">
-            <a href=""><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
         </div>
         <h1 class="header-h1-text">Doctor Registration</h1>
         <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-        <% if(currentUser) { %>
-            <% if(currentUser.typeOfUser == "referrer" && currentUser.role >= 1) { %>
-                <%- include("../partials/navbar_referrer.ejs") %>
-            <% } else if(currentUser.typeOfUser == "hospital" && currentUser.role >= 1) { %>
-                <%- include("../partials/navbar_hospital.ejs") %>
-            <% } else if(currentUser.typeOfUser == "admin") { %>
-                <%- include("../partials/navbar_admin.ejs") %>
-            <% } else { %>
-                <%- include("../partials/navbar_nouser.ejs") %>
-            <% } %>
-        <% } else { %>
-            <%- include("../partials/navbar_nouser.ejs") %>
-        <% } %>
+        <%- include("../partials/navbar_admin.ejs") %>
     </header>
     <div class="container">
         <%- include("../partials/alert.ejs") %>
@@ -54,7 +42,7 @@
                                     <% } %>
                                 <% })%>
                             </select>
-                            <label for="hospital">Referral institution</label>
+                            <label for="hospital">Doctor's department</label>
                         </div>
                         <!--Username-->
                         <div class="form-floating mb-3">
@@ -143,10 +131,10 @@
                         </div>
                         <!--Submit Button-->
                         <div id="button-group" style="width: 100%;">
-                            <input id="submit-button" type="submit" class="button btn btn-success" value="Create account" style="width: 100%; margin: 1rem 0; padding: 2rem;">
+                            <input id="submit-button" type="submit" class="button btn btn-success" value="Register doctor" style="width: 100%; margin: 1rem 0; padding: 2rem;">
                         </div>
                     </div>
-                    <small class="text-center" style="display: block;">Already have an account? <a class="text-success" href="/login" style="text-decoration: underline;">Sign in</a></small>
+                    <small class="text-center" style="display: block;">Already have an account? <a class="text-success" href="/accounts/doctors/login" style="text-decoration: underline;">Sign in</a></small>
                 </form>
             </div>
         </div>

@@ -19,7 +19,7 @@ router.post("/accounts/referrers/login", function(req, res) {
                     if (err) throw err;
                     if (isMatch) {
                         passport.authenticate("local")(req, res, function() {
-                            return res.redirect('/doctors/' + req.user.username + "/dashboard");
+                            return res.redirect('/doctors/' + user.username + "/dashboard");
                         });
                     } else {
                         req.flash("error", "Incorrect password. Try again.");

@@ -1,0 +1,60 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/departments/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">Patient reports</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_hospital.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        
+        <!--REPORTS-->
+        <div class="profile drop__shadow overflow-auto"  style="max-height: 200vh">
+            <% if (user.department_details.reports && user.department_details.reports.length > 0) { %>
+                <% user.department_details.reports.forEach(report => { %>
+                    <div class="profile border border-primary mb-3">
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Investigation</span><br><span class="paragraph__span text-wrap text-break"><%= report.investigation %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Reported by</span><br><span class="paragraph__span text-wrap text-break"><%= report.reported_by %></span></p>
+                        <p class="profile-details-paragraph lh-1"><span class="lead">Reported on</span><br><span class="paragraph__span text-wrap text-break"><%= report.reported_on %></span></p>
+                        <br>
+                        <button type="button" class="mb-3 btn btn-success btn-sm" id="report-body-btn">Display report</button>
+                        <p class="hide-report-body overflow-auto lh-1 hide-report-body" id="report-body" style="max-height: 80vh;"><%= report.body %></p>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">No reports yet.</p>
+            <% } %>
+        </div>
+        <br>
+        <br>
+    </div>
+    <br>
+</div>
+
+<script>
+    var toggleReportButtons = document.querySelectorAll("#report-body-btn");
+    var reportBodys = document.querySelectorAll("#report-body");
+
+    toggleReportButtons.forEach(function(toggleReportButton, index) {
+        toggleReportButton.addEventListener("click", function() {
+            reportBodys[index].classList.toggle("hide-report-body");
+            toggleReportButton.innerHTML = toggleReportButton.innerHTML === "Display report" ? "Hide report" : "Display report";
+        });
+    });
+    
+</script>
+
+<%- include("../partials/footer.ejs") %>

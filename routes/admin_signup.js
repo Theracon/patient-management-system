@@ -1,5 +1,6 @@
 var express = require("express"),
     passport = require("passport"),
+    User = require("../models/user"),
     router = express.Router();
 
 // INDEX(GET): ADMIN SIGNUP PAGE/ADMIN

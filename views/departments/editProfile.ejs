@@ -1,100 +1,49 @@
 <%- include("../partials/header.ejs") %>
 
-    <div class="container-fluid" id="container-fluid">
-        <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <a href="/hospitals/<%= currentUser.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
-                <div style="display: flex; align-items: flex-start; width: 10%;">
-                    <% if(currentUser.hospitalDetails.unread_notifications_count > 0) { %>
-                        <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
-                        <span><%= currentUser.hospitalDetails.unread_notifications_count %> </span>
-                    <% } else { %>
-                        <p><a href="/hospitals/<%=currentUser.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
-                    <% } %>
-                </div>
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/departments/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/departments/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
             </div>
-            <h1 class="header-h1-text">Edit Profile</h1>
-            <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
-            <%- include("../partials/navbar_hospital.ejs") %>
-        </header>
-        <div class="container">
-            <%- include("../partials/alert.ejs") %>
-            <br>
-            <%- include("../partials/alert-to-create-commission-rates.ejs") %>
-            <br>
-            <div class="holder_div drop__shadow">
-                <form action="/hospitals/<%=currentUser.username%>/update?_method=PUT" method="POST">
-                    <div class="row g-3 align-items-center justify-content-center" style="width: 50%; margin: 0 auto;" id="form_row_div">
-                        <!--Type of institution-->
-                        <div class="input-group mb-3" id="ht__input-group" style="display: flex; align-items: center;">
-                            <input type="text" class="form-control" id="institution_type" name="institution_type[0]" value="<%=currentUser.hospitalDetails.institution_type%>" readonly>
-                            <span style="margin-left: 0.5rem; margin-right: 0.5rem;"> <i class="fas fa-chevron-right"></i> </span>
-                            <select class="form-select" id="institution_type" name="institution_type[1]">
-                                <option value="-1" selected disabled> Change Institution Type </option>
-                                <option value="0">Teaching Hospital</option>
-                                <option value="1">Specialist Hospital</option>
-                                <option value="2">General Hospital</option>
-                                <option value="3">Primary Healthcare Centre</option>
-                                <option value="4">Diagnostic Centre</option>
-                                <option value="5">Other (not listed)</option>
-                            </select>
-                        </div>
-                        <!--Name-->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="name" name="name" value="<%=currentUser.hospitalDetails.name%>">
-                            <label for="name">Hospital name</label>
-                        </div>
-                        <!--Address-->
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" id="address" name="address" style="height: 10rem;"><%=currentUser.hospitalDetails.address%></textarea>
-                            <label for="addresss">Hospital address</label>
-                        </div>
-                        <!--Email-->
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" name="email" value="<%=currentUser.hospitalDetails.email%>">
-                            <label for="email">Hospital email</label>
-                        </div>
-                        <!--Phone-->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="phone" name="phone" value="<%=currentUser.hospitalDetails.phone%>">
-                            <label for="name">Hospital phone number</label>
-                        </div>
-                        <!--Website-->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="website" name="website" value="<%=currentUser.hospitalDetails.website%>">
-                            <label for="website">Hospital website address</label>
-                        </div>
-                        <!--CMD-->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="cmd" name="cmd" value="<%=currentUser.hospitalDetails.cmd%>">
-                            <label for="cmd">Full name of Hospital CMD</label>
-                        </div>
-                        <!--CEO-->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="ceo" name="ceo" value="<%=currentUser.hospitalDetails.ceo%>">
-                            <label for="ceo">Full name of Hospital CEO</label>
-                        </div>
-                        <!--Consultants-->
-                        <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="consultants" name="consultants" value="<%=currentUser.hospitalDetails.consultants%>">
-                            <label for="ceo">Number of consultants</label>
-                        </div>
-                        <!--Doctors-->
-                        <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="doctors" name="doctors" value="<%=currentUser.hospitalDetails.doctors%>">
-                            <label for="ceo">Number of medical doctors</label>
-                        </div>
-                        <!--Buttons-->
-                        <div id="button-group" style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
-                            <input type="submit" class="button btn btn-success" value="Confirm" style="width: 100%; padding: 2rem;">
-                            <button type="reset" onclick="window.location.href='/hospitals/<%=currentUser.username%>/profile';" class="button btn btn-outline-success" style="width: 100%; padding: 1rem;">Cancel</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <br><br><br><br><br>
         </div>
+        <h1 class="header-h1-text">Edit Profile</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_hospital.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="holder_div drop__shadow">
+            <form action="/departments/<%=user.username%>/profile/update?_method=PUT" method="POST">
+                <div class="row g-3 align-items-center justify-content-center" id="form_row_div" style="width: 50%; margin: 0 auto;">
+                    <!--Name-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" name="name" value="<%= user.department_details.name %>" required>
+                        <label for="name">Name of department</label>
+                        <div class="invalid-feedback">Please enter your department's name</div>
+                    </div>
+                    <!--HOD-->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="hod" name="hod" value="<%= user.department_details.hod %>">
+                        <label for="hod">HOD's name</label>
+                    </div>
+                    <!--Buttons-->
+                    <div id="button-group" style="width: 100%; margin-top: 3rem; display: grid; grid-row-gap: 1rem;">
+                        <input type="submit" class="button btn btn-success" value="Update profile" style="width: 100%; padding: 2rem;">
+                        <button type="button" class="button btn btn-outline-success" style="width: 100%; padding: 1rem;" onclick="window.location.href='/departments/<%=user.username%>/profile';">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
     </div>
-    <div style="height: 50vh;"></div>
+</div>
 
-    <%- include("../partials/footer.ejs") %>
+<%- include("../partials/footer.ejs") %>

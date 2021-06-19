@@ -1,0 +1,100 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <% var index = null; %>
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <a href="/doctors/<%= user.username %>/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+            <div style="display: flex; align-items: flex-start; width: 10%;">
+                <% if(user.unread_notifications_count > 0) { %>
+                    <p><a href="/doctors/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: #0275D8;"></i></a></p>
+                    <span><%= user.unread_notifications_count %> </span>
+                <% } else { %>
+                    <p><a href="/referrers/<%=user.username%>/notifications"><i class="fas fa-bell" style="font-size: 2rem; color: white;"></i></a></p>
+                <% } %>
+            </div>
+        </div>
+        <h1 class="header-h1-text">Step Two</h1>
+        <p>Enter Investigations</p>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_referrer.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+        <div class="form-content drop__shadow">
+            <p class="lead text-center bold-text">PATIENT INFORMATION</p>
+            <br><br>
+            <!--First name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="firstname" name="firstname" value="<%=patient.firstname%>" readonly>
+                <label for="firstname" class="form-label">First name</label>
+            </div>
+            <!--Middle name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="middlename" name="middlename" value="<%=patient.middlename%>" readonly>
+                <label for="middlename" class="form-label">Middle name</label>
+            </div>
+            <!--Last name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="lastname" name="lastname" value="<%=patient.lastname%>" readonly>
+                <label for="lastname" class="form-label">Last name</label>
+            </div>
+            <!--Age of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="age" name="age" value="<%=patient.age%>" readonly>
+                <label for="lastname" class="form-label">Age</label>
+            </div>
+            <!--Last name of patient-->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="sex" name="sex" value="<%=patient.sex%>" readonly>
+                <label for="lastname" class="form-label">Sex</label>
+            </div>
+        </div>
+        <br>
+        <div class="form-content drop__shadow" id="department-investigation-groups">
+            <form class="needs-validation" action="/doctors/<%=user.username%>/patients/<%=patient.accession_number%>/new-booking" method="POST" novalidate>                
+                <p class="lead text-center bold-text">INVESTIGATIONS REQUIRED</p>
+                <br><br>
+                <% departments.forEach(function(department) { %>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div  style="width: 90%;">
+                            <!--Department-->
+                            <div class="form-floating">
+                                <select class="form-select" id="department_ids" name="department_ids" readonly>
+                                    <option value="<%= department._id %>"><%= department.department_details.name %></option>
+                                </select>
+                            </div>
+                            <!--Investigations-->
+                            <div class="form-floating mb-3">
+                                <textarea spellcheck="yes" class="form-control" name="investigations" id="investigations" style="height: 7.5rem;" required></textarea>
+                                <label for="investigations" class="form-label">Investigations in <%= department.department_details.name %> department</label>
+                                <div class="invalid-feedback">Please enter investigations.</div>
+                                <br>
+                            </div>
+                        </div>
+                        <!--Remove department-investigation group-->
+                        <p class="text-center" style="width: 10%;"><i class="fas fa-trash-alt big-icon text-secondary delete-dpt-inv-grp" style="cursor: pointer;"></i></p>
+                    </div>
+                <% }); %>
+                <!--Button group-->
+                <div id="button-group"  style="width: 100%; margin-top: 4rem; display: grid; grid-row-gap: 1rem;">
+                    <input type="submit" class="button btn btn-success button-group-child" value="Confirm booking" style="width: 100%; padding: 2rem;">
+                    <button type="reset" class="button btn btn-outline-success button-group-child" onclick="window.location.href='/doctors/<%=user.username%>/dashboard';" style="width: 100%; padding: 1rem;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+</div>
+
+<script>
+    // Remove a department-investigation group
+    document.getElementById("department-investigation-groups").addEventListener("click", function(e) {
+        if (e.target.classList.contains("delete-dpt-inv-grp")) {
+            e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+        }
+    });
+</script>
+
+<%- include("../partials/footer.ejs") %>

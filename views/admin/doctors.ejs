@@ -1,0 +1,48 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container-fluid" id="container-fluid">
+    <header class="bg-light p-5 rounded-lg m-3 text-center" id="header">
+        <div style="display: flex; align-items: center; justify-content: center;">
+            <a href="/admin/dashboard"><img class="logo" src="https://i.ibb.co/PmwPpHt/24-3.png" alt="Icon-only" border="0" alt="Fastclinic logo"></a>
+        </div>
+        <h1 class="header-h1-text">All Doctors</h1>
+        <p style="cursor: pointer;"><i class="fas fa-chevron-down" id="show_links"></i></p>
+        <%- include("../partials/navbar_admin.ejs") %>
+    </header>
+    <div class="container">
+        <%- include("../partials/alert.ejs") %>
+        <br>
+
+        <div class="hospitals drop__shadow">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="search-department-input" id="search-department-input" placeholder="search...">
+                <span class="input-group-text" id="search-department-btn"><i class="fas fa-search"></i></span>
+            </div>
+            <br><br>
+            <table class="table" id="allDepartmentsTable">
+                <% var serial = 1; %>
+                    <thead>
+                        <tr>
+                            <th scope="col">S/N</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Department</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% doctors.forEach(doctor => { %>
+                            <tr>
+                                <td><%= serial %></td>
+                                <td><a href="/admin/doctors/<%=doctor.username%>">Doctor <%= doctor.doctor_details.firstname %> <%= doctor.doctor_details.middlename %> <%= doctor.doctor_details.lastname %></a></td>
+                                <td><%= doctor.doctor_details.department %></td>
+                            </tr>
+
+                            <% serial += 1 %>
+                        <% }); %>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+</div>
+
+<%- include("../partials/footer.ejs") %>

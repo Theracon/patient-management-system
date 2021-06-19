@@ -14,32 +14,32 @@ var NotificationSchema = new mongoose.Schema({
 // PROCEDURE SCHEMA
 var InvestigationSchema = new mongoose.Schema({
     name: String,
-    price: Number
+    number_price: String,
+    price: String
 });
 
 // REPORT SCHEMA
 var ReportSchema = new mongoose.Schema({
-    investigation_name: String,
-    investigation_date: String,
+    id: String,
+    booking_id: String,
+    department_id: String,
+    department_name: String,
+    investigation: String,
     body: String,
-    department: String,
-    reported_by: String
+    reported_by: String,
+    reported_on: String
 });
 
-// PATIENTS SCHEMA
-var PatientSchema = new mongoose.Schema({
-    accession_number: String,
-    firstname: String,
-    middlename: String,
-    lastname: String,
-    age: String,
-    sex: String,
-    contact: String,
-    department: Array,
-    status: String,
-    authentication_date: String,
-    total_amount_paid: String,
-    investigations: [InvestigationSchema],
+// BOOKING SCHEMA
+var BookingSchema = new mongoose.Schema({
+    id: String,
+    date: String,
+    doctor: String,
+    patient: String,
+    status: Number,
+    performed_on: String,
+    performed_by: String,
+    data: [{ department_id: String, investigations: String }],
     reports: [ReportSchema]
 });
 
@@ -48,7 +48,8 @@ var DepartmentSchema = new mongoose.Schema({
     name: String,
     hod: String,
     investigations: [InvestigationSchema],
-    patients: [PatientSchema]
+    bookings: [BookingSchema],
+    reports: [ReportSchema]
 });
 
 // DOCTOR SCHEMA
@@ -58,7 +59,7 @@ var DoctorSchema = new mongoose.Schema({
     lastname: String,
     department: String,
     department_id: String,
-    patients: [PatientSchema]
+    bookings: [BookingSchema]
 });
 
 // USER SCHEMA
@@ -72,6 +73,7 @@ var UserSchema = new mongoose.Schema({
     notifications: [NotificationSchema],
     unread_notifications_count: Number,
     last_updated: String,
+    ROLE: Number,
     department_details: DepartmentSchema,
     doctor_details: DoctorSchema
 });
