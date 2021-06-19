@@ -1,4 +1,4 @@
-# Fastclinic
+# My Clinic
 
 [![](https://img.shields.io/badge/bluemix-powered-blue.svg)](https://bluemix.net)
 
@@ -6,29 +6,9 @@
 
 - [Overview](#overview)
 - [Getting started](#getting-started)
-    -   Set up an environment
-    -   Create a MongoDB account
-    -   Create a MongoDB Atlas database instance
-    -   Connect app to cloud database
-    -   Manage database with MongoDB Compass
-- [Use Fastclinic as a doctor](#use-fastclinic-as-a-doctor)
-    -   Sign up
-    -   Sign in
-    -   Refer a patient
-    -   View all patients
-    -   View profile
-- [Use Fastclinic as a healthcare institution](#use-fastclinic-as-a-healthcare-institution)
-    -   Sign up
-    -   Sign in
-    -   Refer a patient
-    -   View all patients
-    -   View profile
-- [Use Fastclinic as an admin](#use-fastclinic-as-an-admin)
-    -   Sign up
-    -   Sign in
-    -   Send a broadcast message
-    -   View Referrers
-    -   View hospitals
+- [Using My Clinic as a doctor](#use-fastclinic-as-a-doctor)
+- [Using My Clinic as a healthcare institution](#use-fastclinic-as-a-healthcare-institution)
+- [Using My Clinic as a hospital admin](#use-fastclinic-as-an-admin)
 - [Log out](#log-out)
 - [License](#license)
 
