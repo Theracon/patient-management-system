@@ -14,22 +14,21 @@
         <br>
         <div class="form-content drop__shadow">
             <p class="lead text-center bold-text">PATIENT INFO</p>
-            <!--First name of patient-->
+            <!--Name of patient-->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="firstname" name="firstname" onkeyup="getPatientName();">
-                <label for="firstname" class="form-label">First name</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <label for="name" class="form-label">Name</label>
                 <div class="invalid-feedback">Please enter a name.</div>
             </div>
-            <!--Middle name of patient-->
+            <!--Address of patient-->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="middlename" name="middlename">
-                <label for="middlename" class="form-label">Middle name</label>
+                <input type="text" class="form-control" id="address" name="address">
+                <label for="address" class="form-label">Address</label>
             </div>
-            <!--Last name of patient-->
+            <!--City of patient-->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="lastname" name="lastname">
-                <label for="lastname" class="form-label">Last name</label>
-                <div class="invalid-feedback">Please enter a name.</div>
+                <input type="text" class="form-control" id="city" name="city">
+                <label for="city" class="form-label">City</label>
             </div>
             <br><br>
             <p class="lead text-center bold-text">INVESTIGATIONS</p>
@@ -102,11 +101,17 @@
 
     // Get Patient Name
     function getPatientName() {
-        var patientFirstName = document.getElementById("firstname").value;
-        var patientMiddleName = document.getElementById("middlename").value;
-        var patientLastName = document.getElementById("lastname").value;
-        var patientName = `${patientFirstName} ${patientMiddleName} ${patientLastName}`;
-        return patientName;
+        return document.getElementById("name").value;
+    }
+
+    // Get Patient Address
+    function getPatientAddress() {
+        return document.getElementById("address").value;
+    }
+
+    // Get Patient Address
+    function getPatientCity() {
+        return document.getElementById("city").value;
     }
 
     // Make Invoice Products Data
@@ -160,21 +165,21 @@
             "logo": "https://i.ibb.co/PmwPpHt/24-3.png",
                 "background": "",
             "sender": {
-                "company": "My Hospital",
-                "address": "Garki",
-                "zip": "900107",
+                "company": "SAMPLE HOSPITAL",
+                "address": "123 Sample Street, Sample Town",
+                "zip": "",
                 "city": "Abuja",
                 "country": "Nigeria"
             },
             "client": {
                 "company": `${getPatientName()}`,
-                "address": "Wuse II",
+                "address": `${getPatientAddress()}`,
                 "zip": "",
-                "city": "Abuja",
+                "city": `${getPatientCity()}`,
                 "country": "Nigeria"
             },
             "invoiceNumber": `${Date.now()}`,
-            "invoiceDate": `${new Date().toLocaleDateString("en-NG")}, ${new Date().toLocaleTimeString("en-NG")}`,
+            "invoiceDate": `${new Date().toLocaleDateString("en-NG")}, ${new Date().toLocaleTimeString()}`,
             "products": [...data],
             "bottomNotice": "Kindly pay the stipulated total at any of the official cash points within the hospital. Thank you.",
         };
